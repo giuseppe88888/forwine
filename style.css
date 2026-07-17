@@ -1,19 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
 
 body {
-    font-family: 'Source Sans Pro', sans-serif;
-    background-color: #111113; /* Nero premium profondo */
-    color: #e0e0e0;
+    font-family: 'Source Sans Pro', sans-serif; /* Font pulito per le descrizioni */
+    background-color: #121212;
+    color: #f4f4f4;
     margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 40px 20px;
+    padding: 20px;
 }
 
 .app-container {
     max-width: 800px;
+    margin: 0 auto; /* Centra l'app nello schermo */
     width: 100%;
     position: relative;
     overflow: hidden; /* Nasconde gli step non attivi */
@@ -76,6 +73,7 @@ h2 {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
+/* Le Card di Scelta (ora ottimizzate come bottoni) */
 .choice-card {
     background: #1a1a1d;
     border: 1px solid #2a2a2e;
@@ -88,6 +86,13 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
+    /* Reset per i tag <button> */
+    font-family: inherit;
+    color: inherit;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .choice-card:hover {
@@ -114,8 +119,8 @@ h2 {
     color: #d4af37;
 }
 
-/* Bottone Indietro */
-.btn-back {
+/* Bottone Indietro (Nome corretto per l'HTML) */
+.btn-indietro {
     background: transparent;
     color: #888;
     border: none;
@@ -124,9 +129,10 @@ h2 {
     margin-bottom: 20px;
     transition: color 0.3s;
     font-family: 'Source Sans Pro', sans-serif;
+    padding: 0;
 }
 
-.btn-back:hover {
+.btn-indietro:hover {
     color: #d4af37;
 }
 
@@ -167,6 +173,7 @@ li h3 {
 }
 
 .vino-descrizione strong, .vino-aromi strong { color: #fff; }
+
 /* Stile del Pulsante di Monetizzazione */
 .btn-acquista {
     display: inline-block;
@@ -192,6 +199,7 @@ li h3 {
     background: linear-gradient(135deg, #ebd076 0%, #c49600 100%);
     color: #000;
 }
+
 /* --- NUOVE ANIMAZIONI E DETTAGLI VISIVI --- */
 
 /* Animazione di entrata schede (Fade-in verso l'alto) */
