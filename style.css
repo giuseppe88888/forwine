@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #111113; /* Nero premium profondo */
+    color: #e0e0e0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
+.app-container {
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+    overflow: hidden; /* Nasconde gli step non attivi */
+    padding-bottom: 50px;
+}
+
+.brand-header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+}
+
+.brand-header h1 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37; /* Oro metallico */
+    font-size: 3.5rem;
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+.slogan {
+    font-size: 1.1rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+.step-section {
+    display: none;
+    animation: slideIn 0.4s ease-out;
+}
+
+.step-section.active {
+    display: block;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+/* La Griglia a 15 Elementi */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+}
+
+.budget-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.choice-card {
+    background: #1a1a1d;
+    border: 1px solid #2a2a2e;
+    border-radius: 12px;
+    padding: 20px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.choice-card:hover {
+    background: #232328;
+    border-color: #d4af37;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.05);
+}
+
+.choice-card .emoji {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.choice-card p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #bbb;
+}
+
+.choice-card:hover p {
+    color: #d4af37;
+}
+
+/* Bottone Indietro */
+.btn-back {
+    background: transparent;
+    color: #888;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.btn-back:hover {
+    color: #d4af37;
+}
+
+/* Grafica dei Risultati */
+ul { list-style: none; padding: 0; }
+
+li {
+    background: linear-gradient(145deg, #1e1e22, #18181b);
+    border-left: 4px solid #800020; /* Bordeaux */
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+li h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    font-size: 1.8rem;
+    margin: 0 0 10px 0;
+}
+
+.prezzo-badge {
+    background: #800020;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.rating { color: #d4af37; font-size: 1.2rem; margin-bottom: 15px; }
+
+.vino-descrizione, .vino-aromi {
+    color: #aaa;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.vino-descrizione strong, .vino-aromi strong { color: #fff; }
+/* Stile del Pulsante di Monetizzazione */
+.btn-acquista {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #d4af37 0%, #aa8000 100%); /* Gradiente Oro */
+    color: #111; /* Testo scuro per contrasto */
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.btn-acquista:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+    background: linear-gradient(135deg, #ebd076 0%, #c49600 100%);
+    color: #000;
+}
