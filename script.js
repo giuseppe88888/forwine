@@ -634,11 +634,21 @@ document.querySelectorAll('.choice-card[data-type="budget"]').forEach(card => {
     });
 });
 
-// IL MOTORE DI RICERCA
+// IL MOTORE DI RICERCA (Con UI Avanzata)
 function mostraRisultati() {
     const lista = document.getElementById('lista-vini');
-    lista.innerHTML = ''; // Pulisci vecchi risultati
+    
+    // 1. Mostriamo la schermata di caricamento del Sommelier
+    lista.innerHTML = `
+        <div id="loader" style="text-align: center; padding: 50px 0;">
+            <div class="spinner"></div>
+            <p style="color: #d4af37; margin-top: 20px; font-weight: bold; font-size: 1.2rem;">
+                Il Sommelier sta analizzando la cantina...
+            </p>
+        </div>
+    `;
 
+    // Filtriamo i risultati nel background
     const consigli = viniDatabase.filter(vino => {
         const matchPiatto = vino.piatti.includes(userPiatto);
         const matchOccasione = vino.occasioni.includes(userOccasione);
@@ -646,23 +656,56 @@ function mostraRisultati() {
         return matchPiatto && matchOccasione && matchBudget;
     });
 
-    if (consigli.length === 0) {
-        lista.innerHTML = '<li><h3 style="color: #fff">Nessun vino trovato.</h3><p style="color: #aaa;">Prova a ricominciare allargando il budget o cambiando opzioni!</p></li>';
-    } else {
-        // Mostriamo un massimo di 3 vini (o cambialo se vuoi mostrarne di più)
-        consigli.slice(0, 3).forEach(vino => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
-                    <h3>${vino.nome}</h3>
-                    <span class="prezzo-badge">~${vino.prezzo}€</span>
-                </div>
-                <div class="rating">⭐ ${vino.valutazione} / 5</div>
-                <p class="vino-descrizione"><strong>Perché sceglierlo:</strong> ${vino.motivo}</p>
-                <p class="vino-aromi">🌿 <strong>Note aromatiche:</strong> ${vino.aroma}</p>
-                <!-- Pulsante di Monetizzazione Dinamico -->
-<a href="https://www.google.it/search?tbm=shop&q=${encodeURIComponent(vino.nome)}" target="_blank" class="btn-acquista">🛒 Trovalo Online</a>            `;
-            lista.appendChild(li);
-        });
-    }
+    // 2. Finto ritardo di 1.5 secondi per creare "suspense"
+    setTimeout(() => {
+        lista.innerHTML = ''; // Rimuoviamo il caricamento
+
+        if (consigli.length === 0) {
+            lista.innerHTML = '<li><h3 style="color: #fff">Nessun vino trovato.</h3><p style="color: #aaa;">Prova a ricominciare allargando il budget o cambiando opzioni!</p></li>';
+        } else {
+            consigli.slice(0, 3).forEach((vino, index) => {
+                const li = document.createElement('li');
+                // Effetto a cascata: il primo vino appare subito, il secondo poco dopo, ecc.
+                li.style.animationDelay = `${index * 0.2}s`;
+                
+                // Ricerca pulita per Google Shopping
+                const nomePerRicerca = "vino " + vino.nome.replace(/ \([^)]*\)/g, '');
+                
+                // Generazione dei Badge per gli Aromi
+                const aromiBadges = vino.aroma.split(',').map(aroma => 
+                    `<span class="aroma-badge">${aroma.trim()}</span>`
+                ).join('');
+
+                // Calcolo approssimativo della Temperatura
+                let temperatura = "10°C - 12°C"; // Default
+                let nomeLower = vino.nome.toLowerCase();
+                if (nomeLower.includes('rosso') || nomeLower.includes('chianti') || nomeLower.includes('barolo')) temperatura = "16°C - 18°C";
+                if (nomeLower.includes('prosecco') || nomeLower.includes('spumante') || nomeLower.includes('champagne')) temperatura = "6°C - 8°C";
+                if (nomeLower.includes('bianco') || nomeLower.includes('chardonnay')) temperatura = "8°C - 10°C";
+
+                // Creazione della scheda
+                li.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 10px;">
+                        <h3 style="margin: 0;">${vino.nome}</h3>
+                        <span class="prezzo-badge">~${vino.prezzo}€</span>
+                    </div>
+                    
+                    <div class="rating" style="margin-bottom: 15px;">⭐ ${vino.valutazione} / 5 &nbsp; | &nbsp; 🌡️ <strong>Servire a:</strong> ${temperatura}</div>
+                    
+                    <p class="vino-descrizione" style="margin-bottom: 15px;"><strong>Perché sceglierlo:</strong> ${vino.motivo}</p>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <strong style="color: #fff; display: block; margin-bottom: 8px;">Profilo Aromatico:</strong>
+                        ${aromiBadges}
+                    </div>
+                    
+                    <!-- Pulsanti di Azione -->
+                    <a href="https://www.google.it/search?tbm=shop&q=${encodeURIComponent(nomePerRicerca)}" target="_blank" class="btn-acquista">🛒 Trovalo Online</a>
+                    
+                    <a href="https://wa.me/?text=${encodeURIComponent('🍷 Ehi! FORWINE mi ha consigliato questo vino per la nostra cena: ' + vino.nome + '. Che ne dici?')}" target="_blank" class="btn-whatsapp">📲 Invia su WhatsApp</a>
+                `;
+                lista.appendChild(li);
+            });
+        }
+    }, 1500); // 1500 millisecondi = 1.5 secondi
 }

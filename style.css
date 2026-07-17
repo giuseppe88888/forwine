@@ -192,3 +192,59 @@ li h3 {
     background: linear-gradient(135deg, #ebd076 0%, #c49600 100%);
     color: #000;
 }
+/* --- NUOVE ANIMAZIONI E DETTAGLI VISIVI --- */
+
+/* Animazione di entrata schede (Fade-in verso l'alto) */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#lista-vini li {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0; /* Partono invisibili prima dell'animazione */
+}
+
+/* Rotellina di caricamento del Sommelier */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(212, 175, 55, 0.2);
+    border-top-color: #d4af37; /* Oro */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Badge per gli aromi */
+.aroma-badge {
+    display: inline-block;
+    background-color: #2a2a2a;
+    color: #ebd076;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin: 4px 6px 4px 0;
+    border: 1px solid #444;
+}
+
+/* Pulsante WhatsApp */
+.btn-whatsapp {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 24px;
+    background-color: #25D366;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+.btn-whatsapp:hover {
+    background-color: #1ebe57;
+    transform: translateY(-2px);
+}

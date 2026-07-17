@@ -13,79 +13,67 @@
             <p class="slogan">Il tuo Sommelier Personale</p>
         </header>
 
+        <main>
+    <!-- LA DICHIARAZIONE DI AUTORITÀ (TRUST) -->
+    <section id="hero-trust" style="text-align: center; margin-bottom: 40px; padding: 20px; background: rgba(30,30,30,0.6); border-radius: 12px; border: 1px solid #d4af37;">
+        <h2 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 10px;">Il tuo Sommelier Digitale</h2>
+        <p style="color: #ddd; font-size: 1.1rem; line-height: 1.5;">
+            Sfrutta l'intelligenza artificiale per esplorare un database esclusivo di <strong>oltre 500 etichette</strong> italiane e internazionali. 
+            Rispondi a 3 semplici domande o cerca direttamente un vino per trovare l'abbinamento perfetto.
+        </p>
+        <!-- Barra di ricerca libera per esperti -->
+        <div style="margin-top: 20px;">
+            <input type="text" id="ricerca-libera" placeholder="Es. Chianti, Barolo, Prosecco..." style="padding: 12px; width: 80%; max-width: 300px; border-radius: 8px; border: none; font-size: 1rem;">
+            <button onclick="cercaTestoLibero()" style="padding: 12px 20px; background: #d4af37; color: #111; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Cerca</button>
+        </div>
+    </section>
+
+    <!-- IL FLUSSO STEP-BY-STEP (WIZARD) -->
+    <div id="wizard-container">
+        
         <!-- STEP 1: IL CIBO -->
-        <div id="step-1" class="step-section active">
-            <h2>Cosa c'è nel piatto stasera?</h2>
+        <section id="fase-1" class="fase-attiva">
+            <h2>🍷 Step 1: Cosa c'è nel piatto?</h2>
             <div class="options-grid">
-                <!-- 15 Opzioni Cibo Super Accurate -->
-                <div class="choice-card" data-type="piatto" data-value="carne_rossa"><span class="emoji">🥩</span><p>Carne alla Griglia (Fiorentina)</p></div>
-                <div class="choice-card" data-type="piatto" data-value="carne_rossa"><span class="emoji">🍲</span><p>Carni in Umido o Brasati</p></div>
-                <div class="choice-card" data-type="piatto" data-value="primi"><span class="emoji">🍝</span><p>Pasta con Sughi di Carne</p></div>
-                <div class="choice-card" data-type="piatto" data-value="primi"><span class="emoji">🥘</span><p>Risotto (Funghi o Tartufo)</p></div>
-                <div class="choice-card" data-type="piatto" data-value="pesce"><span class="emoji">🐟</span><p>Pescato al Forno o Griglia</p></div>
-                <div class="choice-card" data-type="piatto" data-value="pesce"><span class="emoji">🦪</span><p>Crudités, Ostriche e Sushi</p></div>
-                <div class="choice-card" data-type="piatto" data-value="pesce"><span class="emoji">🍤</span><p>Frittura di Pesce Misto</p></div>
-                <div class="choice-card" data-type="piatto" data-value="carne_bianca"><span class="emoji">🍗</span><p>Carni Bianche e Arrosti</p></div>
-                <div class="choice-card" data-type="piatto" data-value="pizza"><span class="emoji">🍕</span><p>Pizza (Classica o Gourmet)</p></div>
-                <div class="choice-card" data-type="piatto" data-value="pizza"><span class="emoji">🥓</span><p>Tagliere di Salumi e Affettati</p></div>
-                <div class="choice-card" data-type="piatto" data-value="formaggi"><span class="emoji">🧀</span><p>Formaggi Stagionati</p></div>
-                <div class="choice-card" data-type="piatto" data-value="formaggi"><span class="emoji">🍯</span><p>Formaggi Fusi o Erborinati</p></div>
-                <div class="choice-card" data-type="piatto" data-value="etnico"><span class="emoji">🌶️</span><p>Cucina Etnica o Speziata</p></div>
-                <div class="choice-card" data-type="piatto" data-value="etnico"><span class="emoji">🥢</span><p>Cucina Asiatica Orientale</p></div>
-                <div class="choice-card" data-type="piatto" data-value="dolce"><span class="emoji">🍰</span><p>Dessert e Pasticceria</p></div>
-                <!-- Nuove aggiunte per un menù impeccabile -->
-                <div class="choice-card" data-type="piatto" data-value="carne_bianca"><span class="emoji">🥦</span><p>Verdure e Piatti Vegani</p></div>
-                <div class="choice-card" data-type="piatto" data-value="carne_rossa"><span class="emoji">🍔</span><p>Street Food e Hamburger</p></div>
-                <div class="choice-card" data-type="piatto" data-value="pizza"><span class="emoji">🥪</span><p>Panini e Focacce</p></div>
-                <div class="choice-card" data-type="piatto" data-value="primi"><span class="emoji">🍅</span><p>Pasta Pomodoro o Pesto</p></div>
-                <div class="choice-card" data-type="piatto" data-value="pesce"><span class="emoji">🦞</span><p>Crostacei e Aragosta</p></div>
+                <!-- INCOLLA QUI DENTRO TUTTE LE TUE CARD DEL CIBO (Carne rossa, pesce, pizza, ecc.) -->
+                <div class="choice-card" data-type="piatto" data-value="carne_rossa" onclick="avanzaFase(1, 2)"><span class="emoji">🥩</span><p>Carne Rossa</p></div>
+                <div class="choice-card" data-type="piatto" data-value="pesce" onclick="avanzaFase(1, 2)"><span class="emoji">🐟</span><p>Pesce</p></div>
+                <!-- ... aggiungi le altre che avevi ... -->
             </div>
-        </div>
+        </section>
 
-        <!-- STEP 2: L'OCCASIONE -->
-        <div id="step-2" class="step-section">
-            <button class="btn-back" onclick="goToStep(1)">← Indietro</button>
-            <h2>Che aria tira?</h2>
+        <!-- STEP 2: L'OCCASIONE (Nascosta all'inizio) -->
+        <section id="fase-2" class="fase-nascosta" style="display: none;">
+            <h2>🥂 Step 2: Qual è l'atmosfera?</h2>
+            <button onclick="tornaFase(2, 1)" class="btn-indietro">⬅ Torna indietro</button>
             <div class="options-grid">
-                <!-- 15 Opzioni Occasione -->
-                <div class="choice-card" data-type="occasione" data-value="aperitivo"><span class="emoji">🌅</span><p>Aperitivo al Tramonto</p></div>
-                <div class="choice-card" data-type="occasione" data-value="aperitivo"><span class="emoji">🥂</span><p>Chiacchiere & Stuzzichini</p></div>
-                <div class="choice-card" data-type="occasione" data-value="cena_amici"><span class="emoji">🍽️</span><p>Cenone con Amici</p></div>
-                <div class="choice-card" data-type="occasione" data-value="cena_amici"><span class="emoji">🍻</span><p>Rimpatriata Goliardica</p></div>
-                <div class="choice-card" data-type="occasione" data-value="appuntamento"><span class="emoji">🕯️</span><p>Cena Lume di Candela</p></div>
-                <div class="choice-card" data-type="occasione" data-value="appuntamento"><span class="emoji">🌹</span><p>Primo Appuntamento</p></div>
-                <div class="choice-card" data-type="occasione" data-value="divano"><span class="emoji">🍿</span><p>Netflix sul Divano</p></div>
-                <div class="choice-card" data-type="occasione" data-value="divano"><span class="emoji">📖</span><p>Serata Relax & Libro</p></div>
-                <div class="choice-card" data-type="occasione" data-value="pranzo_domenica"><span class="emoji">🍝</span><p>Pranzo della Domenica</p></div>
-                <div class="choice-card" data-type="occasione" data-value="pranzo_domenica"><span class="emoji">👵</span><p>Pranzo in Famiglia</p></div>
-                <div class="choice-card" data-type="occasione" data-value="grigliata"><span class="emoji">🔥</span><p>Grigliata in Giardino</p></div>
-                <div class="choice-card" data-type="occasione" data-value="grigliata"><span class="emoji">🧺</span><p>Picnic all'Aria Aperta</p></div>
-                <div class="choice-card" data-type="occasione" data-value="festa"><span class="emoji">🍾</span><p>Brindisi & Bollicine</p></div>
-                <div class="choice-card" data-type="occasione" data-value="festa"><span class="emoji">🎉</span><p>Festa di Compleanno</p></div>
-                <div class="choice-card" data-type="occasione" data-value="regalo"><span class="emoji">🎁</span><p>Regalo Importante</p></div>
+                <!-- INCOLLA QUI DENTRO LE TUE CARD DELL'OCCASIONE -->
+                <div class="choice-card" data-type="occasione" data-value="appuntamento" onclick="avanzaFase(2, 3)"><span class="emoji">❤️</span><p>Appuntamento</p></div>
+                <div class="choice-card" data-type="occasione" data-value="amici" onclick="avanzaFase(2, 3)"><span class="emoji">🍻</span><p>Cena tra amici</p></div>
+                <!-- ... aggiungi le altre che avevi ... -->
             </div>
-        </div>
+        </section>
 
-        <!-- STEP 3: IL BUDGET -->
-        <div id="step-3" class="step-section">
-            <button class="btn-back" onclick="goToStep(2)">← Indietro</button>
-            <h2>Il tuo budget a bottiglia?</h2>
-            <div class="options-grid budget-grid">
-                <div class="choice-card budget-card" data-type="budget" data-value="10"><span class="emoji">🥉</span><p>Sotto i 10€</p></div>
-                <div class="choice-card budget-card" data-type="budget" data-value="20"><span class="emoji">🥈</span><p>Fino a 20€</p></div>
-                <div class="choice-card budget-card" data-type="budget" data-value="40"><span class="emoji">🥇</span><p>Fino a 40€</p></div>
-                <div class="choice-card budget-card" data-type="budget" data-value="1000"><span class="emoji">💎</span><p>Senza Limiti</p></div>
+        <!-- STEP 3: IL BUDGET (Nascosto all'inizio) -->
+        <section id="fase-3" class="fase-nascosta" style="display: none;">
+            <h2>💰 Step 3: Il tuo budget</h2>
+            <button onclick="tornaFase(3, 2)" class="btn-indietro">⬅ Torna indietro</button>
+            <div class="options-grid">
+                <!-- INCOLLA QUI DENTRO LE TUE CARD DEL BUDGET -->
+                <div class="choice-card" data-type="budget" data-value="10" onclick="mostraRisultatiMagici()"><span class="emoji">🪙</span><p>Sotto i 10€</p></div>
+                <div class="choice-card" data-type="budget" data-value="20" onclick="mostraRisultatiMagici()"><span class="emoji">💵</span><p>Fino a 20€</p></div>
+                <!-- ... aggiungi le altre che avevi ... -->
             </div>
-        </div>
-
-        <!-- STEP 4: I RISULTATI -->
-        <div id="step-4" class="step-section">
-            <button class="btn-back" onclick="location.reload()">↺ Ricomincia</button>
-            <h2>Le Scelte del Sommelier</h2>
-            <ul id="lista-vini"></ul>
-        </div>
-
+        </section>
+        
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+
+    <!-- RISULTATI -->
+    <section id="risultati" style="display: none;">
+        <h2>🍾 La Selezione del Sommelier</h2>
+        <button onclick="tornaFase(4, 1)" class="btn-indietro" style="margin-bottom: 20px;">🔄 Ricomincia da capo</button>
+        <ul id="lista-vini">
+            <!-- I vini appariranno qui -->
+        </ul>
+    </section>
+</main>
