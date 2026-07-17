@@ -102,10 +102,21 @@ h2 {
     box-shadow: 0 10px 20px rgba(212, 175, 55, 0.05);
 }
 
-.choice-card .emoji {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+/* Stile Elegante per le nuove Icone Vettoriali */
+.choice-card .icona-lusso {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
     display: block;
+    color: #d4af37; /* Base oro metallico */
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.2)); /* Leggero bagliore dorato */
+}
+
+/* Effetto al passaggio del mouse: l'icona si illumina e si ingrandisce leggermente */
+.choice-card:hover .icona-lusso {
+    color: #ebd076; /* Oro più chiaro */
+    transform: scale(1.1);
+    filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.4));
 }
 
 .choice-card p {

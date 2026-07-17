@@ -28,7 +28,8 @@
             <h1>FORWINE</h1>
             <p class="slogan">Il tuo Sommelier Personale</p>
         </header>
-
+<!-- LIBRERIA ICONE VETTORIALI (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <main>
             <!-- LA DICHIARAZIONE DI AUTORITÀ (TRUST) -->
             <section id="hero-trust" style="text-align: center; margin-bottom: 40px; padding: 20px; background: rgba(30,30,30,0.6); border-radius: 12px; border: 1px solid #d4af37;">
@@ -51,39 +52,38 @@
                 <section id="fase-1" class="fase-attiva">
                     <h2>🍷 Step 1: Cosa c'è nel piatto?</h2>
                     <div class="options-grid">
-                        <div class="choice-card" data-type="piatto" data-value="carne_rossa" onclick="avanzaFase(1, 2)"><span class="emoji">🥩</span><p>Carne Rossa</p></div>
-                        <div class="choice-card" data-type="piatto" data-value="carne_bianca" onclick="avanzaFase(1, 2)"><span class="emoji">🍗</span><p>Carne Bianca</p></div>
-                        <div class="choice-card" data-type="piatto" data-value="pesce" onclick="avanzaFase(1, 2)"><span class="emoji">🐟</span><p>Pesce</p></div>
-                        <div class="choice-card" data-type="piatto" data-value="pizza" onclick="avanzaFase(1, 2)"><span class="emoji">🍕</span><p>Pizza</p></div>
-                        <div class="choice-card" data-type="piatto" data-value="vegan" onclick="avanzaFase(1, 2)"><span class="emoji">🥗</span><p>Vegan / Veg</p></div>
+                        <button class="choice-card" data-type="piatto" data-value="carne_rossa" onclick="avanzaFase(1, 2)"><i class="fa-solid fa-cow icona-lusso"></i><p>Carne Rossa</p></button>
+                        <button class="choice-card" data-type="piatto" data-value="carne_bianca" onclick="avanzaFase(1, 2)"><i class="fa-solid fa-drumstick-bite icona-lusso"></i><p>Carne Bianca</p></button>
+                        <button class="choice-card" data-type="piatto" data-value="pesce" onclick="avanzaFase(1, 2)"><i class="fa-solid fa-fish icona-lusso"></i><p>Pesce</p></button>
+                        <button class="choice-card" data-type="piatto" data-value="pizza" onclick="avanzaFase(1, 2)"><i class="fa-solid fa-pizza-slice icona-lusso"></i><p>Pizza</p></button>
+                        <button class="choice-card" data-type="piatto" data-value="vegan" onclick="avanzaFase(1, 2)"><i class="fa-solid fa-leaf icona-lusso"></i><p>Vegan / Veg</p></button>
+                        <button class="choice-card" data-type="piatto" data-value="dessert" onclick="avanzaFase(1, 2)"><i class="fa-solid fa-cheese icona-lusso"></i><p>Dessert / Formaggi</p></button>
                     </div>
                 </section>
 
                 <!-- STEP 2: L'OCCASIONE -->
                 <section id="fase-2" class="fase-nascosta" style="display: none;">
                     <h2>🥂 Step 2: Qual è l'atmosfera?</h2>
-                    <button onclick="tornaFase(2, 1)" class="btn-indietro">⬅ Torna indietro</button>
+                    <button onclick="tornaFase(2, 1)" class="btn-indietro"><i class="fa-solid fa-arrow-left"></i> Torna indietro</button>
                     <div class="options-grid">
-                        <div class="choice-card" data-type="occasione" data-value="appuntamento" onclick="avanzaFase(2, 3)"><span class="emoji">❤️</span><p>Appuntamento</p></div>
-                        <div class="choice-card" data-type="occasione" data-value="amici" onclick="avanzaFase(2, 3)"><span class="emoji">🍻</span><p>Cena tra amici</p></div>
-                        <div class="choice-card" data-type="occasione" data-value="famiglia" onclick="avanzaFase(2, 3)"><span class="emoji">🍝</span><p>In Famiglia</p></div>
-                        <div class="choice-card" data-type="occasione" data-value="relax" onclick="avanzaFase(2, 3)"><span class="emoji">🛋️</span><p>Relax Serale</p></div>
+                        <button class="choice-card" data-type="occasione" data-value="appuntamento" onclick="avanzaFase(2, 3)"><i class="fa-solid fa-heart icona-lusso"></i><p>Appuntamento</p></button>
+                        <button class="choice-card" data-type="occasione" data-value="amici" onclick="avanzaFase(2, 3)"><i class="fa-solid fa-champagne-glasses icona-lusso"></i><p>Cena tra amici</p></button>
+                        <button class="choice-card" data-type="occasione" data-value="famiglia" onclick="avanzaFase(2, 3)"><i class="fa-solid fa-house icona-lusso"></i><p>In Famiglia</p></button>
+                        <button class="choice-card" data-type="occasione" data-value="relax" onclick="avanzaFase(2, 3)"><i class="fa-solid fa-couch icona-lusso"></i><p>Relax Serale</p></button>
                     </div>
                 </section>
 
                 <!-- STEP 3: IL BUDGET -->
                 <section id="fase-3" class="fase-nascosta" style="display: none;">
                     <h2>💰 Step 3: Il tuo budget</h2>
-                    <button onclick="tornaFase(3, 2)" class="btn-indietro">⬅ Torna indietro</button>
+                    <button onclick="tornaFase(3, 2)" class="btn-indietro"><i class="fa-solid fa-arrow-left"></i> Torna indietro</button>
                     <div class="options-grid">
-                        <div class="choice-card" data-type="budget" data-value="10" onclick="mostraRisultatiMagici()"><span class="emoji">🪙</span><p>Sotto i 10€</p></div>
-                        <div class="choice-card" data-type="budget" data-value="20" onclick="mostraRisultatiMagici()"><span class="emoji">💵</span><p>Fino a 20€</p></div>
-                        <div class="choice-card" data-type="budget" data-value="50" onclick="mostraRisultatiMagici()"><span class="emoji">💳</span><p>Fino a 50€</p></div>
-                        <div class="choice-card" data-type="budget" data-value="1000" onclick="mostraRisultatiMagici()"><span class="emoji">💎</span><p>Nessun limite</p></div>
+                        <button class="choice-card" data-type="budget" data-value="10" onclick="mostraRisultatiMagici()"><i class="fa-solid fa-coins icona-lusso"></i><p>Sotto i 10€</p></button>
+                        <button class="choice-card" data-type="budget" data-value="20" onclick="mostraRisultatiMagici()"><i class="fa-solid fa-money-bill-wave icona-lusso"></i><p>Fino a 20€</p></button>
+                        <button class="choice-card" data-type="budget" data-value="50" onclick="mostraRisultatiMagici()"><i class="fa-solid fa-credit-card icona-lusso"></i><p>Fino a 50€</p></button>
+                        <button class="choice-card" data-type="budget" data-value="1000" onclick="mostraRisultatiMagici()"><i class="fa-solid fa-gem icona-lusso"></i><p>Nessun limite</p></button>
                     </div>
                 </section>
-                
-            </div>
 
             <!-- RISULTATI -->
             <section id="risultati" style="display: none;">

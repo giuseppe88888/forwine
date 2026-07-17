@@ -88,7 +88,8 @@ function mostraRisultatiMagici() {
         'carne_bianca': ['carne bianca', 'pollo', 'tacchino', 'coniglio', 'maiale'],
         'pesce': ['pesce', 'frutti di mare', 'crostacei', 'sushi', 'salmone', 'crudo'],
         'pizza': ['pizza', 'panini', 'focacce', 'hamburger', 'street food', 'piadina'],
-        'vegan': ['verdure', 'vegetariano', 'vegan', 'insalate', 'zuppe', 'formaggi']
+        'vegan': ['verdure', 'vegetariano', 'vegan', 'insalate', 'zuppe', 'formaggi'],
+        'dessert': ['dolce', 'dessert', 'pasticceria', 'cioccolato', 'formaggi stagionati', 'torta'] // <--- AGGIUNGI QUESTA!
     };
 
     const dizionarioOccasioni = {
