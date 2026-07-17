@@ -1,5 +1,5 @@
 // =======================================================
-// LA LOGICA DELL'APP: WIZARD, TRADUTTORE, PARACADUTE E STAMPA
+// LA LOGICA DELL'APP: WIZARD, TRADUTTORE E RICERCA
 // =======================================================
 
 // 1. VARIABILI DI MEMORIA
@@ -7,7 +7,7 @@ let userPiatto = '';
 let userOccasione = '';
 let userBudget = 0;
 
-// 2. GESTIONE CLIC SULLE CARD (Salva la scelta e avanza)
+// 2. GESTIONE CLIC SULLE CARD (Salva la scelta in memoria)
 document.querySelectorAll('.choice-card').forEach(card => {
     card.addEventListener('click', function() {
         const tipo = this.getAttribute('data-type');
@@ -15,14 +15,11 @@ document.querySelectorAll('.choice-card').forEach(card => {
 
         if (tipo === 'piatto') userPiatto = valore;
         if (tipo === 'occasione') userOccasione = valore;
-        if (tipo === 'budget') {
-            userBudget = parseInt(valore);
-            mostraRisultatiMagici(); // L'ultimo clic fa partire la ricerca
-        }
+        if (tipo === 'budget') userBudget = parseInt(valore);
     });
 });
 
-// 3. NAVIGAZIONE WIZARD (Avanti e Indietro)
+// 3. NAVIGAZIONE WIZARD
 function avanzaFase(faseAttuale, faseSuccessiva) {
     document.getElementById(`fase-${faseAttuale}`).style.display = 'none';
     document.getElementById(`fase-${faseSuccessiva}`).style.display = 'block';
@@ -30,7 +27,7 @@ function avanzaFase(faseAttuale, faseSuccessiva) {
 }
 
 function tornaFase(faseAttuale, fasePrecedente) {
-    if (faseAttuale === 4) { // Dalla pagina risultati torna alla home
+    if (faseAttuale === 4) { 
         document.getElementById('risultati').style.display = 'none';
         document.getElementById('wizard-container').style.display = 'block';
         document.getElementById('fase-1').style.display = 'block';
@@ -41,7 +38,7 @@ function tornaFase(faseAttuale, fasePrecedente) {
     }
 }
 
-// 4. RICERCA LIBERA PER GLI ESPERTI
+// 4. RICERCA LIBERA SICURA (ANTIPROIETTILE)
 function cercaTestoLibero() {
     const testo = document.getElementById('ricerca-libera').value.toLowerCase();
     if (testo.trim() === '') return;
@@ -57,15 +54,24 @@ function cercaTestoLibero() {
         </div>`;
 
     setTimeout(() => {
-        const consigli = viniDatabase.filter(vino => 
-            vino.nome.toLowerCase().includes(testo) || 
-            vino.aroma.toLowerCase().includes(testo)
-        );
+        // AIRBAG 1: Controlla se database.js si è rotto
+        if (typeof viniDatabase === 'undefined') {
+            lista.innerHTML = '<div style="text-align:center; padding: 30px; background: rgba(255,0,0,0.1); border-radius: 10px;"><h3 style="color:#ff4444;">Errore Critico 🚨</h3><p style="color: #fff;">Il tuo file <strong>database.js</strong> ha un errore di sintassi e non è leggibile. Controlla di non aver incollato parentesi doppie o dimenticato virgole nei tuoi 500 vini!</p></div>';
+            return;
+        }
+
+        const consigli = viniDatabase.filter(vino => {
+            // AIRBAG 2: Se un vino vecchio non ha nome o aroma, non va in crash
+            const nomeSafe = vino.nome ? vino.nome.toLowerCase() : "";
+            const aromaSafe = vino.aroma ? vino.aroma.toLowerCase() : "";
+            return nomeSafe.includes(testo) || aromaSafe.includes(testo);
+        });
+        
         stampaVini(consigli, lista, `<h3 style="color: #d4af37; margin-bottom: 20px;">Risultati per: "${testo}"</h3>`);
     }, 800);
 }
 
-// 5. IL MOTORE MAGICO CON TRADUTTORE
+// 5. MOTORE MAGICO CON TRADUTTORE
 function mostraRisultatiMagici() {
     document.getElementById('wizard-container').style.display = 'none';
     const sezioneRisultati = document.getElementById('risultati');
@@ -82,49 +88,59 @@ function mostraRisultatiMagici() {
         </div>
     `;
 
-    // IL TRADUTTORE: Associa i bottoni alle vecchie parole del database
-    const dizionarioPiatti = {
-        'carne_rossa': ['carne', 'carne rossa', 'grigliata', 'bistecca', 'arrosto', 'selvaggina', 'ragù'],
-        'carne_bianca': ['carne bianca', 'pollo', 'tacchino', 'coniglio', 'maiale'],
-        'pesce': ['pesce', 'frutti di mare', 'crostacei', 'sushi', 'salmone', 'crudo'],
-        'pizza': ['pizza', 'panini', 'focacce', 'hamburger', 'street food', 'piadina'],
-        'vegan': ['verdure', 'vegetariano', 'vegan', 'insalate', 'zuppe', 'formaggi'],
-        'dessert': ['dolce', 'dessert', 'pasticceria', 'cioccolato', 'formaggi stagionati', 'torta'] // <--- AGGIUNGI QUESTA!
-    };
-
-    const dizionarioOccasioni = {
-        'appuntamento': ['appuntamento', 'romantico', 'elegante', 'regalo', 'anniversario'],
-        'amici': ['amici', 'festa', 'aperitivo', 'informale', 'grigliata', 'party'],
-        'famiglia': ['famiglia', 'pranzo', 'domenica', 'quotidiano', 'tradizione', 'cena'],
-        'relax': ['relax', 'meditazione', 'dopo cena', 'divano', 'lettura']
-    };
-
-    // Controllo a prova di bomba per le parole
-    const controllaMatch = (vinoTags, paroleValide) => {
-        if (!vinoTags) return false;
-        if (Array.isArray(vinoTags)) {
-            return vinoTags.some(tag => paroleValide.includes(tag.toLowerCase().trim()));
-        } else if (typeof vinoTags === 'string') {
-            const vinoStr = vinoTags.toLowerCase();
-            return paroleValide.some(parola => vinoStr.includes(parola));
-        }
-        return false;
-    };
-
     setTimeout(() => {
+        // AIRBAG 1: Controlla se database.js si è rotto
+        if (typeof viniDatabase === 'undefined') {
+            lista.innerHTML = '<div style="text-align:center; padding: 30px; background: rgba(255,0,0,0.1); border-radius: 10px;"><h3 style="color:#ff4444;">Errore Critico 🚨</h3><p style="color: #fff;">Il tuo file <strong>database.js</strong> ha un errore di sintassi e non è leggibile. Controlla di non aver incollato parentesi doppie o dimenticato virgole nei tuoi 500 vini!</p></div>';
+            return;
+        }
+
+        const dizionarioPiatti = {
+            'carne_rossa': ['carne', 'carne rossa', 'grigliata', 'bistecca', 'arrosto', 'selvaggina', 'ragù'],
+            'carne_bianca': ['carne bianca', 'pollo', 'tacchino', 'coniglio', 'maiale'],
+            'pesce': ['pesce', 'frutti di mare', 'crostacei', 'sushi', 'salmone', 'crudo'],
+            'pizza': ['pizza', 'panini', 'focacce', 'hamburger', 'street food', 'piadina'],
+            'vegan': ['verdure', 'vegetariano', 'vegan', 'insalate', 'zuppe', 'formaggi'],
+            'dessert': ['dolce', 'dessert', 'pasticceria', 'cioccolato', 'formaggi stagionati', 'torta']
+        };
+
+        const dizionarioOccasioni = {
+            'appuntamento': ['appuntamento', 'romantico', 'elegante', 'regalo', 'anniversario'],
+            'amici': ['amici', 'festa', 'aperitivo', 'informale', 'grigliata', 'party'],
+            'famiglia': ['famiglia', 'pranzo', 'domenica', 'quotidiano', 'tradizione', 'cena'],
+            'relax': ['relax', 'meditazione', 'dopo cena', 'divano', 'lettura']
+        };
+
+        const controllaMatch = (vinoTags, paroleValide) => {
+            if (!vinoTags) return false;
+            if (Array.isArray(vinoTags)) {
+                return vinoTags.some(tag => paroleValide.includes(tag.toLowerCase().trim()));
+            } else if (typeof vinoTags === 'string') {
+                const vinoStr = vinoTags.toLowerCase();
+                return paroleValide.some(parola => vinoStr.includes(parola));
+            }
+            return false;
+        };
+
         const parolePiatto = dizionarioPiatti[userPiatto] || [userPiatto];
         const paroleOccasione = dizionarioOccasioni[userOccasione] || [userOccasione];
+
+        // Sicurezza: se il budget non viene registrato, assume nessun limite
+        const budgetSicuro = userBudget > 0 ? userBudget : 1000;
 
         let consigli = viniDatabase.filter(vino => {
             const matchPiatto = controllaMatch(vino.piatti, parolePiatto);
             const matchOccasione = controllaMatch(vino.occasioni, paroleOccasione);
-            const matchBudget = vino.prezzo <= userBudget;
+            
+            // AIRBAG 3: Se un vino non ha prezzo segnato, lo conta come 0
+            const prezzoVino = vino.prezzo || 0;
+            const matchBudget = prezzoVino <= budgetSicuro;
+            
             return matchPiatto && matchOccasione && matchBudget;
         });
 
         let messaggioExtra = '';
 
-        // IL PARACADUTE: Se non trova nulla con il budget, prova senza
         if (consigli.length === 0) {
             consigli = viniDatabase.filter(vino => {
                 return controllaMatch(vino.piatti, parolePiatto) && controllaMatch(vino.occasioni, paroleOccasione);
@@ -134,23 +150,23 @@ function mostraRisultatiMagici() {
                 messaggioExtra = `
                 <div style="background: rgba(255, 152, 0, 0.1); border-left: 4px solid #ff9800; padding: 15px; margin-bottom: 25px;">
                     <p style="color: #ffb74d; margin: 0; font-size: 0.95rem;">
-                        ⚠️ <strong>Attenzione:</strong> Non abbiamo trovato bottiglie perfette sotto i ${userBudget}€ per questo abbinamento specifico. 
-                        Tuttavia, ecco le migliori scelte ignorando il limite di prezzo!
+                        ⚠️ <strong>Attenzione:</strong> Non abbiamo trovato bottiglie perfette sotto i ${budgetSicuro}€ per questo abbinamento. 
+                        Ecco le migliori scelte ignorando il limite di prezzo!
                     </p>
                 </div>`;
             }
         }
 
         stampaVini(consigli, lista, messaggioExtra);
-    }, 1500);
+    }, 1000);
 }
 
-// 6. FUNZIONE PER DISEGNARE LE BOTTIGLIE
+// 6. STAMPA BOTTIGLIE CON DATI MANCANTI PROTETTI
 function stampaVini(consigli, listaHTML, messaggioExtra) {
     listaHTML.innerHTML = messaggioExtra;
 
     if (consigli.length === 0) {
-        listaHTML.innerHTML += '<li><h3 style="color: #fff">Nessun vino trovato.</h3><p style="color: #aaa;">Abbinamento molto estremo, prova a cambiare parametri o usare la ricerca libera!</p></li>';
+        listaHTML.innerHTML += '<li><h3 style="color: #fff">Nessun vino trovato.</h3><p style="color: #aaa;">Abbinamento molto estremo o vino non presente in database!</p></li>';
         return;
     }
 
@@ -158,26 +174,32 @@ function stampaVini(consigli, listaHTML, messaggioExtra) {
         const li = document.createElement('li');
         li.style.animationDelay = `${index * 0.2}s`;
         
-        const nomePerRicerca = "vino " + vino.nome.replace(/ \([^)]*\)/g, '');
-        // Sicurezza per gli aromi
-        const aromiTesto = vino.aroma ? vino.aroma : "Non specificato";
+        // Salvataggi se mancano dati nel vecchio database
+        const nomeSafe = vino.nome ? vino.nome : "Vino della Casa";
+        const nomePerRicerca = "vino " + nomeSafe.replace(/ \([^)]*\)/g, '');
+        
+        const aromiTesto = vino.aroma ? vino.aroma : "Nessun aroma specificato";
         const aromiBadges = aromiTesto.split(',').map(aroma => `<span class="aroma-badge">${aroma.trim()}</span>`).join('');
         
+        const prezzoSafe = vino.prezzo ? `~${vino.prezzo}€` : "Prezzo su richiesta";
+        const valutazioneSafe = vino.valutazione ? vino.valutazione : "4.5";
+        const motivoSafe = vino.motivo ? vino.motivo : "Selezione speciale del nostro sommelier digitale per accompagnare al meglio questo piatto.";
+
         let temperatura = "10°C - 12°C";
-        let nomeLower = vino.nome.toLowerCase();
-        if (nomeLower.includes('rosso') || nomeLower.includes('chianti') || nomeLower.includes('barolo')) temperatura = "16°C - 18°C";
+        let nomeLower = nomeSafe.toLowerCase();
+        if (nomeLower.includes('rosso') || nomeLower.includes('chianti') || nomeLower.includes('barolo') || nomeLower.includes('amarone')) temperatura = "16°C - 18°C";
         if (nomeLower.includes('prosecco') || nomeLower.includes('spumante') || nomeLower.includes('champagne')) temperatura = "6°C - 8°C";
         if (nomeLower.includes('bianco') || nomeLower.includes('chardonnay')) temperatura = "8°C - 10°C";
 
         li.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 10px;">
-                <h3 style="margin: 0;">${vino.nome}</h3>
-                <span class="prezzo-badge">~${vino.prezzo}€</span>
+                <h3 style="margin: 0;">${nomeSafe}</h3>
+                <span class="prezzo-badge">${prezzoSafe}</span>
             </div>
             
-            <div class="rating" style="margin-bottom: 15px;">⭐ ${vino.valutazione} / 5 &nbsp; | &nbsp; 🌡️ <strong>Servire a:</strong> ${temperatura}</div>
+            <div class="rating" style="margin-bottom: 15px;">⭐ ${valutazioneSafe} / 5 &nbsp; | &nbsp; 🌡️ <strong>Servire a:</strong> ${temperatura}</div>
             
-            <p class="vino-descrizione" style="margin-bottom: 15px;"><strong>Perché sceglierlo:</strong> ${vino.motivo}</p>
+            <p class="vino-descrizione" style="margin-bottom: 15px;"><strong>Perché sceglierlo:</strong> ${motivoSafe}</p>
             
             <div style="margin-bottom: 20px;">
                 <strong style="color: #fff; display: block; margin-bottom: 8px;">Profilo Aromatico:</strong>
@@ -185,7 +207,6 @@ function stampaVini(consigli, listaHTML, messaggioExtra) {
             </div>
             
             <a href="https://www.google.it/search?tbm=shop&q=${encodeURIComponent(nomePerRicerca)}" target="_blank" class="btn-acquista">🛒 Trovalo Online</a>
-            <a href="https://wa.me/?text=${encodeURIComponent('🍷 Ehi! FORWINE mi ha consigliato questo vino per la nostra cena: ' + vino.nome + '. Che ne dici?')}" target="_blank" class="btn-whatsapp">📲 Invia su WhatsApp</a>
         `;
         listaHTML.appendChild(li);
     });
