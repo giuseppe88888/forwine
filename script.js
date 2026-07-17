@@ -594,118 +594,159 @@ const viniDatabase = [
     { nome: "Krug Grande Cuvée (Champagne)", prezzo: 250, piatti: ["pesce", "formaggi", "carne_bianca"], occasioni: ["regalo", "festa"], motivo: "L'assemblaggio di decine di annate diverse per creare la sinfonia perfetta. Inarrivabile.", valutazione: "5.0", aroma: "Nocciola, burro fuso, agrumi, spezie orientali, miele." }
 ];
 
-// VARIABILI PER SALVARE LE SCELTE DELL'UTENTE
-let userPiatto = null;
-let userOccasione = null;
-let userBudget = null;
+// =======================================================
+// LA LOGICA DELL'APP: WIZARD, PARACADUTE E STAMPA
+// =======================================================
 
-// FUNZIONE PER NAVIGARE TRA LE SCHERMATE
-function goToStep(stepNumber) {
-    document.querySelectorAll('.step-section').forEach(section => {
-        section.classList.remove('active');
+// 1. VARIABILI DI MEMORIA
+let userPiatto = '';
+let userOccasione = '';
+let userBudget = 0;
+
+// 2. GESTIONE CLIC SULLE CARD (Salva la scelta automaticamente)
+document.querySelectorAll('.choice-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const tipo = this.getAttribute('data-type');
+        const valore = this.getAttribute('data-value');
+
+        if (tipo === 'piatto') userPiatto = valore;
+        if (tipo === 'occasione') userOccasione = valore;
+        if (tipo === 'budget') {
+            userBudget = parseInt(valore);
+            mostraRisultatiMagici(); // L'ultimo clic fa partire il motore!
+        }
     });
-    document.getElementById('step-' + stepNumber).classList.add('active');
+});
+
+// 3. NAVIGAZIONE WIZARD (Avanti e Indietro)
+function avanzaFase(faseAttuale, faseSuccessiva) {
+    document.getElementById(`fase-${faseAttuale}`).style.display = 'none';
+    document.getElementById(`fase-${faseSuccessiva}`).style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Riporta l'utente in alto
 }
 
-// ASCOLTA IL CLICK SULLE CARDS DEL CIBO (STEP 1)
-document.querySelectorAll('.choice-card[data-type="piatto"]').forEach(card => {
-    card.addEventListener('click', function() {
-        userPiatto = this.getAttribute('data-value');
-        setTimeout(() => goToStep(2), 200); // Piccola pausa per fluidità
-    });
-});
+function tornaFase(faseAttuale, fasePrecedente) {
+    if (faseAttuale === 4) { // Dalla pagina risultati torna all'inizio
+        document.getElementById('risultati').style.display = 'none';
+        document.getElementById('wizard-container').style.display = 'block';
+        document.getElementById('fase-1').style.display = 'block';
+        // Azzera la barra di ricerca se l'aveva usata
+        document.getElementById('ricerca-libera').value = ''; 
+    } else {
+        document.getElementById(`fase-${faseAttuale}`).style.display = 'none';
+        document.getElementById(`fase-${fasePrecedente}`).style.display = 'block';
+    }
+}
 
-// ASCOLTA IL CLICK SULLE CARDS DELL'OCCASIONE (STEP 2)
-document.querySelectorAll('.choice-card[data-type="occasione"]').forEach(card => {
-    card.addEventListener('click', function() {
-        userOccasione = this.getAttribute('data-value');
-        setTimeout(() => goToStep(3), 200);
-    });
-});
+// 4. RICERCA LIBERA PER GLI ESPERTI (Cerca il testo)
+function cercaTestoLibero() {
+    const testo = document.getElementById('ricerca-libera').value.toLowerCase();
+    if (testo.trim() === '') return; // Se è vuoto, non fa nulla
 
-// ASCOLTA IL CLICK SULLE CARDS DEL BUDGET E CALCOLA (STEP 3)
-document.querySelectorAll('.choice-card[data-type="budget"]').forEach(card => {
-    card.addEventListener('click', function() {
-        userBudget = parseInt(this.getAttribute('data-value'));
-        
-        // Passa allo Step 4 e mostra i risultati
-        mostraRisultati();
-        goToStep(4);
-    });
-});
-
-// IL MOTORE DI RICERCA (Con UI Avanzata)
-function mostraRisultati() {
+    document.getElementById('wizard-container').style.display = 'none';
+    document.getElementById('risultati').style.display = 'block';
     const lista = document.getElementById('lista-vini');
     
-    // 1. Mostriamo la schermata di caricamento del Sommelier
+    lista.innerHTML = `<div class="spinner"></div><p style="text-align:center; color:#d4af37; margin-top:20px;">Ricerco in cantina...</p>`;
+
+    setTimeout(() => {
+        const consigli = viniDatabase.filter(vino => 
+            vino.nome.toLowerCase().includes(testo) || 
+            vino.aroma.toLowerCase().includes(testo)
+        );
+        stampaVini(consigli, lista, `<h3 style="color: #d4af37; margin-bottom: 20px;">Risultati per: "${testo}"</h3>`);
+    }, 800);
+}
+
+// 5. IL MOTORE MAGICO CON "IL PARACADUTE"
+function mostraRisultatiMagici() {
+    document.getElementById('wizard-container').style.display = 'none';
+    const sezioneRisultati = document.getElementById('risultati');
+    sezioneRisultati.style.display = 'block';
+    
+    const lista = document.getElementById('lista-vini');
+    
     lista.innerHTML = `
         <div id="loader" style="text-align: center; padding: 50px 0;">
             <div class="spinner"></div>
             <p style="color: #d4af37; margin-top: 20px; font-weight: bold; font-size: 1.2rem;">
-                Il Sommelier sta analizzando la cantina...
+                Il Sommelier sta selezionando l'abbinamento...
             </p>
         </div>
     `;
 
-    // Filtriamo i risultati nel background
-    const consigli = viniDatabase.filter(vino => {
-        const matchPiatto = vino.piatti.includes(userPiatto);
-        const matchOccasione = vino.occasioni.includes(userOccasione);
-        const matchBudget = vino.prezzo <= userBudget;
-        return matchPiatto && matchOccasione && matchBudget;
-    });
-
-    // 2. Finto ritardo di 1.5 secondi per creare "suspense"
     setTimeout(() => {
-        lista.innerHTML = ''; // Rimuoviamo il caricamento
+        // Tentativo 1: Filtro Esatto (Piatto + Occasione + Budget)
+        let consigli = viniDatabase.filter(vino => {
+            const matchPiatto = vino.piatti.includes(userPiatto);
+            const matchOccasione = vino.occasioni.includes(userOccasione);
+            const matchBudget = vino.prezzo <= userBudget;
+            return matchPiatto && matchOccasione && matchBudget;
+        });
 
+        let messaggioExtra = '';
+
+        // IL PARACADUTE: Se non trova nulla, toglie il blocco del budget!
         if (consigli.length === 0) {
-            lista.innerHTML = '<li><h3 style="color: #fff">Nessun vino trovato.</h3><p style="color: #aaa;">Prova a ricominciare allargando il budget o cambiando opzioni!</p></li>';
-        } else {
-            consigli.slice(0, 3).forEach((vino, index) => {
-                const li = document.createElement('li');
-                // Effetto a cascata: il primo vino appare subito, il secondo poco dopo, ecc.
-                li.style.animationDelay = `${index * 0.2}s`;
-                
-                // Ricerca pulita per Google Shopping
-                const nomePerRicerca = "vino " + vino.nome.replace(/ \([^)]*\)/g, '');
-                
-                // Generazione dei Badge per gli Aromi
-                const aromiBadges = vino.aroma.split(',').map(aroma => 
-                    `<span class="aroma-badge">${aroma.trim()}</span>`
-                ).join('');
-
-                // Calcolo approssimativo della Temperatura
-                let temperatura = "10°C - 12°C"; // Default
-                let nomeLower = vino.nome.toLowerCase();
-                if (nomeLower.includes('rosso') || nomeLower.includes('chianti') || nomeLower.includes('barolo')) temperatura = "16°C - 18°C";
-                if (nomeLower.includes('prosecco') || nomeLower.includes('spumante') || nomeLower.includes('champagne')) temperatura = "6°C - 8°C";
-                if (nomeLower.includes('bianco') || nomeLower.includes('chardonnay')) temperatura = "8°C - 10°C";
-
-                // Creazione della scheda
-                li.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 10px;">
-                        <h3 style="margin: 0;">${vino.nome}</h3>
-                        <span class="prezzo-badge">~${vino.prezzo}€</span>
-                    </div>
-                    
-                    <div class="rating" style="margin-bottom: 15px;">⭐ ${vino.valutazione} / 5 &nbsp; | &nbsp; 🌡️ <strong>Servire a:</strong> ${temperatura}</div>
-                    
-                    <p class="vino-descrizione" style="margin-bottom: 15px;"><strong>Perché sceglierlo:</strong> ${vino.motivo}</p>
-                    
-                    <div style="margin-bottom: 20px;">
-                        <strong style="color: #fff; display: block; margin-bottom: 8px;">Profilo Aromatico:</strong>
-                        ${aromiBadges}
-                    </div>
-                    
-                    <!-- Pulsanti di Azione -->
-                    <a href="https://www.google.it/search?tbm=shop&q=${encodeURIComponent(nomePerRicerca)}" target="_blank" class="btn-acquista">🛒 Trovalo Online</a>
-                    
-                    <a href="https://wa.me/?text=${encodeURIComponent('🍷 Ehi! FORWINE mi ha consigliato questo vino per la nostra cena: ' + vino.nome + '. Che ne dici?')}" target="_blank" class="btn-whatsapp">📲 Invia su WhatsApp</a>
-                `;
-                lista.appendChild(li);
+            consigli = viniDatabase.filter(vino => {
+                return vino.piatti.includes(userPiatto) && vino.occasioni.includes(userOccasione);
             });
+            
+            if (consigli.length > 0) {
+                messaggioExtra = `
+                <div style="background: rgba(255, 152, 0, 0.1); border-left: 4px solid #ff9800; padding: 15px; margin-bottom: 25px;">
+                    <p style="color: #ffb74d; margin: 0; font-size: 0.95rem;">
+                        ⚠️ <strong>Attenzione:</strong> Non abbiamo trovato bottiglie perfette sotto i ${userBudget}€ per questo abbinamento specifico. 
+                        Tuttavia, ecco le migliori scelte in assoluto ignorando il limite di prezzo!
+                    </p>
+                </div>`;
+            }
         }
-    }, 1500); // 1500 millisecondi = 1.5 secondi
+
+        stampaVini(consigli, lista, messaggioExtra);
+    }, 1500);
+}
+
+// 6. FUNZIONE PER DISEGNARE LE BOTTIGLIE A SCHERMO
+function stampaVini(consigli, listaHTML, messaggioExtra) {
+    listaHTML.innerHTML = messaggioExtra;
+
+    if (consigli.length === 0) {
+        listaHTML.innerHTML += '<li><h3 style="color: #fff">Nessun vino trovato.</h3><p style="color: #aaa;">Abbinamento troppo estremo, prova a cambiare parametri!</p></li>';
+        return;
+    }
+
+    consigli.slice(0, 3).forEach((vino, index) => {
+        const li = document.createElement('li');
+        li.style.animationDelay = `${index * 0.2}s`; // Effetto a cascata
+        
+        const nomePerRicerca = "vino " + vino.nome.replace(/ \([^)]*\)/g, '');
+        const aromiBadges = vino.aroma.split(',').map(aroma => `<span class="aroma-badge">${aroma.trim()}</span>`).join('');
+        
+        let temperatura = "10°C - 12°C";
+        let nomeLower = vino.nome.toLowerCase();
+        if (nomeLower.includes('rosso') || nomeLower.includes('chianti') || nomeLower.includes('barolo')) temperatura = "16°C - 18°C";
+        if (nomeLower.includes('prosecco') || nomeLower.includes('spumante') || nomeLower.includes('champagne')) temperatura = "6°C - 8°C";
+        if (nomeLower.includes('bianco') || nomeLower.includes('chardonnay')) temperatura = "8°C - 10°C";
+
+        li.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 10px;">
+                <h3 style="margin: 0;">${vino.nome}</h3>
+                <span class="prezzo-badge">~${vino.prezzo}€</span>
+            </div>
+            
+            <div class="rating" style="margin-bottom: 15px;">⭐ ${vino.valutazione} / 5 &nbsp; | &nbsp; 🌡️ <strong>Servire a:</strong> ${temperatura}</div>
+            
+            <p class="vino-descrizione" style="margin-bottom: 15px;"><strong>Perché sceglierlo:</strong> ${vino.motivo}</p>
+            
+            <div style="margin-bottom: 20px;">
+                <strong style="color: #fff; display: block; margin-bottom: 8px;">Profilo Aromatico:</strong>
+                ${aromiBadges}
+            </div>
+            
+            <a href="https://www.google.it/search?tbm=shop&q=${encodeURIComponent(nomePerRicerca)}" target="_blank" class="btn-acquista">🛒 Trovalo Online</a>
+            <a href="https://wa.me/?text=${encodeURIComponent('🍷 Ehi! FORWINE mi ha consigliato questo vino per la nostra cena: ' + vino.nome + '. Che ne dici?')}" target="_blank" class="btn-whatsapp">📲 Invia su WhatsApp</a>
+        `;
+        listaHTML.appendChild(li);
+    });
 }
