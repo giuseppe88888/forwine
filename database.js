@@ -1,893 +1,595 @@
-// IL SERBATOIO DATI: database.js
-// Qui ci vanno SOLO i vini. Nessuna logica.
-
 const viniDatabase = [
-    // --- VINI PER CARNE BIANCA E VEGAN ---
-    {
-        nome: "Vermentino di Gallura DOCG (Sardegna)",
-        piatti: ["pesce", "carne bianca", "vegan"],
-        occasioni: ["amici", "relax"],
-        prezzo: 16,
-        valutazione: 4.6,
-        motivo: "La sua spiccata sapidità e freschezza ripuliscono il palato senza sovrastare piatti delicati a base di pollo, tacchino o verdure grigliate.",
-        aroma: "Macchia mediterranea, Agrumi, Fiori bianchi, Mandorla amara"
-    },
-    {
-        nome: "Gewürztraminer Alto Adige DOC (Trentino)",
-        piatti: ["carne bianca", "vegan", "pizza"],
-        occasioni: ["appuntamento", "relax"],
-        prezzo: 18,
-        valutazione: 4.8,
-        motivo: "Estremamente aromatico, è il re incontrastato per abbinamenti difficili come cibi speziati, verdure dal gusto deciso o carni bianche saporite.",
-        aroma: "Litchi, Rosa, Chiodi di garofano, Frutta tropicale"
-    },
-    {
-        nome: "Pinot Nero dell'Oltrepò Pavese DOC (Lombardia)",
-        piatti: ["carne bianca", "pizza", "carne rossa"],
-        occasioni: ["appuntamento", "famiglia"],
-        prezzo: 22,
-        valutazione: 4.7,
-        motivo: "Un rosso elegante e dal tannino vellutato. Perfetto per chi vuole un rosso senza appesantire carni bianche o pizze gourmet.",
-        aroma: "Piccoli frutti rossi, Sottobosco, Pepe nero, Leggera vaniglia"
-    },
+    // 1-10: Bollicine, Rossi e Bianchi quotidiani
+    { nome: "Prosecco DOC (Veneto/Friuli)", prezzo: 8, piatti: ["pesce", "pizza", "formaggi"], occasioni: ["aperitivo", "festa", "cena_amici"], motivo: "Fresco, vivace e perfetto per rompere il ghiaccio.", valutazione: "3.8", aroma: "Mela verde, pera, fiori bianchi, agrumi." },
+    { nome: "Prosecco Superiore DOCG (Veneto)", prezzo: 14, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "festa", "appuntamento"], motivo: "Elegante e floreale, un gradino sopra per i brindisi che contano.", valutazione: "4.4", aroma: "Mela, pesca, glicine, fiori d'acacia, maggiore finezza." },
+    { nome: "Chianti DOCG (Toscana)", prezzo: 9, piatti: ["carne_rossa", "primi", "pizza"], occasioni: ["divano", "cena_amici"], motivo: "Un classico toscano, beverino e perfetto per i sughi rossi.", valutazione: "4.0", aroma: "Ciliegia, viola, spezie leggere, tabacco." },
+    { nome: "Chianti Classico DOCG (Toscana)", prezzo: 16, piatti: ["carne_rossa", "primi", "formaggi"], occasioni: ["pranzo_domenica", "appuntamento"], motivo: "Strutturato ed elegante, il tannino pulisce il palato in modo superbo.", valutazione: "4.6", aroma: "Amarena, violetta, cuoio, tabacco, erbe aromatiche." },
+    { nome: "Montepulciano d'Abruzzo DOC (Abruzzo)", prezzo: 8, piatti: ["carne_rossa", "pizza", "primi"], occasioni: ["cena_amici", "grigliata"], motivo: "Corposo, fruttato e senza fronzoli. Il re delle tavolate.", valutazione: "4.1", aroma: "Mora, prugna, liquirizia, cacao." },
+    { nome: "Lambrusco Grasparossa DOC (Emilia)", prezzo: 7, piatti: ["pizza", "formaggi", "carne_rossa"], occasioni: ["cena_amici", "festa"], motivo: "Rosso frizzante e scuro, sgrassa meravigliosamente salumi e cibi unti.", valutazione: "3.9", aroma: "Frutti di bosco, viola, mora, note floreali." },
+    { nome: "Lambrusco Salamino DOC (Emilia)", prezzo: 7, piatti: ["pizza", "formaggi", "primi"], occasioni: ["cena_amici", "aperitivo"], motivo: "Equilibrato e brioso, compagno ideale dei taglieri.", valutazione: "3.8", aroma: "Ciliegia, lampone, fragola." },
+    { nome: "Lambrusco Reggiano DOC (Emilia)", prezzo: 6, piatti: ["pizza", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Fresco e leggero, perfetto per una serata disimpegnata.", valutazione: "3.7", aroma: "Frutti rossi freschi, violetta." },
+    { nome: "Nero d'Avola DOC (Sicilia)", prezzo: 10, piatti: ["carne_rossa", "primi", "formaggi"], occasioni: ["cena_amici", "grigliata"], motivo: "Caldo, avvolgente e con sentori di frutta rossa matura.", valutazione: "4.2", aroma: "Prugna, mora, pepe nero, cacao." },
+    { nome: "Primitivo di Puglia IGT (Puglia)", prezzo: 9, piatti: ["carne_rossa", "pizza", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Morbido, rotondo e facilissimo da bere.", valutazione: "4.0", aroma: "Confettura di ciliegia, prugna, vaniglia." },
 
-    // --- VINI PER PIZZA E AMICI ---
-    {
-        nome: "Lambrusco di Sorbara DOC (Emilia-Romagna)",
-        piatti: ["pizza", "carne bianca", "vegan"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 12,
-        valutazione: 4.5,
-        motivo: "L'acidità vibrante e la bollicina sgrassante lo rendono l'abbinamento definitivo (e storicamente perfetto) per la pizza e i fritti.",
-        aroma: "Viola, Fragolina di bosco, Ribes, Lievito"
-    },
-    {
-        nome: "Franciacorta Satèn DOCG (Lombardia)",
-        piatti: ["pizza", "pesce", "vegan"],
-        occasioni: ["appuntamento", "amici"],
-        prezzo: 28,
-        valutazione: 4.9,
-        motivo: "Il 'Satèn' (100% uve bianche) ha una bollicina setosa e meno aggressiva, ideale per accompagnare pizze bianche, formaggi e crudi.",
-        aroma: "Crosta di pane, Burro fuso, Nocciola tostata, Fiori d'acacia"
-    },
+    // 11-20: Grandi Rossi del Sud e Bianchi del Centro-Nord
+    { nome: "Primitivo di Manduria DOC (Puglia)", prezzo: 16, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "regalo"], motivo: "Corpo pieno, alcolicità calda e note di confettura: un vino che riempie la bocca.", valutazione: "4.5", aroma: "Amarena, cacao, cannella, tabacco." },
+    { nome: "Vermentino di Sardegna DOC", prezzo: 12, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "Sapido, minerale e profumato. Sa letteralmente di mare.", valutazione: "4.2", aroma: "Agrumi, salvia, macchia mediterranea." },
+    { nome: "Vermentino Toscano IGT", prezzo: 10, piatti: ["pesce", "primi"], occasioni: ["aperitivo", "cena_amici"], motivo: "Fresco e versatile, ottimo con antipasti e piatti leggeri.", valutazione: "3.9", aroma: "Limone, mela, erbe aromatiche." },
+    { nome: "Pinot Grigio delle Venezie DOC", prezzo: 7, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "divano"], motivo: "Delicato e pulito, un passe-partout infallibile.", valutazione: "3.8", aroma: "Pera, mela, fiori bianchi." },
+    { nome: "Soave DOC (Veneto)", prezzo: 9, piatti: ["pesce", "carne_bianca", "primi"], occasioni: ["aperitivo", "cena_amici"], motivo: "Gusto armonico e sentori di fiori bianchi, estremamente gradevole.", valutazione: "4.1", aroma: "Mandorla, pesca bianca, camomilla." },
+    { nome: "Lugana DOC (Veneto/Lombardia)", prezzo: 14, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "cena_amici"], motivo: "Gusto rotondo, minerale e con una persistenza elegante.", valutazione: "4.5", aroma: "Agrumi, pesca, mandorla, mineralità." },
+    { nome: "Ribolla Gialla IGT (Friuli)", prezzo: 11, piatti: ["pesce", "formaggi"], occasioni: ["aperitivo", "cena_amici"], motivo: "Acidità vibrante e freschezza estrema. Pulisce il palato magnificamente.", valutazione: "4.0", aroma: "Limone, mela verde, fiori bianchi." },
+    { nome: "Trebbiano d'Abruzzo DOC", prezzo: 6, piatti: ["pesce", "primi"], occasioni: ["divano", "cena_amici"], motivo: "Semplice, asciutto e diretto. L'ideale per il pasto quotidiano.", valutazione: "3.9", aroma: "Mela, agrumi, erbe fresche." },
+    { nome: "Trebbiano di Romagna DOC", prezzo: 6, piatti: ["pesce", "primi"], occasioni: ["cena_amici", "aperitivo"], motivo: "Gusto secco e dissetante, accompagna senza sovrastare i sapori.", valutazione: "3.6", aroma: "Mela, pera, fiori." },
+    { nome: "Sangiovese di Romagna DOC", prezzo: 8, piatti: ["carne_rossa", "primi", "pizza"], occasioni: ["cena_amici", "grigliata"], motivo: "Tannino sincero e frutto vivace, chiama a gran voce il cibo rustico.", valutazione: "4.0", aroma: "Ciliegia, viola, pepe." },
 
-    // --- VINI IMPORTANTI E MEDITAZIONE ---
-    {
-        nome: "Amarone della Valpolicella DOCG (Veneto)",
-        piatti: ["carne rossa"],
-        occasioni: ["appuntamento", "relax"],
-        prezzo: 45,
-        valutazione: 4.9,
-        motivo: "Un gigante dell'enologia. L'appassimento delle uve dona una struttura e una morbidezza inarrivabili, perfetto per arrosti o meditazione.",
-        aroma: "Ciliegia sotto spirito, Cioccolato fondente, Tabacco, Cuoio"
-    },
-    {
-        nome: "Barbaresco DOCG (Piemonte)",
-        piatti: ["carne rossa", "vegan"], /* Ottimo con tartufo/funghi */
-        occasioni: ["appuntamento", "famiglia"],
-        prezzo: 38,
-        valutazione: 4.8,
-        motivo: "Il fratello elegante del Barolo. Tannino fitto ma setoso, perfetto per valorizzare piatti strutturati di carne o risotti ai funghi.",
-        aroma: "Rosa passita, Tartufo, Liquirizia, Frutti di bosco"
-    },
-    {
-        nome: "Fiano di Avellino DOCG (Campania)",
-        piatti: ["pesce", "carne bianca", "vegan"],
-        occasioni: ["amici", "relax"],
-        prezzo: 15,
-        valutazione: 4.6,
-        motivo: "Un bianco del Sud con la stoffa di un rosso. Grande struttura e potenziale di invecchiamento, regge benissimo piatti elaborati.",
-        aroma: "Miele, Nocciola, Pera, Sentori fumé"
-    },
-   // --- BLOCCO 1: BIANCHI E BOLLICINE ---
-    {
-        nome: "Trento DOC Perlé (Trentino)",
-        piatti: ["pesce", "pizza", "carne bianca"],
-        occasioni: ["appuntamento", "amici", "festa"],
-        prezzo: 35,
-        valutazione: 4.8,
-        motivo: "Uno spumante metodo classico di grande eleganza. La sua bollicina fine e persistente sgrassa perfettamente fritti, pizze ricche e antipasti di mare.",
-        aroma: "Crosta di pane, Mela renetta, Mandorla tostata, Agrumi"
-    },
-    {
-        nome: "Prosecco Superiore Valdobbiadene DOCG (Veneto)",
-        piatti: ["pizza", "pesce", "vegan"],
-        occasioni: ["amici", "famiglia", "aperitivo"],
-        prezzo: 14,
-        valutazione: 4.4,
-        motivo: "Freschissimo, leggero e immediato. Il re dell'aperitivo italiano, perfetto per accompagnare una pizza in compagnia senza appesantire.",
-        aroma: "Pera, Mela verde, Fiori bianchi, Pesca"
-    },
-    {
-        nome: "Ribolla Gialla Friuli Colli Orientali DOC (Friuli)",
-        piatti: ["pesce", "vegan", "carne bianca"],
-        occasioni: ["amici", "relax"],
-        prezzo: 18,
-        valutazione: 4.6,
-        motivo: "Un bianco teso e minerale. La sua spiccata freschezza esalta piatti vegetariani, verdure grigliate e crudi di mare.",
-        aroma: "Limone, Fiori di campo, Sasso bagnato, Erbe aromatiche"
-    },
-    {
-        nome: "Greco di Tufo DOCG (Campania)",
-        piatti: ["pesce", "carne bianca", "vegan"],
-        occasioni: ["famiglia", "amici"],
-        prezzo: 16,
-        valutazione: 4.5,
-        motivo: "Un bianco del sud di grande struttura e sapidità. Regge benissimo anche carni bianche saporite o formaggi freschi.",
-        aroma: "Albicocca, Mandorla, Zolfo, Gelsomino"
-    },
-    {
-        nome: "Verdicchio dei Castelli di Jesi DOC (Marche)",
-        piatti: ["pesce", "carne bianca", "pizza"],
-        occasioni: ["famiglia", "quotidiano"],
-        prezzo: 13,
-        valutazione: 4.5,
-        motivo: "Incredibilmente versatile. L'inconfondibile finale ammandorlato lo rende il compagno ideale per il pesce al forno o carni bianche delicate.",
-        aroma: "Ginestra, Pesca bianca, Mandorla amara, Anice"
-    },
-    {
-        nome: "Roero Arneis DOCG (Piemonte)",
-        piatti: ["vegan", "pesce", "carne bianca"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 15,
-        valutazione: 4.4,
-        motivo: "Morbido, floreale e beverino. Un bianco elegante che si sposa meravigliosamente con antipasti, verdure e piatti leggeri.",
-        aroma: "Camomilla, Pera, Fiori bianchi, Nocciola"
-    },
-    {
-        nome: "Etna Bianco DOC (Sicilia)",
-        piatti: ["pesce", "vegan", "carne bianca"],
-        occasioni: ["appuntamento", "relax"],
-        prezzo: 22,
-        valutazione: 4.7,
-        motivo: "Un vino 'vulcanico' che unisce eleganza e potenza. La marcata mineralità lo rende un fuoriclasse sui piatti di mare elaborati.",
-        aroma: "Pietra focaia, Limone, Ginestra, Erbe aromatiche"
-    },
-    {
-        nome: "Lugana DOC (Lombardia)",
-        piatti: ["pesce", "vegan", "pizza"],
-        occasioni: ["amici", "appuntamento"],
-        prezzo: 14,
-        valutazione: 4.5,
-        motivo: "Morbido ma sapido, con un sorso avvolgente. Fantastico sui risotti di verdure o sui formaggi a pasta molle.",
-        aroma: "Melone, Mandorla, Agrumi, Fiori bianchi"
-    },
-    {
-        nome: "Alta Langa DOCG (Piemonte)",
-        piatti: ["pesce", "pizza", "carne bianca"],
-        occasioni: ["appuntamento", "relax"],
-        prezzo: 26,
-        valutazione: 4.8,
-        motivo: "La grande risposta piemontese allo Champagne. Bolla cremosa e corpo strutturato, stupendo su carni bianche in salsa o crudité.",
-        aroma: "Nocciola tostata, Burro, Crosta di pane, Agrumi canditi"
-    },
-    {
-        nome: "Falanghina del Sannio DOC (Campania)",
-        piatti: ["pesce", "vegan", "pizza"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 12,
-        valutazione: 4.3,
-        motivo: "Un bianco solare ed esplosivo. L'ottimo rapporto qualità/prezzo lo rende il re delle cene informali a base di pesce o pizza margherita.",
-        aroma: "Ananas, Banana, Fiori gialli, Miele"
-    },
+    // 21-30: Piemonte, Veneto e Rossi eleganti
+    { nome: "Barbera d'Asti DOCG (Piemonte)", prezzo: 12, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Acidità spiccata che sgrassa a meraviglia i piatti ricchi e carnosi.", valutazione: "4.4", aroma: "Amarena, mora, pepe, vaniglia." },
+    { nome: "Barbera del Monferrato DOC", prezzo: 9, piatti: ["carne_rossa", "pizza"], occasioni: ["divano", "cena_amici"], motivo: "Leggermente mossa, rustica e di grandissima beva.", valutazione: "4.0", aroma: "Ciliegia, lampone, spezie." },
+    { nome: "Barbera d'Alba DOC (Piemonte)", prezzo: 14, piatti: ["carne_rossa", "primi"], occasioni: ["pranzo_domenica", "appuntamento"], motivo: "Piena, strutturata e con sentori speziati e di frutta scura.", valutazione: "4.5", aroma: "Mora, ciliegia, cacao, liquirizia." },
+    { nome: "Dolcetto d'Alba DOC (Piemonte)", prezzo: 10, piatti: ["primi", "carne_bianca", "formaggi"], occasioni: ["cena_amici", "divano"], motivo: "Morbido e fruttato, con un finale piacevolmente ammandorlato.", valutazione: "4.2", aroma: "Mora, mandorla, violetta." },
+    { nome: "Dolcetto d'Acqui DOC (Piemonte)", prezzo: 9, piatti: ["primi", "pizza"], occasioni: ["divano", "cena_amici"], motivo: "Fresco, giovane e molto versatile sulla tavola di tutti i giorni.", valutazione: "3.9", aroma: "Ciliegia, mora, erbe aromatiche." },
+    { nome: "Valpolicella DOC (Veneto)", prezzo: 11, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Rosso rubino vivace, note di ciliegia e grande piacevolezza.", valutazione: "4.0", aroma: "Ciliegia, pepe, erbe officinali." },
+    { nome: "Valpolicella Ripasso DOC (Veneto)", prezzo: 18, piatti: ["carne_rossa", "formaggi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Ripassato sulle vinacce dell'Amarone, acquista corpo, calore e morbidezza.", valutazione: "4.5", aroma: "Amarena, cacao, tabacco, spezie." },
+    { nome: "Amarone della Valpolicella DOCG", prezzo: 45, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Monumento enologico italiano. Potente, setoso e indimenticabile.", valutazione: "4.9", aroma: "Amarena sotto spirito, cacao, tabacco, fichi secchi." },
+    { nome: "Bardolino DOC (Veneto)", prezzo: 8, piatti: ["carne_bianca", "pizza", "primi"], occasioni: ["cena_amici", "aperitivo"], motivo: "Rosso leggero e speziato, eccellente alternativa estiva se servito fresco.", valutazione: "3.8", aroma: "Ciliegia, fragola, pepe bianco." },
+    { nome: "Custoza DOC (Veneto)", prezzo: 8, piatti: ["pesce", "primi"], occasioni: ["aperitivo", "divano"], motivo: "Bianco aromatico, sapido e beverino per piatti delicati.", valutazione: "3.9", aroma: "Fiori bianchi, mela, agrumi." },
 
-    // --- BLOCCO 2: ROSSI LEGGERI E MEDI ---
-    {
-        nome: "Chianti Classico DOCG (Toscana)",
-        piatti: ["carne rossa", "carne bianca", "pizza"],
-        occasioni: ["famiglia", "amici", "tradizione"],
-        prezzo: 18,
-        valutazione: 4.6,
-        motivo: "Il simbolo dell'Italia a tavola. Fresco e con un tannino vivace, "pulisce" la bocca dopo piatti sugosi o saporiti.",
-        aroma: "Ciliegia marasca, Viola mammola, Terra bagnata, Pepe"
-    },
-    {
-        nome: "Barbera d'Alba DOC (Piemonte)",
-        piatti: ["carne rossa", "pizza", "carne bianca"],
-        occasioni: ["famiglia", "amici"],
-        prezzo: 15,
-        valutazione: 4.5,
-        motivo: "La sua spiccata acidità è un'arma segreta contro i cibi grassi. Perfetta con salumi, formaggi e piatti rustici.",
-        aroma: "Prugna, Ciliegia croccante, Spezie leggere, Mora"
-    },
-    {
-        nome: "Valpolicella Ripasso DOC (Veneto)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["appuntamento", "famiglia"],
-        prezzo: 20,
-        valutazione: 4.7,
-        motivo: "Il 'Baby Amarone'. Morbido, rotondo e avvolgente, accompagna carni rosse e bianche arrostite donando un tocco di eleganza.",
-        aroma: "Confettura di ciliegie, Cannella, Cioccolato, Pepe nero"
-    },
-    {
-        nome: "Dolcetto d'Alba DOC (Piemonte)",
-        piatti: ["pizza", "carne bianca", "vegan"],
-        occasioni: ["quotidiano", "famiglia"],
-        prezzo: 12,
-        valutazione: 4.3,
-        motivo: "Vino da pasto per eccellenza. Secco e dal finale ammandorlato, è uno dei pochi rossi che si abbina facilmente a piatti vegetariani.",
-        aroma: "Ciliegia fresca, Mandorla, Fiori viola"
-    },
-    {
-        nome: "Bardolino DOC (Veneto)",
-        piatti: ["pizza", "carne bianca", "pesce"],
-        occasioni: ["amici", "informale"],
-        prezzo: 11,
-        valutazione: 4.2,
-        motivo: "Un rosso talmente leggero e speziato che, servito leggermente fresco, può accompagnare perfino il pesce al forno o tranci di tonno.",
-        aroma: "Pepe bianco, Ciliegia, Lampone, Cannella"
-    },
-    {
-        nome: "Schiava Alto Adige DOC (Trentino)",
-        piatti: ["carne bianca", "vegan", "pizza"],
-        occasioni: ["amici", "relax"],
-        prezzo: 14,
-        valutazione: 4.4,
-        motivo: "Leggerissimo e profumato. Ideale per chi cerca un vino rosso che non impegni il palato, perfetto con lo speck o piatti leggeri.",
-        aroma: "Zucchero filato, Fragola, Mandorla, Viola"
-    },
-    {
-        nome: "Frappato Vittoria DOC (Sicilia)",
-        piatti: ["pesce", "carne bianca", "pizza"],
-        occasioni: ["amici", "appuntamento"],
-        prezzo: 16,
-        valutazione: 4.6,
-        motivo: "Un fuoriclasse siciliano: un rosso floreale e fresco che si sposa meravigliosamente con zuppe di pesce saporite e carni bianche.",
-        aroma: "Rosa, Fragolina, Spezie dolci, Pepe bianco"
-    },
-    {
-        nome: "Lagrein Trentino DOC (Trentino)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["famiglia", "amici"],
-        prezzo: 18,
-        valutazione: 4.5,
-        motivo: "Corposo ma vellutato, con note scure e profonde. Stupendo su carni saporite o taglieri di formaggi stagionati.",
-        aroma: "Frutti neri, Cacao, Viola, Liquirizia"
-    },
-    {
-        nome: "Montepulciano d'Abruzzo DOC (Abruzzo)",
-        piatti: ["carne rossa", "pizza", "carne bianca"],
-        occasioni: ["famiglia", "amici"],
-        prezzo: 10,
-        valutazione: 4.4,
-        motivo: "Rapporto qualità-prezzo imbattibile. Morbido, succoso e accogliente, è il compagno ideale per cene conviviali e arrosticini.",
-        aroma: "Amarena, Prugna, Tabacco leggero, Terra"
-    },
-    {
-        nome: "Ruchè di Castagnole Monferrato DOCG (Piemonte)",
-        piatti: ["carne bianca", "vegan"],
-        occasioni: ["relax", "appuntamento"],
-        prezzo: 19,
-        valutazione: 4.7,
-        motivo: "Un vino rosso aromatico e rarissimo. I suoi profumi esplosivi lo rendono magico su cibi speziati (perfino cucina asiatica) o formaggi erborinati.",
-        aroma: "Rosa appassita, Pepe nero, Geranio, Spezie orientali"
-    },
+    // 31-40: Sud Italia, Sardegna e Grandi Classici
+    { nome: "Bardolino Chiaretto DOC (Veneto)", prezzo: 9, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "appuntamento"], motivo: "Rosato fresco e croccante, note di fragolina di bosco e fiori.", valutazione: "3.8", aroma: "Fragola, lampone, rosa." },
+    { nome: "Falanghina del Sannio DOC (Campania)", prezzo: 10, piatti: ["pesce", "formaggi", "primi"], occasioni: ["cena_amici", "aperitivo"], motivo: "Profumo esotico e ottima acidità. Si fa sempre notare.", valutazione: "4.2", aroma: "Banana, agrumi, fiori bianchi." },
+    { nome: "Greco di Tufo DOCG (Campania)", prezzo: 16, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Bianco strutturato con note solfuree e minerali profonde.", valutazione: "4.6", aroma: "Pesca, pietra focaia, agrumi." },
+    { nome: "Fiano di Avellino DOCG (Campania)", prezzo: 18, piatti: ["pesce", "formaggi", "carne_bianca"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Elegante, note di nocciola tostata e longevità sorprendente.", valutazione: "4.8", aroma: "Nocciola, miele, tiglio, agrumi." },
+    { nome: "Aglianico del Vulture DOC (Basilicata)", prezzo: 15, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "grigliata"], motivo: "Il 'Barolo del Sud'. Austero, tannico e perfetto per carni importanti.", valutazione: "4.7", aroma: "Amarena, pepe, tabacco, grafite." },
+    { nome: "Taurasi DOCG (Campania)", prezzo: 35, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Rosso nobile e possente, invecchiato a lungo per regalare emozioni.", valutazione: "4.9", aroma: "Prugna, cuoio, tabacco, cacao." },
+    { nome: "Cannonau di Sardegna DOC", prezzo: 14, piatti: ["carne_rossa", "formaggi"], occasioni: ["grigliata", "cena_amici"], motivo: "Caldo, speziato e avvolgente. Il sapore selvaggio dell'isola.", valutazione: "4.3", aroma: "Mirto, prugna, macchia mediterranea." },
+    { nome: "Carignano del Sulcis DOC (Sardegna)", prezzo: 15, piatti: ["carne_rossa", "primi"], occasioni: ["grigliata", "cena_amici"], motivo: "Frutto rosso maturo e grande morbidezza per arrosti saporiti.", valutazione: "4.2", aroma: "Mora, pepe nero, erbe mediterranee." },
+    { nome: "Vernaccia di San Gimignano DOCG", prezzo: 12, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "Bianco toscano di carattere, mandorlato e asciutto.", valutazione: "4.3", aroma: "Mandorla, agrumi, fiori gialli." },
+    { nome: "Morellino di Scansano DOCG (Toscana)", prezzo: 12, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Sangiovese della Maremma, solare, morbido e pronto da bere.", valutazione: "4.3", aroma: "Ciliegia, viola, pepe." },
 
-    // --- BLOCCO 3: ROSSI STRUTTURATI E IMPORTANTI ---
-    {
-        nome: "Brunello di Montalcino DOCG (Toscana)",
-        piatti: ["carne rossa"],
-        occasioni: ["appuntamento", "relax", "meditazione"],
-        prezzo: 45,
-        valutazione: 4.9,
-        motivo: "Eleganza pura imbottigliata. Un Sangiovese in purezza invecchiato a lungo che richiede piatti all'altezza: cacciagione, fiorentina o... il camino acceso.",
-        aroma: "Ciliegia matura, Tabacco, Cuoio, Sottobosco"
-    },
-    {
-        nome: "Barolo DOCG (Piemonte)",
-        piatti: ["carne rossa"],
-        occasioni: ["appuntamento", "relax", "regalo"],
-        prezzo: 50,
-        valutazione: 4.9,
-        motivo: "Il Re dei Vini. Tannino possente e profumi eterei che si sprigionano nel bicchiere: l'abbinamento definitivo per brasati o piatti al tartufo.",
-        aroma: "Rosa, Tartufo, Catrame, Liquirizia, Ciliegia sotto spirito"
-    },
-    {
-        nome: "Taurasi DOCG (Campania)",
-        piatti: ["carne rossa"],
-        occasioni: ["relax", "famiglia"],
-        prezzo: 35,
-        valutazione: 4.8,
-        motivo: "Definito 'Il Barolo del Sud'. Un'esplosione di tannini morbidi e frutta scura, perfetto per arrosti importanti o formaggi molto stagionati.",
-        aroma: "Mora, Cenere, Cacao amaro, Pepe nero"
-    },
-    {
-        nome: "Aglianico del Vulture DOC (Basilicata)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["famiglia", "appuntamento"],
-        prezzo: 20,
-        valutazione: 4.6,
-        motivo: "Vino di origine vulcanica. Potente e sapido, regala un'esperienza profonda a un prezzo spesso accessibile. Perfetto per la grigliata perfetta.",
-        aroma: "Prugna nera, Cenere, Liquirizia, Spezie scure"
-    },
-    {
-        nome: "Cannonau di Sardegna DOC (Sardegna)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 16,
-        valutazione: 4.5,
-        motivo: "Caldo, avvolgente e alcolico. Cattura il sole e il vento della Sardegna, ideale compagno di maialino arrosto o formaggi pecorini dal gusto forte.",
-        aroma: "Mirto, Macchia mediterranea, Frutti rossi maturi, Pepe"
-    },
-    {
-        nome: "Primitivo di Manduria DOC (Puglia)",
-        piatti: ["carne rossa", "relax"],
-        occasioni: ["amici", "appuntamento"],
-        prezzo: 18,
-        valutazione: 4.7,
-        motivo: "Morbido, dolce e suadente al palato nonostante il grado alcolico. Piace a tutti per la sua esplosione di frutta. Ottimo a fine pasto o su carni grigliate.",
-        aroma: "Confettura di more, Cioccolato, Vaniglia, Cannella"
-    },
-    {
-        nome: "Nero d'Avola Sicilia DOC (Sicilia)",
-        piatti: ["carne rossa", "pizza", "carne bianca"],
-        occasioni: ["famiglia", "amici"],
-        prezzo: 12,
-        valutazione: 4.4,
-        motivo: "Un concentrato di succulenza e calore. Strutturato ma scorrevole, capace di accompagnare dalle paste al forno alle grigliate miste.",
-        aroma: "Ciliegia scura, Carruba, Spezie dolci, Macchia mediterranea"
-    },
-    {
-        nome: "Sagrantino di Montefalco DOCG (Umbria)",
-        piatti: ["carne rossa"],
-        occasioni: ["relax", "meditazione"],
-        prezzo: 38,
-        valutazione: 4.8,
-        motivo: "Il vino con più tannini al mondo. Un fuoriclasse assoluto che asciuga il palato in modo elegante, fatto per piatti estremamente ricchi e succulenti.",
-        aroma: "Mora, Inchiostro, Tabacco da pipa, Pepe nero"
-    },
-    {
-        nome: "Bolgheri Superiore DOC (Toscana)",
-        piatti: ["carne rossa"],
-        occasioni: ["appuntamento", "relax"],
-        prezzo: 60,
-        valutazione: 4.9,
-        motivo: "Il taglio bordolese (Cabernet/Merlot) interpretato in Toscana. Eleganza internazionale, tannini di velluto e una persistenza infinita in bocca.",
-        aroma: "Ribes nero, Peperone verde, Caffè, Vaniglia, Cedro"
-    },
-    {
-        nome: "Vino Nobile di Montepulciano DOCG (Toscana)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["famiglia", "appuntamento"],
-        prezzo: 22,
-        valutazione: 4.6,
-        motivo: "Spesso oscurato dal Chianti o dal Brunello, è in realtà un gioiello di eleganza e bevibilità. Straordinario sui primi piatti con ragù di carne.",
-        aroma: "Amarena, Mammola, Terra bagnata, Chiodi di garofano"
-    },
-    // --- BLOCCO 4: I ROSATI (I Re della Versatilità) ---
-    {
-        nome: "Cerasuolo d'Abruzzo DOC (Abruzzo)",
-        piatti: ["pizza", "carne bianca", "vegan", "pesce"],
-        occasioni: ["amici", "famiglia", "relax"],
-        prezzo: 14,
-        valutazione: 4.5,
-        motivo: "Ha il colore di un rosato ma l'anima di un rosso. Regge benissimo carni bianche, taglieri di salumi, pizze saporite e perfino brodi di pesce.",
-        aroma: "Fragola, Ciliegia, Melograno, Mandorla"
-    },
-    {
-        nome: "Valtènesi Chiaretto DOC (Lombardia)",
-        piatti: ["pesce", "pizza", "vegan"],
-        occasioni: ["appuntamento", "amici"],
-        prezzo: 16,
-        valutazione: 4.6,
-        motivo: "Elegante e raffinato, dal colore rosa tenue. Fantastico per un aperitivo chic o abbinato a sushi, verdure grigliate e margherita.",
-        aroma: "Rosa, Pompelmo rosa, Pesca bianca, Fiori di campo"
-    },
-    {
-        nome: "Negroamaro Rosato Salento IGT (Puglia)",
-        piatti: ["pizza", "pesce", "carne bianca"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 12,
-        valutazione: 4.3,
-        motivo: "Fresco, succoso e sapido. Un rosato del sud che porta allegria a tavola, perfetto su fritture di mare o focacce ripiene.",
-        aroma: "Lampone, Mora, Macchia mediterranea, Sale"
-    },
-    {
-        nome: "Etna Rosato DOC (Sicilia)",
-        piatti: ["pesce", "vegan", "carne bianca"],
-        occasioni: ["appuntamento", "relax"],
-        prezzo: 22,
-        valutazione: 4.7,
-        motivo: "Minerale e teso, nasce ad alta quota sul vulcano. Pulisce il palato in modo straordinario, esaltando crudi di pesce o piatti vegetariani speziati.",
-        aroma: "Cenere, Fragolina di bosco, Ribes, Erbe aromatiche"
-    },
+    // 41-50: L'Eccellenza Toscana e del Centro Italia
+    { nome: "Rosso di Montalcino DOC (Toscana)", prezzo: 18, piatti: ["carne_rossa", "primi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Il fratello minore del Brunello, offre eleganza e profumi fruttati immediati.", valutazione: "4.5", aroma: "Ciliegia, violetta, spezie." },
+    { nome: "Brunello di Montalcino DOCG", prezzo: 48, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Maestoso. Tannini fitti, infinita persistenza e classe mondiale.", valutazione: "5.0", aroma: "Amarena, tabacco, cuoio, tartufo." },
+    { nome: "Rosso Piceno DOC (Marche)", prezzo: 9, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Equilibrio perfetto tra Sangiovese e Montepulciano, rustico ma elegante.", valutazione: "4.0", aroma: "Ciliegia, mora, pepe." },
+    { nome: "Verdicchio dei Castelli di Jesi DOC", prezzo: 10, piatti: ["pesce", "primi", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "Struttura, acidità e il caratteristico finale di mandorla amara.", valutazione: "4.5", aroma: "Anice, mandorla, agrumi." },
+    { nome: "Verdicchio di Matelica DOC (Marche)", prezzo: 12, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "cena_amici"], motivo: "Bianco di montagna, teso, verticale e spiccatamente sapido.", valutazione: "4.6", aroma: "Agrumi, anice, fiori bianchi." },
+    { nome: "Orvieto Classico DOC (Umbria)", prezzo: 8, piatti: ["pesce", "primi"], occasioni: ["divano", "aperitivo"], motivo: "Delicato e floreale, perfetto se cerchi leggerezza ed equilibrio.", valutazione: "3.9", aroma: "Mela, pesca, camomilla." },
+    { nome: "Frascati DOC (Lazio)", prezzo: 7, piatti: ["primi", "pizza", "carne_bianca"], occasioni: ["cena_amici", "aperitivo"], motivo: "Asciutto e beverino, il re incontrastato delle tavolate romane.", valutazione: "3.8", aroma: "Fiori, agrumi, mela." },
+    { nome: "Cesanese del Piglio DOCG (Lazio)", prezzo: 14, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Rosso laziale verace, con note di pepe rosso e sottobosco.", valutazione: "4.3", aroma: "Amarena, pepe, violetta." },
+    { nome: "Gavi DOCG (Piemonte)", prezzo: 14, piatti: ["pesce", "carne_bianca", "aperitivo"], occasioni: ["aperitivo", "appuntamento"], motivo: "Cortese in purezza, secco, tagliente e di grande finezza.", valutazione: "4.5", aroma: "Limone, mela verde, mandorla." },
+    { nome: "Arneis Roero DOCG (Piemonte)", prezzo: 15, piatti: ["pesce", "formaggi"], occasioni: ["aperitivo", "appuntamento"], motivo: "Bianco profumato e suadente, regala sensazioni di pesca e fiori.", valutazione: "4.4", aroma: "Pera, albicocca, fiori bianchi." },
 
-    // --- BLOCCO 5: BIANCHI AROMATICI E FRESCHI ---
-    {
-        nome: "Sauvignon Blanc Alto Adige DOC (Trentino-Alto Adige)",
-        piatti: ["vegan", "pesce", "carne bianca"],
-        occasioni: ["appuntamento", "amici"],
-        prezzo: 19,
-        valutazione: 4.8,
-        motivo: "L'esplosione dei profumi. Le sue inconfondibili note verdi lo rendono il matrimonio perfetto per asparagi, piatti vegetariani e cucina asiatica.",
-        aroma: "Foglia di pomodoro, Pompelmo, Salvia, Frutto della passione"
-    },
-    {
-        nome: "Pecorino Offida DOCG (Marche)",
-        piatti: ["pesce", "carne bianca", "pizza"],
-        occasioni: ["famiglia", "amici"],
-        prezzo: 15,
-        valutazione: 4.5,
-        motivo: "Un bianco con le spalle larghe, sapido e strutturato. Ottimo compagno per formaggi, carni bianche e fritti misti.",
-        aroma: "Mela renetta, Anice, Ginestra, Erbe spontanee"
-    },
-    {
-        nome: "Gavi DOCG (Piemonte)",
-        piatti: ["pesce", "vegan", "pizza"],
-        occasioni: ["appuntamento", "famiglia"],
-        prezzo: 17,
-        valutazione: 4.6,
-        motivo: "Prodotto da uva Cortese, è un bianco tagliente ed elegantissimo. La sua finezza lo sposa perfettamente a ostriche e risotti delicati.",
-        aroma: "Fiori bianchi, Limone, Mandorla fresca, Camomilla"
-    },
-    {
-        nome: "Vermentino Colli di Luni DOC (Liguria)",
-        piatti: ["pesce", "vegan"],
-        occasioni: ["amici", "appuntamento"],
-        prezzo: 18,
-        valutazione: 4.7,
-        motivo: "Sa di mare e di erbe liguri. La sua sapidità spiccata lo rende l'unico abbinamento davvero perfetto per il pesto alla genovese o il pesce al sale.",
-        aroma: "Basilico, Timo, Pompelmo, Salsedine"
-    },
-    {
-        nome: "Timorasso Derthona DOC (Piemonte)",
-        piatti: ["carne bianca", "pesce", "vegan"],
-        occasioni: ["relax", "amici"],
-        prezzo: 25,
-        valutazione: 4.8,
-        motivo: "Il 'Barolo bianco'. Ha una struttura immensa e un potenziale di invecchiamento lunghissimo. Regge tranquillamente carni bianche tartufate.",
-        aroma: "Idrocarburo, Miele di acacia, Pietra focaia, Pesca"
-    },
-    {
-        nome: "Vernaccia di San Gimignano DOCG (Toscana)",
-        piatti: ["pesce", "carne bianca", "vegan"],
-        occasioni: ["famiglia", "relax"],
-        prezzo: 14,
-        valutazione: 4.4,
-        motivo: "Il bianco storico della Toscana. Secco, asciutto e sapido, ha un finale amarognolo che sgrassa benissimo formaggi freschi e carni bianche.",
-        aroma: "Mela verde, Mandorla amara, Silece, Fiori di campo"
-    },
-    {
-        nome: "Grillo Sicilia DOC (Sicilia)",
-        piatti: ["pesce", "pizza", "vegan"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 13,
-        valutazione: 4.3,
-        motivo: "Intenso, caldo e marino. È un bianco avvolgente che si abbina a meraviglia con paste con le sarde, tonno o semplici cene tra amici.",
-        aroma: "Agrumi di Sicilia, Gelsomino, Fiori d'arancio, Timo"
-    },
-    {
-        nome: "Trebbiano d'Abruzzo DOC (Abruzzo)",
-        piatti: ["pesce", "carne bianca", "vegan"],
-        occasioni: ["famiglia", "quotidiano"],
-        prezzo: 11,
-        valutazione: 4.2,
-        motivo: "Fresco, pulito, delicato e senza fronzoli. Il classico vino da tavola bianco che non stanca mai, perfetto per paste leggere o piatti vegan.",
-        aroma: "Fiori di campo, Mela, Pera, Limone"
-    },
-    {
-        nome: "Müller-Thurgau Trentino DOC (Trentino)",
-        piatti: ["vegan", "pesce"],
-        occasioni: ["amici", "relax"],
-        prezzo: 13,
-        valutazione: 4.4,
-        motivo: "Leggero, aromatico e super beverino. Nasce ad alta quota ed è la scelta ideale per accompagnare verdure, torte salate e antipasti delicati.",
-        aroma: "Pesca bianca, Noce moscata, Salvia, Mela verde"
-    },
+    // 51-60: Bollicine, Dolci e Nord Est
+    { nome: "Moscato d'Asti DOCG (Piemonte)", prezzo: 12, piatti: ["dolce"], occasioni: ["festa", "cena_amici", "pranzo_domenica"], motivo: "Dolcezza aromatica e alcol basso: la chiusura ideale.", valutazione: "4.3", aroma: "Salvia, pesca, albicocca." },
+    { nome: "Asti Spumante DOCG (Piemonte)", prezzo: 9, piatti: ["dolce"], occasioni: ["festa", "regalo"], motivo: "Bollicina dolce ed esplosiva, regina dei brindisi con il dessert.", valutazione: "4.0", aroma: "Uva fresca, pesca, fiori d'arancio." },
+    { nome: "Alta Langa DOCG (Piemonte)", prezzo: 26, piatti: ["pesce", "formaggi"], occasioni: ["regalo", "appuntamento", "festa"], motivo: "Metodo Classico elegante e croccante. Grande struttura e lieviti.", valutazione: "4.7", aroma: "Crosta di pane, agrumi, nocciola." },
+    { nome: "Franciacorta DOCG (Lombardia)", prezzo: 28, piatti: ["pesce", "carne_bianca", "formaggi"], occasioni: ["regalo", "appuntamento", "festa"], motivo: "Perlage finissimo e sentori di crosta di pane. Una bollicina di lusso.", valutazione: "4.8", aroma: "Crosta di pane, burro, agrumi." },
+    { nome: "Oltrepò Pavese Metodo Classico DOCG", prezzo: 22, piatti: ["pesce", "primi", "carne_bianca"], occasioni: ["festa", "appuntamento"], motivo: "Struttura da vendere grazie al Pinot Nero. Perfetto a tutto pasto.", valutazione: "4.5", aroma: "Pane tostato, mela, nocciola." },
+    { nome: "Bonarda dell'Oltrepò Pavese DOC", prezzo: 8, piatti: ["pizza", "carne_rossa", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Rosso brioso e amabile, sgrassa e porta allegria sulla tavola.", valutazione: "4.0", aroma: "Mora, ciliegia, viola." },
+    { nome: "Pinot Nero dell'Oltrepò Pavese DOC", prezzo: 14, piatti: ["carne_bianca", "primi", "formaggi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Elegante e vellutato, sentori di piccoli frutti rossi sottili.", valutazione: "4.5", aroma: "Lampone, rosa, sottobosco." },
+    { nome: "Trento DOC (Trentino)", prezzo: 24, piatti: ["pesce", "formaggi"], occasioni: ["regalo", "festa", "appuntamento"], motivo: "Spumante di montagna: freschezza tagliente e grandissima precisione.", valutazione: "4.8", aroma: "Agrumi, nocciola, crosta di pane." },
+    { nome: "Müller Thurgau Trentino DOC", prezzo: 11, piatti: ["pesce", "etnico", "primi"], occasioni: ["aperitivo", "cena_amici"], motivo: "Aromatico, leggero e fresco. Straordinario sui piatti delicati.", valutazione: "4.0", aroma: "Sambuco, salvia, pesca." },
+    { nome: "Gewürztraminer Alto Adige DOC", prezzo: 16, piatti: ["pesce", "etnico", "formaggi"], occasioni: ["appuntamento", "regalo"], motivo: "Un'esplosione di litchi e petali di rosa. Il bianco che stupisce.", valutazione: "4.7", aroma: "Litchi, rosa, spezie orientali." },
 
-    // --- BLOCCO 6: BOLLICINE E FRIZZANTI (Alternativi) ---
-    {
-        nome: "Lambrusco Grasparossa di Castelvetro DOC (Emilia-Romagna)",
-        piatti: ["pizza", "carne bianca", "carne rossa"],
-        occasioni: ["amici", "famiglia", "informale"],
-        prezzo: 11,
-        valutazione: 4.5,
-        motivo: "A differenza del Sorbara, il Grasparossa è più scuro, tannico e corposo. Sgrassa perfettamente piatti unti, ragù ricchi e pizze ai salumi.",
-        aroma: "Mora, Prugna nera, Viola, Sottobosco"
-    },
-    {
-        nome: "Pignoletto Frizzante DOCG (Emilia-Romagna)",
-        piatti: ["pizza", "pesce", "vegan"],
-        occasioni: ["amici", "aperitivo"],
-        prezzo: 12,
-        valutazione: 4.3,
-        motivo: "L'alternativa vivace al Prosecco. La sua bollicina spigliata e il finale piacevolmente amarognolo lo rendono perfetto con i fritti.",
-        aroma: "Mela, Pera, Biancospino, Lievito"
-    },
-    {
-        nome: "Franciacorta Pas Dosé DOCG (Lombardia)",
-        piatti: ["pesce", "vegan"],
-        occasioni: ["appuntamento", "relax"],
-        prezzo: 32,
-        valutazione: 4.8,
-        motivo: "Senza zuccheri aggiunti. Estremamente secco, verticale e tagliente. Pulisce la bocca dopo fritti importanti, crudi e ostriche.",
-        aroma: "Nocciola tostata, Crosta di pane, Agrumi scuri, Gesso"
-    },
-    {
-        nome: "Oltrepò Pavese Metodo Classico Pinot Nero DOCG (Lombardia)",
-        piatti: ["pizza", "carne bianca", "pesce"],
-        occasioni: ["appuntamento", "famiglia"],
-        prezzo: 24,
-        valutazione: 4.7,
-        motivo: "Struttura da vendere grazie al Pinot Nero. Regge l'urto anche con piatti di terra, funghi e pizze gourmet corpose.",
-        aroma: "Ribes, Mandorla, Crosta di pane, Frutti rossi"
-    },
+    // 61-70: Alto Adige, Friuli e Isole
+    { nome: "Pinot Bianco Alto Adige DOC", prezzo: 14, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "Cristallino, profumi pulitissimi di mela e grande acidità.", valutazione: "4.3", aroma: "Mela, pera, fiori bianchi." },
+    { nome: "Lagrein Alto Adige DOC", prezzo: 15, piatti: ["carne_rossa", "formaggi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Rosso scuro, fruttato e con note di cacao. Tannino morbido.", valutazione: "4.4", aroma: "Mora, cacao, violetta." },
+    { nome: "Teroldego Rotaliano DOC (Trentino)", prezzo: 14, piatti: ["carne_rossa", "primi", "formaggi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Intenso sapore di mora e viola, robusto ma di rara bevibilità.", valutazione: "4.4", aroma: "Mora, mirtillo, pepe." },
+    { nome: "Refosco dal Peduncolo Rosso DOC (Friuli)", prezzo: 12, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Tannino vibrante e note fruttate selvatiche per piatti decisi.", valutazione: "4.3", aroma: "Mora, pepe, liquirizia." },
+    { nome: "Collio Bianco DOC (Friuli)", prezzo: 18, piatti: ["pesce", "carne_bianca", "formaggi"], occasioni: ["appuntamento", "regalo"], motivo: "Blend magistrale: avvolgente, complesso e di grande longevità.", valutazione: "4.5", aroma: "Agrumi, pesca, fiori bianchi." },
+    { nome: "Friulano DOC (Friuli-V.G.)", prezzo: 13, piatti: ["pesce", "formaggi"], occasioni: ["aperitivo", "cena_amici"], motivo: "Il compagno ideale per il prosciutto crudo, finale tipicamente ammandorlato.", valutazione: "4.4", aroma: "Mandorla, pera, fiori di campo." },
+    { nome: "Grillo DOC (Sicilia)", prezzo: 10, piatti: ["pesce", "carne_bianca", "etnico"], occasioni: ["aperitivo", "cena_amici"], motivo: "Bianco solare, agrumato e sapido. Un raggio di sole siciliano.", valutazione: "4.2", aroma: "Agrumi, mango, erbe mediterranee." },
+    { nome: "Inzolia Sicilia DOC", prezzo: 9, piatti: ["pesce", "primi"], occasioni: ["divano", "cena_amici"], motivo: "Gusto delicato e mandorlato, accompagna senza stancare.", valutazione: "4.0", aroma: "Mandorla, limone, pesca." },
+    { nome: "Cerasuolo di Vittoria DOCG (Sicilia)", prezzo: 16, piatti: ["carne_rossa", "primi", "pizza"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "L'unico DOCG siciliano. Setoso, fragrante e incredibilmente fine.", valutazione: "4.6", aroma: "Ciliegia, melograno, spezie dolci." },
+    { nome: "Etna Rosso DOC (Sicilia)", prezzo: 22, piatti: ["carne_rossa", "formaggi", "primi"], occasioni: ["regalo", "appuntamento"], motivo: "Il 'Pinot Noir del Mediterraneo'. Elegante, sulfureo e vulcanico.", valutazione: "4.8", aroma: "Frutti rossi, cenere vulcanica, erbe aromatiche." },
+// 71-80: Piemonte & Valle d'Aosta
+    { nome: "Ruchè di Castagnole Monferrato DOCG", prezzo: 18, piatti: ["etnico", "primi"], occasioni: ["appuntamento", "cena_amici"], motivo: "Speziato e floreale, perfetto con i piatti aromatici.", valutazione: "4.3", aroma: "Rosa, geranio, pepe bianco." },
+    { nome: "Timorasso Derthona DOC", prezzo: 22, piatti: ["pesce", "formaggi"], occasioni: ["pranzo_domenica", "regalo"], motivo: "Bianco da invecchiamento, potente e minerale.", valutazione: "4.6", aroma: "Idrocarburo, pesca gialla, miele." },
+    { nome: "Erbaluce di Caluso DOCG", prezzo: 14, piatti: ["pesce", "primi"], occasioni: ["aperitivo", "cena_amici"], motivo: "Fresco e sapido, un bianco piemontese di grande carattere.", valutazione: "4.1", aroma: "Fiori di campo, mela verde, mandorla." },
+    { nome: "Brachetto d'Acqui DOCG", prezzo: 12, piatti: ["dolce"], occasioni: ["festa", "appuntamento"], motivo: "Rosso dolce e frizzante, un trionfo di frutti rossi.", valutazione: "4.2", aroma: "Fragola, rosa, lampone." },
+    { nome: "Pelaverga di Verduno DOC", prezzo: 16, piatti: ["primi", "pizza"], occasioni: ["cena_amici", "divano"], motivo: "Leggero e spiccatamente pepato, una chicca rara.", valutazione: "4.4", aroma: "Pepe bianco, ciliegia, fragolina." },
+    { nome: "Carema DOC", prezzo: 25, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Nebbiolo di montagna, elegante e sottile.", valutazione: "4.7", aroma: "Rosa appassita, cuoio, ciliegia." },
+    { nome: "Blanc de Morgex et de La Salle DOC", prezzo: 19, piatti: ["pesce", "formaggi"], occasioni: ["appuntamento", "aperitivo"], motivo: "Dal tetto d'Europa, un bianco estremo e tagliente.", valutazione: "4.5", aroma: "Erbe alpine, mela, agrumi." },
+    { nome: "Fumin Valle d'Aosta DOC", prezzo: 18, piatti: ["carne_rossa"], occasioni: ["cena_amici", "grigliata"], motivo: "Rosso scuro, rustico e di grande struttura.", valutazione: "4.2", aroma: "Frutti di bosco, pepe nero, ginepro." },
+    { nome: "Ghemme DOCG", prezzo: 28, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Nebbiolo del nord Piemonte, austero e profondo.", valutazione: "4.6", aroma: "Viola, liquirizia, terra." },
+    { nome: "Malvasia di Casorzo DOC", prezzo: 10, piatti: ["dolce"], occasioni: ["festa", "divano"], motivo: "Dolce, aromatico e dal colore rubino brillante.", valutazione: "4.0", aroma: "Rosa, lampone, fragolina di bosco." },
 
-    // --- BLOCCO 7: ROSSI QUOTIDIANI E DI TERRITORIO ---
-    {
-        nome: "Gutturnio Superiore DOC (Emilia-Romagna)",
-        piatti: ["carne rossa", "pizza", "carne bianca"],
-        occasioni: ["amici", "famiglia", "tradizione"],
-        prezzo: 14,
-        valutazione: 4.6,
-        motivo: "L'orgoglio dei Colli Piacentini. Unione di Barbera e Croatina, unisce freschezza e struttura. Immancabile compagno di coppa piacentina e paste ripiene.",
-        aroma: "Prugna, Frutti rossi maturi, Viola, Spezie dolci"
-    },
-    {
-        nome: "Morellino di Scansano DOCG (Toscana)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["famiglia", "amici"],
-        prezzo: 15,
-        valutazione: 4.4,
-        motivo: "Il Sangiovese che guarda il mare della Maremma. Risulta più morbido e fruttato del Chianti, perfetto per grigliate miste senza troppo impegno.",
-        aroma: "Ciliegia matura, Macchia mediterranea, Pepe nero, Prugna"
-    },
-    {
-        nome: "Lacrima di Morro d'Alba DOC (Marche)",
-        piatti: ["carne bianca", "pizza"],
-        occasioni: ["appuntamento", "amici"],
-        prezzo: 16,
-        valutazione: 4.5,
-        motivo: "Un rosso unico al mondo, profumatissimo e floreale. Sorprende chiunque lo beva. Ottimo su carni bianche saporite o salumi speziati.",
-        aroma: "Rosa rossa, Viola, Mora selvatica, Pepe rosa"
-    },
-    {
-        nome: "Teroldego Rotaliano DOC (Trentino)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["relax", "famiglia"],
-        prezzo: 17,
-        valutazione: 4.6,
-        motivo: "Scuro, profondo e succoso. Il principe del Trentino ha tannini morbidissimi e un gran corpo, ideale per polenta, funghi o formaggi d'alpeggio.",
-        aroma: "Lampone, Ribes, Mandorla, Viola"
-    },
-    {
-        nome: "Sangiovese di Romagna Superiore DOC (Emilia-Romagna)",
-        piatti: ["carne rossa", "pizza"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 13,
-        valutazione: 4.4,
-        motivo: "Sincero e diretto, il vino conviviale per eccellenza. Tannino grintoso perfetto per sgrassare la piadina, la pizza o il ragù.",
-        aroma: "Ciliegia, Viola, Terra umida, Chiodi di garofano"
-    },
-    {
-        nome: "Cesanese del Piglio DOCG (Lazio)",
-        piatti: ["carne rossa", "pizza"],
-        occasioni: ["famiglia", "relax"],
-        prezzo: 18,
-        valutazione: 4.5,
-        motivo: "Il rosso romano per eccellenza. Caldo, morbido e leggermente speziato, è il re incontrastato dell'abbinamento con abbacchio o bucatini all'amatriciana.",
-        aroma: "Mora, Spezie scure, Sottobosco, Balsamico"
-    },
-    {
-        nome: "Carignano del Sulcis DOC (Sardegna)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["relax", "appuntamento"],
-        prezzo: 20,
-        valutazione: 4.7,
-        motivo: "Vite coltivata sulla sabbia. Regala un vino mediterraneo, sapido e ricco di frutto. Eccellente su carni arrosto e piatti saporiti.",
-        aroma: "Mirto, Ciliegia sotto spirito, Cappero, Pepe"
-    },
-    {
-        nome: "Cirò Rosso Classico Superiore DOC (Calabria)",
-        piatti: ["carne rossa", "pizza"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 14,
-        valutazione: 4.4,
-        motivo: "Prodotto da uva Gaglioppo. Caldo e speziato, è capace di domare anche le note piccanti della 'nduja o piatti molto conditi.",
-        aroma: "Frutta rossa cotta, Cuoio, Spezie dolci, Terra"
-    },
-    {
-        nome: "Nero di Troia Castel del Monte DOC (Puglia)",
-        piatti: ["carne rossa", "relax"],
-        occasioni: ["famiglia", "appuntamento"],
-        prezzo: 19,
-        valutazione: 4.6,
-        motivo: "Un rosso di grande eleganza ed equilibrio rispetto agli altri pugliesi. Tannino fitto e profumi delicati, perfetto per formaggi stagionati o arrosti.",
-        aroma: "Viola, Mora, Cannella, Tabacco"
-    },
-    {
-        nome: "Susumaniello Salento IGT (Puglia)",
-        piatti: ["carne rossa", "pizza"],
-        occasioni: ["amici", "relax"],
-        prezzo: 17,
-        valutazione: 4.5,
-        motivo: "Un'uva che stava scomparendo, oggi riscoperta. Morbido, fruttatissimo e godereccio, si abbina benissimo a cene rilassate e grigliate.",
-        aroma: "Prugna nera, Cacao, Ciliegia matura, Vaniglia"
-    },
-    {
-        nome: "Valpolicella Classico DOC (Veneto)",
-        piatti: ["carne bianca", "pizza", "vegan"],
-        occasioni: ["famiglia", "quotidiano"],
-        prezzo: 13,
-        valutazione: 4.3,
-        motivo: "Fresco, succoso e leggero. A differenza dei fratelli maggiori (Ripasso, Amarone), è un rosso agilissimo che si sposa perfino col pesce di lago o piatti vegani.",
-        aroma: "Ciliegia fresca, Mandorla, Pepe bianco, Rosa"
-    },
-    // --- BLOCCO 8: CHICCHE REGIONALI E AUTOCTONI RARI ---
-    {
-        nome: "Ortrugo dei Colli Piacentini DOC (Emilia-Romagna)",
-        piatti: ["pesce", "vegan", "pizza"],
-        occasioni: ["amici", "aperitivo", "quotidiano"],
-        prezzo: 10,
-        valutazione: 4.4,
-        motivo: "Una gemma locale vivace e scattante. La sua bollicina leggera e il retrogusto finemente amarognolo lo rendono il compagno perfetto per antipasti leggeri e torte salate.",
-        aroma: "Mela verde, Fiori bianchi, Mandorla fresca, Menta"
-    },
-    {
-        nome: "Malvasia di Candia Aromatica Piacentina DOC (Emilia-Romagna)",
-        piatti: ["carne bianca", "vegan", "pizza"],
-        occasioni: ["amici", "relax"],
-        prezzo: 12,
-        valutazione: 4.6,
-        motivo: "Un’esplosione aromatica nel bicchiere. Un bianco (spesso frizzante) incredibilmente profumato che contrasta a meraviglia i cibi saporiti e speziati.",
-        aroma: "Albicocca, Pesca gialla, Salvia, Fiori d'arancio"
-    },
-    {
-        nome: "Pelaverga di Verduno DOC (Piemonte)",
-        piatti: ["carne bianca", "pizza", "pesce"], /* Perfetto col pesce strutturato! */
-        occasioni: ["appuntamento", "amici"],
-        prezzo: 22,
-        valutazione: 4.7,
-        motivo: "Un rosso rarissimo e particolarissimo, famoso per le sue spiccate note di pepe. Va servito fresco ed è uno dei rari rossi perfetti col pesce o con pizze saporite.",
-        aroma: "Pepe nero, Fragola, Geranio, Noce moscata"
-    },
-    {
-        nome: "Tintilia del Molise DOC (Molise)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["famiglia", "relax"],
-        prezzo: 20,
-        valutazione: 4.6,
-        motivo: "L'orgoglio del Molise. Un rosso speziato, caldo e balsamico che offre un'alternativa originale per grigliate e arrosti della domenica.",
-        aroma: "Prugna secca, Pepe nero, Liquirizia, Sottobosco"
-    },
-    {
-        nome: "Fumin Valle d'Aosta DOC (Valle d'Aosta)",
-        piatti: ["carne rossa"],
-        occasioni: ["relax", "appuntamento"],
-        prezzo: 25,
-        valutazione: 4.7,
-        motivo: "Un rosso di montagna estremo, dal colore impenetrabile. Perfetto per scaldarsi durante una cena elegante a base di selvaggina o fonduta.",
-        aroma: "Ginepro, Mora, Fumo di legna, Pepe nero"
-    },
-    {
-        nome: "Prié Blanc Blanc de Morgex et de La Salle (Valle d'Aosta)",
-        piatti: ["pesce", "vegan"],
-        occasioni: ["appuntamento", "amici"],
-        prezzo: 24,
-        valutazione: 4.8,
-        motivo: "Il vino bianco coltivato più in alto d'Europa. Minerale, teso, affilato come una lama: pulisce il palato in modo straordinario con crudi e ostriche.",
-        aroma: "Ghiaccio, Erbe alpine, Mela verde, Limone"
-    },
-    {
-        nome: "Torbato Alghero DOC (Sardegna)",
-        piatti: ["pesce", "vegan", "pizza"],
-        occasioni: ["famiglia", "relax"],
-        prezzo: 16,
-        valutazione: 4.5,
-        motivo: "Un bianco sardo elegante e complesso, capace di richiamare le note del mare. Sposa magnificamente primi di mare, crostacei e pizze bianche.",
-        aroma: "Macchia mediterranea, Camomilla, Salsedine, Pera"
-    },
-    {
-        nome: "Ciliegolo Maremma Toscana DOC (Toscana)",
-        piatti: ["pizza", "carne bianca", "vegan"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 14,
-        valutazione: 4.3,
-        motivo: "Fresco, succoso e scanzonato. Un rosso che profuma letteralmente di ciliegia, fantastico per accompagnare taglieri e cene informali.",
-        aroma: "Ciliegia croccante, Lampone, Pepe bianco, Rosa"
-    },
+    // 81-90: Lombardia & Liguria
+    { nome: "Valtellina Superiore Sassella DOCG", prezzo: 24, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "appuntamento"], motivo: "Chiavennasca (Nebbiolo) elegante, sapido e roccioso.", valutazione: "4.6", aroma: "Ciliegia, viola, note minerali." },
+    { nome: "Sforzato di Valtellina DOCG", prezzo: 35, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Da uve appassite, potente e caldo ma elegantissimo.", valutazione: "4.8", aroma: "Prugna secca, spezie dolci, tabacco." },
+    { nome: "Franciacorta Satèn DOCG", prezzo: 30, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "festa"], motivo: "Bollicina morbida e setosa, puro Chardonnay.", valutazione: "4.7", aroma: "Fiori bianchi, burro, mandorla dolce." },
+    { nome: "Lugana Riserva DOC", prezzo: 22, piatti: ["pesce", "formaggi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Invecchiato e complesso, un bianco che sfida il tempo.", valutazione: "4.5", aroma: "Frutta esotica, miele, pietra focaia." },
+    { nome: "Rossese di Dolceacqua DOC", prezzo: 16, piatti: ["carne_bianca", "pesce"], occasioni: ["cena_amici", "appuntamento"], motivo: "Rosso ligure leggero, perfetto anche col pesce.", valutazione: "4.3", aroma: "Macchia mediterranea, ribes, pepe." },
+    { nome: "Pigato Riviera Ligure DOC", prezzo: 15, piatti: ["pesce", "primi"], occasioni: ["aperitivo", "pranzo_domenica"], motivo: "Sapido e strutturato, il compagno del pesto.", valutazione: "4.2", aroma: "Erbe aromatiche, pino, agrumi." },
+    { nome: "Vermentino Colli di Luni DOC", prezzo: 14, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "aperitivo"], motivo: "Fresco e fruttato, con un finale marino.", valutazione: "4.1", aroma: "Mela, fiori di acacia, sale." },
+    { nome: "Ormeasco di Pornassio DOC", prezzo: 13, piatti: ["primi", "carne_rossa"], occasioni: ["cena_amici", "divano"], motivo: "Parente del Dolcetto, ma con il profumo del mare.", valutazione: "4.0", aroma: "Mora, ciliegia selvatica, violetta." },
+    { nome: "Cinque Terre DOC", prezzo: 18, piatti: ["pesce", "formaggi"], occasioni: ["appuntamento", "aperitivo"], motivo: "Vino eroico, sa di salsedine e sole.", valutazione: "4.4", aroma: "Limone, erbe mediterranee, iodio." },
+    { nome: "Sciacchetrà DOC", prezzo: 45, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Passito rarissimo e prezioso delle Cinque Terre.", valutazione: "4.9", aroma: "Fichi secchi, albicocca, miele di castagno." },
 
-    // --- BLOCCO 9: GLI "ORANGE WINE" (I Bianchi Macerati) ---
-    {
-        nome: "Ribolla Gialla Macerata IGT (Friuli)",
-        piatti: ["carne bianca", "pesce", "vegan", "pizza"],
-        occasioni: ["relax", "appuntamento"],
-        prezzo: 30,
-        valutazione: 4.8,
-        motivo: "Un bianco vinificato come un rosso. Tannico, strutturato, spiazzante. Perfetto per palati esperti e per accompagnare cibi asiatici o sapori molto forti.",
-        aroma: "Albicocca disidratata, Tè nero, Zenzero, Resina"
-    },
-    {
-        nome: "Vitovska Carso DOC (Friuli)",
-        piatti: ["pesce", "vegan", "carne bianca"],
-        occasioni: ["meditazione", "appuntamento"],
-        prezzo: 28,
-        valutazione: 4.7,
-        motivo: "Vino di pietra e di mare. Macerazione leggera per un bianco scontroso ma affascinante. Richiede crudi di pesce, erbe aromatiche o formaggi ovini.",
-        aroma: "Pietra focaia, Salvia, Mela cotogna, Sale"
-    },
-    {
-        nome: "Trebbiano Spoletino DOC (Umbria)",
-        piatti: ["carne bianca", "vegan", "pesce"],
-        occasioni: ["famiglia", "relax"],
-        prezzo: 18,
-        valutazione: 4.6,
-        motivo: "Un bianco dal grandissimo potenziale evolutivo. Ricco, sapido e vibrante, regge magnificamente preparazioni tartufate o carni bianche arrosto.",
-        aroma: "Zafferano, Miele, Fiori di tiglio, Susina"
-    },
+    // 91-100: Trentino Alto Adige & Veneto (Aggiunte)
+    { nome: "Kerner Alto Adige DOC", prezzo: 15, piatti: ["etnico", "pesce"], occasioni: ["aperitivo", "cena_amici"], motivo: "Aromatico, incrocia il Riesling e la Schiava.", valutazione: "4.3", aroma: "Mango, noce moscata, mela verde." },
+    { nome: "Sylvaner Valle Isarco DOC", prezzo: 16, piatti: ["pesce", "formaggi"], occasioni: ["pranzo_domenica", "appuntamento"], motivo: "Fresco, terroso e di grande personalità.", valutazione: "4.2", aroma: "Fiori alpini, fieno, pesca." },
+    { nome: "Riesling Renano Alto Adige DOC", prezzo: 19, piatti: ["pesce", "etnico"], occasioni: ["appuntamento", "regalo"], motivo: "Verticale, acido e destinato a un lungo invecchiamento.", valutazione: "4.6", aroma: "Pesca bianca, idrocarburi, limone." },
+    { nome: "Schiava Alto Adige DOC", prezzo: 11, piatti: ["pizza", "carne_bianca"], occasioni: ["divano", "cena_amici"], motivo: "Rosso chiarissimo, va bevuto fresco, leggero e spensierato.", valutazione: "4.0", aroma: "Fragola, mandorla, ciliegia." },
+    { nome: "Santa Maddalena DOC", prezzo: 13, piatti: ["carne_bianca", "primi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Schiava con saldo di Lagrein, fruttato e morbido.", valutazione: "4.1", aroma: "Violetta, lampone, mandorla." },
+    { nome: "Marzemino Trentino DOC", prezzo: 12, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Il rosso gentile amato da Mozart.", valutazione: "4.1", aroma: "Viola mammola, frutti di bosco, erbe." },
+    { nome: "Nosiola Trentino DOC", prezzo: 14, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "Bianco delicato, unico autoctono trentino a bacca bianca.", valutazione: "4.0", aroma: "Nocciola, mela, fiori bianchi." },
+    { nome: "Recioto della Valpolicella DOCG", prezzo: 30, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "festa"], motivo: "L'antenato dell'Amarone, un rosso dolce e vellutato.", valutazione: "4.7", aroma: "Ciliegia sotto spirito, cacao, vaniglia." },
+    { nome: "Amarone Riserva DOCG", prezzo: 65, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "festa"], motivo: "Potenza assoluta e invecchiamento estremo.", valutazione: "5.0", aroma: "Prugna secca, cioccolato fondente, tabacco, cuoio." },
+    { nome: "Tai Rosso Colli Berici DOC", prezzo: 12, piatti: ["carne_bianca", "pizza"], occasioni: ["cena_amici", "grigliata"], motivo: "Il parente veneto della Grenache, speziato e fruttato.", valutazione: "4.0", aroma: "Lampone, ciliegia, pepe bianco." },
 
-    // --- BLOCCO 10: VINI DA MEDITAZIONE, DOLCI E FINE PASTO ---
-    // NOTA: Non avendo ancora un bottone "Dolce" nella UI, l'IA li pesca tramite Ricerca Libera o se l'utente cerca "Relax" con opzione "Vegan/Formaggi".
-    {
-        nome: "Moscato d'Asti DOCG (Piemonte)",
-        piatti: ["vegan", "pizza"], // Ottimo con le torte a fine pasto
-        occasioni: ["relax", "famiglia", "amici"],
-        prezzo: 12,
-        valutazione: 4.6,
-        motivo: "Il re dei vini dolci leggeri. Frizzante, a bassissima gradazione (5%), è l'unico vero accompagnamento per il panettone, i biscotti o la pasticceria secca.",
-        aroma: "Pesca, Salvia, Fiori d'arancio, Miele"
-    },
-    {
-        nome: "Passito di Pantelleria DOC (Sicilia)",
-        piatti: ["vegan", "carne bianca"], // Abbinamento per contrasto con formaggi erborinati
-        occasioni: ["relax", "appuntamento"],
-        prezzo: 35,
-        valutazione: 4.9,
-        motivo: "Un nettare prezioso fatto di sole e vento di Sicilia. Perfetto da solo a fine pasto o abbinato a formaggi piccanti ed erborinati (come il Gorgonzola).",
-        aroma: "Fichi secchi, Datteri, Miele di castagno, Albicocca disidratata"
-    },
-    {
-        nome: "Vin Santo del Chianti Classico DOC (Toscana)",
-        piatti: ["vegan"],
-        occasioni: ["relax", "famiglia"],
-        prezzo: 30,
-        valutazione: 4.8,
-        motivo: "Storico, ambrato, lunghissimo in bocca. Richiede a gran voce di essere accompagnato (e "pucciato") con i tradizionali Cantucci toscani alle mandorle.",
-        aroma: "Noce, Fico secco, Caramello, Frutta candita"
-    },
-    {
-        nome: "Brachetto d'Acqui DOCG (Piemonte)",
-        piatti: ["vegan", "pizza"], 
-        occasioni: ["appuntamento", "relax"],
-        prezzo: 15,
-        valutazione: 4.5,
-        motivo: "Un rosso dolce, vivace e inebriante. È la risposta italiana perfetta per accompagnare i dolci a base di cioccolato, le fragole o i frutti di bosco rossi.",
-        aroma: "Rosa rossa, Fragolina di bosco, Muschio, Lampone"
-    },
-    {
-        nome: "Picolit Colli Orientali del Friuli DOCG (Friuli)",
-        piatti: ["vegan", "relax"],
-        occasioni: ["appuntamento", "meditazione"],
-        prezzo: 45,
-        valutazione: 4.9,
-        motivo: "Considerato il 'Sauternes' italiano, prodotto in quantità minuscole a causa di un aborto floreale spontaneo. Un vino intellettuale, perfetto da meditazione.",
-        aroma: "Fiori d'acacia, Albicocca, Miele millefiori, Mandorla tostata"
-    },
-    {
-        nome: "Recioto della Valpolicella DOCG (Veneto)",
-        piatti: ["vegan"],
-        occasioni: ["relax", "famiglia"],
-        prezzo: 35,
-        valutazione: 4.7,
-        motivo: "Il padre dolce dell'Amarone. Rosso, suadente, cremoso. Un capolavoro da abbinare alla cioccolata fondente o a grandi formaggi stagionati.",
-        aroma: "Ciliegia nera, Cioccolato, Cannella, Prugna cotta"
-    },
+    // 101-110: Friuli Venezia Giulia (Aggiunte)
+    { nome: "Schioppettino di Prepotto DOC", prezzo: 22, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Esplosione di pepe nero e spezie, rosso elegantissimo.", valutazione: "4.5", aroma: "Pepe nero, mora, viola." },
+    { nome: "Pignolo DOC", prezzo: 28, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Austero, tannico e potente. Richiede tempo in bottiglia.", valutazione: "4.6", aroma: "Prugna, sottobosco, cuoio." },
+    { nome: "Vitovska Carso DOC", prezzo: 20, piatti: ["pesce", "formaggi"], occasioni: ["appuntamento", "cena_amici"], motivo: "Bianco roccioso e sapido, figlio del vento di Bora.", valutazione: "4.4", aroma: "Pietra bagnata, agrumi, erbe carsiche." },
+    { nome: "Terrano Carso DOC", prezzo: 16, piatti: ["carne_rossa", "formaggi"], occasioni: ["grigliata", "cena_amici"], motivo: "Rosso vibrante, acidità spiccata, perfetto per piatti grassi.", valutazione: "4.2", aroma: "Lampone, ribes, ferro." },
+    { nome: "Malvasia Istriana DOC", prezzo: 15, piatti: ["pesce", "etnico"], occasioni: ["aperitivo", "appuntamento"], motivo: "Aromatica, sapida e di grande beva.", valutazione: "4.3", aroma: "Albicocca, pepe bianco, fiori di campo." },
+    { nome: "Sauvignon Collio DOC", prezzo: 18, piatti: ["pesce", "primi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Intensamente aromatico, un must per gli amanti del genere.", valutazione: "4.5", aroma: "Foglia di pomodoro, sambuco, pompelmo." },
+    { nome: "Pinot Grigio Ramato DOC", prezzo: 16, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "aperitivo"], motivo: "Vinificato sulle bucce, colore ramato e grande struttura.", valutazione: "4.3", aroma: "Fragolina, pesca, rosa." },
+    { nome: "Traminer Aromatico Friuli DOC", prezzo: 14, piatti: ["etnico", "formaggi"], occasioni: ["divano", "cena_amici"], motivo: "Esplosivo al naso, perfetto per chi ama i profumi intensi.", valutazione: "4.1", aroma: "Litchi, rosa, frutta tropicale." },
+    { nome: "Ribolla Gialla Macerata DOC", prezzo: 26, piatti: ["formaggi", "carne_bianca"], occasioni: ["regalo", "appuntamento"], motivo: "Orange wine macerato sulle bucce, complesso e affascinante.", valutazione: "4.6", aroma: "Albicocca disidratata, tè nero, resina." },
+    { nome: "Ramandolo DOCG", prezzo: 24, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Passito dorato e avvolgente dal nord del Friuli.", valutazione: "4.7", aroma: "Miele di acacia, albicocca, fichi secchi." },
 
-    // --- BLOCCO 11: I "FUORICLASSE" VERSATILI ---
-    {
-        nome: "Schioppettino di Prepotto DOC (Friuli)",
-        piatti: ["carne rossa", "carne bianca", "pizza"],
-        occasioni: ["appuntamento", "amici"],
-        prezzo: 26,
-        valutazione: 4.8,
-        motivo: "Elegantissimo rosso friulano famoso per la sua fortissima nota di pepe nero. Fresco e verticale, è sublime su carni arrosto e piatti saporiti.",
-        aroma: "Pepe nero pungente, Mora selvatica, Muschio, Lampone"
-    },
-    {
-        nome: "Nascetta Langhe DOC (Piemonte)",
-        piatti: ["pesce", "vegan", "carne bianca"],
-        occasioni: ["relax", "appuntamento"],
-        prezzo: 18,
-        valutazione: 4.6,
-        motivo: "Un bianco storico delle Langhe appena riscoperto. Strutturato, sapido e resinoso, invecchia benissimo e si sposa con pesci grassi e formaggi.",
-        aroma: "Salvia, Rosmarino, Pompelmo, Miele"
-    },
-    {
-        nome: "Monica di Sardegna DOC (Sardegna)",
-        piatti: ["pizza", "carne bianca"],
-        occasioni: ["amici", "quotidiano"],
-        prezzo: 11,
-        valutazione: 4.2,
-        motivo: "Il rosso quotidiano della Sardegna. Soave, scorrevole e profumato di frutti rossi dolci, un toccasana per pranzi frugali o pizze leggere.",
-        aroma: "Mora, Susina, Macchia mediterranea, Liquirizia"
-    },
-    {
-        nome: "Pallagrello Nero Terre del Volturno IGT (Campania)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["famiglia", "relax"],
-        prezzo: 22,
-        valutazione: 4.5,
-        motivo: "Era il vino preferito dei Re Borbonici. Struttura, eleganza e una setosità inaspettata. Eccellente compagno per carni elaborate e sughi intensi.",
-        aroma: "Ciliegia nera, Pepe bianco, Vaniglia, Carruba"
-    },
-    {
-        nome: "Casavecchia Terre del Volturno IGT (Campania)",
-        piatti: ["carne rossa", "pizza"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 19,
-        valutazione: 4.6,
-        motivo: "Ottenuto da un ceppo sopravvissuto a un'epidemia. Rosso dal carattere rustico ma dal frutto prorompente, ideale per accompagnare maiale o selvaggina.",
-        aroma: "Mora di rovo, Terra umida, Geranio, Inchiostro"
-    },
-    {
-        nome: "Coda di Volpe Campania IGT (Campania)",
-        piatti: ["pesce", "pizza", "vegan"],
-        occasioni: ["amici", "famiglia"],
-        prezzo: 13,
-        valutazione: 4.3,
-        motivo: "Prende il nome dalla forma del grappolo. Morbido, non troppo acido e dal frutto esotico, perfetto per cene marinare informali o pizze con verdure.",
-        aroma: "Ananas, Pera coscia, Camomilla, Gesso"
-    },
-    {
-        nome: "Erbaluce di Caluso DOCG (Piemonte)",
-        piatti: ["pesce", "vegan", "carne bianca"],
-        occasioni: ["appuntamento", "relax"],
-        prezzo: 16,
-        valutazione: 4.5,
-        motivo: "Tagliente e sferzante. Un bianco piemontese che dona il meglio di sé con fritture di pesce, risotti mantecati e piatti d'acqua dolce.",
-        aroma: "Limone, Fiori di campo, Sasso bagnato, Mandorla verde"
-    },
-    {
-        nome: "Freisa Langhe DOC (Piemonte)",
-        piatti: ["carne rossa", "pizza", "carne bianca"],
-        occasioni: ["amici", "quotidiano"],
-        prezzo: 14,
-        valutazione: 4.4,
-        motivo: "Spesso proposto in versione vivace. Un rosso rustico e scalpitante, colmo di piccoli frutti rossi. Sgrassa perfettamente salumi crudi e carni grasse.",
-        aroma: "Fragola selvatica, Lampone, Rosa, Terra"
-    },
-    {
-        nome: "Biancolella Ischia DOC (Campania)",
-        piatti: ["pesce", "vegan"],
-        occasioni: ["appuntamento", "amici"],
-        prezzo: 17,
-        valutazione: 4.6,
-        motivo: "Il sole e il mare di Ischia in bottiglia. Minerale, freschissimo e sapido, esige a gran voce una pepata di cozze, un fritto misto o degli scampi crudi.",
-        aroma: "Pesca bianca, Fiori d'arancio, Salvia, Salsedine"
-    },
-    {
-        nome: "Bovale Sardegna DOC (Sardegna)",
-        piatti: ["carne rossa", "carne bianca"],
-        occasioni: ["relax", "famiglia"],
-        prezzo: 24,
-        valutazione: 4.7,
-        motivo: "Un concentrato di frutta e potenza mediterranea. Caldo e avvolgente, perfetto per le grandi cotture alla brace o pecorini invecchiati.",
-        aroma: "Amarena, Fumo, Macchia mediterranea, Mirto"
-    },
-    {
-        nome: "Zibibbo Secco Sicilia DOC (Sicilia)",
-        piatti: ["pesce", "vegan", "carne bianca"],
-        occasioni: ["amici", "appuntamento"],
-        prezzo: 15,
-        valutazione: 4.5,
-        motivo: "Tutto il profumo del Passito, ma in versione asciutta e sapida. Il compagno perfetto per la cucina asiatica, i crudi di mare o formaggi caprini.",
-        aroma: "Zagara, Albicocca disidratata, Pesca gialla, Sale"
-    },
-    {
-        nome: "Centesimino Ravenna IGT (Emilia-Romagna)",
-        piatti: ["carne rossa", "pizza", "carne bianca"],
-        occasioni: ["appuntamento", "relax"],
-        prezzo: 18,
-        valutazione: 4.6,
-        motivo: "Un autoctono romagnolo esplosivo e floreale. Un rosso unico, ricco di spezie dolci, eccellente sui piatti al tartufo o sughi di carne.",
-        aroma: "Rosa passita, Melograno, Cannella, Anice stellato"
-    },
-    {
-        nome: "Franciacorta Rosé DOCG (Lombardia)",
-        piatti: ["pizza", "pesce", "vegan", "carne bianca"],
-        occasioni: ["appuntamento", "amici", "festa"],
-        prezzo: 35,
-        valutazione: 4.8,
-        motivo: "La struttura del Pinot Nero e l'eleganza della bollicina metodo classico. È letteralmente il passpartout definitivo: sta bene con tutto, dai crudi alla pizza.",
-        aroma: "Fragolina di bosco, Ribes, Crosta di pane, Pompelmo rosa"
-    }
+    // 111-120: Emilia Romagna & Toscana (Aggiunte)
+    { nome: "Albana di Romagna DOCG Secco", prezzo: 13, piatti: ["carne_bianca", "pesce"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Il primo bianco DOCG d'Italia, caldo e strutturato.", valutazione: "4.2", aroma: "Ginestra, pesca gialla, mandorla." },
+    { nome: "Pignoletto Colli Bolognesi DOCG", prezzo: 11, piatti: ["pizza", "formaggi"], occasioni: ["aperitivo", "divano"], motivo: "Frizzante, fresco e gioviale. Il re dell'aperitivo emiliano.", valutazione: "3.9", aroma: "Mela, pera, fiori bianchi." },
+    { nome: "Gutturnio Frizzante DOC", prezzo: 9, piatti: ["carne_rossa", "pizza"], occasioni: ["grigliata", "cena_amici"], motivo: "Barbera e Bonarda insieme: ruspante e perfetto per i salumi.", valutazione: "3.8", aroma: "Frutta rossa, viola, pepe." },
+    { nome: "Malvasia di Candia Aromatica DOC", prezzo: 12, piatti: ["etnico", "pesce"], occasioni: ["aperitivo", "divano"], motivo: "Intensa, morbida, inebriante e dissetante.", valutazione: "4.1", aroma: "Pesca matura, salvia, agrumi." },
+    { nome: "Sangiovese di Romagna Riserva DOC", prezzo: 18, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "appuntamento"], motivo: "Profondo, strutturato e molto longevo.", valutazione: "4.4", aroma: "Ciliegia scura, prugna, cuoio." },
+    { nome: "Carmignano DOCG", prezzo: 22, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Blend storico toscano (Sangiovese e Cabernet), morbido e nobile.", valutazione: "4.6", aroma: "Amarena, vaniglia, tabacco." },
+    { nome: "Nobile di Montepulciano DOCG", prezzo: 24, piatti: ["carne_rossa", "primi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Prugnolo Gentile in purezza, elegante e maestoso.", valutazione: "4.5", aroma: "Mammola, prugna, spezie dolci." },
+    { nome: "Vin Santo del Chianti DOC", prezzo: 30, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Il vino dell'ospitalità toscana, dolcissimo e ossidativo.", valutazione: "4.8", aroma: "Miele, fichi secchi, noci, caramello." },
+    { nome: "Bolgheri Rosso DOC", prezzo: 20, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Taglio bordolese toscano, moderno e avvolgente.", valutazione: "4.4", aroma: "Frutti neri, macchia mediterranea, cacao." },
+    { nome: "Bolgheri Superiore DOC", prezzo: 55, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "festa"], motivo: "Eccellenza assoluta, potente, setoso e indimenticabile.", valutazione: "4.9", aroma: "Ribes nero, menta, cioccolato, tabacco." },
+
+    // 121-130: Umbria, Marche & Lazio (Aggiunte)
+    { nome: "Sagrantino di Montefalco DOCG", prezzo: 32, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Il vino più tannico d'Italia, potenza allo stato puro.", valutazione: "4.7", aroma: "Mora, liquirizia, cacao, pepe nero." },
+    { nome: "Montefalco Rosso DOC", prezzo: 15, piatti: ["primi", "carne_rossa"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Sangiovese con saldo di Sagrantino, equilibrato e succoso.", valutazione: "4.2", aroma: "Ciliegia, spezie leggere, fiori rossi." },
+    { nome: "Grechetto Colli Martani DOC", prezzo: 12, piatti: ["carne_bianca", "pesce"], occasioni: ["aperitivo", "cena_amici"], motivo: "Bianco di carattere, sapido e con lievi sentori di nocciola.", valutazione: "4.0", aroma: "Pera, nocciola, erbe aromatiche." },
+    { nome: "Lacrima di Morro d'Alba DOC", prezzo: 14, piatti: ["primi", "carne_bianca"], occasioni: ["cena_amici", "divano"], motivo: "Incredibilmente aromatico, un rosso che profuma di rosa.", valutazione: "4.3", aroma: "Rosa, viola, frutti di bosco." },
+    { nome: "Pecorino Falerio DOC", prezzo: 13, piatti: ["pesce", "formaggi"], occasioni: ["aperitivo", "pranzo_domenica"], motivo: "Bianco strutturato e acido, perfetto con fritture e formaggi.", valutazione: "4.2", aroma: "Agrumi, anice, macchia mediterranea." },
+    { nome: "Passerina Offida DOCG", prezzo: 12, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "divano"], motivo: "Fresca, floreale ed estremamente beverina.", valutazione: "4.0", aroma: "Fiori bianchi, pesca, agrumi." },
+    { nome: "Bianchello del Metauro DOC", prezzo: 10, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "divano"], motivo: "Bianco marchigiano delicato e molto scorrevole.", valutazione: "3.8", aroma: "Mela, fiori di campo, mandorla." },
+    { nome: "Est! Est!! Est!!! di Montefiascone DOC", prezzo: 9, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Bianco storico, semplice e super dissetante.", valutazione: "3.7", aroma: "Agrumi, mela, fiori." },
+    { nome: "Bellone Lazio IGT", prezzo: 12, piatti: ["primi", "pesce"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Bianco antico laziale, morbido e ricco di polpa.", valutazione: "4.1", aroma: "Frutta gialla matura, miele, erbe." },
+    { nome: "Nero Buono Cori DOC", prezzo: 16, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Rosso profondo e vellutato, da riscoprire.", valutazione: "4.3", aroma: "Ciliegia scura, cacao, spezie." },
+
+    // 131-140: Abruzzo, Molise, Campania & Puglia (Aggiunte)
+    { nome: "Cerasuolo d'Abruzzo DOC", prezzo: 12, piatti: ["pizza", "carne_bianca"], occasioni: ["cena_amici", "grigliata"], motivo: "Uno dei migliori rosati italiani, vinoso e strutturato.", valutazione: "4.3", aroma: "Ciliegia, fragola, mandorla." },
+    { nome: "Tintilia del Molise DOC", prezzo: 18, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "regalo"], motivo: "L'autoctono molisano per eccellenza, speziato e avvolgente.", valutazione: "4.4", aroma: "Prugna, pepe nero, liquirizia." },
+    { nome: "Falanghina dei Campi Flegrei DOC", prezzo: 14, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Vulcanica, sapida, sa di mare e di tufo.", valutazione: "4.2", aroma: "Ginestra, agrumi, mineralità." },
+    { nome: "Piedirosso Campi Flegrei DOC", prezzo: 15, piatti: ["pizza", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Rosso leggero e affumicato, il vero abbinamento per la pizza napoletana.", valutazione: "4.3", aroma: "Geranio, cenere, ciliegia." },
+    { nome: "Asprinio di Aversa DOC", prezzo: 13, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Coltivato ad alberata, acido e citrino, ideale per il fritto.", valutazione: "4.1", aroma: "Limone, mela verde, fiori bianchi." },
+    { nome: "Salice Salentino Riserva DOC", prezzo: 14, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "divano"], motivo: "Negroamaro storico, molto caldo e vellutato.", valutazione: "4.2", aroma: "Prugna, tabacco, vaniglia." },
+    { nome: "Negroamaro Salento IGT", prezzo: 11, piatti: ["carne_rossa", "primi"], occasioni: ["grigliata", "cena_amici"], motivo: "Morbido, fruttato e di facilissimo approccio.", valutazione: "4.0", aroma: "Mora, amarena, macchia mediterranea." },
+    { nome: "Susumaniello Valle d'Itria IGT", prezzo: 16, piatti: ["carne_rossa", "formaggi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Rosso pugliese emergente, ricchissimo e concentrato.", valutazione: "4.4", aroma: "Frutti di bosco, inchiostro, cacao." },
+    { nome: "Bombino Bianco Puglia IGT", prezzo: 9, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "divano"], motivo: "Bianco semplice, fresco e da tutto pasto.", valutazione: "3.8", aroma: "Mela, fiori di campo." },
+    { nome: "Castel del Monte Riserva DOCG", prezzo: 22, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Nero di Troia elegante e austero, di grande longevità.", valutazione: "4.5", aroma: "Viola, mora, spezie dolci." },
+
+    // 141-150: Basilicata, Calabria, Sicilia & Sardegna (Aggiunte)
+    { nome: "Matera Primitivo DOC", prezzo: 15, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Caldo e polposo, direttamente dai calanchi lucani.", valutazione: "4.2", aroma: "Ciliegia sotto spirito, cacao." },
+    { nome: "Cirò Rosso Classico DOC", prezzo: 14, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Gaglioppo calabrese, tannico e trasparente, antico come i greci.", valutazione: "4.1", aroma: "Ciliegia, erbe aromatiche, pepe." },
+    { nome: "Cirò Bianco DOC", prezzo: 11, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "Da uve Greco Bianco, estremamente marino e sapido.", valutazione: "3.9", aroma: "Fiori d'arancio, pesca, sale." },
+    { nome: "Magliocco Calabria IGT", prezzo: 16, piatti: ["carne_rossa", "formaggi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Rosso morbido e setoso, l'anima vellutata della Calabria.", valutazione: "4.3", aroma: "Mora, cannella, vaniglia." },
+    { nome: "Zibibbo Sicilia DOC Secco", prezzo: 15, piatti: ["etnico", "pesce"], occasioni: ["aperitivo", "appuntamento"], motivo: "Intensamente aromatico, un vero e proprio tuffo nel Mediterraneo.", valutazione: "4.4", aroma: "Gelsomino, pesca bianca, agrumi." },
+    { nome: "Passito di Pantelleria DOC", prezzo: 35, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "festa"], motivo: "Nettare degli dei vulcanico: dolce, complesso e indimenticabile.", valutazione: "4.9", aroma: "Albicocca secca, fichi, miele, zagara." },
+    { nome: "Frappato di Vittoria DOC", prezzo: 16, piatti: ["pizza", "pesce"], occasioni: ["cena_amici", "divano"], motivo: "Rosso fragrante e leggero, perfetto da bere fresco, anche col tonno.", valutazione: "4.3", aroma: "Fragolina, rosa, pepe bianco." },
+    { nome: "Malvasia delle Lipari Passito DOC", prezzo: 30, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Dolce, iodato, porta nel bicchiere il vento e il sole delle Eolie.", valutazione: "4.7", aroma: "Datteri, miele, erbe mediterranee." },
+    { nome: "Monica di Sardegna DOC", prezzo: 12, piatti: ["primi", "pizza"], occasioni: ["cena_amici", "divano"], motivo: "Rosso sardo gentile e molto morbido, per la quotidianità.", valutazione: "4.0", aroma: "Mora, ciliegia, macchia mediterranea." },
+    { nome: "Nasco di Cagliari DOC", prezzo: 20, piatti: ["formaggi", "dolce"], occasioni: ["appuntamento", "regalo"], motivo: "Bianco antico e opulento, sentori di frutta secca e miele amaro.", valutazione: "4.5", aroma: "Frutta candita, nocciola, macchia sarda." },
+    // 151-160: Champagne e Bollicine Francesi
+    { nome: "Champagne Brut Blanc de Blancs", prezzo: 45, piatti: ["pesce", "formaggi"], occasioni: ["festa", "appuntamento", "regalo"], motivo: "Chardonnay in purezza: tagliente, elegante e perfetto per celebrare.", valutazione: "4.8", aroma: "Gesso, limone, crosta di pane, burro." },
+    { nome: "Champagne Brut Rosé", prezzo: 55, piatti: ["pesce", "pizza"], occasioni: ["appuntamento", "festa"], motivo: "Fascino puro nel bicchiere, con piccoli frutti rossi croccanti.", valutazione: "4.7", aroma: "Fragolina di bosco, brioche, pompelmo rosa." },
+    { nome: "Champagne Vintage (Millesimato)", prezzo: 80, piatti: ["pesce", "carne_bianca"], occasioni: ["regalo", "appuntamento"], motivo: "Un'annata eccezionale, complesso e destinato a chi capisce di vino.", valutazione: "4.9", aroma: "Miele, nocciola tostata, pasticceria, mela cotta." },
+    { nome: "Crémant de Bourgogne", prezzo: 22, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "L'alternativa geniale allo Champagne: stesso metodo, meno spesa.", valutazione: "4.4", aroma: "Mela verde, fiori bianchi, mandorla." },
+    { nome: "Crémant d'Alsace", prezzo: 20, piatti: ["etnico", "pesce"], occasioni: ["aperitivo", "divano"], motivo: "Fresco e floreale, eccellente sui cibi leggermente speziati.", valutazione: "4.3", aroma: "Pesca, gelsomino, agrumi." },
+    { nome: "Crémant de Loire", prezzo: 19, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "pranzo_domenica"], motivo: "Base Chenin Blanc, offre un'acidità vibrante e dissetante.", valutazione: "4.2", aroma: "Mela cotogna, tiglio, gesso." },
+    { nome: "Champagne Blanc de Noirs", prezzo: 50, piatti: ["carne_bianca", "formaggi"], occasioni: ["regalo", "festa"], motivo: "Uve a bacca nera (Pinot Noir), per una bollicina di grande struttura.", valutazione: "4.7", aroma: "Ribes, pepe bianco, pane tostato." },
+    { nome: "Champagne Demi-Sec", prezzo: 40, piatti: ["dolce"], occasioni: ["festa", "regalo"], motivo: "La bollicina francese pensata specificamente per accompagnare i dessert.", valutazione: "4.5", aroma: "Frutta candita, miele, fiori d'arancio." },
+    { nome: "Blanquette de Limoux", prezzo: 18, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "La bollicina più antica del mondo, rustica e affascinante.", valutazione: "4.1", aroma: "Mela verde, erba tagliata, agrumi." },
+    { nome: "Champagne Grand Cru", prezzo: 120, piatti: ["pesce", "formaggi"], occasioni: ["regalo", "festa"], motivo: "L'apice dell'eccellenza, da vigne leggendarie. Il lusso nel bicchiere.", valutazione: "5.0", aroma: "Tartufo bianco, brioche, agrumi canditi, burro fuso." },
+
+    // 161-170: I Grandi Bianchi Francesi
+    { nome: "Chablis (Borgogna)", prezzo: 25, piatti: ["pesce"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Chardonnay non legnoso, sapido come l'acqua di mare. Perfetto per le ostriche.", valutazione: "4.6", aroma: "Pietra focaia, limone, mela verde." },
+    { nome: "Sancerre (Valle della Loira)", prezzo: 28, piatti: ["pesce", "formaggi"], occasioni: ["appuntamento", "cena_amici"], motivo: "Il Sauvignon Blanc di riferimento mondiale: tagliente ed elegantissimo.", valutazione: "4.7", aroma: "Foglia di pomodoro, pompelmo, selce." },
+    { nome: "Pouilly-Fumé (Valle della Loira)", prezzo: 30, piatti: ["pesce", "carne_bianca"], occasioni: ["regalo", "appuntamento"], motivo: "Sauvignon con un caratteristico e inconfondibile sentore affumicato.", valutazione: "4.6", aroma: "Fumo, agrumi, erba bagnata." },
+    { nome: "Gewürztraminer d'Alsazia", prezzo: 22, piatti: ["etnico", "formaggi"], occasioni: ["cena_amici", "divano"], motivo: "Molto più opulento di quello italiano, dolce nelle spezie e denso.", valutazione: "4.5", aroma: "Litchi, rosa, zenzero, chiodi di garofano." },
+    { nome: "Riesling d'Alsazia", prezzo: 24, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Secco, teso e roccioso. Un bianco per palati molto esigenti.", valutazione: "4.6", aroma: "Idrocarburo, pesca bianca, lime." },
+    { nome: "Meursault (Borgogna)", prezzo: 70, piatti: ["carne_bianca", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Chardonnay invecchiato in legno: burroso, ampio e monumentale.", valutazione: "4.9", aroma: "Burro, nocciola tostata, vaniglia, mela." },
+    { nome: "Vouvray Sec (Loira)", prezzo: 20, piatti: ["pesce", "primi"], occasioni: ["cena_amici", "aperitivo"], motivo: "Chenin Blanc freschissimo, perfetto per sgrassare.", valutazione: "4.3", aroma: "Mela cotogna, camomilla, gesso." },
+    { nome: "Condrieu (Rodano)", prezzo: 60, piatti: ["pesce", "etnico"], occasioni: ["regalo", "appuntamento"], motivo: "Viognier in purezza, rarissimo, cremoso e profumato di albicocca.", valutazione: "4.8", aroma: "Albicocca, violetta, pesca matura." },
+    { nome: "Muscadet Sèvre et Maine", prezzo: 15, piatti: ["pesce"], occasioni: ["aperitivo", "cena_amici"], motivo: "Il compagno quotidiano per i frutti di mare: leggero e salino.", valutazione: "4.1", aroma: "Sale, limone, mela verde." },
+    { nome: "Sauternes", prezzo: 45, piatti: ["formaggi", "dolce"], occasioni: ["regalo", "appuntamento"], motivo: "Il re dei vini dolci mondiali, perfetto col formaggio erborinato.", valutazione: "4.9", aroma: "Zafferano, miele, albicocca secca, agrumi canditi." },
+
+    // 171-180: I Grandi Rossi Francesi
+    { nome: "Bordeaux Superieur", prezzo: 18, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Il taglio bordolese accessibile, con tannini morbidi e frutto scuro.", valutazione: "4.2", aroma: "Prugna, mora, cedro." },
+    { nome: "Saint-Émilion Grand Cru (Bordeaux)", prezzo: 45, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "A prevalenza Merlot: vellutato, elegante e di grande classe.", valutazione: "4.7", aroma: "Ciliegia nera, cioccolato, tartufo." },
+    { nome: "Margaux (Bordeaux)", prezzo: 80, piatti: ["carne_rossa"], occasioni: ["regalo", "festa"], motivo: "Cabernet Sauvignon dal lato più femminile e profumato di Bordeaux.", valutazione: "4.9", aroma: "Viola, ribes nero, scatola di sigari." },
+    { nome: "Pinot Noir Bourgogne Rouge", prezzo: 25, piatti: ["carne_bianca", "primi"], occasioni: ["cena_amici", "appuntamento"], motivo: "L'ingresso nel mondo della Borgogna: rosso scarico, elegante e terroso.", valutazione: "4.4", aroma: "Lampone, fragolina, sottobosco." },
+    { nome: "Gevrey-Chambertin (Borgogna)", prezzo: 75, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Pinot Noir strutturato, maschile e perfetto per lunghi invecchiamenti.", valutazione: "4.8", aroma: "Ciliegia matura, cuoio, funghi." },
+    { nome: "Châteauneuf-du-Pape (Rodano)", prezzo: 45, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Potente, alcolico e speziatissimo, ottenuto da 13 vitigni diversi.", valutazione: "4.7", aroma: "Pepe nero, garrigue, prugna, carne arrosto." },
+    { nome: "Côtes du Rhône", prezzo: 16, piatti: ["carne_rossa", "pizza"], occasioni: ["cena_amici", "grigliata"], motivo: "Rosso quotidiano francese, speziato, succoso e di grande bevibilità.", valutazione: "4.1", aroma: "Mora, pepe nero, lavanda." },
+    { nome: "Beaujolais Villages", prezzo: 15, piatti: ["pizza", "carne_bianca"], occasioni: ["cena_amici", "divano"], motivo: "Gamay in purezza, da bere fresco: un'esplosione di succo di frutta rossa.", valutazione: "4.2", aroma: "Fragola, banana, ciliegia croccante." },
+    { nome: "Cru di Beaujolais (Morgon)", prezzo: 22, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Il Beaujolais serio, con struttura e capacità di invecchiare.", valutazione: "4.5", aroma: "Kirsch, spezie, terra." },
+    { nome: "Côte-Rôtie (Rodano)", prezzo: 65, piatti: ["carne_rossa"], occasioni: ["regalo", "appuntamento"], motivo: "Syrah con una goccia di Viognier. Elegante, carnoso e pepato.", valutazione: "4.8", aroma: "Olive nere, pepe, viola, bacon." },
+
+    // 181-190: Spagna e Portogallo
+    { nome: "Cava Brut Nature (Spagna)", prezzo: 14, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "La risposta spagnola allo Champagne. Secco, terroso e conveniente.", valutazione: "4.2", aroma: "Mela cotta, mandorla amara, terra." },
+    { nome: "Rioja Crianza (Spagna)", prezzo: 16, piatti: ["carne_rossa", "formaggi"], occasioni: ["cena_amici", "divano"], motivo: "Tempranillo morbido con evidente e piacevole passaggio in botte americana.", valutazione: "4.3", aroma: "Ciliegia, vaniglia, cocco, tabacco." },
+    { nome: "Rioja Gran Reserva (Spagna)", prezzo: 35, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Lungo invecchiamento, tannini setosi e aromi terziari complessi.", valutazione: "4.7", aroma: "Cuoio, prugna secca, aneto, scatola di sigari." },
+    { nome: "Ribera del Duero Crianza (Spagna)", prezzo: 20, piatti: ["carne_rossa", "grigliata"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Tempranillo di altitudine, muscolare e potente.", valutazione: "4.5", aroma: "Mora, cioccolato fondente, spezie nere." },
+    { nome: "Albariño Rías Baixas (Spagna)", prezzo: 18, piatti: ["pesce"], occasioni: ["aperitivo", "appuntamento"], motivo: "Bianco atlantico per eccellenza: salino, freschissimo e agrumato.", valutazione: "4.4", aroma: "Pompelmo, pesca bianca, salsedine." },
+    { nome: "Verdejo Rueda (Spagna)", prezzo: 12, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "L'alternativa spagnola al Sauvignon: erbaceo, fresco ed economico.", valutazione: "4.0", aroma: "Melone, finocchio, lime." },
+    { nome: "Priorat (Spagna)", prezzo: 40, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Garnacha e Cariñena su suoli di ardesia. Minerale, concentrato, alcolico.", valutazione: "4.8", aroma: "Amarena liquirizia, ardesia bagnata." },
+    { nome: "Porto Tawny (Portogallo)", prezzo: 25, piatti: ["dolce", "formaggi"], occasioni: ["divano", "regalo"], motivo: "Vino liquoroso invecchiato in legno, perfetto con cioccolato o formaggi erborinati.", valutazione: "4.6", aroma: "Caramello, fichi secchi, noci, caffè." },
+    { nome: "Vinho Verde (Portogallo)", prezzo: 9, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Bianco giovanissimo, leggermente frizzante e a bassa gradazione.", valutazione: "4.0", aroma: "Limone verde, mela acerba, fiori." },
+    { nome: "Touriga Nacional Douro (Portogallo)", prezzo: 22, piatti: ["carne_rossa", "formaggi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Rosso fermo dal profumo inebriante di viola e grande corpo.", valutazione: "4.5", aroma: "Viola, mora, bergamotto." },
+
+    // 191-200: Germania, Austria e Nuovo Mondo (Bianchi)
+    { nome: "Riesling Kabinett Mosella (Germania)", prezzo: 20, piatti: ["etnico", "pesce"], occasioni: ["appuntamento", "aperitivo"], motivo: "Basso grado alcolico, leggero residuo zuccherino ma un'acidità che taglia come una lama.", valutazione: "4.7", aroma: "Mela verde, lime, ardesia, idrocarburi leggeri." },
+    { nome: "Riesling Trocken (Germania)", prezzo: 22, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "appuntamento"], motivo: "Versione completamente secca, dritta e affilata, per palati esperti.", valutazione: "4.5", aroma: "Pesca bianca, limone, pietra bagnata." },
+    { nome: "Grüner Veltliner (Austria)", prezzo: 16, piatti: ["carne_bianca", "etnico"], occasioni: ["cena_amici", "aperitivo"], motivo: "Bianco croccante con un inconfondibile sentore di pepe bianco.", valutazione: "4.3", aroma: "Lenticchia, pepe bianco, mela." },
+    { nome: "Sauvignon Blanc Marlborough (Nuova Zelanda)", prezzo: 18, piatti: ["pesce", "etnico"], occasioni: ["aperitivo", "cena_amici"], motivo: "Esplosivo, tropicale e inconfondibile. Molto diverso dal cugino francese.", valutazione: "4.4", aroma: "Frutto della passione, pompelmo, foglia di pomodoro." },
+    { nome: "Chardonnay Napa Valley (USA)", prezzo: 45, piatti: ["carne_bianca", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Morbido, burroso, con forte impronta di legno tostato.", valutazione: "4.6", aroma: "Burro fuso, vaniglia, ananas maturo, quercia." },
+    { nome: "Chenin Blanc Stellenbosch (Sudafrica)", prezzo: 15, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "divano"], motivo: "Ottimo rapporto qualità/prezzo, fresco ma con bel volume in bocca.", valutazione: "4.2", aroma: "Mela gialla, miele, fiori di camomilla." },
+    { nome: "Semillon Hunter Valley (Australia)", prezzo: 28, piatti: ["pesce"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Bianco che sfida i decenni: nasce citrino, invecchia diventando miele puro.", valutazione: "4.7", aroma: "Limone, cera d'api, fieno." },
+    { nome: "Gewürztraminer (Nuova Zelanda)", prezzo: 20, piatti: ["etnico", "formaggi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Super floreale e speziato, un compagno perfetto per sushi e curry.", valutazione: "4.3", aroma: "Petali di rosa, zenzero, litchi." },
+    { nome: "Torrontés (Argentina)", prezzo: 14, piatti: ["etnico", "pesce"], occasioni: ["aperitivo", "divano"], motivo: "Al naso sembra dolcissimo, in bocca è secco e rinfrescante.", valutazione: "4.1", aroma: "Uva fresca, gelsomino, pesca." },
+    { nome: "Viognier (California)", prezzo: 25, piatti: ["carne_bianca", "etnico"], occasioni: ["cena_amici", "appuntamento"], motivo: "Corposo e morbido, per chi non ama i bianchi troppo acidi.", valutazione: "4.4", aroma: "Albicocca, miele, fiori d'arancio." },
+
+    // 201-210: Nuovo Mondo (Rossi) e Orange/Naturali
+    { nome: "Malbec Mendoza (Argentina)", prezzo: 16, piatti: ["carne_rossa", "grigliata"], occasioni: ["cena_amici", "grigliata"], motivo: "Il rosso definitivo per la carne alla brace. Fruttato e possente.", valutazione: "4.4", aroma: "Prugna, violetta, cioccolato, tabacco." },
+    { nome: "Shiraz Barossa Valley (Australia)", prezzo: 22, piatti: ["carne_rossa", "grigliata"], occasioni: ["cena_amici", "divano"], motivo: "Un Syrah all'ennesima potenza: caldo, denso e pepato.", valutazione: "4.5", aroma: "Mora di rovo, eucalipto, pepe nero." },
+    { nome: "Cabernet Sauvignon Napa Valley (USA)", prezzo: 55, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Imponente, ricco e lussuoso. Un vero status symbol californiano.", valutazione: "4.8", aroma: "Ribes nero, menta, vaniglia, quercia." },
+    { nome: "Pinot Noir Central Otago (Nuova Zelanda)", prezzo: 35, piatti: ["carne_bianca", "primi"], occasioni: ["appuntamento", "regalo"], motivo: "Espressivo, con un frutto molto più scuro e dolce rispetto alla Borgogna.", valutazione: "4.6", aroma: "Ciliegia scura, timo, spezie dolci." },
+    { nome: "Carmenère (Cile)", prezzo: 15, piatti: ["carne_rossa", "etnico"], occasioni: ["cena_amici", "divano"], motivo: "L'antico vitigno bordolese che ha trovato casa in Cile. Erbaceo e speziato.", valutazione: "4.2", aroma: "Peperone verde, lampone, paprika." },
+    { nome: "Zinfandel Lodi (California)", prezzo: 20, piatti: ["carne_rossa", "pizza"], occasioni: ["grigliata", "cena_amici"], motivo: "Parente stretto del Primitivo. Esplosivo, alcolico e con sentori di confettura.", valutazione: "4.3", aroma: "Confettura di more, cannella, pepe dolce." },
+    { nome: "Pinotage (Sudafrica)", prezzo: 18, piatti: ["carne_rossa", "grigliata"], occasioni: ["cena_amici", "divano"], motivo: "Incrocio unico tra Pinot Noir e Cinsault, rustico e affumicato.", valutazione: "4.1", aroma: "Ciliegia nera, fumo, terra, carne arrostita." },
+    { nome: "Ribolla Gialla Macerata (Orange Wine)", prezzo: 28, piatti: ["formaggi", "carne_bianca", "etnico"], occasioni: ["appuntamento", "cena_amici"], motivo: "Il vino bianco fatto come un rosso. Tannico, complesso, una vera avventura.", valutazione: "4.6", aroma: "Albicocca disidratata, tè nero, resina, miele castagno." },
+    { nome: "Pet-Nat (Pétillant Naturel) Bianco", prezzo: 18, piatti: ["pizza", "aperitivo"], occasioni: ["festa", "cena_amici"], motivo: "La bollicina naturale col fondo. Torbida, divertente e super beverina.", valutazione: "4.3", aroma: "Lievito, agrumi, mela selvatica." },
+    { nome: "Trebbiano Naturale Ancestrale", prezzo: 16, piatti: ["pizza", "formaggi"], occasioni: ["cena_amici", "aperitivo"], motivo: "Senza filtri e senza solfiti aggiunti: rustico, vivo e in continuo cambiamento.", valutazione: "4.2", aroma: "Fieno, sidro di mela, mandorla cruda." },
+
+    // 211-220: Tendenze, Rosati e Chicche Italiane Minori
+    { nome: "Cerasuolo d'Abruzzo Superiore", prezzo: 16, piatti: ["pizza", "carne_bianca", "pesce"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Molto più di un rosato: ha la struttura di un rosso ma si beve fresco.", valutazione: "4.4", aroma: "Ciliegia, fragola, mandorla amara." },
+    { nome: "Rosato Salento IGT (Negroamaro)", prezzo: 12, piatti: ["pizza", "pesce"], occasioni: ["aperitivo", "cena_amici"], motivo: "Corposo e sapido, perfetto per l'estate e i piatti a base di pomodoro.", valutazione: "4.1", aroma: "Melograno, rosa, lampone." },
+    { nome: "Côtes de Provence Rosé", prezzo: 18, piatti: ["pesce", "aperitivo"], occasioni: ["aperitivo", "appuntamento"], motivo: "Il rosato francese per eccellenza: chiarissimo, secco ed elegantissimo.", valutazione: "4.3", aroma: "Pesca bianca, fragolina, agrumi." },
+    { nome: "Ruché di Castagnole Monferrato DOCG", prezzo: 18, piatti: ["etnico", "primi"], occasioni: ["appuntamento", "cena_amici"], motivo: "Speziato, profumatissimo e con pochissimi tannini. Per chi cerca l'inusuale.", valutazione: "4.4", aroma: "Rosa appassita, geranio, pepe bianco." },
+    { nome: "Pelaverga di Verduno DOC", prezzo: 19, piatti: ["primi", "pizza"], occasioni: ["cena_amici", "divano"], motivo: "Un rosso piemontese leggero con un inconfondibile e clamoroso profumo di pepe.", valutazione: "4.5", aroma: "Pepe nero e bianco, fragola, ciliegia." },
+    { nome: "Gragnano della Penisola Sorrentina DOC", prezzo: 12, piatti: ["pizza"], occasioni: ["cena_amici", "divano"], motivo: "Rosso frizzante servito ghiacciato. Il vero, unico abbinamento alla pizza a Napoli.", valutazione: "4.3", aroma: "Viola, ciliegia, fumo leggero." },
+    { nome: "Coda di Volpe DOC (Campania)", prezzo: 14, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Bianco rustico e vulcanico, di grande volume e soddisfazione.", valutazione: "4.2", aroma: "Pera, ginestra, cenere." },
+    { nome: "Nerello Mascalese (Etna IGT)", prezzo: 18, piatti: ["carne_rossa", "pesce"], occasioni: ["cena_amici", "appuntamento"], motivo: "Il fratello minore dell'Etna Rosso DOC, elegantissimo e abbinabile anche col tonno.", valutazione: "4.4", aroma: "Fruttini rossi, erbe vulcaniche, grafite." },
+    { nome: "Timorasso Derthona", prezzo: 24, piatti: ["pesce", "formaggi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Bianco piemontese da lunghissimo invecchiamento, minerale e possente.", valutazione: "4.6", aroma: "Miele, idrocarburo, pesca gialla." },
+    { nome: "Susumaniello (Puglia)", prezzo: 16, piatti: ["carne_rossa", "formaggi"], occasioni: ["cena_amici", "divano"], motivo: "Vitigno emergente pugliese: scuro, concentrato e molto speziato.", valutazione: "4.3", aroma: "Prugna nera, inchiostro, cacao." },
+// 221-230: I Rossi Quotidiani del Nord
+    { nome: "Dolcetto Piemonte DOC", prezzo: 7, piatti: ["primi", "pizza", "carne_bianca"], occasioni: ["divano", "cena_amici"], motivo: "Semplice, fruttato e piacevolmente asciutto. Ideale per la tavola di tutti i giorni.", valutazione: "3.8", aroma: "Ciliegia, mandorla, frutti rossi freschi." },
+    { nome: "Croatina dell'Oltrepò Pavese", prezzo: 6, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "grigliata"], motivo: "Spesso vivace, regala un sorso rustico e spensierato.", valutazione: "3.7", aroma: "Mora, lampone, geranio." },
+    { nome: "Cabernet Franc Veneto IGT", prezzo: 5, piatti: ["carne_rossa", "pizza"], occasioni: ["divano", "cena_amici"], motivo: "La sua inconfondibile nota erbacea lo rende perfetto per cene informali.", valutazione: "3.6", aroma: "Peperone verde, erba tagliata, mora." },
+    { nome: "Merlot Trevenezie IGT", prezzo: 6, piatti: ["primi", "carne_bianca"], occasioni: ["divano", "pranzo_domenica"], motivo: "Morbido, rotondo e senza spigoli. Piace a tutti senza sforzo.", valutazione: "3.8", aroma: "Prugna, ciliegia matura, leggere spezie." },
+    { nome: "Refosco Trevenezie IGT", prezzo: 7, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Leggermente tannico e rustico, ottimo per sughi di carne.", valutazione: "3.9", aroma: "Mora di rovo, pepe nero, sottobosco." },
+    { nome: "Marzemino Frizzante", prezzo: 8, piatti: ["pizza", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "Un rosso allegro e beverino, che sgrassa il palato con la sua spuma.", valutazione: "3.8", aroma: "Viola, fragola, lampone." },
+    { nome: "Garda Corvina DOC", prezzo: 9, piatti: ["carne_bianca", "primi"], occasioni: ["pranzo_domenica", "divano"], motivo: "Il fratello leggero dell'Amarone, speziato e facile da bere.", valutazione: "4.0", aroma: "Ciliegia croccante, pepe bianco, erbe." },
+    { nome: "Bonarda Colli Piacentini Frizzante", prezzo: 7, piatti: ["pizza", "carne_rossa"], occasioni: ["cena_amici", "grigliata"], motivo: "Vino sincero ed espansivo, chiama a gran voce i salumi.", valutazione: "3.9", aroma: "Frutti rossi maturi, viola mammola." },
+    { nome: "Gutturnio Superiore Colli Piacentini", prezzo: 9, piatti: ["carne_rossa", "primi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Fermo, corposo ed estremamente appagante per il suo prezzo.", valutazione: "4.1", aroma: "Prugna, amarena, spezie scure." },
+    { nome: "Freisa Langhe DOC", prezzo: 10, piatti: ["carne_rossa", "pizza"], occasioni: ["divano", "cena_amici"], motivo: "Tannico e vivace, un piemontese di carattere a costo contenuto.", valutazione: "4.0", aroma: "Lampone, rosa, terra." },
+
+    // 231-240: I Bianchi Freschi da Scaffale
+    { nome: "Trebbiano Rubicone IGT", prezzo: 5, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "divano"], motivo: "Semplice, neutro e super dissetante. Ottimo da bere freddo.", valutazione: "3.5", aroma: "Mela verde, fiori di campo, limone." },
+    { nome: "Garganega Veneto IGT", prezzo: 6, piatti: ["pesce", "primi"], occasioni: ["cena_amici", "aperitivo"], motivo: "Floreale e leggero, un bianco che non impegna la testa e il portafoglio.", valutazione: "3.7", aroma: "Fiori bianchi, pesca, mandorla dolce." },
+    { nome: "Chardonnay Sicilia DOC", prezzo: 7, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "divano"], motivo: "Solare e fruttato, un approccio molto mediterraneo allo Chardonnay.", valutazione: "3.9", aroma: "Ananas, melone, ginestra." },
+    { nome: "Insolia Terre Siciliane IGT", prezzo: 6, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Sapido, caldo e con un inconfondibile tocco di nocciola.", valutazione: "3.8", aroma: "Agrumi, nocciola, erbe mediterranee." },
+    { nome: "Passerina Terre di Chieti IGT", prezzo: 7, piatti: ["pesce", "primi"], occasioni: ["aperitivo", "divano"], motivo: "Fresco, floreale e dotato di un'acidità che risveglia il palato.", valutazione: "3.9", aroma: "Pompelmo, fiori bianchi, pesca." },
+    { nome: "Pecorino Terre di Chieti IGT", prezzo: 8, piatti: ["formaggi", "pesce"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Bianco di bella struttura, regge bene anche formaggi leggeri e fritti.", valutazione: "4.0", aroma: "Salvia, mela gialla, anice." },
+    { nome: "Falanghina Beneventano IGT", prezzo: 7, piatti: ["pesce", "pizza"], occasioni: ["cena_amici", "aperitivo"], motivo: "Bianco campano per tutti i giorni, fruttato e piacevolissimo.", valutazione: "3.8", aroma: "Banana, ananas, agrumi." },
+    { nome: "Vermentino Maremma Toscana DOC", prezzo: 9, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "pranzo_domenica"], motivo: "Sapido e solare, un sorso di mare toscano a piccolo prezzo.", valutazione: "4.0", aroma: "Rosmarino, susina, salsedine." },
+    { nome: "Nuragus di Cagliari DOC", prezzo: 8, piatti: ["pesce", "primi"], occasioni: ["divano", "cena_amici"], motivo: "Bianco sardo storico, morbido e leggermente ammandorlato.", valutazione: "3.9", aroma: "Mela cotogna, mandorla cruda, fiori bianchi." },
+    { nome: "Sauvignon Trevenezie IGT", prezzo: 6, piatti: ["pesce", "etnico"], occasioni: ["aperitivo", "cena_amici"], motivo: "Erbaceo e pungente, perfetto per sushi o cibi leggermente speziati.", valutazione: "3.7", aroma: "Foglia di pomodoro, pompelmo, peperone verde." },
+
+    // 241-250: Grandi Rossi del Sud Economici
+    { nome: "Negroamaro Puglia IGT", prezzo: 6, piatti: ["carne_rossa", "primi"], occasioni: ["grigliata", "cena_amici"], motivo: "Denso, fruttato e morbidissimo. Un comfort wine infallibile.", valutazione: "3.8", aroma: "Amarena, confettura di prugne, macchia mediterranea." },
+    { nome: "Nero di Troia Puglia IGT", prezzo: 8, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Tannino più deciso e corpo solido, ideale con carni saporite.", valutazione: "4.0", aroma: "Viola, pepe nero, more." },
+    { nome: "Syrah Terre Siciliane IGT", prezzo: 7, piatti: ["carne_rossa", "formaggi"], occasioni: ["divano", "cena_amici"], motivo: "Un'esplosione di spezie calde, ideale per serate invernali sul divano.", valutazione: "3.9", aroma: "Pepe nero, ciliegia matura, cioccolato." },
+    { nome: "Aglianico Campania IGT", prezzo: 8, piatti: ["carne_rossa", "primi"], occasioni: ["pranzo_domenica", "grigliata"], motivo: "Il lato accessibile dell'Aglianico: tannino ammorbidito e tanto frutto scuro.", valutazione: "3.9", aroma: "Prugna, cenere, violetta." },
+    { nome: "Cannonau di Sardegna (Base)", prezzo: 9, piatti: ["carne_rossa", "formaggi"], occasioni: ["grigliata", "cena_amici"], motivo: "Caldo, speziato e alcolico. Ottimo con arrosti e formaggi pecorini.", valutazione: "4.0", aroma: "Mirto, mora selvatica, pepe rosso." },
+    { nome: "Monica di Sardegna (Base)", prezzo: 8, piatti: ["pizza", "primi"], occasioni: ["divano", "cena_amici"], motivo: "Facile e rotondo, un rosso sardo che non impegna ma soddisfa.", valutazione: "3.8", aroma: "Lampone, ciliegia, macchia sarda." },
+    { nome: "Primitivo Salento IGT", prezzo: 7, piatti: ["carne_rossa", "pizza"], occasioni: ["cena_amici", "divano"], motivo: "Il fratello minore del Manduria, morbido come velluto.", valutazione: "3.9", aroma: "Confettura di ciliegia, vaniglia, prugna." },
+    { nome: "Frappato Terre Siciliane IGT", prezzo: 9, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Rosso siciliano da servire fresco. Croccante e profumato.", valutazione: "4.1", aroma: "Fragola, rosa, pepe bianco." },
+    { nome: "Gaglioppo Calabria IGT", prezzo: 8, piatti: ["carne_rossa", "primi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Rosso caldo e tannico, un viaggio nei sapori antichi della Calabria.", valutazione: "3.9", aroma: "Ciliegia secca, erbe aromatiche, pepe." },
+    { nome: "Piedirosso Campania IGT", prezzo: 9, piatti: ["pizza", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Il compagno ideale della pizza Margherita, leggero e affumicato.", valutazione: "4.0", aroma: "Geranio, fumo, fragolina." },
+
+    // 251-260: Bollicine ed Effervescenti Economici
+    { nome: "Prosecco Treviso DOC", prezzo: 7, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "festa"], motivo: "Semplice, fruttato e senza pensieri. Il re dell'aperitivo.", valutazione: "3.8", aroma: "Mela verde, pera, glicine." },
+    { nome: "Spumante Brut Metodo Charmat", prezzo: 6, piatti: ["pesce", "formaggi"], occasioni: ["festa", "aperitivo"], motivo: "Bollicina neutra e dissetante, eccellente per creare cocktail o spritz.", valutazione: "3.5", aroma: "Limone, mela, crosta di pane leggera." },
+    { nome: "Ribolla Gialla Spumante", prezzo: 9, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "festa"], motivo: "Fresco, agrumato e con un'acidità che pulisce perfettamente la bocca.", valutazione: "4.0", aroma: "Lime, fiori bianchi, mela verde." },
+    { nome: "Pignoletto Frizzante DOC", prezzo: 7, piatti: ["pizza", "formaggi"], occasioni: ["aperitivo", "cena_amici"], motivo: "Leggero ed estremamente godibile, un aperitivo emiliano perfetto.", valutazione: "3.9", aroma: "Pera, biancospino, camomilla." },
+    { nome: "Müller Thurgau Frizzante", prezzo: 8, piatti: ["etnico", "pesce"], occasioni: ["aperitivo", "divano"], motivo: "Aromatico, leggero e con una spuma invitante.", valutazione: "3.8", aroma: "Sambuco, pesca, salvia." },
+    { nome: "Lambrusco Emilia IGT Dolce", prezzo: 5, piatti: ["pizza", "dolce"], occasioni: ["festa", "divano"], motivo: "Rosso frizzante abboccato, ideale con cibi leggermente speziati o pasticceria secca.", valutazione: "3.6", aroma: "Fragola di bosco, lampone, violetta." },
+    { nome: "Moscato Spumante Dolce", prezzo: 6, piatti: ["dolce"], occasioni: ["festa", "pranzo_domenica"], motivo: "Bollicina dolce ed economica, non delude mai a fine pasto.", valutazione: "3.7", aroma: "Pesca sciroppata, salvia, fiori d'arancio." },
+    { nome: "Brachetto Spumante Dolce", prezzo: 7, piatti: ["dolce"], occasioni: ["festa", "appuntamento"], motivo: "Rosso, dolce e frizzante. Ottimo con crostate di frutta rossa.", valutazione: "3.9", aroma: "Rosa, fragola selvatica, lampone." },
+    { nome: "Spumante Rosé Extra Dry", prezzo: 7, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "festa"], motivo: "Morbido, fruttato e colorato. Per brindisi allegri e informali.", valutazione: "3.7", aroma: "Piccoli frutti rossi, crosta di pane, agrumi." },
+    { nome: "Durello Monti Lessini Spumante", prezzo: 10, piatti: ["pesce", "formaggi"], occasioni: ["aperitivo", "cena_amici"], motivo: "Bollicina veneta tagliente ed economica, per chi ama l'acidità vibrante.", valutazione: "4.1", aroma: "Mela renetta, agrumi, mineralità." },
+
+    // 261-270: Rosati Freschi e Vini Estivi
+    { nome: "Rosato Puglia IGT", prezzo: 6, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "divano"], motivo: "Colorato e corposo, accompagna bene anche i pomodorini e le focacce.", valutazione: "3.8", aroma: "Ciliegia, melograno, lampone." },
+    { nome: "Chiaretto di Bardolino Classico", prezzo: 8, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "appuntamento"], motivo: "Rosato gardesano delicatissimo, quasi provenzale nello stile.", valutazione: "4.0", aroma: "Fragolina, agrumi, rosa." },
+    { nome: "Rosato Toscana IGT", prezzo: 7, piatti: ["carne_bianca", "primi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Asciutto e strutturato, perfetto per pranzi estivi in giardino.", valutazione: "3.9", aroma: "Viola, ciliegia, erbe aromatiche." },
+    { nome: "Cerasuolo d'Abruzzo (Base)", prezzo: 8, piatti: ["pizza", "carne_bianca"], occasioni: ["grigliata", "cena_amici"], motivo: "Un rosato che si crede un rosso. Succoso, gastronomico e verace.", valutazione: "4.1", aroma: "Amarena, fragola scura, mandorla." },
+    { nome: "Rosato Sicilia DOC", prezzo: 7, piatti: ["pesce", "etnico"], occasioni: ["aperitivo", "cena_amici"], motivo: "Solare e fruttato, porta allegria e si abbina bene anche al cous cous.", valutazione: "3.8", aroma: "Pesca, lampone, erbe mediterranee." },
+    { nome: "Verdicchio Castelli di Jesi (Base)", prezzo: 7, piatti: ["pesce", "carne_bianca"], occasioni: ["pranzo_domenica", "divano"], motivo: "Bianco strutturato con il classico finale amarognolo che pulisce la bocca.", valutazione: "3.9", aroma: "Mandorla amara, anice, mela." },
+    { nome: "Orvieto DOC", prezzo: 6, piatti: ["pesce", "primi"], occasioni: ["aperitivo", "cena_amici"], motivo: "Delicato, morbido e leggermente abboccato. Un grande classico economico.", valutazione: "3.7", aroma: "Fiori di campo, pesca, camomilla." },
+    { nome: "Frascati Superiore DOCG", prezzo: 9, piatti: ["primi", "pizza"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Asciutto e saporito, è la morte sua con la carbonara o la gricia.", valutazione: "4.1", aroma: "Mela gialla, fiori bianchi, erbe." },
+    { nome: "Soave Classico DOC (Base)", prezzo: 8, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "aperitivo"], motivo: "Armonico e floreale, un bianco veneto che non delude mai sulla tavola.", valutazione: "3.9", aroma: "Mandorla, camomilla, pesca bianca." },
+    { nome: "Vernaccia di San Gimignano (Base)", prezzo: 8, piatti: ["carne_bianca", "pesce"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Bianco toscano di buona struttura e acidità, ideale per piatti di carne bianca.", valutazione: "3.9", aroma: "Fiori gialli, mandorla, agrumi." },
+
+    // 271-280: Internazionali da Scaffale e Blend
+    { nome: "Cabernet Sauvignon Sicilia IGT", prezzo: 7, piatti: ["carne_rossa", "formaggi"], occasioni: ["grigliata", "cena_amici"], motivo: "Caldo, morbido e ricco di frutta scura. Un rosso internazionale dal cuore mediterraneo.", valutazione: "3.8", aroma: "Mora, eucalipto, peperone dolce." },
+    { nome: "Chardonnay Veneto IGT", prezzo: 5, piatti: ["pesce", "primi"], occasioni: ["divano", "aperitivo"], motivo: "Bianco leggero e neutro, eccellente da bere molto fresco senza pensieri.", valutazione: "3.6", aroma: "Mela gialla, fiori bianchi." },
+    { nome: "Merlot Sicilia IGT", prezzo: 6, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Setoso, caldo e rotondo. Si abbina facilmente a quasi tutte le cene veloci.", valutazione: "3.8", aroma: "Prugna, mora, cacao leggero." },
+    { nome: "Syrah Lazio IGT", prezzo: 8, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Ricco di spezie e polpa, un Syrah appagante a un prezzo irrisorio.", valutazione: "4.0", aroma: "Pepe nero, amarena, cuoio." },
+    { nome: "Sauvignon Blanc Sicilia IGT", prezzo: 7, piatti: ["pesce", "etnico"], occasioni: ["aperitivo", "cena_amici"], motivo: "Intenso e aromatico, con note di frutta esotica molto marcate.", valutazione: "3.9", aroma: "Frutto della passione, pompelmo, ananas." },
+    { nome: "Pinot Nero Trevenezie IGT", prezzo: 9, piatti: ["carne_bianca", "primi"], occasioni: ["appuntamento", "divano"], motivo: "Rosso elegante, scarico di colore e di tannino. Ottimo con cibi delicati.", valutazione: "3.9", aroma: "Lampone, fragolina di bosco, rosa." },
+    { nome: "Cabernet-Merlot Blend (Nord Italia)", prezzo: 6, piatti: ["carne_rossa", "pizza"], occasioni: ["cena_amici", "divano"], motivo: "Il classico taglio bordolese in versione economica, equilibrato e piacevole.", valutazione: "3.7", aroma: "Ciliegia matura, erba, vaniglia." },
+    { nome: "Gewürztraminer Trevenezie IGT", prezzo: 9, piatti: ["etnico", "formaggi"], occasioni: ["aperitivo", "appuntamento"], motivo: "Profumatissimo e abboccato. Stupisce gli ospiti e si sposa col cibo speziato.", valutazione: "4.0", aroma: "Litchi, petali di rosa, spezie dolci." },
+    { nome: "Pinot Grigio Sicilia DOC", prezzo: 7, piatti: ["pesce", "primi"], occasioni: ["aperitivo", "cena_amici"], motivo: "Fruttato e solare, un'interpretazione più calda del classico Pinot Grigio.", valutazione: "3.8", aroma: "Pesca, melone, agrumi." },
+    { nome: "Shiraz Terre Siciliane IGT", prezzo: 8, piatti: ["carne_rossa", "grigliata"], occasioni: ["cena_amici", "divano"], motivo: "Pieno e corposo, con un netto richiamo alla mora e al pepe rosso.", valutazione: "3.9", aroma: "Mora selvatica, pepe rosso, erbe." },
+
+    // 281-290: Le "Chicche" Regionali sotto i 10€
+    { nome: "Sangiovese Umbria IGT", prezzo: 6, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Sincero e asciutto, un vino da tavola perfetto per accompagnare salumi e pasta.", valutazione: "3.7", aroma: "Ciliegia, viola, pepe." },
+    { nome: "Barbera Oltrepò Pavese DOC", prezzo: 7, piatti: ["carne_rossa", "pizza"], occasioni: ["grigliata", "cena_amici"], motivo: "Acidità spiccata che invita al secondo sorso, ideale per cibi grassi.", valutazione: "3.8", aroma: "Mora, ciliegia, geranio." },
+    { nome: "Cesanese del Piglio (Base)", prezzo: 9, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Rosso laziale rustico, leggermente dolce nel frutto ma con buon tannino.", valutazione: "4.0", aroma: "Amarena, sottobosco, pepe rosso." },
+    { nome: "Montepulciano d'Abruzzo (Supermercato)", prezzo: 5, piatti: ["pizza", "primi", "carne_rossa"], occasioni: ["cena_amici", "divano"], motivo: "Il Re indiscusso della spesa economica: corposo, fruttato e sempre gradevole.", valutazione: "3.8", aroma: "Prugna, mora, liquirizia." },
+    { nome: "Nero d'Avola Terre Siciliane IGT", prezzo: 6, piatti: ["carne_rossa", "primi"], occasioni: ["grigliata", "cena_amici"], motivo: "Caldo, avvolgente e denso. Regge benissimo anche grigliate robuste.", valutazione: "3.8", aroma: "Mora matura, ciliegia nera, carruba." },
+    { nome: "Aglianico del Vulture (Base)", prezzo: 10, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Un grande rosso del sud in versione giovane, minerale e profondo.", valutazione: "4.1", aroma: "Prugna, cenere, violetta, terra." },
+    { nome: "Vermentino di Sardegna (Base)", prezzo: 8, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "Sapido, fresco e aromatico. Eccellente con antipasti di mare.", valutazione: "3.9", aroma: "Limone, macchia mediterranea, sale." },
+    { nome: "Pecorino Offida DOCG (Base)", prezzo: 9, piatti: ["pesce", "formaggi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Bianco strutturato marchigiano, regge il confronto anche con formaggi saporiti.", valutazione: "4.0", aroma: "Mela gialla, salvia, anice stellato." },
+    { nome: "Grillo Terre Siciliane IGT", prezzo: 6, piatti: ["pesce", "etnico"], occasioni: ["aperitivo", "divano"], motivo: "Agrumato e leggero, un calice di sole siciliano perfetto per il tardo pomeriggio.", valutazione: "3.8", aroma: "Mandarino, fiori d'arancio, melone." },
+    { nome: "Lambrusco Mantovano DOC", prezzo: 7, piatti: ["pizza", "formaggi"], occasioni: ["cena_amici", "aperitivo"], motivo: "Frizzante, secco e dissetante. L'abbinamento regionale per eccellenza con zucca e salumi.", valutazione: "3.9", aroma: "Fragola, violetta, sottobosco." },
+    // 291-300: I Re del Piemonte (Barolo e Barbaresco)
+    { nome: "Barolo Riserva Monfortino", prezzo: 800, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo"], motivo: "Il mito assoluto delle Langhe. Un'esperienza enologica che trascende la degustazione.", valutazione: "5.0", aroma: "Tartufo bianco, rosa appassita, cuoio, liquirizia." },
+    { nome: "Barolo Cannubi DOCG", prezzo: 90, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Dal cru più storico del Barolo, offre un'eleganza e una finezza impareggiabili.", valutazione: "4.8", aroma: "Viola, ciliegia matura, tabacco dolce, spezie." },
+    { nome: "Barbaresco Asili DOCG", prezzo: 85, piatti: ["carne_rossa", "primi"], occasioni: ["regalo", "appuntamento"], motivo: "Il lato più femminile ed elegante del Nebbiolo, setoso e profumatissimo.", valutazione: "4.7", aroma: "Rosa, lampone, chiodi di garofano." },
+    { nome: "Gattinara Riserva DOCG", prezzo: 45, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "regalo"], motivo: "Nebbiolo dell'Alto Piemonte: vulcanico, sapido e incredibilmente longevo.", valutazione: "4.6", aroma: "Ferro, arancia sanguigna, frutti di bosco." },
+    { nome: "Boca DOC", prezzo: 40, piatti: ["carne_rossa", "primi"], occasioni: ["regalo", "cena_amici"], motivo: "Una chicca per intenditori, Nebbiolo e Vespolina per un rosso teso e affascinante.", valutazione: "4.5", aroma: "Melograno, pepe bianco, note balsamiche." },
+    { nome: "Barolo Bussia DOCG", prezzo: 75, piatti: ["carne_rossa"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Potenza e muscoli. Un Barolo austero che richiede tempo e grandi arrosti.", valutazione: "4.6", aroma: "Prugna secca, cacao, menta, terra." },
+    { nome: "Roero Riserva DOCG", prezzo: 35, piatti: ["carne_rossa", "formaggi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "L'alternativa geniale al Barolo sulla riva sinistra del Tanaro, più sabbioso e fruttato.", valutazione: "4.4", aroma: "Amarena, spezie dolci, violetta." },
+    { nome: "Barbaresco Rabajà DOCG", prezzo: 95, piatti: ["carne_rossa", "primi"], occasioni: ["regalo", "appuntamento"], motivo: "Intenso e strutturato, un fuoriclasse capace di sfidare i decenni.", valutazione: "4.8", aroma: "Ciliegia nera, tartufo, cuoio, liquirizia." },
+    { nome: "Lessona DOC", prezzo: 42, piatti: ["carne_rossa", "formaggi"], occasioni: ["appuntamento", "regalo"], motivo: "Nebbiolo su sabbie marine: sottile, salato e di un'eleganza disarmante.", valutazione: "4.5", aroma: "Rosa antica, salsedine, agrumi." },
+    { nome: "Nebbiolo d'Alba DOC", prezzo: 25, piatti: ["primi", "carne_rossa"], occasioni: ["cena_amici", "divano"], motivo: "L'ingresso perfetto nel mondo del Nebbiolo: tannino presente ma grande bevibilità.", valutazione: "4.2", aroma: "Lampone, terra umida, viola." },
+
+    // 301-310: I Super Tuscan e le Icone Toscane
+    { nome: "Sassicaia Bolgheri DOC", prezzo: 250, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Il vino italiano più famoso al mondo. Un taglio bordolese di classe siderale.", valutazione: "4.9", aroma: "Ribes nero, macchia mediterranea, cedro." },
+    { nome: "Tignanello Toscana IGT", prezzo: 130, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Il padre dei Super Tuscan: Sangiovese, Cabernet e un'eleganza moderna assoluta.", valutazione: "4.8", aroma: "Ciliegia matura, vaniglia, cioccolato fondente." },
+    { nome: "Ornellaia Bolgheri Superiore DOC", prezzo: 220, piatti: ["carne_rossa"], occasioni: ["regalo", "festa"], motivo: "Opulento, denso e setoso. Un capolavoro di morbidezza e potenza.", valutazione: "4.9", aroma: "Mora di rovo, caffè tostato, erbe balsamiche." },
+    { nome: "Masseto Toscana IGT", prezzo: 850, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo"], motivo: "Merlot in purezza, iconico e rarissimo. Il 'Pétrus' italiano.", valutazione: "5.0", aroma: "Prugna, mirtillo, tartufo nero, cacao." },
+    { nome: "Brunello di Montalcino Riserva", prezzo: 110, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Anni di attesa in botte per una struttura e una longevità monumentali.", valutazione: "4.8", aroma: "Tabacco, cuoio, ciliegia sotto spirito." },
+    { nome: "Flaccianello della Pieve IGT", prezzo: 140, piatti: ["carne_rossa", "primi"], occasioni: ["regalo", "appuntamento"], motivo: "Sangiovese in purezza portato alla massima espressione di concentrazione e finezza.", valutazione: "4.8", aroma: "Amarena, viola mammola, spezie scure." },
+    { nome: "Solaia Toscana IGT", prezzo: 300, piatti: ["carne_rossa"], occasioni: ["regalo", "festa"], motivo: "Vigneto adiacente al Tignanello, a prevalenza Cabernet. Aristocratico.", valutazione: "4.9", aroma: "Frutti neri, menta, liquirizia, cioccolato." },
+    { nome: "Cepparello Toscana IGT", prezzo: 85, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "cena_amici"], motivo: "Un inno al Sangiovese puro, verticale, acido ed estremamente elegante.", valutazione: "4.6", aroma: "Ciliegia rossa, terra, pepe nero." },
+    { nome: "Le Pergole Torte IGT", prezzo: 160, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Raffinato ed essenziale, con etichette d'artista d'autore. Un vero gioiello.", valutazione: "4.8", aroma: "Frutti di bosco, grafite, rosa." },
+    { nome: "Chianti Classico Gran Selezione DOCG", prezzo: 45, piatti: ["carne_rossa", "primi"], occasioni: ["pranzo_domenica", "regalo"], motivo: "Il vertice della piramide del Chianti: uve selezionatissime per un vino strutturato.", valutazione: "4.5", aroma: "Violetta, cuoio, amarena, erbe toscane." },
+
+    // 311-320: Le Grandi Icone dal Mondo (Rossi)
+    { nome: "Château Margaux Premier Cru (Bordeaux)", prezzo: 700, piatti: ["carne_rossa"], occasioni: ["regalo"], motivo: "Il lato più vellutato e floreale dei Premier Cru di Bordeaux. Storia nel bicchiere.", valutazione: "5.0", aroma: "Viola, ribes nero, scatola di sigari." },
+    { nome: "Château Lafite Rothschild (Bordeaux)", prezzo: 850, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo"], motivo: "Il Cabernet Sauvignon definitivo. Austero in gioventù, infinito nel tempo.", valutazione: "5.0", aroma: "Grafite, cassis, cedro, terra bagnata." },
+    { nome: "La Tâche Grand Cru (Borgogna)", prezzo: 4500, piatti: ["carne_bianca", "formaggi"], occasioni: ["regalo"], motivo: "Domaine de la Romanée-Conti. Il Sacro Graal del Pinot Noir mondiale.", valutazione: "5.0", aroma: "Rosa antica, sottobosco, incenso, ciliegia selvatica." },
+    { nome: "Opus One Napa Valley (USA)", prezzo: 400, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "festa"], motivo: "L'unione tra l'esperienza francese e il sole californiano. Lussuoso e opulento.", valutazione: "4.9", aroma: "Mora di rovo, vaniglia, cioccolato, tabacco." },
+    { nome: "Penfolds Grange (Australia)", prezzo: 600, piatti: ["carne_rossa"], occasioni: ["regalo"], motivo: "Il Syrah (Shiraz) più famoso dell'emisfero sud. Esplosivo, denso e immortale.", valutazione: "4.9", aroma: "Eucalipto, prugna nera, pepe, moka." },
+    { nome: "Vega Sicilia Único (Spagna)", prezzo: 350, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Tempranillo e Cabernet. Affina per anni in botte prima di uscire. Incredibile.", valutazione: "4.9", aroma: "Cuoio, fichi secchi, tabacco, ribes." },
+    { nome: "Pingus Ribera del Duero (Spagna)", prezzo: 900, piatti: ["carne_rossa"], occasioni: ["regalo"], motivo: "Vino 'garagiste' spagnolo, rarissimo, concentrato e richiestissimo dai collezionisti.", valutazione: "4.8", aroma: "Inchiostro, mora, mineralità estrema." },
+    { nome: "Clos de Vougeot Grand Cru (Borgogna)", prezzo: 180, piatti: ["carne_bianca", "primi"], occasioni: ["regalo", "appuntamento"], motivo: "Dal vigneto cintato dai monaci cistercensi. Pinot Noir strutturato e carnoso.", valutazione: "4.7", aroma: "Amarena, funghi, spezie orientali." },
+    { nome: "Hermitage La Chapelle (Rodano)", prezzo: 220, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "festa"], motivo: "Syrah in purezza da una collina mitica. Speziato, pepato e nerboruto.", valutazione: "4.8", aroma: "Olive nere, pepe nero, carne arrostita, mora." },
+    { nome: "Cheval Blanc Saint-Émilion (Bordeaux)", prezzo: 650, piatti: ["carne_rossa"], occasioni: ["regalo"], motivo: "A prevalenza Cabernet Franc. È la seta liquida di Bordeaux.", valutazione: "5.0", aroma: "Lampone, menta, violetta, cioccolato." },
+
+    // 321-330: Passiti, Muffati e Icewine (Dolci da Meditazione)
+    { nome: "Château d'Yquem Sauternes (Francia)", prezzo: 350, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Il vino dolce più famoso al mondo, attaccato dalla 'muffa nobile'. Magico.", valutazione: "5.0", aroma: "Zafferano, albicocca secca, miele d'acacia, vaniglia." },
+    { nome: "Tokaji Aszú 5 Puttonyos (Ungheria)", prezzo: 65, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Il 'Re dei vini, vino dei Re'. Dolcezza vibrante bilanciata da un'acidità tagliente.", valutazione: "4.8", aroma: "Marmellata di arance, zenzero, tè nero." },
+    { nome: "Eiswein (Icewine - Germania/Canada)", prezzo: 80, piatti: ["dolce"], occasioni: ["regalo", "appuntamento"], motivo: "Uve vendemmiate e pressate ghiacciate. Un'essenza di frutta cristallina.", valutazione: "4.7", aroma: "Pesca bianca sciroppata, limone candito, litchi." },
+    { nome: "Passito di Pantelleria 'Ben Ryé'", prezzo: 60, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "festa"], motivo: "Zibibbo appassito al sole. È il passito italiano più premiato, ricco e avvolgente.", valutazione: "4.9", aroma: "Datteri, fichi secchi, albicocca, zagara." },
+    { nome: "Muffato della Sala IGT (Umbria)", prezzo: 40, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "La risposta italiana al Sauternes, aristocratico ed equilibrato.", valutazione: "4.6", aroma: "Miele di castagno, zafferano, frutta candita." },
+    { nome: "Picolit Colli Orientali DOCG (Friuli)", prezzo: 45, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Vino rarissimo per colpa di un difetto floreale della pianta. Prezioso e delicato.", valutazione: "4.7", aroma: "Fiori di campo, pesca, mandorla." },
+    { nome: "Vin Santo di Montepulciano Occhio di Pernice", prezzo: 70, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Ottenuto da uve rosse (Prugnolo). Denso, oscuro, un concentrato di storia.", valutazione: "4.8", aroma: "Noci, prugna secca, caramello, caffè." },
+    { nome: "Recioto di Soave DOCG", prezzo: 30, piatti: ["dolce"], occasioni: ["festa", "pranzo_domenica"], motivo: "Garganega appassita: dorato, dolce e con un inconfondibile finale ammandorlato.", valutazione: "4.5", aroma: "Miele, albicocca, mandorla dolce." },
+    { nome: "Moscato di Scanzo DOCG (Lombardia)", prezzo: 35, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Passito rosso lombardo, molto particolare per il suo sentore incenso e spezie.", valutazione: "4.4", aroma: "Rosa appassita, incenso, salvia, marasca." },
+    { nome: "Caluso Passito DOCG", prezzo: 38, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "cena_amici"], motivo: "Da uva Erbaluce. Offre una freschezza formidabile che bilancia tutto lo zucchero.", valutazione: "4.5", aroma: "Mela cotogna, fichi, miele millefiori." },
+
+    // 331-340: I Grandi Fortificati (Porto, Sherry, Marsala)
+    { nome: "Porto Vintage", prezzo: 90, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Imbottigliato giovane, invecchia in vetro per decenni. Denso, nero e portentoso.", valutazione: "4.8", aroma: "More, cioccolato fondente, liquirizia, tabacco." },
+    { nome: "Porto Tawny 20 Anni", prezzo: 45, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Invecchiato in botte, perde colore e acquista aromi tostati di frutta secca e caramello.", valutazione: "4.7", aroma: "Noce moscata, mandorla tostata, caramello, fichi." },
+    { nome: "Sherry Fino (Andalusia)", prezzo: 20, piatti: ["pesce", "etnico"], occasioni: ["aperitivo", "cena_amici"], motivo: "Secco come il deserto, salino, invecchiato sotto un velo di lieviti (flor). Perfetto con le tapas.", valutazione: "4.5", aroma: "Mandorla verde, mela cotta, camomilla, sale." },
+    { nome: "Sherry Pedro Ximénez (PX)", prezzo: 28, piatti: ["dolce", "formaggi"], occasioni: ["divano", "regalo"], motivo: "Nero e sciropposo, talmente dolce e denso da poter essere versato sul gelato artigianale.", valutazione: "4.6", aroma: "Uva passa, caffè, liquirizia, cioccolato fuso." },
+    { nome: "Marsala Superiore Riserva Targa", prezzo: 22, piatti: ["dolce", "formaggi"], occasioni: ["divano", "cena_amici"], motivo: "Da uve Grillo. Dimentica il vino da cucina: questo è un signor vino da meditazione.", valutazione: "4.5", aroma: "Dattero, legno tostato, vaniglia." },
+    { nome: "Marsala Vergine", prezzo: 35, piatti: ["formaggi", "pesce"], occasioni: ["regalo", "divano"], motivo: "Completamente secco e austero. Sfida il tempo e accompagna splendidamente formaggi stagionati.", valutazione: "4.6", aroma: "Curry, nocciola, erbe essiccate, iodio." },
+    { nome: "Madeira Malmsey (Portogallo)", prezzo: 50, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Letteralmente immortale. Cotto dal sole, ossidato, offre un'acidità folle e dolcezza eterna.", valutazione: "4.8", aroma: "Caramello bruciato, noci, scorza d'arancia amara." },
+    { nome: "Banyuls Grand Cru (Francia)", prezzo: 30, piatti: ["dolce"], occasioni: ["appuntamento", "divano"], motivo: "L'abbinamento definitivo e assoluto per il cioccolato fondente. Base Grenache.", valutazione: "4.5", aroma: "Ciliegia sotto spirito, cacao amaro, prugna." },
+    { nome: "Macvin du Jura (Francia)", prezzo: 35, piatti: ["formaggi", "dolce"], occasioni: ["regalo", "aperitivo"], motivo: "Fortificato aggiungendo Marc (grappa) al mosto. Terroso, dolce e inusuale.", valutazione: "4.3", aroma: "Uva fresca, mela cotogna, noci, erbe aromatiche." },
+    { nome: "Pineau des Charentes (Francia)", prezzo: 25, piatti: ["dolce", "formaggi"], occasioni: ["aperitivo", "divano"], motivo: "Fortificato con Cognac. Meraviglioso sia come aperitivo che con dolci alla frutta.", valutazione: "4.4", aroma: "Miele, mandorla, albicocca, fiori secchi." },
+
+    // 341-350: Chicche da Meditazione e Autoctoni Preziosi
+    { nome: "Vernaccia di Oristano Riserva", prezzo: 40, piatti: ["formaggi", "pesce"], occasioni: ["divano", "regalo"], motivo: "Il cugino sardo dello Sherry: invecchia sotto lieviti. Secco, salato, da botarga e meditazione.", valutazione: "4.7", aroma: "Mandorla amara, salsedine, curry, elicriso." },
+    { nome: "Malvasia di Bosa DOC", prezzo: 35, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Oro liquido della Sardegna, vellutato e dal lungo finale ammandorlato.", valutazione: "4.6", aroma: "Miele amaro, fiori di ginestra, albicocca." },
+    { nome: "Moscato Rosa Alto Adige DOC", prezzo: 30, piatti: ["dolce"], occasioni: ["appuntamento", "divano"], motivo: "L'unico vino capace di profumare letteralmente di acqua di rose. Elegante e non stucchevole.", valutazione: "4.5", aroma: "Rosa bulgara, litchi, chiodi di garofano." },
+    { nome: "Vin Jaune (Jura - Francia)", prezzo: 65, piatti: ["formaggi", "carne_bianca"], occasioni: ["regalo", "cena_amici"], motivo: "Il vino giallo che sa di noce. Invecchia per 6 anni scolmo in botte. L'abbinamento del Comté.", valutazione: "4.8", aroma: "Noce fresca, curry, zafferano, mela verde." },
+    { nome: "Château Chalon (Francia)", prezzo: 90, piatti: ["formaggi"], occasioni: ["regalo"], motivo: "Il re del Vin Jaune, prodotto solo nelle annate eccezionali. Di estrema complessità.", valutazione: "4.9", aroma: "Noci tostate, funghi, mela ossidata." },
+    { nome: "Vinsanto di Carmignano DOC", prezzo: 45, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Raro e prezioso, prodotto in quantità microscopiche vicino Prato. Perfetto coi cantucci.", valutazione: "4.6", aroma: "Miele di castagno, fichi secchi, tabacco dolce." },
+    { nome: "Oloroso Sherry (Andalusia)", prezzo: 25, piatti: ["carne_rossa", "formaggi"], occasioni: ["divano", "cena_amici"], motivo: "Completamente ossidato, secco e dal colore scuro. Un vino da contemplazione e cibi forti.", valutazione: "4.5", aroma: "Noci, legno di quercia, cuoio, tabacco." },
+    { nome: "Recioto della Valpolicella Classico DOCG", prezzo: 35, piatti: ["dolce", "formaggi"], occasioni: ["festa", "divano"], motivo: "L'abbinamento magico per il cioccolato e i dolci secchi della tradizione.", valutazione: "4.6", aroma: "Ciliegia nera sciroppata, cacao, violetta." },
+    { nome: "Moscadello di Montalcino Vendemmia Tardiva", prezzo: 30, piatti: ["dolce", "formaggi"], occasioni: ["cena_amici", "divano"], motivo: "La storia dolce e segreta di Montalcino, oscurata dal Brunello ma di enorme fascino.", valutazione: "4.4", aroma: "Pesca sciroppata, zenzero, fiori bianchi." },
+    { nome: "Aleatico dell'Elba Passito DOCG", prezzo: 38, piatti: ["dolce"], occasioni: ["regalo", "appuntamento"], motivo: "Il vino dolce preferito da Napoleone in esilio. Rosso, inebriante e vellutato.", valutazione: "4.5", aroma: "Ciliegia matura, macchia mediterranea, rosa." },
+
+    // 351-360: Vini Estremi ed Eroici
+    { nome: "Valtellina Superiore Inferno DOCG", prezzo: 28, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "regalo"], motivo: "Dal cru più roccioso e rovente della Valtellina, un Nebbiolo vibrante e austero.", valutazione: "4.5", aroma: "Pietra, rosa appassita, ciliegia croccante." },
+    { nome: "Carema Etichetta Nera", prezzo: 45, piatti: ["carne_rossa"], occasioni: ["regalo", "appuntamento"], motivo: "Coltivato su pilastri di pietra al confine con la Val d'Aosta. Un monumento alla tenacia.", valutazione: "4.6", aroma: "Spezie scure, funghi, violetta." },
+    { nome: "Cinque Terre Sciacchetrà Riserva", prezzo: 80, piatti: ["formaggi", "dolce"], occasioni: ["regalo"], motivo: "Strappato al mare e alla fatica, un nettare rarissimo che profuma di sole e scogli.", valutazione: "4.8", aroma: "Miele di corbezzolo, albicocca secca, salsedine." },
+    { nome: "Etna Bianco Superiore (Milo)", prezzo: 35, piatti: ["pesce", "carne_bianca"], occasioni: ["regalo", "appuntamento"], motivo: "Carricante in purezza dall'unico versante autorizzato 'Superiore'. Minerale e teso.", valutazione: "4.6", aroma: "Pietra focaia, ginestra, limone sfusato." },
+    { nome: "Fiorano Bianco Storico", prezzo: 60, piatti: ["pesce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Il bianco mitico nato alle porte di Roma, capace di invecchiare 30 anni senza fare una piega.", valutazione: "4.7", aroma: "Cera d'api, idrocarburi, frutta a polpa gialla." },
+    { nome: "Tintilia del Molise Riserva", prezzo: 26, piatti: ["carne_rossa", "primi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Il vitigno recuperato dall'oblio. Speziatissimo e di grande trama tannica.", valutazione: "4.4", aroma: "Pepe nero, prugna secca, liquirizia." },
+    { nome: "Susucaru Rosso (Vino Naturale)", prezzo: 25, piatti: ["pizza", "carne_bianca"], occasioni: ["cena_amici", "divano"], motivo: "Cult assoluto nel mondo dei vini naturali dell'Etna. Succo, fumo e bevibilità pericolosa.", valutazione: "4.4", aroma: "Melograno, cenere vulcanica, fiori selvatici." },
+    { nome: "Gravner Ribolla Gialla Anfora", prezzo: 80, piatti: ["formaggi", "carne_bianca"], occasioni: ["regalo", "appuntamento"], motivo: "Il pioniere degli Orange Wine. Fermenta sottoterra in anfore georgiane. Un'esperienza a sé.", valutazione: "4.8", aroma: "Tè nero, resina di pino, scorza d'arancia, erbe officinali." },
+    { nome: "Radikon Jakot (Orange Wine)", prezzo: 45, piatti: ["etnico", "formaggi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Tocai Friulano (girato al contrario) macerato per mesi. Colore ambrato e tannino da rosso.", valutazione: "4.6", aroma: "Albicocca disidratata, mandorla, zenzero." },
+    { nome: "Valentini Trebbiano d'Abruzzo", prezzo: 150, piatti: ["pesce", "carne_bianca"], occasioni: ["regalo"], motivo: "Il Trebbiano artigianale che ha fatto la storia d'Italia. Longevo, mutevole e inimitabile.", valutazione: "4.9", aroma: "Cera, camomilla selvatica, mela cotogna, mineralità intensa." },
+    // 361-370: I Grandi Bianchi del Sud Italia
+    { nome: "Fiano di Avellino Riserva DOCG", prezzo: 28, piatti: ["pesce", "carne_bianca", "formaggi"], occasioni: ["pranzo_domenica", "regalo"], motivo: "Un bianco con l'anima di un rosso. Affinato a lungo, regala sentori di idrocarburo e nocciola.", valutazione: "4.7", aroma: "Nocciola tostata, pietra focaia, miele d'acacia." },
+    { nome: "Greco di Tufo Riserva DOCG", prezzo: 26, piatti: ["pesce", "formaggi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Struttura imponente e spalla acida vulcanica. Perfetto anche sui formaggi stagionati.", valutazione: "4.6", aroma: "Zolfo, albicocca, scorza d'arancia." },
+    { nome: "Carricante Etna Bianco DOC", prezzo: 24, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "appuntamento"], motivo: "Teso, salato e verticale. Porta nel bicchiere la cenere del vulcano e la brezza del mare.", valutazione: "4.5", aroma: "Pompelmo, ginestra, cenere, timo." },
+    { nome: "Vermentino di Gallura Superiore DOCG", prezzo: 18, piatti: ["pesce", "primi"], occasioni: ["aperitivo", "pranzo_domenica"], motivo: "L'unica DOCG sarda. Potente, alcolico e con un finale ammandorlato inconfondibile.", valutazione: "4.4", aroma: "Fiori di macchia, mandorla amara, salsedine." },
+    { nome: "Verdicchio Castelli di Jesi Riserva DOCG", prezzo: 22, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Opulento e longevo, uno dei bianchi italiani che invecchia meglio in assoluto.", valutazione: "4.6", aroma: "Anice stellato, camomilla, mela gialla." },
+    { nome: "Catarratto Terre Siciliane IGT (Artigianale)", prezzo: 16, piatti: ["pesce", "pizza"], occasioni: ["divano", "cena_amici"], motivo: "Versione non filtrata e verace del classico siciliano. Rustico e appagante.", valutazione: "4.3", aroma: "Agrumi dolci, erbe spontanee, fieno." },
+    { nome: "Zibibbo Secco Pantelleria DOC", prezzo: 20, piatti: ["etnico", "pesce"], occasioni: ["aperitivo", "cena_amici"], motivo: "Esplosione aromatica al naso, ma completamente secco in bocca. Geniale col sushi.", valutazione: "4.5", aroma: "Zagara, pesca bianca, litchi, sale." },
+    { nome: "Trebbiano Spoletino DOC", prezzo: 18, piatti: ["carne_bianca", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Bianco umbro di grande carattere, con leggeri sentori tropicali e ottima spinta acida.", valutazione: "4.3", aroma: "Frutto della passione, agrumi, erbe aromatiche." },
+    { nome: "Coda di Volpe Irpinia DOC", prezzo: 15, piatti: ["pizza", "pesce"], occasioni: ["cena_amici", "divano"], motivo: "Sottovalutato ma delizioso. Corposo, fruttato e perfetto per accompagnare la pizza.", valutazione: "4.1", aroma: "Pera matura, ginestra, mineralità leggera." },
+    { nome: "Biancolella Ischia DOC", prezzo: 19, piatti: ["pesce", "primi"], occasioni: ["appuntamento", "aperitivo"], motivo: "Vino isolano per eccellenza. Fresco, floreale e con un tocco sapido irresistibile.", valutazione: "4.2", aroma: "Fiori di limone, mela verde, iodio." },
+
+    // 371-380: Rosati Strutturati e dal Mondo
+    { nome: "Tavel AOC (Francia)", prezzo: 22, piatti: ["pizza", "carne_bianca", "etnico"], occasioni: ["cena_amici", "grigliata"], motivo: "Il rosato francese per chi ama i rossi. Scuro, potente, tannico e speziato.", valutazione: "4.5", aroma: "Fragola matura, pepe bianco, garrigue." },
+    { nome: "Bandol Rosé (Francia)", prezzo: 30, piatti: ["pesce", "formaggi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Mourvèdre in purezza. Un rosato da invecchiamento, serissimo ed elegantissimo.", valutazione: "4.6", aroma: "Pesca, pompelmo rosa, spezie provenzali, sale." },
+    { nome: "Navarra Rosado (Spagna)", prezzo: 14, piatti: ["pizza", "etnico"], occasioni: ["cena_amici", "divano"], motivo: "Da uve Garnacha, un rosato dal colore acceso, succoso e di grande beva.", valutazione: "4.1", aroma: "Lampone, fragola caramellata, fiori rossi." },
+    { nome: "White Zinfandel (California)", prezzo: 12, piatti: ["etnico", "dolce"], occasioni: ["aperitivo", "divano"], motivo: "Rosato abboccato (leggermente dolce), famosissimo negli USA. Perfetto con cibi piccanti.", valutazione: "3.7", aroma: "Zucchero filato, fragola, melone." },
+    { nome: "Valtènesi Chiaretto DOC", prezzo: 15, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Dal Lago di Garda, un rosato tenue, floreale e di un'eleganza sussurrata.", valutazione: "4.2", aroma: "Mandorla, rosa, fragolina." },
+    { nome: "Cirò Rosato DOC (Calabria)", prezzo: 12, piatti: ["carne_bianca", "primi"], occasioni: ["cena_amici", "grigliata"], motivo: "Gaglioppo vinificato in rosa. Sapido, caldo e strutturato. Ottimo col peperoncino.", valutazione: "4.0", aroma: "Ciliegia, erbe aromatiche, pepe." },
+    { nome: "Etna Rosato DOC", prezzo: 20, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Nerello Mascalese in rosa. Minerale tagliente, fumo e piccoli frutti rossi.", valutazione: "4.4", aroma: "Cenere, pompelmo, ribes rosso." },
+    { nome: "Cerasuolo d'Abruzzo (Artigianale)", prezzo: 18, piatti: ["pizza", "carne_rossa"], occasioni: ["grigliata", "cena_amici"], motivo: "Versione non filtrata, quasi un rosso leggero. Tannino vivo e succo irresistibile.", valutazione: "4.3", aroma: "Amarena croccante, radice di liquirizia, terra." },
+    { nome: "Rosé d'Anjou (Francia)", prezzo: 14, piatti: ["etnico", "aperitivo"], occasioni: ["divano", "cena_amici"], motivo: "Leggermente dolce, fruttato e dissetante. Un classico della Loira.", valutazione: "3.9", aroma: "Fragola, menta, caramella al lampone." },
+    { nome: "Franciacorta Rosé DOCG", prezzo: 32, piatti: ["pesce", "formaggi", "pizza"], occasioni: ["festa", "appuntamento"], motivo: "Pinot Nero che regala struttura e sentori di piccoli frutti alla bollicina lombarda.", valutazione: "4.6", aroma: "Crosta di pane, fragolina di bosco, ribes." },
+
+    // 381-390: Il Mondo del Pinot Nero
+    { nome: "Pinot Noir Willamette Valley (Oregon, USA)", prezzo: 45, piatti: ["carne_bianca", "primi"], occasioni: ["appuntamento", "regalo"], motivo: "La vera alternativa alla Borgogna. Elegante, terroso e con una freschezza formidabile.", valutazione: "4.7", aroma: "Ciliegia rossa, sottobosco, tè nero, spezie dolci." },
+    { nome: "Pinot Noir Russian River Valley (California)", prezzo: 55, piatti: ["carne_bianca", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Più caldo, ricco e fruttato rispetto a quello dell'Oregon. Velluto puro.", valutazione: "4.6", aroma: "Mora, cola, vaniglia, prugna scura." },
+    { nome: "Spätburgunder (Pinot Nero Tedesco)", prezzo: 30, piatti: ["carne_bianca", "primi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Dalla Germania, un Pinot Nero verticale, speziato e molto elegante.", valutazione: "4.5", aroma: "Lampone, pepe bianco, legno di cedro." },
+    { nome: "Pinot Nero Alto Adige Riserva DOC", prezzo: 35, piatti: ["carne_bianca", "formaggi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "L'eccellenza italiana del Pinot Nero. Struttura, finezza e grande longevità.", valutazione: "4.6", aroma: "Ciliegia matura, violetta, chiodi di garofano." },
+    { nome: "Pinot Nero Marlborough (Nuova Zelanda)", prezzo: 25, piatti: ["carne_bianca", "etnico"], occasioni: ["cena_amici", "divano"], motivo: "Vibrante e fruttato, con una nota erbacea che lo rende molto riconoscibile.", valutazione: "4.4", aroma: "Ciliegia, prugna, timo selvatico." },
+    { nome: "Bourgogne Hautes-Côtes de Nuits", prezzo: 32, piatti: ["carne_bianca", "primi"], occasioni: ["appuntamento", "cena_amici"], motivo: "Borgogna accessibile ma di carattere. Rustico, terroso e autentico.", valutazione: "4.3", aroma: "Ribes, terra umida, funghi." },
+    { nome: "Pinot Nero Oltrepò Pavese (Vinificato in Rosso)", prezzo: 18, piatti: ["primi", "carne_bianca"], occasioni: ["pranzo_domenica", "divano"], motivo: "Interpretazione lombarda: polposo, morbido e con buon frutto.", valutazione: "4.1", aroma: "Lampone, rosa, leggero cuoio." },
+    { nome: "Pinot Noir Casablanca Valley (Cile)", prezzo: 16, piatti: ["carne_bianca", "pizza"], occasioni: ["cena_amici", "divano"], motivo: "Fresco, economico e dal clima oceanico. Un Pinot Nero sorprendente per il prezzo.", valutazione: "4.0", aroma: "Ciliegia fresca, erbe aromatiche, spezie dolci." },
+    { nome: "Pinot Noir Yarra Valley (Australia)", prezzo: 38, piatti: ["carne_bianca", "formaggi"], occasioni: ["appuntamento", "regalo"], motivo: "Eleganza australe. Teso, complesso e con una bellissima trama tannica.", valutazione: "4.5", aroma: "Fragola selvatica, spezie asiatiche, tartufo." },
+    { nome: "Coteaux Champenois Rouge", prezzo: 65, piatti: ["carne_bianca", "formaggi"], occasioni: ["regalo"], motivo: "Il rarissimo Pinot Nero fermo (non spumantizzato) della Champagne. Acidità estrema.", valutazione: "4.6", aroma: "Ribes rosso, gesso, pepe, peonia." },
+
+    // 391-400: Nuove Tendenze (Vini Naturali, Macerati e Ancestrali)
+    { nome: "Pet-Nat Rosato (Pétillant Naturel)", prezzo: 18, piatti: ["pizza", "aperitivo"], occasioni: ["festa", "cena_amici"], motivo: "Frizzante col fondo, non sboccato. Torbido, succoso e divertentissimo.", valutazione: "4.2", aroma: "Pompelmo rosa, lievito, fragolina." },
+    { nome: "Orange Wine (Trebbiano Macerato)", prezzo: 24, piatti: ["formaggi", "etnico"], occasioni: ["appuntamento", "cena_amici"], motivo: "Uve bianche fermentate come le rosse. Tannico, complesso, per palati curiosi.", valutazione: "4.4", aroma: "Mela cotogna, tè nero, resina." },
+    { nome: "Glera Col Fondo (Prosecco Ancestrale)", prezzo: 15, piatti: ["pizza", "pesce"], occasioni: ["aperitivo", "cena_amici"], motivo: "Il Prosecco come si faceva una volta. Secco, torbido e con sentori di crosta di pane netti.", valutazione: "4.3", aroma: "Lievito, mela gialla, camomilla." },
+    { nome: "Frappato Naturale (Sicilia)", prezzo: 22, piatti: ["pesce", "pizza"], occasioni: ["cena_amici", "divano"], motivo: "Senza solfiti aggiunti. Un succo di frutta rossa vivo, vibrante e indomabile.", valutazione: "4.4", aroma: "Rosa, fragola, pepe bianco, note terrose." },
+    { nome: "Vino Rosso in Anfora", prezzo: 35, piatti: ["carne_rossa", "formaggi"], occasioni: ["appuntamento", "regalo"], motivo: "Affinato in terracotta. Il frutto rimane puro, ossigenato ma senza i sentori di legno.", valutazione: "4.5", aroma: "Frutto puro, argilla, spezie scure." },
+    { nome: "Chenin Blanc Naturale (Loira)", prezzo: 28, piatti: ["pesce", "formaggi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Bianco biodinamico: vibrante, con un'acidità elettrica e un'evoluzione nel bicchiere continua.", valutazione: "4.6", aroma: "Mela bacata, cera d'api, limone salato." },
+    { nome: "Lambrusco Rifermentato in Bottiglia", prezzo: 16, piatti: ["pizza", "carne_rossa"], occasioni: ["grigliata", "cena_amici"], motivo: "Il Lambrusco della tradizione, torbido e secchissimo. Pulisce la bocca in modo brutale e magnifico.", valutazione: "4.4", aroma: "Mora, lievito, violetta, terra." },
+    { nome: "Beaujolais Nouveau / Novello Naturale", prezzo: 14, piatti: ["pizza", "carne_bianca"], occasioni: ["festa", "divano"], motivo: "Da bere rigorosamente giovane. Zero tannini, tutto frutto e spensieratezza.", valutazione: "4.0", aroma: "Banana, caramella alla fragola, uva fresca." },
+    { nome: "Skin Contact Pinot Gris", prezzo: 26, piatti: ["etnico", "formaggi"], occasioni: ["cena_amici", "divano"], motivo: "Pinot Grigio lasciato sulle bucce: assume un colore ramato intenso e aromi complessi.", valutazione: "4.4", aroma: "Buccia di pesca, zenzero, rosa canina." },
+    { nome: "Blend Rosso 'Glou Glou'", prezzo: 18, piatti: ["pizza", "aperitivo"], occasioni: ["cena_amici", "grigliata"], motivo: "Vino naturale pensato per essere bevuto a fiumi ('Glou Glou'). Leggero, fresco, estivo.", valutazione: "4.1", aroma: "Succo di ciliegia, erbe fresche, ibisco." },
+
+    // 401-410: Vini dal Sud America
+    { nome: "Malbec Riserva Mendoza (Argentina)", prezzo: 24, piatti: ["carne_rossa", "grigliata"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Struttura importante, passaggio in legno evidente. Il re incontrastato dell'Asado argentino.", valutazione: "4.5", aroma: "Prugna scura, cioccolato, violetta, vaniglia." },
+    { nome: "Carménère Gran Reserva (Cile)", prezzo: 22, piatti: ["carne_rossa", "etnico"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Morbido, con un'inconfondibile nota erbacea e speziata. Elegante e avvolgente.", valutazione: "4.4", aroma: "Peperone verde dolce, mora, caffè." },
+    { nome: "Tannat (Uruguay)", prezzo: 20, piatti: ["carne_rossa", "formaggi"], occasioni: ["grigliata", "divano"], motivo: "Un vitigno dal tannino formidabile, ammorbidito dal sole uruguaiano. Per carni grasse.", valutazione: "4.3", aroma: "Mora, cioccolato fondente, fumo, cuoio." },
+    { nome: "Cabernet Sauvignon Maipo Valley (Cile)", prezzo: 25, piatti: ["carne_rossa"], occasioni: ["pranzo_domenica", "appuntamento"], motivo: "Cabernet di montagna, fresco ma potente, con una nota di eucalipto tipica della zona.", valutazione: "4.5", aroma: "Cassis, menta, eucalipto, grafite." },
+    { nome: "Syrah San Antonio Valley (Cile)", prezzo: 28, piatti: ["carne_rossa", "formaggi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Syrah oceanico, fresco e speziatissimo. Ricorda le grandi bottiglie del Rodano francese.", valutazione: "4.6", aroma: "Pepe nero, olive nere, mora, carne affumicata." },
+    { nome: "Sauvignon Blanc Casablanca Valley (Cile)", prezzo: 16, piatti: ["pesce", "etnico"], occasioni: ["aperitivo", "cena_amici"], motivo: "Fresco, agrumato ed economico. Un eccellente Sauvignon del Nuovo Mondo.", valutazione: "4.1", aroma: "Lime, erba tagliata, frutto della passione." },
+    { nome: "Chardonnay Mendoza (Argentina)", prezzo: 18, piatti: ["carne_bianca", "pesce"], occasioni: ["cena_amici", "divano"], motivo: "Chardonnay d'altura, che unisce la morbidezza tropicale a un'acidità rinfrescante.", valutazione: "4.2", aroma: "Ananas, mela gialla, burro leggero." },
+    { nome: "Bonarda Argentina", prezzo: 15, piatti: ["pizza", "carne_rossa"], occasioni: ["grigliata", "cena_amici"], motivo: "Diversa da quella italiana: qui dà un vino molto fruttato, scuro ma dal tannino soffice.", valutazione: "4.0", aroma: "Amarena, prugna, spezie dolci." },
+    { nome: "Pais (Cile)", prezzo: 17, piatti: ["carne_bianca", "pizza"], occasioni: ["cena_amici", "divano"], motivo: "Il vitigno storico dei missionari. Vino rustico, terroso, leggero e affascinante.", valutazione: "4.1", aroma: "Ciliegia selvatica, terra secca, fiori rustici." },
+    { nome: "Bordeaux Blend 'Icon Wine' (Cile)", prezzo: 80, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "festa"], motivo: "Taglio bordolese cileno di altissima gamma (es. Almaviva). Setoso, perfetto, lussuoso.", valutazione: "4.9", aroma: "Ribes nero, scatola di sigari, cioccolato alla menta." },
+
+    // 411-420: USA, Sudafrica e Oceania
+    { nome: "Zinfandel Dry Creek Valley (USA)", prezzo: 30, piatti: ["carne_rossa", "grigliata"], occasioni: ["grigliata", "cena_amici"], motivo: "Viti vecchie, concentrazione pazzesca. Un'esplosione di frutta cotta e spezie dolci.", valutazione: "4.6", aroma: "Mora in confettura, cannella, pepe dolce, vaniglia." },
+    { nome: "Cabernet Sauvignon Sonoma County (USA)", prezzo: 35, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "regalo"], motivo: "L'alternativa (più fresca) a Napa Valley. Strutturato, elegante e molto longevo.", valutazione: "4.5", aroma: "Cassis, ciliegia nera, cedro." },
+    { nome: "Chenin Blanc Old Vines (Sudafrica)", prezzo: 25, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Da vigne vecchie, offre una complessità e una densità in bocca straordinarie.", valutazione: "4.7", aroma: "Mela cotogna, miele di acacia, lana bagnata, agrumi." },
+    { nome: "Pinotage Riserva (Sudafrica)", prezzo: 28, piatti: ["carne_rossa", "grigliata"], occasioni: ["grigliata", "cena_amici"], motivo: "Invecchiato in legno, perde le note più rustiche e diventa vellutato, pur mantenendo l'anima affumicata.", valutazione: "4.4", aroma: "Prugna nera, caffè tostato, fumo, mora." },
+    { nome: "Shiraz McLaren Vale (Australia)", prezzo: 32, piatti: ["carne_rossa", "formaggi"], occasioni: ["cena_amici", "divano"], motivo: "Potenza allo stato puro. Shiraz oceanico con note di cioccolato e frutti neri densissimi.", valutazione: "4.6", aroma: "Mirtillo, cioccolato fondente, liquirizia." },
+    { nome: "Cabernet Sauvignon Margaret River (Australia)", prezzo: 40, piatti: ["carne_rossa"], occasioni: ["regalo", "appuntamento"], motivo: "Bordolese australe. Estremamente elegante, con note balsamiche e tannini finissimi.", valutazione: "4.7", aroma: "Ribes nero, menta piperita, grafite." },
+    { nome: "Sauvignon Blanc Fumé (Nuova Zelanda)", prezzo: 28, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "cena_amici"], motivo: "Passato in legno. Perde l'esuberanza tropicale e acquista cremosità e note tostate.", valutazione: "4.5", aroma: "Frutto della passione, vaniglia, pietra focaia." },
+    { nome: "Syrah Gimblett Gravels (Nuova Zelanda)", prezzo: 35, piatti: ["carne_rossa", "formaggi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Un Syrah che ricorda il Nord del Rodano: floreale, pepato e snello, non 'muscolare'.", valutazione: "4.6", aroma: "Viola, pepe nero sbriciolato, carne." },
+    { nome: "Chardonnay Hunter Valley (Australia)", prezzo: 30, piatti: ["pesce", "carne_bianca"], occasioni: ["cena_amici", "divano"], motivo: "A differenza di molti australiani, è teso, sapido e con un uso del legno molto misurato.", valutazione: "4.4", aroma: "Pesca bianca, anacardi, agrumi." },
+    { nome: "Merlot Washington State (USA)", prezzo: 28, piatti: ["carne_rossa", "primi"], occasioni: ["pranzo_domenica", "divano"], motivo: "Clima freddo e desertico: regala Merlot strutturati, freschi e con un bel frutto rosso croccante.", valutazione: "4.5", aroma: "Ciliegia rossa, prugna, erbe aromatiche." },
+
+    // 421-430: Grandi Classici e Chicche Italiane della Festa
+    { nome: "Franciacorta Satèn Millesimato", prezzo: 45, piatti: ["pesce", "carne_bianca"], occasioni: ["festa", "appuntamento"], motivo: "Pressione in bottiglia più bassa: la bollicina risulta cremosa, setosa, come vera seta sul palato.", valutazione: "4.8", aroma: "Fiori bianchi, burro fuso, mandorla dolce, agrume." },
+    { nome: "Trento DOC Riserva", prezzo: 55, piatti: ["pesce", "formaggi"], occasioni: ["regalo", "festa"], motivo: "Oltre 5 anni sui lieviti. Struttura immensa, in grado di reggere tutto il pasto.", valutazione: "4.9", aroma: "Crosta di pane, nocciola tostata, mela renetta, miele." },
+    { nome: "Magnum Chianti Classico (1,5 L)", prezzo: 40, piatti: ["carne_rossa", "primi"], occasioni: ["festa", "cena_amici", "grigliata"], motivo: "Il formato della festa. Il vino in Magnum invecchia meglio e fa subito scena a tavola.", valutazione: "4.5", aroma: "Ciliegia, viola, leggero cuoio." },
+    { nome: "Oltrepò Pavese Pinot Nero Cru", prezzo: 42, piatti: ["carne_bianca", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Pinot Nero lombardo da singolo vigneto. Borgognone nello spirito, italiano nel cuore.", valutazione: "4.6", aroma: "Piccoli frutti rossi, tartufo, sottobosco." },
+    { nome: "Schioppettino Riserva (Friuli)", prezzo: 38, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "cena_amici"], motivo: "Il pepe nero liquido. Affinato a lungo, diventa vellutato e di un'eleganza assoluta.", valutazione: "4.7", aroma: "Pepe nero, mora, viola mammola, balsamico." },
+    { nome: "Timorasso Riserva 'Colli Tortonesi'", prezzo: 40, piatti: ["formaggi", "pesce"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Bianco italiano da invecchiamento per eccellenza. Dopo 5-10 anni assomiglia a un Riesling evoluto.", valutazione: "4.8", aroma: "Idrocarburo, miele, cera d'api, pesca candita." },
+    { nome: "Sagrantino di Montefalco Passito DOCG", prezzo: 45, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "Vino rosso passito tannico! Un'esperienza gustativa incredibile, perfetto col formaggio erborinato.", valutazione: "4.7", aroma: "Mora in confettura, cacao amaro, liquirizia, pepe." },
+    { nome: "Vin Santo del Chianti Classico Riserva", prezzo: 80, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "festa"], motivo: "L'essenza del tempo. Invecchia per anni in piccoli caratelli. Denso e indimenticabile.", valutazione: "4.9", aroma: "Fichi secchi, albicocca disidratata, noce, caramello." },
+    { nome: "Valpolicella Superiore 'Ripasso' Storico", prezzo: 28, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Fatto con metodo tradizionale senza troppi residui zuccherini. Elegante e secco.", valutazione: "4.5", aroma: "Ciliegia matura, pepe nero, chiodi di garofano." },
+    { nome: "Vernaccia di San Gimignano Riserva", prezzo: 24, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Bianco toscano affinato in legno. Prende corpo, rotondità e sentori tostati raffinati.", valutazione: "4.4", aroma: "Mandorla tostata, agrumi, vaniglia leggera, fiori gialli." },
+    // 431-440: Le "Chicche" Autoctone (L'effetto Sommelier Esperto)
+    { nome: "Nascetta delle Langhe DOC", prezzo: 18, piatti: ["pesce", "formaggi"], occasioni: ["cena_amici", "appuntamento"], motivo: "Il bianco segreto del Piemonte (terra di rossi). Sapido, strutturato e semi-aromatico.", valutazione: "4.5", aroma: "Salvia, rosmarino, agrumi, miele." },
+    { nome: "Centesimino (Emilia-Romagna)", prezzo: 16, piatti: ["dolce", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Un autoctono rarissimo di Faenza. Esiste sia secco che passito, con profumi inebrianti.", valutazione: "4.3", aroma: "Rosa appassita, melograno, arancia sanguigna." },
+    { nome: "Cagnulari Isola dei Nuraghi IGT", prezzo: 20, piatti: ["carne_rossa", "formaggi"], occasioni: ["grigliata", "cena_amici"], motivo: "Rosso sardo di straordinaria ruvidezza ed eleganza. Tannino selvaggio e balsamico.", valutazione: "4.4", aroma: "Macchia mediterranea, mirto, pepe nero." },
+    { nome: "Ruchè Passito DOCG", prezzo: 35, piatti: ["dolce", "formaggi"], occasioni: ["regalo", "divano"], motivo: "La versione dolce del Ruchè. Introvabile, speziato e perfetto col cioccolato.", valutazione: "4.6", aroma: "Petali di rosa, pepe bianco, fichi." },
+    { nome: "Oseleta Rosso Veronese IGT", prezzo: 28, piatti: ["carne_rossa", "formaggi"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Vitigno recuperato in Valpolicella. Colore impenetrabile, tannino fitto e grande acidità.", valutazione: "4.5", aroma: "Mora di rovo, inchiostro, terra." },
+    { nome: "Pallagrello Bianco Terre del Volturno", prezzo: 22, piatti: ["carne_bianca", "formaggi"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Il vino dei Borbone di Napoli. Ricco, suadente e con sentori di cera d'api.", valutazione: "4.4", aroma: "Melone, cera d'api, albicocca." },
+    { nome: "Casavecchia Terre del Volturno", prezzo: 20, piatti: ["carne_rossa", "primi"], occasioni: ["cena_amici", "grigliata"], motivo: "Rosso campano antico, scoperto da un vecchio ceppo superstite. Rustico e scuro.", valutazione: "4.3", aroma: "Ciliegia nera, liquirizia, funghi." },
+    { nome: "Maceratino (Ribona) Colli Maceratesi DOC", prezzo: 14, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "Bianco marchigiano di grande longevità e sapidità, parente del Verdicchio ma più morbido.", valutazione: "4.1", aroma: "Anice, fiori gialli, mela." },
+    { nome: "Pugnitello Toscana IGT", prezzo: 26, piatti: ["carne_rossa", "primi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Grappolo piccolo come un pugno, vino di immensa concentrazione e colore.", valutazione: "4.5", aroma: "Prugna scura, cuoio, tabacco dolce." },
+    { nome: "Susumaniello Rosato IGT", prezzo: 15, piatti: ["pizza", "pesce"], occasioni: ["aperitivo", "cena_amici"], motivo: "La versione rosata del potente vitigno pugliese. Fresco, croccante e saporito.", valutazione: "4.2", aroma: "Lampone, melograno, erbe aromatiche." },
+
+    // 441-450: Bollicine Estreme (Pas Dosé e Zero Dosage)
+    { nome: "Franciacorta Pas Dosé (Dosaggio Zero)", prezzo: 35, piatti: ["pesce", "etnico"], occasioni: ["appuntamento", "regalo"], motivo: "Zero zuccheri aggiunti. Tagliente, puro ed essenziale. Non perdona gli errori.", valutazione: "4.7", aroma: "Crosta di pane, limone, gesso, mandorla cruda." },
+    { nome: "Trento DOC Pas Dosé", prezzo: 38, piatti: ["pesce", "formaggi"], occasioni: ["regalo", "cena_amici"], motivo: "La montagna nel bicchiere. Acidità verticale e mineralità rocciosa.", valutazione: "4.8", aroma: "Pietra focaia, mela verde, nocciola." },
+    { nome: "Alta Langa Pas Dosé DOCG", prezzo: 32, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Il Metodo Classico piemontese nella sua veste più nuda e cruda. Elegante e teso.", valutazione: "4.6", aroma: "Agrumi, lievito, erbe alpine." },
+    { nome: "Champagne Brut Nature / Zero Dosage", prezzo: 65, piatti: ["pesce", "etnico"], occasioni: ["regalo", "appuntamento"], motivo: "Lo Champagne per i puristi. Nessun 'trucco' zuccherino, solo l'espressione pura del terroir.", valutazione: "4.9", aroma: "Sale, limone, ostrica, brioche." },
+    { nome: "Oltrepò Pavese Pinot Nero Pas Dosé", prezzo: 28, piatti: ["carne_bianca", "formaggi"], occasioni: ["cena_amici", "festa"], motivo: "Il Pinot Nero in purezza conferisce a questa bollicina a zero zuccheri una struttura vinosa.", valutazione: "4.5", aroma: "Frutti rossi, pane tostato, spezie leggere." },
+    { nome: "Asprinio di Aversa Spumante Brut", prezzo: 18, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Bollicina campana con un'acidità citrina così spiccata da 'sgrassare' qualsiasi fritto.", valutazione: "4.3", aroma: "Succo di limone, mela acerba, fiori bianchi." },
+    { nome: "Durello Monti Lessini Metodo Classico", prezzo: 25, piatti: ["pesce", "formaggi"], occasioni: ["cena_amici", "aperitivo"], motivo: "Uva Durella vulcanica. Acidità folle e longevità pazzesca per una bollicina veneta di nicchia.", valutazione: "4.6", aroma: "Pietra bagnata, mela renetta, agrumi." },
+    { nome: "Cava Brut Nature Gran Reserva (Spagna)", prezzo: 22, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Lungo invecchiamento e zero zuccheri per la migliore bolla spagnola. Rapporto qualità/prezzo imbattibile.", valutazione: "4.4", aroma: "Mandorla amara, terra secca, mela cotta." },
+    { nome: "Lambrusco di Sorbara Rifermentato in Bottiglia", prezzo: 16, piatti: ["pizza", "formaggi", "carne_rossa"], occasioni: ["cena_amici", "divano"], motivo: "Chiarissimo, acido e secco. Il 'Metodo Ancestrale' che ha riportato in auge il Lambrusco tra gli intenditori.", valutazione: "4.5", aroma: "Pompelmo rosa, fragolina di bosco, lievito." },
+    { nome: "Prosecco 'Sui Lieviti' (Col Fondo) DOCG", prezzo: 15, piatti: ["pizza", "pesce"], occasioni: ["aperitivo", "cena_amici"], motivo: "Torbido e senza zuccheri. Dimentica il Prosecco dolce: questo sa di pane e agrumi.", valutazione: "4.3", aroma: "Lievito, camomilla, pera williams." },
+
+    // 451-460: Vini Vulcanici (La forza della Terra)
+    { nome: "Lacryma Christi del Vesuvio Bianco DOC", prezzo: 16, piatti: ["pesce", "pizza"], occasioni: ["cena_amici", "pranzo_domenica"], motivo: "Da uve Caprettone alle pendici del Vesuvio. Sapido, minerale e avvolgente.", valutazione: "4.2", aroma: "Ginestra, cenere, albicocca." },
+    { nome: "Lacryma Christi del Vesuvio Rosso DOC", prezzo: 18, piatti: ["pizza", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Piedirosso e Aglianico: affumicato, vivace e perfetto col pomodoro San Marzano.", valutazione: "4.1", aroma: "Fumo, geranio, prugna rossa." },
+    { nome: "Soave Classico 'Vulcanico' DOC", prezzo: 16, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "pranzo_domenica"], motivo: "Garganega coltivata su basalto vulcanico. Tira fuori note fumé e di pietra focaia uniche.", valutazione: "4.4", aroma: "Fumo, camomilla, mandorla dolce." },
+    { nome: "Campi Flegrei Falanghina DOC", prezzo: 15, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Da vigne a piede franco cresciute nella caldera vulcanica. Salata e sulfurea.", valutazione: "4.3", aroma: "Zolfo, agrumi, fiori di campo." },
+    { nome: "Campi Flegrei Piedirosso DOC", prezzo: 17, piatti: ["pizza", "primi"], occasioni: ["cena_amici", "divano"], motivo: "Leggero, poco tannico e spiccatamente minerale. Un rosso che si può bere quasi freddo.", valutazione: "4.2", aroma: "Ciliegia, geranio, pietra focaia." },
+    { nome: "Etna Rosso Cru (Contrada)", prezzo: 45, piatti: ["carne_rossa", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Da singole 'Contrade' dell'Etna, l'espressione più pura e borgognona del vulcano siciliano.", valutazione: "4.8", aroma: "Cenere, fruttini di bosco, radice di liquirizia." },
+    { nome: "Faro DOC (Messina)", prezzo: 35, piatti: ["carne_rossa", "primi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Elegante uvaggio siciliano (Nerello, Nocera) affacciato sullo stretto. Balsamico e marino.", valutazione: "4.6", aroma: "Eucalipto, mora, capperi, sale." },
+    { nome: "Aglianico del Vulture Superiore DOCG", prezzo: 30, piatti: ["carne_rossa", "formaggi"], occasioni: ["pranzo_domenica", "regalo"], motivo: "Il vulcano spento lucano dona a questo vino una struttura tannica pazzesca e infinita longevità.", valutazione: "4.7", aroma: "Amarena, ferro, tabacco, cioccolato amaro." },
+    { nome: "Frascati Superiore Riserva DOCG", prezzo: 18, piatti: ["primi", "carne_bianca"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "L'antica zona vulcanica dei Castelli Romani regala bianchi morbidi ma dall'anima salata.", valutazione: "4.2", aroma: "Mela gialla, fiori d'arancio, pietra bagnata." },
+    { nome: "Pitigliano Bianco Superiore DOC", prezzo: 14, piatti: ["pesce", "carne_bianca"], occasioni: ["aperitivo", "cena_amici"], motivo: "Il bianco del 'tufo' in Maremma Toscana. Fresco, rustico e di grandissima beva.", valutazione: "4.0", aroma: "Mela verde, fiori di campo, mineralità polverosa." },
+
+    // 461-470: Rossi da bere Freddi (Per l'Estate o il Pesce)
+    { nome: "Rossese di Dolceacqua Superiore", prezzo: 24, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "cena_amici"], motivo: "Il rosso ligure amatissimo da Napoleone. Macchia mediterranea, poco tannino, perfetto freddo.", valutazione: "4.5", aroma: "Mirto, fragolina di bosco, pepe nero, sale." },
+    { nome: "Grignolino del Monferrato Casalese", prezzo: 15, piatti: ["pizza", "primi", "pesce"], occasioni: ["aperitivo", "cena_amici"], motivo: "Colore scarico, acidità vibrante e tannino secco. Un piemontese 'ribelle' e dissetante.", valutazione: "4.2", aroma: "Pepe bianco, rosa, lampone." },
+    { nome: "Ciliegiolo di Narni IGT", prezzo: 14, piatti: ["pizza", "carne_bianca"], occasioni: ["divano", "cena_amici"], motivo: "Dall'Umbria, un rosso morbidissimo che esplode di frutto fresco, perfetto a 14 gradi.", valutazione: "4.1", aroma: "Ciliegia croccante, mora, fiori rossi." },
+    { nome: "Schiava Alto Adige (Fass#9)", prezzo: 18, piatti: ["pizza", "carne_bianca", "formaggi"], occasioni: ["cena_amici", "aperitivo"], motivo: "Leggera e beverina, ma con una complessità fruttata che invoglia a finire la bottiglia in 5 minuti.", valutazione: "4.3", aroma: "Mandorla, fragola di bosco, violetta." },
+    { nome: "Frappato di Vittoria (Artigianale)", prezzo: 22, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Il vero rosso estivo siciliano. Fresco, speziato e talmente leggero da accompagnare il tonno scottato.", valutazione: "4.4", aroma: "Pepe bianco, ciliegia, rosa, timo." },
+    { nome: "Gamay (Bourgogne o Oltrepò Pavese)", prezzo: 16, piatti: ["pizza", "carne_bianca"], occasioni: ["cena_amici", "divano"], motivo: "Tutto succo, zero astringenza. Il vitigno del Beaujolais si fa bere come l'acqua.", valutazione: "4.1", aroma: "Caramella al lampone, banana, fragola." },
+    { nome: "Poulsard (Jura - Francia)", prezzo: 28, piatti: ["formaggi", "carne_bianca"], occasioni: ["appuntamento", "cena_amici"], motivo: "Colore quasi rosato, rosso terroso, selvatico e particolarissimo. Ideale fresco con formaggi a pasta molle.", valutazione: "4.5", aroma: "Ribes, terra bagnata, spezie." },
+    { nome: "Trousseau (Jura - Francia)", prezzo: 32, piatti: ["carne_bianca", "primi"], occasioni: ["cena_amici", "regalo"], motivo: "Il fratello maggiore del Poulsard: più strutturato ma sempre giocato sull'eleganza e le spezie nordiche.", valutazione: "4.6", aroma: "Pepe, fragolina, terra." },
+    { nome: "Bardolino Classico Superiore DOCG", prezzo: 15, piatti: ["pizza", "carne_bianca"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "La versione più seria del Bardolino, ma che mantiene l'anima speziata e leggera tipica del Garda.", valutazione: "4.2", aroma: "Ciliegia, cannella, pepe nero." },
+    { nome: "Pinot Noir d'Alsace (Francia)", prezzo: 24, piatti: ["carne_bianca", "pesce"], occasioni: ["appuntamento", "cena_amici"], motivo: "Pinot Nero alsaziano, chiarissimo, sottile ed estremamente teso. Magnifico rinfrescato.", valutazione: "4.4", aroma: "Lampone acerbo, erbe, mineralità." },
+
+    // 471-480: Bianchi di Montagna ed Estremi
+    { nome: "Petite Arvine Valle d'Aosta DOC", prezzo: 24, piatti: ["formaggi", "pesce"], occasioni: ["appuntamento", "cena_amici"], motivo: "Bianco alpino per eccellenza. Profumato di pompelmo e dotato di una sapidità quasi 'salata'.", valutazione: "4.6", aroma: "Pompelmo, glicine, sale, mela verde." },
+    { nome: "Blanc de Morgex et de la Salle 'Rayon' DOC", prezzo: 28, piatti: ["pesce", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Viti a 1200 metri sul Monte Bianco. Acido, tagliente e cristallino come un ruscello.", valutazione: "4.7", aroma: "Erbe di montagna, limone, fieno." },
+    { nome: "Chardonnay 'Sanct Valentin' Alto Adige", prezzo: 35, piatti: ["carne_bianca", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Uno degli Chardonnay italiani più famosi. Fermentato in legno, burroso ed elegante.", valutazione: "4.8", aroma: "Burro, mela cotogna, vaniglia, nocciola." },
+    { nome: "Sauvignon Blanc 'Quarz' Alto Adige", prezzo: 45, piatti: ["pesce", "primi"], occasioni: ["regalo", "appuntamento"], motivo: "Sauvignon estremo e lussuoso, minerale come il quarzo da cui prende il nome.", valutazione: "4.9", aroma: "Pietra focaia, sambuco, pesca bianca, pompelmo." },
+    { nome: "Müller Thurgau 'Feldmarschall' Alto Adige", prezzo: 38, piatti: ["etnico", "pesce"], occasioni: ["regalo", "appuntamento"], motivo: "Vigneto a 1000 metri. Eleva il Müller Thurgau a vino di altissima gamma e invecchiamento.", valutazione: "4.8", aroma: "Salvia, pesca matura, mineralità tesa." },
+    { nome: "Silvaner Valle Isarco Riserva DOC", prezzo: 26, piatti: ["pesce", "formaggi"], occasioni: ["pranzo_domenica", "cena_amici"], motivo: "Corposo, terroso e strutturato. Perfetto con piatti di pesce elaborati o formaggi alpini.", valutazione: "4.5", aroma: "Mela gialla, fieno, fiori alpini." },
+    { nome: "Veltliner Valle Isarco DOC", prezzo: 22, piatti: ["etnico", "carne_bianca"], occasioni: ["cena_amici", "aperitivo"], motivo: "L'anima speziata dell'Alto Adige, con quel riconoscibile tocco pepato al naso e in bocca.", valutazione: "4.4", aroma: "Pepe bianco, lenticchia, agrumi." },
+    { nome: "Riesling Renano 'Vigna Martina' Oltrepò", prezzo: 20, piatti: ["pesce", "formaggi"], occasioni: ["appuntamento", "cena_amici"], motivo: "Riesling lombardo che non ha nulla da invidiare ai tedeschi. Verticale e idrocarburico.", valutazione: "4.5", aroma: "Idrocarburo, pesca, limone." },
+    { nome: "Garganega 'La Froscà' Soave Classico", prezzo: 22, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Cru storico del Soave. Morbido, mandorlato e dotato di una grazia senza tempo.", valutazione: "4.6", aroma: "Camomilla, mandorla dolce, fiori bianchi." },
+    { nome: "Malvasia Istriana 'Discum' Friuli", prezzo: 25, piatti: ["pesce", "etnico"], occasioni: ["cena_amici", "appuntamento"], motivo: "Aromatica ma secca e sapida. Un vino di frontiera profondo e appagante.", valutazione: "4.5", aroma: "Albicocca, pepe bianco, salsedine." },
+
+    // 481-490: Rosati Gastronomici (Da pasto completo)
+    { nome: "Tavel L'Anglore (Francia - Naturale)", prezzo: 40, piatti: ["etnico", "pizza", "carne_bianca"], occasioni: ["regalo", "cena_amici"], motivo: "Vino di culto naturale. Un rosato scuro, complesso e vibrante che si beve come un grande rosso.", valutazione: "4.8", aroma: "Fragola selvatica, spezie, terra, rosa." },
+    { nome: "Cerasuolo d'Abruzzo 'Valentini'", prezzo: 120, piatti: ["carne_bianca", "pesce", "pizza"], occasioni: ["regalo", "appuntamento"], motivo: "Il rosato più costoso e leggendario d'Italia. Struttura infinita e potenziale d'invecchiamento.", valutazione: "5.0", aroma: "Amarena, mandorla, zafferano, terra." },
+    { nome: "Bandol Rosé 'Château Pradeaux'", prezzo: 35, piatti: ["pesce", "formaggi"], occasioni: ["regalo", "pranzo_domenica"], motivo: "Mourvèdre che dona una struttura e una speziatura in grado di reggere carni e formaggi.", valutazione: "4.7", aroma: "Pompelmo, garrigue, pepe nero, pesca." },
+    { nome: "Rosato Salento IGT 'Girofle'", prezzo: 15, piatti: ["pizza", "pesce"], occasioni: ["cena_amici", "aperitivo"], motivo: "Negroamaro in rosa d'eccellenza. Corposo, fruttato e incredibilmente gastronomico.", valutazione: "4.3", aroma: "Ciliegia, melograno, macchia mediterranea." },
+    { nome: "Etna Rosato 'Mille E Una Notte'", prezzo: 24, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "cena_amici"], motivo: "Fumo, cenere e piccoli frutti rossi. Un rosato vulcanico che pulisce e appaga.", valutazione: "4.5", aroma: "Ribes, cenere, rosa." },
+    { nome: "Chiaretto di Bardolino 'Lettere'", prezzo: 18, piatti: ["pesce", "pizza"], occasioni: ["aperitivo", "cena_amici"], motivo: "Corvina e Rondinella per un rosato chiarissimo, agrumato e salato come il lago.", valutazione: "4.4", aroma: "Agrumi, fiori d'arancio, fragolina." },
+    { nome: "Rosato Bolgheri DOC", prezzo: 22, piatti: ["pesce", "carne_bianca"], occasioni: ["appuntamento", "pranzo_domenica"], motivo: "Taglio bordolese (Cabernet/Merlot) vinificato in rosa. Morbido, internazionale ed elegante.", valutazione: "4.3", aroma: "Lampone, pesca, vaniglia leggera." },
+    { nome: "Pinot Grigio Ramato 'Dessimis' Friuli", prezzo: 30, piatti: ["pesce", "carne_bianca"], occasioni: ["regalo", "appuntamento"], motivo: "Macerato sulle bucce, ha il colore del rame e la struttura di un rosso. Complesso e inimitabile.", valutazione: "4.7", aroma: "Pesca sciroppata, fragola di bosco, pepe." },
+    { nome: "Rosé de Riceys (Champagne fermo)", prezzo: 45, piatti: ["carne_bianca", "formaggi"], occasioni: ["regalo", "appuntamento"], motivo: "Rarissimo Pinot Nero fermo rosato prodotto nella regione della Champagne. Acido e longevo.", valutazione: "4.6", aroma: "Ribes, rosa, gesso, mandorla." },
+    { nome: "Aleatico Rosato (Puglia)", prezzo: 16, piatti: ["pizza", "etnico"], occasioni: ["aperitivo", "cena_amici"], motivo: "Aromatico al naso ma secco in bocca. Una bomba di profumi perfetta per cibi piccanti.", valutazione: "4.2", aroma: "Rosa, litchi, fragola." },
+
+    // 491-500: Le Ultime Bolle Magiche e i Grandi Formati
+    { nome: "Champagne Blanc de Blancs Magnum (1,5 L)", prezzo: 130, piatti: ["pesce", "formaggi"], occasioni: ["festa", "regalo"], motivo: "Lo Chardonnay della Champagne nel formato perfetto per la festa. Cremoso e infinito.", valutazione: "4.9", aroma: "Burro, agrumi canditi, crosta di pane." },
+    { nome: "Franciacorta Riserva 'Vittorio Moretti'", prezzo: 90, piatti: ["pesce", "carne_bianca"], occasioni: ["regalo", "festa"], motivo: "Il vertice della Franciacorta. Anni sui lieviti per una struttura che sfida lo Champagne.", valutazione: "4.8", aroma: "Frutta matura, nocciola, vaniglia, lievito." },
+    { nome: "Trento DOC 'Giulio Ferrari' Riserva del Fondatore", prezzo: 140, piatti: ["pesce", "formaggi"], occasioni: ["regalo", "festa"], motivo: "La bollicina italiana più premiata. Oltre 10 anni sui lieviti. Un monumento enologico.", valutazione: "5.0", aroma: "Miele di acacia, mela renetta, cioccolato bianco, pane tostato." },
+    { nome: "Alta Langa 'Zero' Riserva (120 mesi)", prezzo: 65, piatti: ["pesce", "carne_bianca"], occasioni: ["regalo", "appuntamento"], motivo: "10 anni di affinamento per il Metodo Classico piemontese. Teso, minerale, profondo.", valutazione: "4.8", aroma: "Erbe officinali, crosta di pane, limone candito." },
+    { nome: "Spumante Metodo Classico Etna DOC", prezzo: 35, piatti: ["pesce", "pizza"], occasioni: ["festa", "appuntamento"], motivo: "Nerello Mascalese spumantizzato. Una bolla tagliente, affumicata e vulcanica.", valutazione: "4.6", aroma: "Pietra focaia, pompelmo, ribes bianco." },
+    { nome: "Lambrusco 'Concerto' Reggiano DOC", prezzo: 14, piatti: ["pizza", "formaggi"], occasioni: ["cena_amici", "grigliata"], motivo: "Il Lambrusco che ha sdoganato la qualità della tipologia. Frizzante, secco e fruttatissimo.", valutazione: "4.3", aroma: "Mora di rovo, violetta, fragola matura." },
+    { nome: "Prosecco Valdobbiadene 'Cartizze' DOCG", prezzo: 25, piatti: ["dolce", "pesce"], occasioni: ["festa", "regalo"], motivo: "Dal cru più prestigioso del Prosecco (Dry). Leggermente dolce, cremoso e superbo con i pasticcini.", valutazione: "4.5", aroma: "Mela, glicine, pesca sciroppata." },
+    { nome: "Champagne Rosé de Saignée", prezzo: 85, piatti: ["carne_bianca", "pizza"], occasioni: ["regalo", "appuntamento"], motivo: "Metodo a 'salasso' per un rosato carico, vinoso, con una struttura tannica leggera e affascinante.", valutazione: "4.8", aroma: "Lampone maturo, pepe rosso, rosa antica." },
+    { nome: "Spumante Metodo Classico Durella (Veneto)", prezzo: 28, piatti: ["pesce", "formaggi"], occasioni: ["cena_amici", "aperitivo"], motivo: "La risposta veneta allo Champagne. Acidità altissima, sapido e perfetto per i fritti.", valutazione: "4.5", aroma: "Mela verde, sasso bagnato, limone." },
+    { nome: "Krug Grande Cuvée (Champagne)", prezzo: 250, piatti: ["pesce", "formaggi", "carne_bianca"], occasioni: ["regalo", "festa"], motivo: "L'assemblaggio di decine di annate diverse per creare la sinfonia perfetta. Inarrivabile.", valutazione: "5.0", aroma: "Nocciola, burro fuso, agrumi, spezie orientali, miele." }
+];
