@@ -48,114 +48,82 @@ function salva(tipo, valore, faseAttuale, faseSuccessiva, bottoneCliccato) {
     }, 400); 
 }
 
-// --- MOTORE DI RICERCA ---
 function mostraRisultati() {
-    nascondiInterfaccia();
-    
-    const trad = { 'amici': 'cena_amici', 'appuntamento': 'appuntamento', 'famiglia': 'pranzo_domenica', 'relax': 'divano' };
-    const occDB = trad[userOccasione] || userOccasione;
-
-    const risultati = viniDatabase.filter(v => 
-        v.piatti.includes(userPiatto) && 
-        v.occasioni.includes(occDB) && 
-        v.prezzo <= userBudget
-    );
-
-    stampaVini(risultati);
-}
-
-function cercaTestoLibero() {
-    let inputEl = document.getElementById('ricerca-libera');
-    if (!inputEl) return;
-    
-    let query = inputEl.value.toLowerCase().trim();
-    if (query === '') {
-        alert("Inserisci un vino, un sapore o una regione.");
-        return;
-    }
-
-    nascondiInterfaccia();
-
-    const risultati = viniDatabase.filter(v => 
-        v.nome.toLowerCase().includes(query) || 
-        (v.aroma && v.aroma.toLowerCase().includes(query)) ||
-        (v.motivo && v.motivo.toLowerCase().includes(query))
-    );
-
-    stampaVini(risultati);
-}
-
-function nascondiInterfaccia() {
-    let f1 = document.getElementById('fase-1');
-    let f2 = document.getElementById('fase-2');
-    let f3 = document.getElementById('fase-3');
-    let hero = document.getElementById('hero-trust');
-    
-    if (f1) f1.style.display = 'none';
-    if (f2) f2.style.display = 'none';
-    if (f3) f3.style.display = 'none';
-    if (hero) hero.style.display = 'none';
-    
     document.getElementById('risultati').style.display = 'block';
-}
+    
+    // 1. IL TRADUTTORE: Mappa i bottoni della UI con i "vecchi" e "nuovi" tag del database
+    const mappaPiatti = {
+        'carne_rossa': ['carne_rossa'],
+        'carne_bianca': ['carne_bianca'],
+        'pesce': ['pesce'],
+        'primi_pizza': ['primi', 'pizza'],
+        'etnico_veg': ['etnico', 'vegan', 'veg'],
+        'dessert_formaggi': ['dolce', 'dessert', 'formaggi']
+    };
 
-// --- L'EFFETTO WOW: COSTRUZIONE VISIVA DELLE CARDS ---
-function stampaVini(risultati) {
+    const mappaOccasioni = {
+        'appuntamento': ['appuntamento'],
+        'amici_festa': ['cena_amici', 'festa'],
+        'famiglia_grigliata': ['pranzo_domenica', 'grigliata'],
+        'relax': ['divano'],
+        'aperitivo': ['aperitivo'],
+        'regalo': ['regalo']
+    };
+
+    // Prende la lista di tag da cercare (es. se clicchi Amici/Festa, lui cerca 'cena_amici' O 'festa')
+    const piattiCercati = mappaPiatti[userPiatto] || [userPiatto];
+    const occasioniCercate = mappaOccasioni[userOccasione] || [userOccasione];
+
+    // 2. IL FILTRAGGIO DINAMICO
+    const risultati = viniDatabase.filter(v => {
+        // true se il vino ha ALMENO UNO dei tag richiesti per i piatti
+        const matchPiatto = v.piatti.some(p => piattiCercati.includes(p));
+        // true se il vino ha ALMENO UNO dei tag richiesti per le occasioni
+        const matchOccasione = v.occasioni.some(o => occasioniCercate.includes(o));
+
+        return matchPiatto && matchOccasione && v.prezzo <= userBudget;
+    });
+
     const lista = document.getElementById('lista-vini');
     lista.innerHTML = ""; 
     
     if (risultati.length === 0) {
-        lista.innerHTML = `
-        <div style="text-align: center; padding: 40px; border: 1px dashed #d4af37; border-radius: 12px; background: rgba(30,30,30,0.8);">
-            <i class="fa-solid fa-wine-glass-empty" style="font-size: 3rem; color: #d4af37; margin-bottom: 15px;"></i>
-            <h3 style="color: #fff;">Nessuna etichetta trovata</h3>
-            <p style="color: #aaa;">Il nostro sommelier non ha trovato l'abbinamento perfetto con questi parametri. Prova a modificare il budget o la portata.</p>
-        </div>`;
+        lista.innerHTML = `<div style="text-align: center; color: #fff;"><h3>Mmm, sfida difficile.</h3><p>Non ho trovato un vino sotto i ${userBudget}€ per questa precisa combinazione. Riprova con un budget più alto.</p></div>`;
         return;
     }
 
-    risultati.slice(0, 5).forEach((v, index) => {
-        // Calcolo simulato dell'algoritmo di affinità (Match 94-99%)
-        let matchScore = 99 - index; 
-
-        // Fix di Google Shopping richiesto prima
-        let ricercaShopping = encodeURIComponent(v.nome + " vino bottiglia 75cl");
-        let linkShopping = "https://www.google.com/search?tbm=shop&q=" + ricercaShopping;
-        let testoWhatsapp = encodeURIComponent("🍷 Guarda cosa ho trovato su FORWINE: " + v.nome + " (Circa " + v.prezzo + "€). Penso sia perfetto!");
-        let linkWhatsapp = "https://api.whatsapp.com/send?text=" + testoWhatsapp;
-
-        lista.innerHTML += `
-        <li style="background: linear-gradient(145deg, #1f1f1f, #151515); border-radius: 16px; padding: 0; margin-bottom: 25px; list-style: none; border: 1px solid #333; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.6); position: relative;">
-            
-            <!-- Badge Affinità -->
-            <div style="position: absolute; top: 20px; right: 20px; background: #d4af37; color: #111; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; display: flex; align-items: center; gap: 5px;">
-                <i class="fa-solid fa-star"></i> Match ${matchScore}%
-            </div>
-
-            <div style="padding: 30px;">
-                <h3 style="font-family: 'Playfair Display', serif; color: #d4af37; margin: 0 0 5px 0; font-size: 1.8rem; padding-right: 90px;">${v.nome}</h3>
-                <p style="color: #aaa; font-weight: 300; font-size: 1.1rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">Prezzo stimato: <span style="color:#fff; font-weight:bold;">${v.prezzo}€</span></p>
-                
-                <div style="background: rgba(0,0,0,0.3); border-left: 3px solid #d4af37; padding: 15px 20px; border-radius: 0 8px 8px 0; margin-bottom: 20px;">
-                    <p style="color: #eee; line-height: 1.6; margin: 0; font-style: italic;">"${v.motivo || 'Un abbinamento eccezionale selezionato dai nostri esperti.'}"</p>
-                </div>
-
-                ${v.aroma ? `
-                <div style="margin-bottom: 25px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                    <span style="color: #888; font-size: 0.9rem; text-transform: uppercase;">Note chiave:</span>
-                    <span style="background: #2a2a2a; border: 1px solid #444; color: #ddd; padding: 4px 12px; border-radius: 15px; font-size: 0.85rem;">${v.aroma}</span>
-                </div>` : ''}
-                
-                <div style="display: flex; gap: 12px; flex-wrap: wrap; border-top: 1px solid #333; padding-top: 20px;">
-                    <a href="${linkShopping}" target="_blank" style="flex: 1; text-align: center; background: #fff; color: #111; padding: 14px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.95rem; transition: background 0.2s;">
-                        <i class="fa-solid fa-cart-shopping"></i> Acquista
-                    </a>
-                    <a href="${linkWhatsapp}" target="_blank" style="flex: 1; text-align: center; background: #25D366; color: #fff; padding: 14px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.95rem; transition: background 0.2s;">
-                        <i class="fa-brands fa-whatsapp"></i> Invia a un amico
-                    </a>
-                </div>
-            </div>
-        </li>
-        `;
-    });
+    // 3. LA CARD CINEMATOGRAFICA DEL VINO TOP
+    let bottigliaTop = risultati[0];
+    
+    // Aggiungo frasi personalizzate anche per i vecchi criteri (es. Regalo e Dolci)
+    let introPersonale = "";
+    if (occasioniCercate.includes('appuntamento')) introPersonale = "Per un appuntamento serve eleganza, non arroganza.";
+    if (piattiCercati.includes('carne_rossa')) introPersonale = "La carne rossa chiama tannini importanti per pulire il palato.";
+    if (occasioniCercate.includes('regalo')) introPersonale = "Un regalo importante richiede una bottiglia indimenticabile e prestigiosa.";
+    if (piattiCercati.includes('dolce')) introPersonale = "I dolci richiedono un calice che sappia bilanciare gli zuccheri senza appesantire.";
+    
+    let ricercaShopping = encodeURIComponent(bottigliaTop.nome + " vino bottiglia 75cl");
+    
+    lista.innerHTML = `
+    <li style="background: linear-gradient(145deg, #1f1f1f, #111); border-radius: 20px; padding: 40px 25px; list-style: none; border: 1px solid var(--bordeaux); box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative; text-align: center;">
+        
+        <p style="color: var(--gold); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">La Scelta del Sommelier</p>
+        
+        <h3 style="font-family: 'Playfair Display', serif; color: #fff; margin: 0 0 10px 0; font-size: 2.5rem;">${bottigliaTop.nome}</h3>
+        <p style="color: #aaa; font-size: 1.2rem; margin-bottom: 25px;">Prezzo stimato: <strong style="color: var(--gold);">${bottigliaTop.prezzo}€</strong></p>
+        
+        <div style="background: var(--bordeaux-dark); border-radius: 12px; padding: 25px; text-align: left; margin-bottom: 30px; position: relative;">
+            <i class="fa-solid fa-quote-left" style="position: absolute; top: 15px; left: 15px; font-size: 3rem; color: rgba(255,255,255,0.05);"></i>
+            <h4 style="color: var(--gold); margin-bottom: 10px; font-size: 1.1rem; position: relative; z-index: 1;">Perché proprio questo?</h4>
+            <p style="color: #eee; line-height: 1.7; font-size: 1.1rem; position: relative; z-index: 1;">
+                ${introPersonale} Tra tutte le opzioni, ho scelto questo ${bottigliaTop.nome.split(' ')[0]} perché ${bottigliaTop.motivo ? bottigliaTop.motivo.toLowerCase() : "bilancia perfettamente i sapori del tuo piatto"}. 
+                Avvertirai note di <strong>${bottigliaTop.aroma || "frutta rossa e spezie"}</strong>.
+            </p>
+        </div>
+        
+        <a href="https://www.google.com/search?tbm=shop&q=${ricercaShopping}" target="_blank" style="display: inline-block; width: 100%; background: var(--gold); color: #000; padding: 18px 20px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.2s;">
+            <i class="fa-solid fa-bag-shopping"></i> Cerca e Acquista
+        </a>
+    </li>
+    `;
 }
