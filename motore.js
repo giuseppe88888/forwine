@@ -151,7 +151,7 @@ function generaCards(risultati, usaIntroPersonale) {
         return;
     }
 
-    risultati.slice(0, 3).forEach((v, index) => {
+    risultati.slice(0, 5).forEach((v, index) => {
         let matchScore = 99 - (index * 2); 
         let ricercaShopping = encodeURIComponent(v.nome + " vino bottiglia 75cl");
         let linkShopping = "https://www.google.com/search?tbm=shop&q=" + ricercaShopping;
