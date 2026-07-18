@@ -34,21 +34,21 @@ function mostraRisultatiMagici() {
     const lista = document.getElementById('lista-vini');
     lista.innerHTML = "<li>Caricamento in corso...</li>";
 
-    // Dizionario di normalizzazione: mappa ciò che clicchi ai tag possibili nel database
+    // Dizionario di TRADUZIONE: mappa i bottoni (chiavi) ai tag esatti del database
     const mappaPiatti = {
-        'carne_rossa': ['carne_rossa', 'carne rossa', 'carne'],
-        'carne_bianca': ['carne_bianca', 'carne bianca', 'bianca'],
+        'carne_rossa': ['carne_rossa'],
+        'carne_bianca': ['carne_bianca'],
         'pesce': ['pesce'],
-        'pizza': ['pizza', 'primi', 'street food'],
-        'vegan': ['vegan', 'vegetariano', 'formaggi'],
+        'pizza': ['pizza'],
+        'vegan': ['formaggi', 'etnico', 'verdure'],
         'dessert': ['dolce', 'dessert']
     };
 
     const mappaOccasioni = {
         'appuntamento': ['appuntamento', 'regalo', 'romantico'],
-        'amici': ['cena_amici', 'aperitivo', 'festa', 'amici'],
-        'famiglia': ['pranzo_domenica', 'famiglia', 'pranzo'],
-        'relax': ['divano', 'dopo cena', 'relax', 'aperitivo']
+        'amici': ['cena_amici', 'aperitivo', 'festa'],
+        'famiglia': ['pranzo_domenica', 'cena_amici', 'pranzo'],
+        'relax': ['relax', 'divano', 'aperitivo']
     };
 
     // Ottieni i tag da cercare
