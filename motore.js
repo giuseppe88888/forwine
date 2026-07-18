@@ -1,3 +1,7 @@
+// Funzione "tappabuchi" per evitare l'errore del bottone di ricerca
+window.cercaTestoLibero = function() {
+    console.log("Ricerca non attiva");
+};
 function mostraRisultati() {
     // 1. Forza la visualizzazione
     document.getElementById('wizard-container').style.display = 'none';
