@@ -1,64 +1,56 @@
+console.log("🚀 MOTORE AVVIATO: Architettura pulita e UX reattiva.");
+
 let userPiatto = '';
 let userOccasione = '';
 let userBudget = 0;
 
-// INIZIALIZZAZIONE PROGRESS BAR
-document.addEventListener("DOMContentLoaded", () => {
-    aggiornaProgressBar(1);
-});
-
-function aggiornaProgressBar(fase) {
-    let percentuale = 0;
-    if (fase === 1) percentuale = 33;
-    if (fase === 2) percentuale = 66;
-    if (fase === 3) percentuale = 100;
-    document.getElementById('progress-bar').style.width = percentuale + '%';
-}
-
+// --- NAVIGAZIONE ---
 function avanzaFase(faseAttuale, faseSuccessiva) {
-    document.getElementById('fase-' + faseAttuale).style.display = 'none';
-    document.getElementById('fase-' + faseSuccessiva).style.display = 'block';
-    aggiornaProgressBar(faseSuccessiva);
+    let divAttuale = document.getElementById('fase-' + faseAttuale);
+    let divSuccessivo = document.getElementById('fase-' + faseSuccessiva);
+    if (divAttuale) divAttuale.style.display = 'none';
+    if (divSuccessivo) divSuccessivo.style.display = 'block';
 }
 
-function salva(tipo, valore, faseAttuale, faseSuccessiva, bottoneCliccato) {
-    bottoneCliccato.classList.add('selezionato');
+function tornaFase(faseAttuale, fasePrecedente) {
+    let divAttuale = document.getElementById('fase-' + faseAttuale);
+    let divPrecedente = document.getElementById('fase-' + fasePrecedente);
+    if (divAttuale) divAttuale.style.display = 'none';
+    if (divPrecedente) divPrecedente.style.display = 'block';
+}
 
+function ricomincia() {
+    location.reload();
+}
+
+// --- SALVATAGGIO CON FEEDBACK VISIVO (UX) ---
+function salva(tipo, valore, faseAttuale, faseSuccessiva, bottoneCliccato) {
+    // 1. Accendi il bottone per dare feedback visivo all'utente
+    if (bottoneCliccato) {
+        bottoneCliccato.classList.add('selezionato');
+    }
+
+    // 2. Salva il dato in memoria
     if (tipo === 'piatto') userPiatto = valore;
     if (tipo === 'occasione') userOccasione = valore;
     
+    // 3. Ritardo di 400ms per permettere all'utente di godersi l'animazione del click
     setTimeout(() => {
-        bottoneCliccato.classList.remove('selezionato');
+        // Spegni il bottone in background così se l'utente torna indietro lo trova resettato
+        if (bottoneCliccato) bottoneCliccato.classList.remove('selezionato');
 
         if (tipo === 'budget') {
             userBudget = parseInt(valore);
-            avviaRicercaSimulata(); // Avvia il finto caricamento WOW
+            mostraRisultati(); 
         } else if (faseAttuale && faseSuccessiva) {
             avanzaFase(faseAttuale, faseSuccessiva);
         }
     }, 400); 
 }
 
-// L'EFFETTO WOW: Finto ragionamento del Sommelier
-function avviaRicercaSimulata() {
-    document.getElementById('wizard-container').style.display = 'none';
-    document.getElementById('progress-container').style.display = 'none';
-    document.getElementById('loading-screen').style.display = 'block';
-
-    const loadingText = document.getElementById('loading-text');
-    
-    setTimeout(() => { loadingText.innerText = "Valuto gli abbinamenti perfetti..."; }, 800);
-    setTimeout(() => { loadingText.innerText = "Controllo i profili aromatici..."; }, 1600);
-    setTimeout(() => { loadingText.innerText = "Ci siamo. Ho la bottiglia perfetta."; }, 2400);
-    
-    setTimeout(() => {
-        document.getElementById('loading-screen').style.display = 'none';
-        mostraRisultati();
-    }, 3000); // 3 secondi di "suspense"
-}
-
+// --- MOTORE DI RICERCA ---
 function mostraRisultati() {
-    document.getElementById('risultati').style.display = 'block';
+    nascondiInterfaccia();
     
     const trad = { 'amici': 'cena_amici', 'appuntamento': 'appuntamento', 'famiglia': 'pranzo_domenica', 'relax': 'divano' };
     const occDB = trad[userOccasione] || userOccasione;
@@ -69,45 +61,101 @@ function mostraRisultati() {
         v.prezzo <= userBudget
     );
 
+    stampaVini(risultati);
+}
+
+function cercaTestoLibero() {
+    let inputEl = document.getElementById('ricerca-libera');
+    if (!inputEl) return;
+    
+    let query = inputEl.value.toLowerCase().trim();
+    if (query === '') {
+        alert("Inserisci un vino, un sapore o una regione.");
+        return;
+    }
+
+    nascondiInterfaccia();
+
+    const risultati = viniDatabase.filter(v => 
+        v.nome.toLowerCase().includes(query) || 
+        (v.aroma && v.aroma.toLowerCase().includes(query)) ||
+        (v.motivo && v.motivo.toLowerCase().includes(query))
+    );
+
+    stampaVini(risultati);
+}
+
+function nascondiInterfaccia() {
+    let f1 = document.getElementById('fase-1');
+    let f2 = document.getElementById('fase-2');
+    let f3 = document.getElementById('fase-3');
+    let hero = document.getElementById('hero-trust');
+    
+    if (f1) f1.style.display = 'none';
+    if (f2) f2.style.display = 'none';
+    if (f3) f3.style.display = 'none';
+    if (hero) hero.style.display = 'none';
+    
+    document.getElementById('risultati').style.display = 'block';
+}
+
+// --- L'EFFETTO WOW: COSTRUZIONE VISIVA DELLE CARDS ---
+function stampaVini(risultati) {
     const lista = document.getElementById('lista-vini');
     lista.innerHTML = ""; 
     
     if (risultati.length === 0) {
-        lista.innerHTML = `<div style="text-align: center; color: #fff;"><h3>Mmm, sfida difficile.</h3><p>Non ho trovato un vino sotto i ${userBudget}€ per questa precisa combinazione. Riprova con un budget più alto.</p></div>`;
+        lista.innerHTML = `
+        <div style="text-align: center; padding: 40px; border: 1px dashed #d4af37; border-radius: 12px; background: rgba(30,30,30,0.8);">
+            <i class="fa-solid fa-wine-glass-empty" style="font-size: 3rem; color: #d4af37; margin-bottom: 15px;"></i>
+            <h3 style="color: #fff;">Nessuna etichetta trovata</h3>
+            <p style="color: #aaa;">Il nostro sommelier non ha trovato l'abbinamento perfetto con questi parametri. Prova a modificare il budget o la portata.</p>
+        </div>`;
         return;
     }
 
-    // Prendiamo solo il MIGLIORE assoluto (o i primi 2) per mantenere il focus
-    let bottigliaTop = risultati[0];
-    
-    // Generazione della PERSONALITÀ (Motivazione dinamica)
-    let introPersonale = "";
-    if (userOccasione === 'appuntamento') introPersonale = "Per un appuntamento serve eleganza, non arroganza.";
-    if (userPiatto === 'carne_rossa') introPersonale = "La carne rossa chiama tannini importanti per pulire il palato.";
-    
-    let ricercaShopping = encodeURIComponent(bottigliaTop.nome + " vino bottiglia 75cl");
-    
-    // Il nuovo layout della CARD: Enorme, lussuoso, da vetrina
-    lista.innerHTML = `
-    <li style="background: linear-gradient(145deg, #1f1f1f, #111); border-radius: 20px; padding: 40px 25px; list-style: none; border: 1px solid var(--bordeaux); box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative; text-align: center;">
-        
-        <p style="color: var(--gold); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">La Scelta del Sommelier</p>
-        
-        <h3 style="font-family: 'Playfair Display', serif; color: #fff; margin: 0 0 10px 0; font-size: 2.5rem;">${bottigliaTop.nome}</h3>
-        <p style="color: #aaa; font-size: 1.2rem; margin-bottom: 25px;">Prezzo stimato: <strong style="color: var(--gold);">${bottigliaTop.prezzo}€</strong></p>
-        
-        <div style="background: var(--bordeaux-dark); border-radius: 12px; padding: 25px; text-align: left; margin-bottom: 30px; position: relative;">
-            <i class="fa-solid fa-quote-left" style="position: absolute; top: 15px; left: 15px; font-size: 3rem; color: rgba(255,255,255,0.05);"></i>
-            <h4 style="color: var(--gold); margin-bottom: 10px; font-size: 1.1rem; position: relative; z-index: 1;">Perché proprio questo?</h4>
-            <p style="color: #eee; line-height: 1.7; font-size: 1.1rem; position: relative; z-index: 1;">
-                ${introPersonale} Tra tutte le opzioni, ho scelto questo ${bottigliaTop.nome.split(' ')[0]} perché ${bottigliaTop.motivo ? bottigliaTop.motivo.toLowerCase() : "bilancia perfettamente i sapori del tuo piatto"}. 
-                Avvertirai note di <strong>${bottigliaTop.aroma || "frutta rossa e spezie"}</strong>.
-            </p>
-        </div>
-        
-        <a href="https://www.google.com/search?tbm=shop&q=${ricercaShopping}" target="_blank" style="display: inline-block; width: 100%; background: var(--gold); color: #000; padding: 18px 20px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.2s;">
-            <i class="fa-solid fa-bag-shopping"></i> Cerca e Acquista
-        </a>
-    </li>
-    `;
+    risultati.slice(0, 5).forEach((v, index) => {
+        // Calcolo simulato dell'algoritmo di affinità (Match 94-99%)
+        let matchScore = 99 - index; 
+
+        // Fix di Google Shopping richiesto prima
+        let ricercaShopping = encodeURIComponent(v.nome + " vino bottiglia 75cl");
+        let linkShopping = "https://www.google.com/search?tbm=shop&q=" + ricercaShopping;
+        let testoWhatsapp = encodeURIComponent("🍷 Guarda cosa ho trovato su FORWINE: " + v.nome + " (Circa " + v.prezzo + "€). Penso sia perfetto!");
+        let linkWhatsapp = "https://api.whatsapp.com/send?text=" + testoWhatsapp;
+
+        lista.innerHTML += `
+        <li style="background: linear-gradient(145deg, #1f1f1f, #151515); border-radius: 16px; padding: 0; margin-bottom: 25px; list-style: none; border: 1px solid #333; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.6); position: relative;">
+            
+            <!-- Badge Affinità -->
+            <div style="position: absolute; top: 20px; right: 20px; background: #d4af37; color: #111; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; display: flex; align-items: center; gap: 5px;">
+                <i class="fa-solid fa-star"></i> Match ${matchScore}%
+            </div>
+
+            <div style="padding: 30px;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #d4af37; margin: 0 0 5px 0; font-size: 1.8rem; padding-right: 90px;">${v.nome}</h3>
+                <p style="color: #aaa; font-weight: 300; font-size: 1.1rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">Prezzo stimato: <span style="color:#fff; font-weight:bold;">${v.prezzo}€</span></p>
+                
+                <div style="background: rgba(0,0,0,0.3); border-left: 3px solid #d4af37; padding: 15px 20px; border-radius: 0 8px 8px 0; margin-bottom: 20px;">
+                    <p style="color: #eee; line-height: 1.6; margin: 0; font-style: italic;">"${v.motivo || 'Un abbinamento eccezionale selezionato dai nostri esperti.'}"</p>
+                </div>
+
+                ${v.aroma ? `
+                <div style="margin-bottom: 25px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <span style="color: #888; font-size: 0.9rem; text-transform: uppercase;">Note chiave:</span>
+                    <span style="background: #2a2a2a; border: 1px solid #444; color: #ddd; padding: 4px 12px; border-radius: 15px; font-size: 0.85rem;">${v.aroma}</span>
+                </div>` : ''}
+                
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; border-top: 1px solid #333; padding-top: 20px;">
+                    <a href="${linkShopping}" target="_blank" style="flex: 1; text-align: center; background: #fff; color: #111; padding: 14px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.95rem; transition: background 0.2s;">
+                        <i class="fa-solid fa-cart-shopping"></i> Acquista
+                    </a>
+                    <a href="${linkWhatsapp}" target="_blank" style="flex: 1; text-align: center; background: #25D366; color: #fff; padding: 14px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.95rem; transition: background 0.2s;">
+                        <i class="fa-brands fa-whatsapp"></i> Invia a un amico
+                    </a>
+                </div>
+            </div>
+        </li>
+        `;
+    });
 }
