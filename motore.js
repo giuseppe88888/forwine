@@ -112,7 +112,7 @@ function stampaVini(risultati) {
     }
 
     risultati.slice(0, 5).forEach(v => {
-        let ricercaShopping = encodeURIComponent(v.nome + " vino");
+       let ricercaShopping = encodeURIComponent(v.nome + " vino bottiglia 75cl");
         let linkShopping = "https://www.google.com/search?tbm=shop&q=" + ricercaShopping;
         
         let testoWhatsapp = encodeURIComponent("🍷 Guarda questo vino che ho trovato su FORWINE: " + v.nome + " (Circa " + v.prezzo + "€). Perfetto per noi!");
