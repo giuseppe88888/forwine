@@ -1,4 +1,4 @@
-console.log("🚀 MOTORE AVVIATO E CORRETTO AL 100%");
+console.log("🚀 MOTORE AVVIATO: Vetrina Lusso e Ricerca attive");
 
 let userPiatto = '';
 let userOccasione = '';
@@ -47,16 +47,18 @@ function avviaRicercaSimulata() {
     let wiz = document.getElementById('wizard-container');
     let prog = document.getElementById('progress-container');
     let load = document.getElementById('loading-screen');
+    let hero = document.getElementById('hero-trust');
     
     if(wiz) wiz.style.display = 'none';
     if(prog) prog.style.display = 'none';
+    if(hero) hero.style.display = 'none';
     if(load) load.style.display = 'block';
 
     const loadingText = document.getElementById('loading-text');
     
     setTimeout(() => { if(loadingText) loadingText.innerText = "Valuto gli abbinamenti perfetti..."; }, 800);
     setTimeout(() => { if(loadingText) loadingText.innerText = "Controllo i profili aromatici..."; }, 1600);
-    setTimeout(() => { if(loadingText) loadingText.innerText = "Ci siamo. Ho la bottiglia perfetta."; }, 2400);
+    setTimeout(() => { if(loadingText) loadingText.innerText = "Ci siamo. Ho le bottiglie perfette."; }, 2400);
     
     setTimeout(() => {
         if(load) load.style.display = 'none';
@@ -65,15 +67,7 @@ function avviaRicercaSimulata() {
 }
 
 function mostraRisultati() {
-    let res = document.getElementById('risultati');
-    let wiz = document.getElementById('wizard-container');
-    let hero = document.getElementById('hero-trust');
-    let prog = document.getElementById('progress-container');
-    
-    if(res) res.style.display = 'block';
-    if(wiz) wiz.style.display = 'none';
-    if(hero) hero.style.display = 'none';
-    if(prog) prog.style.display = 'none';
+    document.getElementById('risultati').style.display = 'block';
     
     const mappaPiatti = {
         'carne_rossa': ['carne_rossa'],
@@ -102,46 +96,9 @@ function mostraRisultati() {
         return matchPiatto && matchOccasione && v.prezzo <= userBudget;
     });
 
-    const lista = document.getElementById('lista-vini');
-    if(!lista) return;
-    lista.innerHTML = ""; 
-    
-    if (risultati.length === 0) {
-        lista.innerHTML = `<div style="text-align: center; color: #fff;"><h3>Mmm, sfida difficile.</h3><p>Non ho trovato un vino sotto i ${userBudget}€ per questa combinazione. Riprova con un budget o parametri diversi.</p></div>`;
-        return;
-    }
-
-    let bottigliaTop = risultati[0];
-    
-    let introPersonale = "";
-    if (occasioniCercate.includes('appuntamento')) introPersonale = "Per un appuntamento serve eleganza, non arroganza.";
-    if (piattiCercati.includes('carne_rossa')) introPersonale = "La carne rossa chiama tannini importanti per pulire il palato.";
-    if (occasioniCercate.includes('regalo')) introPersonale = "Un regalo importante richiede una bottiglia indimenticabile e prestigiosa.";
-    if (piattiCercati.includes('dolce')) introPersonale = "I dolci richiedono un calice che sappia bilanciare gli zuccheri senza appesantire.";
-    
-    let ricercaShopping = encodeURIComponent(bottigliaTop.nome + " vino bottiglia 75cl");
-    
-    lista.innerHTML = `
-    <li style="background: linear-gradient(145deg, #1f1f1f, #111); border-radius: 20px; padding: 40px 25px; list-style: none; border: 1px solid var(--bordeaux); box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative; text-align: center;">
-        <p style="color: var(--gold); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">La Scelta del Sommelier</p>
-        <h3 style="font-family: 'Playfair Display', serif; color: #fff; margin: 0 0 10px 0; font-size: 2.5rem;">${bottigliaTop.nome}</h3>
-        <p style="color: #aaa; font-size: 1.2rem; margin-bottom: 25px;">Prezzo stimato: <strong style="color: var(--gold);">${bottigliaTop.prezzo}€</strong></p>
-        <div style="background: var(--bordeaux-dark); border-radius: 12px; padding: 25px; text-align: left; margin-bottom: 30px; position: relative;">
-            <i class="fa-solid fa-quote-left" style="position: absolute; top: 15px; left: 15px; font-size: 3rem; color: rgba(255,255,255,0.05);"></i>
-            <h4 style="color: var(--gold); margin-bottom: 10px; font-size: 1.1rem; position: relative; z-index: 1;">Perché proprio questo?</h4>
-            <p style="color: #eee; line-height: 1.7; font-size: 1.1rem; position: relative; z-index: 1;">
-                ${introPersonale} Tra tutte le opzioni, ho scelto questo ${bottigliaTop.nome.split(' ')[0]} perché ${bottigliaTop.motivo ? bottigliaTop.motivo.toLowerCase() : "bilancia perfettamente i sapori del tuo piatto"}. 
-                Avvertirai note di <strong>${bottigliaTop.aroma || "frutta rossa e spezie"}</strong>.
-            </p>
-        </div>
-        <a href="https://www.google.com/search?tbm=shop&q=${ricercaShopping}" target="_blank" style="display: inline-block; width: 100%; background: var(--gold); color: #000; padding: 18px 20px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.2s;">
-            <i class="fa-solid fa-bag-shopping"></i> Cerca e Acquista
-        </a>
-    </li>
-    `;
+    generaCards(risultati, true);
 }
 
-// LA RICERCA LIBERA REINSERITA!
 function cercaTestoLibero() {
     let inputEl = document.getElementById('ricerca-libera');
     if (!inputEl) return;
@@ -152,15 +109,10 @@ function cercaTestoLibero() {
         return;
     }
 
-    let wiz = document.getElementById('wizard-container');
-    let hero = document.getElementById('hero-trust');
-    let prog = document.getElementById('progress-container');
-    let res = document.getElementById('risultati');
-    
-    if(wiz) wiz.style.display = 'none';
-    if(hero) hero.style.display = 'none';
-    if(prog) prog.style.display = 'none';
-    if(res) res.style.display = 'block';
+    document.getElementById('wizard-container').style.display = 'none';
+    document.getElementById('hero-trust').style.display = 'none';
+    document.getElementById('progress-container').style.display = 'none';
+    document.getElementById('risultati').style.display = 'block';
 
     const risultati = viniDatabase.filter(v => 
         v.nome.toLowerCase().includes(query) || 
@@ -168,32 +120,70 @@ function cercaTestoLibero() {
         (v.motivo && v.motivo.toLowerCase().includes(query))
     );
 
+    generaCards(risultati, false);
+}
+
+// IL GENERATORE DI CARDS DI LUSSO (Unificato per Wizard e Ricerca)
+function generaCards(risultati, usaIntroPersonale) {
     const lista = document.getElementById('lista-vini');
-    if(!lista) return;
     lista.innerHTML = ""; 
 
     if (risultati.length === 0) {
-        lista.innerHTML = `<div style="text-align: center; color: #fff;"><h3>Nessun vino trovato. 😕</h3><p>Prova a cercare qualcos'altro.</p></div>`;
+        lista.innerHTML = `<div style="text-align: center; color: #fff; padding: 40px; border: 1px dashed #d4af37; border-radius: 12px; background: rgba(30,30,30,0.8);">
+            <i class="fa-solid fa-wine-glass-empty" style="font-size: 3rem; color: #d4af37; margin-bottom: 15px;"></i>
+            <h3 style="margin-bottom:10px;">Nessuna etichetta trovata</h3>
+            <p style="color: #aaa;">Il sommelier non ha trovato l'abbinamento perfetto con questi parametri. Prova ad alzare il budget o cambiare termini.</p>
+        </div>`;
         return;
     }
 
-    risultati.slice(0, 5).forEach((v) => {
+    // Mostriamo le prime 3 opzioni migliori
+    risultati.slice(0, 3).forEach((v, index) => {
+        let matchScore = 99 - (index * 2); // Simula 99%, 97%, 95%
         let ricercaShopping = encodeURIComponent(v.nome + " vino bottiglia 75cl");
+        let linkShopping = "https://www.google.com/search?tbm=shop&q=" + ricercaShopping;
+        let testoWhatsapp = encodeURIComponent("🍷 Guarda cosa ho trovato su FORWINE: " + v.nome + " (Circa " + v.prezzo + "€). Perfetto per noi!");
+        let linkWhatsapp = "https://api.whatsapp.com/send?text=" + testoWhatsapp;
+
+        let intro = "";
+        if (usaIntroPersonale && index === 0) {
+            intro = "Eccellente scelta. ";
+            if (userOccasione === 'appuntamento') intro = "Per un appuntamento serve eleganza, non arroganza. ";
+            if (userPiatto === 'carne_rossa') intro = "La carne rossa chiama tannini importanti per pulire il palato. ";
+            if (userOccasione === 'regalo') intro = "Un regalo importante richiede una bottiglia indimenticabile e prestigiosa. ";
+        }
 
         lista.innerHTML += `
-        <li style="background: linear-gradient(145deg, #1f1f1f, #111); border-radius: 20px; padding: 40px 25px; list-style: none; border: 1px solid var(--bordeaux); margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative; text-align: center;">
-            <h3 style="font-family: 'Playfair Display', serif; color: #fff; margin: 0 0 10px 0; font-size: 2.5rem;">${v.nome}</h3>
+        <li style="background: linear-gradient(145deg, #1f1f1f, #111); border-radius: 20px; padding: 40px 25px; list-style: none; border: 1px solid var(--bordeaux); margin-bottom: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative; text-align: center;">
+            
+            <!-- BADGE AFFINITÀ -->
+            <div style="position: absolute; top: -15px; right: 20px; background: var(--gold); color: #111; padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);">
+                <i class="fa-solid fa-star"></i> Match ${matchScore}%
+            </div>
+
+            <p style="color: var(--gold); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; margin-top: 15px;">La Scelta del Sommelier</p>
+            
+            <h3 style="font-family: 'Playfair Display', serif; color: #fff; margin: 0 0 10px 0; font-size: 2.2rem;">${v.nome}</h3>
             <p style="color: #aaa; font-size: 1.2rem; margin-bottom: 25px;">Prezzo stimato: <strong style="color: var(--gold);">${v.prezzo}€</strong></p>
+            
             <div style="background: var(--bordeaux-dark); border-radius: 12px; padding: 25px; text-align: left; margin-bottom: 30px; position: relative;">
                 <i class="fa-solid fa-quote-left" style="position: absolute; top: 15px; left: 15px; font-size: 3rem; color: rgba(255,255,255,0.05);"></i>
+                <h4 style="color: var(--gold); margin-bottom: 10px; font-size: 1.1rem; position: relative; z-index: 1;">Perché questo vino?</h4>
                 <p style="color: #eee; line-height: 1.7; font-size: 1.1rem; position: relative; z-index: 1;">
-                    ${v.motivo || 'Un abbinamento eccezionale.'}
-                    <br><br>Note di: <strong>${v.aroma || "frutta e spezie"}</strong>.
+                    ${intro}${v.motivo || 'Un abbinamento eccezionale selezionato dai nostri esperti.'} 
+                    <br><br><span style="color:#aaa; font-size: 0.95rem;">👃 Note di degustazione: <strong>${v.aroma || "frutta e spezie"}</strong>.</span>
                 </p>
             </div>
-            <a href="https://www.google.com/search?tbm=shop&q=${ricercaShopping}" target="_blank" style="display: inline-block; width: 100%; background: var(--gold); color: #000; padding: 18px 20px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.2s;">
-                <i class="fa-solid fa-bag-shopping"></i> Cerca e Acquista
-            </a>
+            
+            <!-- BOTTONI ACQUISTO E WHATSAPP -->
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                <a href="${linkShopping}" target="_blank" style="flex: 1; min-width: 200px; background: var(--gold); color: #000; padding: 16px 20px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">
+                    <i class="fa-solid fa-cart-shopping"></i> Cerca e Acquista
+                </a>
+                <a href="${linkWhatsapp}" target="_blank" style="flex: 1; min-width: 200px; background: #25D366; color: #fff; padding: 16px 20px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Condividi
+                </a>
+            </div>
         </li>
         `;
     });
