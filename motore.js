@@ -42,7 +42,7 @@ function salva(tipo, valore, faseAttuale, faseSuccessiva) {
 function mostraRisultati() {
     console.log("Sto cercando i vini per: Piatto=" + userPiatto + ", Occasione=" + userOccasione + ", Budget=" + userBudget);
     
-    document.getElementById('wizard-container').style.display = 'none';
+    document.getElementById('fase-3').style.display = 'none';
     document.getElementById('risultati').style.display = 'block';
     
     // Mappatura per far combaciare i bottoni con il database
