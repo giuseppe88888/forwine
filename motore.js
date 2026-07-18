@@ -1,3 +1,5 @@
+console.log("🚀 MOTORE AVVIATO: Versione con Immagini Attiva");
+
 let userPiatto = '';
 let userOccasione = '';
 let userBudget = 0;
@@ -66,7 +68,6 @@ function avviaRicercaSimulata() {
 function mostraRisultati() {
     document.getElementById('risultati').style.display = 'block';
     
-    // Controlla se il database si è rotto per una virgola mancante
     if (typeof viniDatabase === 'undefined') {
         alert("🚨 ERRORE: Il database dei vini non è caricato. Controlla che non manchi una virgola nel file database.js!");
         return;
@@ -166,12 +167,18 @@ function generaCards(risultati, usaIntroPersonale) {
             if (userPiatto === 'dessert_formaggi') intro = "I dolci e i formaggi richiedono un calice speciale che sappia bilanciare i sapori. ";
         }
 
+        // LA MAGIA DELLE IMMAGINI È QUI: Se c'è l'immagine la carica, sennò lascia vuoto.
+        let immagineHtml = v.immagine ? `<img src="${v.immagine}" alt="${v.nome}" style="max-height: 250px; width: auto; margin: 15px auto 25px auto; display: block; border-radius: 8px; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));">` : '';
+
         lista.innerHTML += `
         <li style="background: linear-gradient(145deg, #1f1f1f, #111); border-radius: 20px; padding: 40px 25px; list-style: none; border: 1px solid var(--bordeaux); margin-bottom: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative; text-align: center;">
             <div style="position: absolute; top: -15px; right: 20px; background: var(--gold); color: #111; padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);">
                 <i class="fa-solid fa-star"></i> Match ${matchScore}%
             </div>
             <p style="color: var(--gold); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; margin-top: 15px;">La Scelta del Sommelier</p>
+            
+            ${immagineHtml}
+            
             <h3 style="font-family: 'Playfair Display', serif; color: #fff; margin: 0 0 10px 0; font-size: 2.2rem;">${v.nome}</h3>
             <p style="color: #aaa; font-size: 1.2rem; margin-bottom: 25px;">Prezzo stimato: <strong style="color: var(--gold);">${v.prezzo}€</strong></p>
             <div style="background: var(--bordeaux-dark); border-radius: 12px; padding: 25px; text-align: left; margin-bottom: 30px; position: relative;">
