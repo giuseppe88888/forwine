@@ -267,3 +267,14 @@ li h3 {
     background-color: #1ebe57;
     transform: translateY(-2px);
 }
+/* FEEDBACK VISIVO PER IL CLICK DEI BOTTONI */
+.choice-card {
+    transition: all 0.2s ease-in-out;
+}
+
+.choice-card.selezionato {
+    border: 2px solid #d4af37;
+    background-color: rgba(212, 175, 55, 0.15);
+    transform: scale(0.96);
+    box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.4);
+}
