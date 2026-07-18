@@ -1,47 +1,52 @@
 function mostraRisultatiMagici() {
-    const container = document.getElementById('wizard-container');
-    const risultati = document.getElementById('risultati');
-    const lista = document.getElementById('lista-vini');
+    console.group("DEBUG RICERCA");
+    
+    // 1. Verifiche base
+    console.log("Valore Cliccato Piatto:", userPiatto);
+    console.log("Valore Cliccato Occasione:", userOccasione);
+    console.log("Budget Impostato:", userBudget);
+    
+    if (typeof viniDatabase === 'undefined') {
+        console.error("ERRORE: viniDatabase non trovato!");
+        return;
+    }
 
-    container.style.display = 'none';
-    risultati.style.display = 'block';
-    lista.innerHTML = "<li>Cercando...</li>";
-
-    const traduttore = {
-        piatto: {
-            'carne_rossa': ['carne_rossa'],
-            'carne_bianca': ['carne_bianca'],
-            'pesce': ['pesce'],
-            'pizza': ['pizza'],
-            'vegan': ['formaggi', 'etnico', 'verdure'],
-            'dessert': ['dolce', 'dessert']
-        },
-        occasione: {
-            'amici': ['cena_amici', 'aperitivo', 'festa'],
-            'appuntamento': ['appuntamento', 'romantico', 'regalo'],
-            'famiglia': ['pranzo_domenica', 'cena_amici', 'pranzo'],
-            'relax': ['relax', 'divano', 'aperitivo']
-        }
-    };
-
-    const tagPiatti = userPiatto ? (traduttore.piatto[userPiatto] || [userPiatto]) : null;
-    const tagOccasioni = userOccasione ? (traduttore.occasione[userOccasione] || [userOccasione]) : null;
-
+    // 2. Filtraggio VERBOSO
     const consigli = viniDatabase.filter(vino => {
-        // Se non hai selezionato un filtro, il match è "automaticamente vero"
-        const matchPiatto = tagPiatti ? tagPiatti.some(t => vino.piatti.includes(t)) : true;
-        const matchOccasione = tagOccasioni ? tagOccasioni.some(t => vino.occasioni.includes(t)) : true;
-        const matchBudget = userBudget > 0 ? Number(vino.prezzo) <= userBudget : true;
+        // Normalizziamo i tag del vino in stringhe semplici per il confronto
+        const piattiVino = vino.piatti.map(p => String(p).toLowerCase().trim());
+        const occasioniVino = vino.occasioni.map(o => String(o).toLowerCase().trim());
+
+        // Normalizziamo l'input dell'utente
+        const inputPiatto = String(userPiatto).toLowerCase().trim();
+        const inputOccasione = String(userOccasione).toLowerCase().trim();
+
+        const matchPiatto = piattiVino.includes(inputPiatto);
+        const matchOccasione = occasioniVino.includes(inputOccasione);
+        const matchBudget = Number(vino.prezzo) <= userBudget;
+
+        // Se trovi almeno un vino, loggalo
+        if (matchPiatto && matchOccasione && matchBudget) {
+            console.log("✅ MATCH TROVATO:", vino.nome);
+        }
 
         return matchPiatto && matchOccasione && matchBudget;
     });
 
+    console.log("Risultati totali trovati:", consigli.length);
+    console.groupEnd();
+
+    // 3. UI
+    document.getElementById('wizard-container').style.display = 'none';
+    document.getElementById('risultati').style.display = 'block';
+    const lista = document.getElementById('lista-vini');
     lista.innerHTML = "";
+
     if (consigli.length === 0) {
-        lista.innerHTML = "<li><h3>Nessun vino trovato</h3><p>Prova a cambiare i parametri.</p></li>";
+        lista.innerHTML = "<li><h3>Nessun vino trovato.</h3><p>Controlla la console (F12) per vedere cosa stavo cercando.</p></li>";
     } else {
         consigli.slice(0, 6).forEach(vino => {
             lista.innerHTML += `<li><h3>${vino.nome}</h3><p>${vino.prezzo}€</p></li>`;
         });
     }
-}
+}s
