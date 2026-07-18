@@ -71,3 +71,7 @@ function mostraRisultati() {
         lista.innerHTML += `<li><h3>${v.nome}</h3><p>${v.prezzo}€</p></li>`;
     });
 }
+// Funzione per ricaricare e azzerare tutto
+function ricomincia() {
+    location.reload();
+}
