@@ -1,4 +1,4 @@
-console.log("🚀 MOTORE AVVIATO: Versione con Immagini Attiva");
+console.log("🚀 MOTORE AVVIATO: Wizard a 5 risultati, Ricerca libera illimitata!");
 
 let userPiatto = '';
 let userOccasione = '';
@@ -100,7 +100,8 @@ function mostraRisultati() {
         return matchPiatto && matchOccasione && v.prezzo <= userBudget;
     });
 
-    generaCards(risultati, true);
+    // 🔴 WIZARD: Manteniamo il limite a 5
+    generaCards(risultati, true, 5);
 }
 
 function cercaTestoLibero() {
@@ -134,10 +135,11 @@ function cercaTestoLibero() {
         (v.motivo && v.motivo.toLowerCase().includes(query))
     );
 
-    generaCards(risultati, false);
+    // 🟢 RICERCA LIBERA: Nessun limite (0 = Tutti i risultati)
+    generaCards(risultati, false, 0);
 }
 
-function generaCards(risultati, usaIntroPersonale) {
+function generaCards(risultati, usaIntroPersonale, limite) {
     const lista = document.getElementById('lista-vini');
     if(!lista) return;
     lista.innerHTML = ""; 
@@ -151,8 +153,13 @@ function generaCards(risultati, usaIntroPersonale) {
         return;
     }
 
-    risultati.slice(0, 5).forEach((v, index) => {
-        let matchScore = 99 - (index * 2); 
+    // Applica il limite solo se "limite" è maggiore di 0
+    let viniDaMostrare = limite > 0 ? risultati.slice(0, limite) : risultati;
+
+    viniDaMostrare.forEach((v, index) => {
+        // Calcolo Affinità: non scende mai sotto l'85% per le liste lunghe
+        let matchScore = Math.max(85, 99 - (index * 2)); 
+        
         let ricercaShopping = encodeURIComponent(v.nome + " vino bottiglia 75cl");
         let linkShopping = "https://www.google.com/search?tbm=shop&q=" + ricercaShopping;
         let testoWhatsapp = encodeURIComponent("🍷 Guarda cosa ho trovato su FORWINE: " + v.nome + " (Circa " + v.prezzo + "€). Perfetto per noi!");
@@ -167,7 +174,6 @@ function generaCards(risultati, usaIntroPersonale) {
             if (userPiatto === 'dessert_formaggi') intro = "I dolci e i formaggi richiedono un calice speciale che sappia bilanciare i sapori. ";
         }
 
-        // LA MAGIA DELLE IMMAGINI È QUI: Se c'è l'immagine la carica, sennò lascia vuoto.
         let immagineHtml = v.immagine ? `<img src="${v.immagine}" alt="${v.nome}" style="max-height: 250px; width: auto; margin: 15px auto 25px auto; display: block; border-radius: 8px; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));">` : '';
 
         lista.innerHTML += `
