@@ -4,18 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- OTTIMIZZAZIONE SEO BASE -->
     <title>FORWINE | Il tuo Sommelier Digitale</title>
-    <meta name="description" content="Scegli il vino perfetto per ogni occasione. Un'intelligenza artificiale e un database di oltre 500 etichette per abbinare cibo, budget e atmosfera.">
-    <meta name="keywords" content="abbinamento vino, scegliere vino, sommelier digitale, vini italiani, vino per cena">
-    <meta name="author" content="Il tuo Nome">
-
-    <!-- TAG PER LE CONDIVISIONI SOCIAL (WhatsApp, Facebook, ecc.) -->
-    <meta property="og:title" content="FORWINE | Il Sommelier Digitale">
-    <meta property="og:description" content="Non sai che vino scegliere? Rispondi a 3 domande e trova l'abbinamento perfetto.">
-    <meta property="og:type" content="website">
-
-    <!-- IMPORTAZIONE FONT ELEGANTE (Google Fonts) -->
+    <meta name="description" content="Scegli il vino perfetto per ogni occasione. Un algoritmo avanzato e un database di oltre 500 etichette per abbinare cibo, budget e atmosfera.">
+    
+    <!-- LIBRERIA ICONE VETTORIALI - SPOSTATA QUI, DOVE DEVE STARE -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -28,78 +23,76 @@
             <h1>FORWINE</h1>
             <p class="slogan">Il tuo Sommelier Personale</p>
         </header>
-<!-- LIBRERIA ICONE VETTORIALI (FontAwesome) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
         <main>
-            <!-- LA DICHIARAZIONE DI AUTORITÀ (TRUST) -->
+            <!-- IL COPY CORRETTO: Onesto e professionale -->
             <section id="hero-trust" style="text-align: center; margin-bottom: 40px; padding: 20px; background: rgba(30,30,30,0.6); border-radius: 12px; border: 1px solid #d4af37;">
                 <h2 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 10px;">Il tuo Sommelier Digitale</h2>
                 <p style="color: #ddd; font-size: 1.1rem; line-height: 1.5;">
-                    Sfrutta l'intelligenza artificiale per esplorare un database esclusivo di <strong>oltre 500 etichette</strong> italiane e internazionali. 
+                    Sfrutta un <strong>algoritmo di abbinamento avanzato</strong> per esplorare un database esclusivo di <strong>oltre 500 etichette</strong> italiane e internazionali. 
                     Rispondi a 3 semplici domande o cerca direttamente un vino per trovare l'abbinamento perfetto.
                 </p>
-                <!-- Barra di ricerca libera per esperti -->
                 <div style="margin-top: 20px;">
                     <input type="text" id="ricerca-libera" placeholder="Es. Chianti, Barolo, Prosecco..." style="padding: 12px; width: 80%; max-width: 300px; border-radius: 8px; border: none; font-size: 1rem;">
                     <button onclick="cercaTestoLibero()" style="padding: 12px 20px; background: #d4af37; color: #111; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Cerca</button>
                 </div>
             </section>
 
-            <!-- IL FLUSSO STEP-BY-STEP (WIZARD) -->
             <div id="wizard-container">
                 
-              <!-- STEP 1: IL CIBO -->
-<section id="fase-1" class="fase-attiva">
-    <h2>🍷 Step 1: Cosa c'è nel piatto?</h2>
-    <div class="options-grid">
-        <button class="choice-card" onclick="salva('piatto', 'carne_rossa', 1, 2)"><i class="fa-solid fa-cow icona-lusso"></i><p>Carne Rossa</p></button>
-        <button class="choice-card" onclick="salva('piatto', 'carne_bianca', 1, 2)"><i class="fa-solid fa-drumstick-bite icona-lusso"></i><p>Carne Bianca</p></button>
-        <button class="choice-card" onclick="salva('piatto', 'pesce', 1, 2)"><i class="fa-solid fa-fish icona-lusso"></i><p>Pesce</p></button>
-        <button class="choice-card" onclick="salva('piatto', 'pizza', 1, 2)"><i class="fa-solid fa-pizza-slice icona-lusso"></i><p>Pizza</p></button>
-        <button class="choice-card" onclick="salva('piatto', 'vegan', 1, 2)"><i class="fa-solid fa-leaf icona-lusso"></i><p>Vegan / Veg</p></button>
-        <button class="choice-card" onclick="salva('piatto', 'dessert', 1, 2)"><i class="fa-solid fa-cheese icona-lusso"></i><p>Dessert / Formaggi</p></button>
-    </div>
-</section>
+              <!-- STEP 1 -->
+              <section id="fase-1" class="fase-attiva">
+                  <h2>🍷 Step 1: Cosa c'è nel piatto?</h2>
+                  <div class="options-grid">
+                      <button class="choice-card" onclick="salva('piatto', 'carne_rossa', 1, 2, this)"><i class="fa-solid fa-cow icona-lusso"></i><p>Carne Rossa</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'carne_bianca', 1, 2, this)"><i class="fa-solid fa-drumstick-bite icona-lusso"></i><p>Carne Bianca</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'pesce', 1, 2, this)"><i class="fa-solid fa-fish icona-lusso"></i><p>Pesce</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'pizza', 1, 2, this)"><i class="fa-solid fa-pizza-slice icona-lusso"></i><p>Pizza</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'vegan', 1, 2, this)"><i class="fa-solid fa-leaf icona-lusso"></i><p>Vegan / Veg</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'dessert', 1, 2, this)"><i class="fa-solid fa-cheese icona-lusso"></i><p>Dessert / Formaggi</p></button>
+                  </div>
+              </section>
 
-<!-- STEP 2: L'OCCASIONE -->
-<section id="fase-2" class="fase-nascosta" style="display: none;">
-    <h2>🥂 Step 2: Qual è l'atmosfera?</h2>
-    <button onclick="tornaFase(2, 1)" class="btn-indietro"><i class="fa-solid fa-arrow-left"></i> Torna indietro</button>
-    <div class="options-grid">
-        <button class="choice-card" onclick="salva('occasione', 'appuntamento', 2, 3)"><i class="fa-solid fa-heart icona-lusso"></i><p>Appuntamento</p></button>
-        <button class="choice-card" onclick="salva('occasione', 'amici', 2, 3)"><i class="fa-solid fa-champagne-glasses icona-lusso"></i><p>Cena tra amici</p></button>
-        <button class="choice-card" onclick="salva('occasione', 'famiglia', 2, 3)"><i class="fa-solid fa-house icona-lusso"></i><p>In Famiglia</p></button>
-        <button class="choice-card" onclick="salva('occasione', 'relax', 2, 3)"><i class="fa-solid fa-couch icona-lusso"></i><p>Relax Serale</p></button>
-    </div>
-</section>
+              <!-- STEP 2 -->
+              <section id="fase-2" class="fase-nascosta" style="display: none;">
+                  <h2>🥂 Step 2: Qual è l'atmosfera?</h2>
+                  <button onclick="tornaFase(2, 1)" class="btn-indietro"><i class="fa-solid fa-arrow-left"></i> Torna indietro</button>
+                  <div class="options-grid">
+                      <button class="choice-card" onclick="salva('occasione', 'appuntamento', 2, 3, this)"><i class="fa-solid fa-heart icona-lusso"></i><p>Appuntamento</p></button>
+                      <button class="choice-card" onclick="salva('occasione', 'amici', 2, 3, this)"><i class="fa-solid fa-champagne-glasses icona-lusso"></i><p>Cena tra amici</p></button>
+                      <button class="choice-card" onclick="salva('occasione', 'famiglia', 2, 3, this)"><i class="fa-solid fa-house icona-lusso"></i><p>In Famiglia</p></button>
+                      <button class="choice-card" onclick="salva('occasione', 'relax', 2, 3, this)"><i class="fa-solid fa-couch icona-lusso"></i><p>Relax Serale</p></button>
+                  </div>
+              </section>
 
-<!-- STEP 3: IL BUDGET -->
-<section id="fase-3" class="fase-nascosta" style="display: none;">
-    <h2>💰 Step 3: Il tuo budget</h2>
-    <button onclick="tornaFase(3, 2)" class="btn-indietro"><i class="fa-solid fa-arrow-left"></i> Torna indietro</button>
-    <div class="options-grid">
-        <button class="choice-card" onclick="salva('budget', '10')"><i class="fa-solid fa-coins icona-lusso"></i><p>Sotto i 10€</p></button>
-        <button class="choice-card" onclick="salva('budget', '20')"><i class="fa-solid fa-money-bill-wave icona-lusso"></i><p>Fino a 20€</p></button>
-        <button class="choice-card" onclick="salva('budget', '50')"><i class="fa-solid fa-credit-card icona-lusso"></i><p>Fino a 50€</p></button>
-        <button class="choice-card" onclick="salva('budget', '1000')"><i class="fa-solid fa-gem icona-lusso"></i><p>Nessun limite</p></button>
-    </div>
-</section>
+              <!-- STEP 3 -->
+              <section id="fase-3" class="fase-nascosta" style="display: none;">
+                  <h2>💰 Step 3: Il tuo budget</h2>
+                  <button onclick="tornaFase(3, 2)" class="btn-indietro"><i class="fa-solid fa-arrow-left"></i> Torna indietro</button>
+                  <div class="options-grid">
+                      <button class="choice-card" onclick="salva('budget', '10', 3, null, this)"><i class="fa-solid fa-coins icona-lusso"></i><p>Sotto i 10€</p></button>
+                      <button class="choice-card" onclick="salva('budget', '20', 3, null, this)"><i class="fa-solid fa-money-bill-wave icona-lusso"></i><p>Fino a 20€</p></button>
+                      <button class="choice-card" onclick="salva('budget', '50', 3, null, this)"><i class="fa-solid fa-credit-card icona-lusso"></i><p>Fino a 50€</p></button>
+                      <button class="choice-card" onclick="salva('budget', '1000', 3, null, this)"><i class="fa-solid fa-gem icona-lusso"></i><p>Nessun limite</p></button>
+                  </div>
+              </section>
+
+            </div>
 
             <!-- RISULTATI -->
             <section id="risultati" style="display: none;">
-                <h2>🍾 La Selezione del Sommelier</h2>
-                <button onclick="tornaFase(4, 1)" class="btn-indietro" style="margin-bottom: 20px;">🔄 Ricomincia da capo</button>
-                <ul id="lista-vini">
-                    <!-- I vini appariranno qui -->
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #d4af37; text-align: center;">🍾 La Selezione del Sommelier</h2>
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <button onclick="ricomincia()" class="btn-indietro" style="display: inline-block;">🔄 Esegui un'altra ricerca</button>
+                </div>
+                <ul id="lista-vini" style="padding: 0;">
+                    <!-- Le schede eleganti appariranno qui -->
                 </ul>
             </section>
         </main>
     </div>
 
-    <!-- PRIMA IL DATABASE CON I VINI -->
     <script src="database.js"></script>
-
-    <!-- POI IL MOTORE JAVASCRIPT -->
     <script src="motore.js"></script>
 </body>
 </html>
