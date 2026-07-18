@@ -40,28 +40,29 @@
 
             <div id="wizard-container">
                 
-              <!-- STEP 1 -->
-              <section id="fase-1" class="fase-attiva">
-                  <h2>🍷 Step 1: Cosa c'è nel piatto?</h2>
+              <!-- STEP 1: Piatto -->
+              <section id="fase-1" class="step-section">
+                  <h2 class="step-title">Cosa c'è nel piatto stasera?</h2>
                   <div class="options-grid">
-                      <button class="choice-card" onclick="salva('piatto', 'carne_rossa', 1, 2, this)"><i class="fa-solid fa-cow icona-lusso"></i><p>Carne Rossa</p></button>
-                      <button class="choice-card" onclick="salva('piatto', 'carne_bianca', 1, 2, this)"><i class="fa-solid fa-drumstick-bite icona-lusso"></i><p>Carne Bianca</p></button>
-                      <button class="choice-card" onclick="salva('piatto', 'pesce', 1, 2, this)"><i class="fa-solid fa-fish icona-lusso"></i><p>Pesce</p></button>
-                      <button class="choice-card" onclick="salva('piatto', 'pizza', 1, 2, this)"><i class="fa-solid fa-pizza-slice icona-lusso"></i><p>Pizza</p></button>
-                      <button class="choice-card" onclick="salva('piatto', 'vegan', 1, 2, this)"><i class="fa-solid fa-leaf icona-lusso"></i><p>Vegan / Veg</p></button>
-                      <button class="choice-card" onclick="salva('piatto', 'dessert', 1, 2, this)"><i class="fa-solid fa-cheese icona-lusso"></i><p>Dessert / Formaggi</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'carne_rossa', 1, 2, this)"><i class="fa-solid fa-cow"></i><p>Carne Rossa</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'carne_bianca', 1, 2, this)"><i class="fa-solid fa-drumstick-bite"></i><p>Carne Bianca</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'pesce', 1, 2, this)"><i class="fa-solid fa-fish"></i><p>Pesce</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'primi_pizza', 1, 2, this)"><i class="fa-solid fa-pizza-slice"></i><p>Pasta / Pizza</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'etnico_veg', 1, 2, this)"><i class="fa-solid fa-seedling"></i><p>Etnico / Veg</p></button>
+                      <button class="choice-card" onclick="salva('piatto', 'dessert_formaggi', 1, 2, this)"><i class="fa-solid fa-cheese"></i><p>Dolci / Formaggi</p></button>
                   </div>
               </section>
 
-              <!-- STEP 2 -->
-              <section id="fase-2" class="fase-nascosta" style="display: none;">
-                  <h2>🥂 Step 2: Qual è l'atmosfera?</h2>
-                  <button onclick="tornaFase(2, 1)" class="btn-indietro"><i class="fa-solid fa-arrow-left"></i> Torna indietro</button>
+              <!-- STEP 2: Atmosfera -->
+              <section id="fase-2" class="step-section" style="display: none;">
+                  <h2 class="step-title">Che atmosfera cerchi?</h2>
                   <div class="options-grid">
-                      <button class="choice-card" onclick="salva('occasione', 'appuntamento', 2, 3, this)"><i class="fa-solid fa-heart icona-lusso"></i><p>Appuntamento</p></button>
-                      <button class="choice-card" onclick="salva('occasione', 'amici', 2, 3, this)"><i class="fa-solid fa-champagne-glasses icona-lusso"></i><p>Cena tra amici</p></button>
-                      <button class="choice-card" onclick="salva('occasione', 'famiglia', 2, 3, this)"><i class="fa-solid fa-house icona-lusso"></i><p>In Famiglia</p></button>
-                      <button class="choice-card" onclick="salva('occasione', 'relax', 2, 3, this)"><i class="fa-solid fa-couch icona-lusso"></i><p>Relax Serale</p></button>
+                      <button class="choice-card" onclick="salva('occasione', 'appuntamento', 2, 3, this)"><i class="fa-solid fa-heart"></i><p>Appuntamento</p></button>
+                      <button class="choice-card" onclick="salva('occasione', 'amici_festa', 2, 3, this)"><i class="fa-solid fa-champagne-glasses"></i><p>Amici / Festa</p></button>
+                      <button class="choice-card" onclick="salva('occasione', 'famiglia_grigliata', 2, 3, this)"><i class="fa-solid fa-fire-burner"></i><p>Famiglia / Griglia</p></button>
+                      <button class="choice-card" onclick="salva('occasione', 'relax', 2, 3, this)"><i class="fa-solid fa-couch"></i><p>Relax Serale</p></button>
+                      <button class="choice-card" onclick="salva('occasione', 'aperitivo', 2, 3, this)"><i class="fa-solid fa-martini-glass"></i><p>Aperitivo</p></button>
+                      <button class="choice-card" onclick="salva('occasione', 'regalo', 2, 3, this)"><i class="fa-solid fa-gift"></i><p>Regalo Importante</p></button>
                   </div>
               </section>
 
