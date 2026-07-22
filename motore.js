@@ -145,11 +145,32 @@ function generaCards(risultati, usaIntroPersonale, limite) {
     lista.innerHTML = ""; 
 
     if (risultati.length === 0) {
-        lista.innerHTML = `<div style="text-align: center; color: #fff; padding: 40px; border: 1px dashed #d4af37; border-radius: 12px; background: rgba(30,30,30,0.8);">
-            <i class="fa-solid fa-wine-glass-empty" style="font-size: 3rem; color: #d4af37; margin-bottom: 15px;"></i>
-            <h3 style="margin-bottom:10px;">Nessuna etichetta trovata</h3>
-            <p style="color: #aaa;">Il sommelier non ha trovato l'abbinamento perfetto con questi parametri. Prova ad alzare il budget o cambiare termini.</p>
-        </div>`;
+        // L'UTENTE HA CHIESTO TROPPO? SFODERIAMO IL JOLLY.
+        // Peschiamo un Franciacorta o uno Champagne come passe-partout di lusso
+        let vinoJolly = viniDatabase.find(v => v.nome.includes("Franciacorta DOCG")) || viniDatabase[0];
+        
+        let ricercaShopping = encodeURIComponent(vinoJolly.nome + " vino bottiglia 75cl");
+        let linkShopping = "https://www.google.com/search?tbm=shop&q=" + ricercaShopping;
+
+        lista.innerHTML = `
+        <li style="background: linear-gradient(145deg, #1f1f1f, #111); border-radius: 20px; padding: 40px 25px; list-style: none; border: 1px solid var(--gold); margin-bottom: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative; text-align: center;">
+            <div style="position: absolute; top: -15px; right: 20px; background: #fff; color: #111; padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">
+                <i class="fa-solid fa-life-ring"></i> L'Alternativa Jolly
+            </div>
+            <i class="fa-solid fa-wine-glass-empty" style="font-size: 3rem; color: #555; margin-bottom: 15px;"></i>
+            <h3 style="font-family: 'Playfair Display', serif; color: #fff; margin: 0 0 10px 0; font-size: 1.8rem;">Richiesta Estrema!</h3>
+            <p style="color: #aaa; font-size: 1.1rem; margin-bottom: 25px; line-height: 1.5;">Non ho trovato un abbinamento perfetto sotto questo budget per questi parametri esatti. Ma non ti lascio a bicchiere vuoto.</p>
+            
+            <div style="background: var(--bordeaux-dark); border-radius: 12px; padding: 25px; text-align: left; margin-bottom: 30px;">
+                <h4 style="color: var(--gold); margin-bottom: 10px; font-size: 1.1rem;">La Proposta Universale:</h4>
+                <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 10px;">${vinoJolly.nome}</h3>
+                <p style="color: #eee; line-height: 1.6; font-size: 1rem;">Quando le regole si fanno troppo strette, una grande bollicina salva sempre la serata. ${vinoJolly.motivo}</p>
+            </div>
+            
+            <a href="${linkShopping}" target="_blank" style="display: inline-block; width: 100%; background: var(--gold); color: #000; padding: 16px 20px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1rem; text-transform: uppercase;">
+                <i class="fa-solid fa-cart-shopping"></i> Salva la serata
+            </a>
+        </li>`;
         return;
     }
 
