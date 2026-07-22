@@ -181,11 +181,15 @@ function generaCards(risultati, usaIntroPersonale, limite) {
         // Calcolo Affinità: non scende mai sotto l'85% per le liste lunghe
         let matchScore = Math.max(85, 99 - (index * 2)); 
         
-        let ricercaShopping = encodeURIComponent(v.nome + " vino bottiglia 75cl");
+       let ricercaShopping = encodeURIComponent(v.nome + " vino bottiglia 75cl");
         let linkShopping = "https://www.google.com/search?tbm=shop&q=" + ricercaShopping;
-        let testoWhatsapp = encodeURIComponent("🍷 Guarda cosa ho trovato su FORWINE: " + v.nome + " (Circa " + v.prezzo + "€). Perfetto per noi!");
+        
+        // Creiamo il messaggio WhatsApp definitivo con i link
+        let urlSito = window.location.href.split('#')[0]; // Prende il link esatto della tua app
+        let messaggioWA = "🍷 Guarda cosa mi ha consigliato il Sommelier di FORWINE!\n\n🍾 *" + v.nome + "* (Circa " + v.prezzo + "€).\n\n🛒 Guardalo qui: " + linkShopping + "\n\n✨ Fai il test anche tu: " + urlSito;
+        
+        let testoWhatsapp = encodeURIComponent(messaggioWA);
         let linkWhatsapp = "https://api.whatsapp.com/send?text=" + testoWhatsapp;
-
         let intro = "";
         if (usaIntroPersonale && index === 0) {
             intro = "Eccellente scelta. ";
