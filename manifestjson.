@@ -1,0 +1,17 @@
+{
+  "name": "FORWINE | Sommelier Personale",
+  "short_name": "FORWINE",
+  "description": "Il tuo sommelier tascabile personale.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3014/3014498.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
