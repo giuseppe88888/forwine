@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FORWINE | Il tuo Sommelier Digitale</title>
+    <!-- Collegamento alla PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3014/3014498.png">
     <!-- Open Graph / Anteprima WhatsApp e Social -->
     <meta property="og:title" content="FORWINE | Il tuo Sommelier Personale">
     <meta property="og:description" content="Rispondi a 3 semplici domande e scopri il vino perfetto per la tua serata.">
@@ -95,5 +98,15 @@
 
     <script src="database.js"></script>
     <script src="motore.js"></script>
+    <!-- Avvio del Service Worker per l'offline -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('✅ Service Worker Registrato!'))
+            .catch(err => console.log('❌ Errore Service Worker:', err));
+        });
+      }
+    </script>
 </body>
 </html>
