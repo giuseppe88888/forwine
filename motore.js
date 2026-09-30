@@ -1,4 +1,4 @@
-console.log("🚀 MOTORE AVVIATO: Cantina e Preferiti attivi!");
+console.log("🚀 MOTORE AVVIATO: Cantina, Preferiti e Monetizzazione Amazon attivi!");
 
 let userPiatto = '';
 let userOccasione = '';
@@ -176,9 +176,10 @@ function generaCards(risultati, usaIntroPersonale, limite) {
     lista.innerHTML = ""; 
 
     if (risultati.length === 0) {
-        // IL JOLLY PER LE SCELTE ESTREME
+        // IL JOLLY PER LE SCELTE ESTREME - AGGIORNATO CON AMAZON
         let vinoJolly = viniDatabase.find(v => v.nome.includes("Franciacorta DOCG")) || viniDatabase[0];
-        let linkShopping = "https://www.google.com/search?tbm=shop&q=" + encodeURIComponent(vinoJolly.nome + " vino bottiglia 75cl");
+        // IL LINK MAGICO DI AMAZON: Cerca il vino e inserisce il tuo codice forwine-21
+        let linkShopping = "https://www.amazon.it/s?k=" + encodeURIComponent(vinoJolly.nome + " vino") + "&tag=forwine-21";
 
         lista.innerHTML = `
         <li style="background: linear-gradient(145deg, #1f1f1f, #111); border-radius: 20px; padding: 40px 25px; list-style: none; border: 1px solid var(--gold); margin-bottom: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); position: relative; text-align: center;">
@@ -194,7 +195,7 @@ function generaCards(risultati, usaIntroPersonale, limite) {
                 <p style="color: #eee; line-height: 1.6; font-size: 1rem;">Quando le regole si fanno troppo strette, una grande bollicina salva sempre la serata. ${vinoJolly.motivo}</p>
             </div>
             <a href="${linkShopping}" target="_blank" style="display: inline-block; width: 100%; background: var(--gold); color: #000; padding: 16px 20px; text-decoration: none; border-radius: 10px; font-weight: bold; text-transform: uppercase;">
-                <i class="fa-solid fa-cart-shopping"></i> Scopri l'alternativa
+                <i class="fa-brands fa-amazon"></i> Acquista su Amazon
             </a>
         </li>`;
         return;
@@ -205,8 +206,11 @@ function generaCards(risultati, usaIntroPersonale, limite) {
 
     viniDaMostrare.forEach((v, index) => {
         let matchScore = Math.max(85, 99 - (index * 2)); 
-        let ricercaShopping = encodeURIComponent(v.nome + " vino bottiglia 75cl");
-        let linkShopping = "https://www.google.com/search?tbm=shop&q=" + ricercaShopping;
+        
+        // IL LINK MAGICO DI AMAZON: Cerca il vino e inserisce il tuo codice forwine-21
+        let ricercaShopping = encodeURIComponent(v.nome + " vino");
+        let linkShopping = "https://www.amazon.it/s?k=" + ricercaShopping + "&tag=forwine-21";
+        
         let urlSito = window.location.href.split('#')[0];
         let testoWhatsapp = encodeURIComponent("🍷 Guarda cosa mi ha consigliato il Sommelier di FORWINE!\n\n🍾 *" + v.nome + "* (Circa " + v.prezzo + "€).\n\n🛒 Guardalo qui: " + linkShopping + "\n\n✨ Fai il test anche tu: " + urlSito);
         let linkWhatsapp = "https://api.whatsapp.com/send?text=" + testoWhatsapp;
@@ -259,7 +263,7 @@ function generaCards(risultati, usaIntroPersonale, limite) {
             
             <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
                 <a href="${linkShopping}" target="_blank" style="flex: 1; min-width: 200px; background: var(--gold); color: #000; padding: 16px 20px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">
-                    <i class="fa-solid fa-cart-shopping"></i> Cerca e Acquista
+                    <i class="fa-brands fa-amazon"></i> Acquista su Amazon
                 </a>
                 <a href="${linkWhatsapp}" target="_blank" style="flex: 1; min-width: 200px; background: #25D366; color: #fff; padding: 16px 20px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">
                     <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Condividi
