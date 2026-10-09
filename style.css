@@ -65,9 +65,31 @@ body {
 .mobile-nav-item { display: flex; align-items: center; gap: 15px; font-size: 1.2rem; color: var(--text-dark); text-decoration: none; padding: 10px 0; border-bottom: 1px solid #f0f0f0;}
 .mobile-nav-item i { color: var(--bordeaux); width: 25px; text-align: center; }
 
-@media (max-width: 768px) {
-    .mobile-menu-btn { display: block; }
-    .navbar-menu, .navbar-profile { display: none !important; }
+@media (max-width: 480px) {
+    .confronta-section { padding: 25px 15px !important; }
+    .confronta-title { font-size: 1.8rem !important; }
+    .dna-modal-box { padding: 25px 15px !important; }
+    
+    /* Forza 2 colonne per il wizard principale */
+    .options-grid { 
+        grid-template-columns: repeat(2, 1fr) !important; 
+        gap: 10px !important; 
+    }
+    
+    /* Riduce leggermente le spaziature interne per farle stare comode */
+    .choice-card { 
+        padding: 15px 10px !important; 
+    }
+    
+    /* Rimpicciolisce appena l'icona per non far sbavare il testo */
+    .choice-card i { 
+        font-size: 1.6rem !important; 
+        margin-bottom: 8px !important; 
+    }
+    
+    .choice-card p {
+        font-size: 0.9rem !important;
+    }
 }
 
 /* --- CONTAINER CENTRALE E HERO --- */
