@@ -89,14 +89,20 @@
         .search-tag { background: transparent; border: 1px solid var(--border-color); padding: 8px 18px; border-radius: 30px; font-size: 0.85rem; color: var(--text-dark); cursor: pointer; transition: all 0.3s; }
         .search-tag:hover { border-color: var(--bordeaux); color: var(--bordeaux); background: var(--white); }
 
-        /* VIDEO PRESENTATION SECTION */
-        .video-presentation-section { max-width: 1100px; margin: 40px auto 80px; padding: 0 20px; }
-        .video-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; background-color: #111; border-radius: 12px; overflow: hidden; background-image: url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center; box-shadow: 0 30px 60px rgba(0,0,0,0.15); display: flex; justify-content: center; align-items: center; }
-        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6)); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
-        .play-btn-large { width: 90px; height: 90px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.5); border-radius: 50%; color: var(--white); font-size: 2rem; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s ease; margin-bottom: 25px; padding-left: 6px; }
-        .play-btn-large:hover { background: var(--bordeaux); border-color: var(--bordeaux); transform: scale(1.05); }
-        .video-title { color: var(--white); font-size: 2.2rem; margin: 0 0 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        .video-subtitle { color: rgba(255,255,255,0.8); font-size: 1.1rem; }
+       <!-- VIDEO PRESENTATION -->
+<section class="video-presentation-section dna-section-wrapper" id="sezione-video-intro">
+    <div class="video-wrapper">
+        <video 
+            controls 
+            playsinline 
+            preload="metadata"
+            poster="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+            style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+            <source src="presentazione.mp4" type="video/mp4">
+            Il tuo browser non supporta la riproduzione video.
+        </video>
+    </div>
+</section>
 
         /* WIZARD ENGINE */
         .wizard-engine { max-width: 900px; margin: 20px auto 80px; background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; padding: 60px; box-shadow: 0 20px 50px rgba(0,0,0,0.02); position: relative; }
