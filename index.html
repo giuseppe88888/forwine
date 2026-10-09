@@ -89,20 +89,10 @@
         .search-tag { background: transparent; border: 1px solid var(--border-color); padding: 8px 18px; border-radius: 30px; font-size: 0.85rem; color: var(--text-dark); cursor: pointer; transition: all 0.3s; }
         .search-tag:hover { border-color: var(--bordeaux); color: var(--bordeaux); background: var(--white); }
 
-       <!-- VIDEO PRESENTATION -->
-<section class="video-presentation-section dna-section-wrapper" id="sezione-video-intro">
-    <div class="video-wrapper">
-        <video 
-            controls 
-            playsinline 
-            preload="metadata"
-            poster="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
-            style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
-            <source src="presentazione.mp4" type="video/mp4">
-            Il tuo browser non supporta la riproduzione video.
-        </video>
-    </div>
-</section>
+        /* VIDEO PRESENTATION SECTION */
+        .video-presentation-section { max-width: 1100px; margin: 40px auto 80px; padding: 0 20px; }
+        .video-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; background-color: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.15); display: flex; justify-content: center; align-items: center; }
+        .video-wrapper video { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block; }
 
         /* WIZARD ENGINE */
         .wizard-engine { max-width: 900px; margin: 20px auto 80px; background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; padding: 60px; box-shadow: 0 20px 50px rgba(0,0,0,0.02); position: relative; }
@@ -233,7 +223,6 @@
         .dna-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(252, 250, 248, 0.9); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 2000; }
         .dna-modal-box { background: var(--white); width: 90%; max-width: 550px; padding: 60px 50px; border-radius: 8px; border: 1px solid var(--border-color); position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.06); }
         
-        /* DNA OPTION BUTTONS - FIX 3 */
         .dna-option-btn { text-align: left; padding: 20px; font-size: 1rem; border-radius: 6px; width: 100%; cursor: pointer; transition: all 0.3s; background: var(--white); border: 1px solid var(--border-color); font-family: 'Lato', sans-serif; color: var(--text-dark); }
         .dna-option-btn:hover { border-color: var(--bordeaux); background-color: #FCFAF8; }
         
@@ -329,16 +318,17 @@
                 </div>
             </section>
 
-            <!-- VIDEO PRESENTATION -->
+            <!-- VIDEO PRESENTATION (CORRETTO NEL BODY) -->
             <section class="video-presentation-section dna-section-wrapper" id="sezione-video-intro">
                 <div class="video-wrapper">
-                    <div class="video-overlay">
-                        <button class="play-btn-large" aria-label="Riproduci Video di Presentazione">
-                            <i class="fa-solid fa-play"></i>
-                        </button>
-                        <h3 class="video-title serif-font">L'Esperienza FORWINE</h3>
-                        <p class="video-subtitle">Scopri come la tecnologia incontra la passione per il vino. (Video in arrivo)</p>
-                    </div>
+                    <video 
+                        controls 
+                        playsinline 
+                        preload="metadata"
+                        poster="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80">
+                        <source src="presentazione.mp4" type="video/mp4">
+                        Il tuo browser non supporta la riproduzione video.
+                    </video>
                 </div>
             </section>
 
@@ -576,7 +566,7 @@
                             </div>
                         </div>
 
-                        <!-- Tab Settings (Modulo per salvare sul database) -->
+                        <!-- Tab Settings -->
                         <div id="tab-settings" class="dash-tab-pane">
                             <h3 class="dash-section-title serif-font">Dati Personali</h3>
                             <form onsubmit="window.salvaImpostazioni(event)">
@@ -668,9 +658,8 @@
         </div>
     </div>
 
-    <!-- PREVENZIONE CRASH SCRIPT ESTERNI (FIX 4) -->
+    <!-- PREVENZIONE CRASH SCRIPT ESTERNI -->
     <script>
-        // Funzioni di fallback temporanee prima che i file JS esterni le sovrascrivano
         window.cercaTestoLibero = function() { alert('Funzione di ricerca in caricamento o temporaneamente non disponibile.'); };
         window.salva = function(tipo, valore, step, nextStep, btn) { alert('Motore di raccomandazione in caricamento.'); };
         window.confermaVinoManuale = function(id) { alert('Azione non disponibile. Attendere caricamento.'); };
@@ -686,7 +675,7 @@
     <script src="motore.js"></script>
     <script src="confronta.js"></script>
 
-    <!-- FUNZIONI DI INTERFACCIA (Gestione menu e popup) -->
+    <!-- FUNZIONI DI INTERFACCIA -->
     <script>
     function toggleMobileMenu() { const menu = document.getElementById('mobile-nav'); menu.classList.contains('active') ? menu.classList.remove('active') : menu.classList.add('active'); }
     function chiudiAuth() { document.getElementById('modal-auth').style.display = 'none'; }
@@ -700,7 +689,6 @@
     function apriDashboardProfilo() { nascondiExtra(); ['progress-container', 'wizard-container', 'risultati', 'hero-trust', 'sezione-confronta'].forEach(id => { let el = document.getElementById(id); if(el) el.style.display = 'none'; }); document.getElementById('sezione-profilo').style.display = 'block'; switchProfileTab('overview'); window.scrollTo(0, 0); }
     function switchProfileTab(tabName) { document.querySelectorAll('.dash-tab-pane').forEach(el => el.classList.remove('active')); document.querySelectorAll('.dash-nav-btn').forEach(el => el.classList.remove('active')); const tabEl = document.getElementById('tab-' + tabName); const btnEl = document.getElementById('btn-tab-' + tabName); if(tabEl) tabEl.classList.add('active'); if(btnEl) btnEl.classList.add('active'); }
     
-    // FIX 1: CREAZIONE DELLA FUNZIONE MANCANTE PER LA CANTINA DIGITALE
     function mostraCantinaPulita() {
         if (window.utenteLoggato) {
             apriDashboardProfilo();
@@ -711,16 +699,14 @@
     }
     </script>
 
-
-    <!-- FIREBASE: IL TUO VERO DATABASE CONNESSO (Autenticazione + Profilo + Dati) -->
+    <!-- FIREBASE: BACKEND -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, updatePassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-        // FIX 2: NASCOSTA LA API KEY E I DATI SENSIBILI ESPOSTI
         const firebaseConfig = {
-            apiKey: "", // <--- SOSTITUISCI IN PRODUZIONE APPLICANDO LE RESTRIZIONI DI DOMINIO
+            apiKey: "AIzaSyDWdDLRadRE5OmpkhM1NQkqmXbnJ3OJLqQ",
             authDomain: "forwine-196c4.firebaseapp.com",
             projectId: "forwine-196c4",
             storageBucket: "forwine-196c4.firebasestorage.app",
@@ -740,38 +726,30 @@
                 const emailVera = user.email;
                 const nomeUtente = user.displayName || emailVera.split('@')[0];
 
-                // Scriviamo i dati visivi base
                 document.getElementById('profilo-username').innerText = nomeUtente;
                 document.getElementById('profilo-iniziale').innerText = nomeUtente.charAt(0).toUpperCase();
                 document.getElementById('profilo-email').innerText = emailVera;
                 document.getElementById('form-edit-name').value = nomeUtente;
                 document.getElementById('form-edit-email').value = emailVera;
 
-                // Connessione al Database Firestore per prendere i dati aggiuntivi (Cantina e DNA)
                 const userRef = doc(db, "users", user.uid);
                 const docSnap = await getDoc(userRef);
 
                 if (docSnap.exists()) {
                     const datiSalvati = docSnap.data();
-                    
-                    // Mostra risultati DNA se presenti
                     if(datiSalvati.wineDna) {
                         document.getElementById('valore-stato-dna').innerText = "Completato";
                         document.getElementById('descrizione-dna-utente').innerText = datiSalvati.wineDna.titolo + " - " + datiSalvati.wineDna.vitigni;
                     }
-
-                    // Mostra conteggio cantina se presente (altrimenti 0)
                     if(datiSalvati.cantina) {
                         document.getElementById('valore-vini-cantina').innerText = datiSalvati.cantina.length;
                     }
                 } else {
-                    // Crea il documento dell'utente la prima volta che fa l'accesso
                     await setDoc(userRef, { cantina: [], wineDna: null });
                 }
 
             } else {
                 window.utenteLoggato = false;
-                // Resetta l'interfaccia se nessuno è loggato
                 document.getElementById('profilo-username').innerText = "...";
                 document.getElementById('profilo-email').innerText = "Effettua l'accesso per vedere i dati";
                 document.getElementById('profilo-iniziale').innerText = "";
@@ -781,9 +759,9 @@
             }
         });
 
-        // 2. FUNZIONE PER SALVARE LE MODIFICHE NEL FORM DEL PROFILO
+        // 2. SALVATAGGIO IMPOSTAZIONI
         window.salvaImpostazioni = async function(event) {
-            event.preventDefault(); // Impedisce alla pagina di ricaricarsi
+            event.preventDefault();
             const user = auth.currentUser;
             if(!user) return;
 
@@ -795,17 +773,15 @@
             btn.innerText = "Salvataggio in corso...";
 
             try {
-                // Aggiorna il Nome se è stato modificato
                 if(nuovoNome && nuovoNome !== user.displayName) {
                     await updateProfile(user, { displayName: nuovoNome });
                     document.getElementById('profilo-username').innerText = nuovoNome;
                     document.getElementById('profilo-iniziale').innerText = nuovoNome.charAt(0).toUpperCase();
                 }
                 
-                // Aggiorna la Password se ne è stata inserita una
                 if(nuovaPass) {
                     await updatePassword(user, nuovaPass);
-                    document.getElementById('form-edit-password').value = ""; // Svuota il campo per sicurezza
+                    document.getElementById('form-edit-password').value = "";
                 }
                 
                 alert("Dati aggiornati con successo!");
@@ -820,7 +796,7 @@
             }
         }
 
-        // 3. FUNZIONI DI REGISTRAZIONE E ACCESSO CHE INTERAGISCONO CON GOOGLE
+        // 3. REGISTRAZIONE E ACCESSO
         window.registraUtente = function() {
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
@@ -845,7 +821,7 @@
             signOut(auth).then(() => { tornaAllaHome(); }).catch((error) => console.error(error));
         }
 
-        // 4. FUNZIONE GLOBALE PER SALVARE IL DNA NEL DATABASE
+        // 4. SALVATAGGIO DNA NEL DB
         window.salvaRisultatoDnaNelDb = async function(risultatoDna) {
             const user = auth.currentUser;
             if (user) {
@@ -859,7 +835,6 @@
             else document.getElementById('modal-auth').style.display = 'flex';
         }
     </script>
-
 
     <!-- LOGICA DEL WINE DNA -->
     <script>
@@ -925,7 +900,6 @@
             <h3 class="serif-font" style="color: var(--text-dark); margin-bottom: 30px; font-size: 1.6rem; line-height: 1.4;">${q.titolo}</h3>
             <div style="display: flex; flex-direction: column; gap: 15px;">
         `;
-        // FIX 3: Rimossi gli stili in linea onmouseover e onmouseout a favore della classe CSS .dna-option-btn creata in testa al file
         q.opzioni.forEach((opt, idx) => {
             html += `<button class="dna-option-btn" onclick="rispondiDNA(${idx})">${opt.testo}</button>`;
         });
@@ -954,7 +928,6 @@
         for (let p in punteggiDNA) { if (punteggiDNA[p] > maxPunti) { maxPunti = punteggiDNA[p]; vincitore = p; } }
         const res = profiliDNA[vincitore];
         
-        // 1. Mostra il risultato a schermo
         document.getElementById('dna-profile-title').innerText = res.titolo;
         document.getElementById('dna-profile-desc').innerText = res.desc;
         document.getElementById('dna-profile-grapes').innerText = res.vitigni;
@@ -964,12 +937,10 @@
         loadingContainer.style.display = 'none'; resultContainer.style.opacity = '0'; resultContainer.style.display = 'block'; resultContainer.style.transition = 'opacity 0.4s ease';
         setTimeout(() => { resultContainer.style.opacity = '1'; }, 50);
         
-        // 2. Se l'utente è loggato, salva nel Database Firebase e aggiorna la Dashboard visiva
         if (window.utenteLoggato) {
             document.getElementById('valore-stato-dna').innerText = "Completato";
             document.getElementById('descrizione-dna-utente').innerText = res.titolo + " - " + res.vitigni;
             
-            // Invia i dati al cloud tramite la funzione collegata prima
             if (typeof window.salvaRisultatoDnaNelDb === 'function') {
                 window.salvaRisultatoDnaNelDb(res);
             }
