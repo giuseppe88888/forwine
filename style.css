@@ -247,16 +247,68 @@ body {
 .btn-reset-confronto { background: transparent; color: var(--bordeaux); border: 1px solid var(--bordeaux); padding: 12px 30px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; margin: 0 auto; }
 .btn-reset-confronto:hover { background: var(--bordeaux); color: #FFFFFF; }
 
-/* MEDIA QUERIES RESPONSIVE FINALI */
+
+/* ==========================================================================
+   MODIFICHE AGGIUNTIVE: RESPONSIVE, HERO E WIZARD CONFRONTA
+   ========================================================================== */
+
+/* 1. Hero Image Wrapper e Stile Desktop/Mobile */
+.hero-vineyard-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 35px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+    height: 300px;
+    position: relative;
+    border: 1px solid var(--border-color, #EAEAEA);
+}
+.hero-vineyard-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+.hero-vineyard-wrapper:hover .hero-vineyard-img {
+    transform: scale(1.03);
+}
+
+/* 2. Ottimizzazioni Responsive Globali Minime */
 @media (max-width: 900px) {
+    body, html { overflow-x: hidden; width: 100%; }
+    
+    /* Rimozione di padding e margini eccessivi per liberare spazio su smartphone */
+    .app-container { padding: 0 15px 30px 15px !important; }
+    .confronta-section { padding: 30px 20px !important; margin: 30px auto !important; }
+    .wizard-engine { padding: 30px 20px !important; }
+    .dna-premium-section { padding: 50px 20px !important; }
+    
+    .hero-subtitle-strong { font-size: 2.4rem !important; }
+    .confronta-title { font-size: 2.2rem !important; }
+    
+    /* Gestione dei titoli in Confronta per impedire test troncati */
+    .confronta-step-title { font-size: 1.2rem !important; align-items: flex-start !important; }
+    .confronta-step-title span { flex-shrink: 0; }
+    
+    .hero-vineyard-wrapper { height: 180px; margin-bottom: 25px; }
+
+    /* Le griglie preesistenti che richiedevano aggiustamenti su mobile */
     .bottiglie-grid, .cards-confronto-container { grid-template-columns: 1fr; }
-    .piatti-confronto-grid { grid-template-columns: repeat(2, 1fr); }
-    .slot-bottiglia { height: 320px; }
+    .piatti-confronto-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    
+    .slot-bottiglia { height: auto; min-height: 280px; }
     .card-bottiglia-res.vincente { transform: none; }
 }
 
 @media (max-width: 480px) {
-    .confronta-section { padding: 25px 15px; }
-    .confronta-title { font-size: 2rem; }
-    .dna-modal-box { padding: 25px 15px; }
+    .confronta-section { padding: 25px 15px !important; }
+    .confronta-title { font-size: 1.8rem !important; }
+    .dna-modal-box { padding: 25px 15px !important; }
+}
+
+/* 3. Wizard Transizioni */
+.confronta-wizard-step {
+    animation: fadeIn 0.4s ease forwards;
 }

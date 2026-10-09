@@ -301,6 +301,11 @@
                 <h2 class="hero-subtitle-strong serif-font">Il tuo sommelier digitale personale.</h2>
                 <p class="hero-desc">Trova l'abbinamento perfetto in pochi istanti. Lasciati guidare dall'intelligenza enologica per scoprire la bottiglia ideale per ogni momento.</p>
 
+                <!-- NUOVA IMMAGINE VIGNETO E TRAMONTO -->
+                <div class="hero-vineyard-wrapper">
+                    <img src="vigneto.jpg" alt="Vigneto Italiano FORWINE" class="hero-vineyard-img">
+                </div>
+
                 <div class="search-bar-container">
                     <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
                     <input type="text" id="ricerca-libera" aria-label="Ricerca un vino" placeholder="Cerca un vino, un piatto o un aroma..." onkeypress="if(event.key === 'Enter') { nascondiExtra(); cercaTestoLibero(); }">
@@ -315,20 +320,6 @@
                     <span class="search-tag" onclick="document.getElementById('ricerca-libera').value='Vino bianco'; nascondiExtra(); cercaTestoLibero();">Vino bianco</span>
                     <span class="search-tag" onclick="document.getElementById('ricerca-libera').value='Speziato'; nascondiExtra(); cercaTestoLibero();">Speziato</span>
                     <span class="search-tag" onclick="document.getElementById('ricerca-libera').value='Carne'; nascondiExtra(); cercaTestoLibero();">Per la carne</span>
-                </div>
-            </section>
-
-            <!-- VIDEO PRESENTATION (CORRETTO NEL BODY) -->
-            <section class="video-presentation-section dna-section-wrapper" id="sezione-video-intro">
-                <div class="video-wrapper">
-                    <video 
-                        controls 
-                        playsinline 
-                        preload="metadata"
-                        poster="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80">
-                        <source src="presentazione.mp4" type="video/mp4">
-                        Il tuo browser non supporta la riproduzione video.
-                    </video>
                 </div>
             </section>
 
@@ -417,6 +408,20 @@
                 </div>
             </section>
 
+            <!-- VIDEO PRESENTATION SPOSTATO QUI -->
+            <section class="video-presentation-section dna-section-wrapper" id="sezione-video-intro">
+                <div class="video-wrapper">
+                    <video 
+                        controls 
+                        playsinline 
+                        preload="metadata"
+                        poster="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80">
+                        <source src="presentazione.mp4" type="video/mp4">
+                        Il tuo browser non supporta la riproduzione video.
+                    </video>
+                </div>
+            </section>
+
             <!-- WINE DNA HERO BANNER -->
             <section class="dna-premium-section dna-section-wrapper">
                 <div class="dna-premium-container">
@@ -434,7 +439,7 @@
                 </div>
             </section>
             
-            <!-- SEZIONE: CONFRONTA -->
+            <!-- SEZIONE: CONFRONTA CON NUOVO WIZARD AD ALBERO -->
             <section id="sezione-confronta" class="confronta-section" style="display: none;">
                 <button type="button" class="dna-close-btn" onclick="chiudiConfronta()" aria-label="Chiudi sezione confronta">&times;</button>
                 <div class="confronta-header">
@@ -443,63 +448,96 @@
                     <p class="confronta-subtitle">Digita i nomi delle bottiglie e valuta oggettivamente quale scegliere.</p>
                 </div>
                 <div id="confronta-form-wrap">
-                    <h3 class="confronta-step-title"><span>1</span> Inserisci i vini in sfida (minimo 2)</h3>
-                    <div class="bottiglie-grid">
-                        <div class="slot-bottiglia" id="slot-0">
-                            <div class="slot-input-content" id="input-wrap-0">
-                                <i class="fa-solid fa-magnifying-glass search-icon-gold"></i>
-                                <label for="testo-vino-0" class="slot-label">Bottiglia 1</label>
-                                <input type="text" id="testo-vino-0" class="confronta-text-input" placeholder="Es. Chianti, Barolo...">
-                                <button type="button" class="btn-conferma-vino" onclick="confermaVinoManuale(0)">CONFERMA</button>
+                    
+                    <!-- CONFRONTA STEP 1: BOTTIGLIE -->
+                    <div id="confronta-step-1" class="confronta-wizard-step">
+                        <h3 class="confronta-step-title"><span>1</span> Inserisci i vini in sfida (minimo 2)</h3>
+                        <div class="bottiglie-grid">
+                            <div class="slot-bottiglia" id="slot-0">
+                                <div class="slot-input-content" id="input-wrap-0">
+                                    <i class="fa-solid fa-magnifying-glass search-icon-gold"></i>
+                                    <label for="testo-vino-0" class="slot-label">Bottiglia 1</label>
+                                    <input type="text" id="testo-vino-0" class="confronta-text-input" placeholder="Es. Chianti, Barolo...">
+                                    <button type="button" class="btn-conferma-vino" onclick="confermaVinoManuale(0)">CONFERMA</button>
+                                </div>
+                                <div class="slot-preview-wrap" id="preview-wrap-0">
+                                    <i class="fa-solid fa-wine-bottle" style="font-size: 3rem; color: var(--bordeaux); margin-bottom: 20px;"></i>
+                                    <h4 id="nome-vino-scelto-0" style="color: var(--text-dark); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px;"></h4>
+                                    <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.9rem;" onclick="rimuoviVinoManuale(0)"><i class="fa-solid fa-trash"></i> Rimuovi</button>
+                                </div>
                             </div>
-                            <div class="slot-preview-wrap" id="preview-wrap-0">
-                                <i class="fa-solid fa-wine-bottle" style="font-size: 3rem; color: var(--bordeaux); margin-bottom: 20px;"></i>
-                                <h4 id="nome-vino-scelto-0" style="color: var(--text-dark); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px;"></h4>
-                                <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.9rem;" onclick="rimuoviVinoManuale(0)"><i class="fa-solid fa-trash"></i> Rimuovi</button>
+                            <div class="slot-bottiglia" id="slot-1">
+                                <div class="slot-input-content" id="input-wrap-1">
+                                    <i class="fa-solid fa-magnifying-glass search-icon-gold"></i>
+                                    <label for="testo-vino-1" class="slot-label">Bottiglia 2</label>
+                                    <input type="text" id="testo-vino-1" class="confronta-text-input" placeholder="Es. Franciacorta...">
+                                    <button type="button" class="btn-conferma-vino" onclick="confermaVinoManuale(1)">CONFERMA</button>
+                                </div>
+                                <div class="slot-preview-wrap" id="preview-wrap-1">
+                                    <i class="fa-solid fa-wine-bottle" style="font-size: 3rem; color: var(--bordeaux); margin-bottom: 20px;"></i>
+                                    <h4 id="nome-vino-scelto-1" style="color: var(--text-dark); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px;"></h4>
+                                    <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.9rem;" onclick="rimuoviVinoManuale(1)"><i class="fa-solid fa-trash"></i> Rimuovi</button>
+                                </div>
+                            </div>
+                            <div class="slot-bottiglia" id="slot-2">
+                                <div class="slot-input-content" id="input-wrap-2">
+                                    <i class="fa-solid fa-magnifying-glass search-icon-gold"></i>
+                                    <label for="testo-vino-2" class="slot-label">Bottiglia 3 (Opzionale)</label>
+                                    <input type="text" id="testo-vino-2" class="confronta-text-input" placeholder="Es. Gewürztraminer...">
+                                    <button type="button" class="btn-conferma-vino" onclick="confermaVinoManuale(2)">CONFERMA</button>
+                                </div>
+                                <div class="slot-preview-wrap" id="preview-wrap-2">
+                                    <i class="fa-solid fa-wine-bottle" style="font-size: 3rem; color: var(--bordeaux); margin-bottom: 20px;"></i>
+                                    <h4 id="nome-vino-scelto-2" style="color: var(--text-dark); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px;"></h4>
+                                    <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.9rem;" onclick="rimuoviVinoManuale(2)"><i class="fa-solid fa-trash"></i> Rimuovi</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="slot-bottiglia" id="slot-1">
-                            <div class="slot-input-content" id="input-wrap-1">
-                                <i class="fa-solid fa-magnifying-glass search-icon-gold"></i>
-                                <label for="testo-vino-1" class="slot-label">Bottiglia 2</label>
-                                <input type="text" id="testo-vino-1" class="confronta-text-input" placeholder="Es. Franciacorta...">
-                                <button type="button" class="btn-conferma-vino" onclick="confermaVinoManuale(1)">CONFERMA</button>
-                            </div>
-                            <div class="slot-preview-wrap" id="preview-wrap-1">
-                                <i class="fa-solid fa-wine-bottle" style="font-size: 3rem; color: var(--bordeaux); margin-bottom: 20px;"></i>
-                                <h4 id="nome-vino-scelto-1" style="color: var(--text-dark); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px;"></h4>
-                                <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.9rem;" onclick="rimuoviVinoManuale(1)"><i class="fa-solid fa-trash"></i> Rimuovi</button>
-                            </div>
-                        </div>
-                        <div class="slot-bottiglia" id="slot-2">
-                            <div class="slot-input-content" id="input-wrap-2">
-                                <i class="fa-solid fa-magnifying-glass search-icon-gold"></i>
-                                <label for="testo-vino-2" class="slot-label">Bottiglia 3 (Opzionale)</label>
-                                <input type="text" id="testo-vino-2" class="confronta-text-input" placeholder="Es. Gewürztraminer...">
-                                <button type="button" class="btn-conferma-vino" onclick="confermaVinoManuale(2)">CONFERMA</button>
-                            </div>
-                            <div class="slot-preview-wrap" id="preview-wrap-2">
-                                <i class="fa-solid fa-wine-bottle" style="font-size: 3rem; color: var(--bordeaux); margin-bottom: 20px;"></i>
-                                <h4 id="nome-vino-scelto-2" style="color: var(--text-dark); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px;"></h4>
-                                <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.9rem;" onclick="rimuoviVinoManuale(2)"><i class="fa-solid fa-trash"></i> Rimuovi</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="sezione-piatto-confronto">
-                        <h3 class="confronta-step-title"><span>2</span> Qual è l'abbinamento previsto?</h3>
-                        <div class="piatti-confronto-grid">
-                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Carne rossa', this)"><i class="fa-solid fa-cow"></i><span>Carne rossa</span></button>
-                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Carne bianca', this)"><i class="fa-solid fa-drumstick-bite"></i><span>Carne bianca</span></button>
-                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Pesce', this)"><i class="fa-solid fa-fish"></i><span>Pesce</span></button>
-                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Pizza / Pasta', this)"><i class="fa-solid fa-pizza-slice"></i><span>Pizza / Pasta</span></button>
-                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Vegetariano', this)"><i class="fa-solid fa-seedling"></i><span>Vegetariano</span></button>
-                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Formaggi', this)"><i class="fa-solid fa-cheese"></i><span>Formaggi</span></button>
-                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Dessert', this)"><i class="fa-solid fa-cake-candles"></i><span>Dessert</span></button>
+                        <div class="confronta-cta-wrap" style="margin-top: 20px;">
+                            <button type="button" class="btn-avvia-confronto" onclick="avantiConfronta(2)" style="width: 100%; max-width: 400px; margin: 0 auto; display: block;">AVANTI: SCEGLI IL PIATTO</button>
                         </div>
                     </div>
-                    <div class="confronta-cta-wrap">
-                        <button type="button" id="btn-confronta-vini" class="btn-avvia-confronto" disabled onclick="avviaAnalisiConfronto()">AVVIA IL CONFRONTO</button>
-                        <p class="confronta-hint" id="confronta-status-hint">Aggiungi almeno 2 bottiglie e seleziona il piatto per procedere.</p>
+
+                    <!-- CONFRONTA STEP 2: PIATTO -->
+                    <div id="confronta-step-2" class="confronta-wizard-step" style="display: none;">
+                        <div style="margin-bottom: 20px;">
+                            <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.95rem; font-weight:700;" onclick="indietroConfronta(1)"><i class="fa-solid fa-arrow-left"></i> Torna alle bottiglie</button>
+                        </div>
+                        <div id="sezione-piatto-confronto">
+                            <h3 class="confronta-step-title"><span>2</span> Qual è l'abbinamento previsto?</h3>
+                            <div class="piatti-confronto-grid">
+                                <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Carne rossa', this)"><i class="fa-solid fa-cow"></i><span>Carne rossa</span></button>
+                                <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Carne bianca', this)"><i class="fa-solid fa-drumstick-bite"></i><span>Carne bianca</span></button>
+                                <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Pesce', this)"><i class="fa-solid fa-fish"></i><span>Pesce</span></button>
+                                <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Pizza / Pasta', this)"><i class="fa-solid fa-pizza-slice"></i><span>Pizza / Pasta</span></button>
+                                <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Vegetariano', this)"><i class="fa-solid fa-seedling"></i><span>Vegetariano</span></button>
+                                <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Formaggi', this)"><i class="fa-solid fa-cheese"></i><span>Formaggi</span></button>
+                                <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Dessert', this)"><i class="fa-solid fa-cake-candles"></i><span>Dessert</span></button>
+                            </div>
+                        </div>
+                        <div class="confronta-cta-wrap" style="margin-top: 20px;">
+                            <button type="button" class="btn-avvia-confronto" onclick="avantiConfronta(3)" style="width: 100%; max-width: 400px; margin: 0 auto; display: block;">AVANTI: SCEGLI L'ATMOSFERA</button>
+                        </div>
+                    </div>
+
+                    <!-- CONFRONTA STEP 3: ATMOSFERA -->
+                    <div id="confronta-step-3" class="confronta-wizard-step" style="display: none;">
+                        <div style="margin-bottom: 20px;">
+                            <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.95rem; font-weight:700;" onclick="indietroConfronta(2)"><i class="fa-solid fa-arrow-left"></i> Torna al piatto</button>
+                        </div>
+                        <div id="sezione-atmosfera-confronto">
+                            <h3 class="confronta-step-title"><span>3</span> Qual è l'atmosfera della serata?</h3>
+                            <div class="piatti-confronto-grid">
+                                <button type="button" class="piatto-confronto-btn atmosfera-btn" onclick="impostaAtmosferaConfronto('Romantica', this)"><i class="fa-solid fa-heart"></i><span>Romantica</span></button>
+                                <button type="button" class="piatto-confronto-btn atmosfera-btn" onclick="impostaAtmosferaConfronto('Festa', this)"><i class="fa-solid fa-champagne-glasses"></i><span>Festa / Amici</span></button>
+                                <button type="button" class="piatto-confronto-btn atmosfera-btn" onclick="impostaAtmosferaConfronto('Relax', this)"><i class="fa-solid fa-couch"></i><span>Relax Serale</span></button>
+                                <button type="button" class="piatto-confronto-btn atmosfera-btn" onclick="impostaAtmosferaConfronto('Elegante', this)"><i class="fa-solid fa-gem"></i><span>Occasione Speciale</span></button>
+                            </div>
+                        </div>
+                        <div class="confronta-cta-wrap">
+                            <button type="button" id="btn-confronta-vini" class="btn-avvia-confronto" disabled onclick="avviaAnalisiConfronto()">AVVIA IL CONFRONTO</button>
+                            <p class="confronta-hint" id="confronta-status-hint">Aggiungi almeno 2 bottiglie e seleziona il piatto per procedere.</p>
+                        </div>
                     </div>
                 </div>
                 <div id="confronta-loader" class="confronta-loader" style="text-align: center; display: none;">
@@ -675,7 +713,7 @@
     <script src="motore.js"></script>
     <script src="confronta.js"></script>
 
-    <!-- FUNZIONI DI INTERFACCIA -->
+    <!-- FUNZIONI DI INTERFACCIA E CONTROLLO WIZARD CONFRONTA -->
     <script>
     function toggleMobileMenu() { const menu = document.getElementById('mobile-nav'); menu.classList.contains('active') ? menu.classList.remove('active') : menu.classList.add('active'); }
     function chiudiAuth() { document.getElementById('modal-auth').style.display = 'none'; }
@@ -684,7 +722,22 @@
         else { document.getElementById('form-login').style.display = 'none'; document.getElementById('form-registrazione').style.display = 'block'; }
     }
     function nascondiExtra() { document.querySelectorAll('.dna-section-wrapper').forEach(sec => sec.style.display = 'none'); const sezProfilo = document.getElementById('sezione-profilo'); if (sezProfilo) sezProfilo.style.display = 'none'; const ecosystem = document.querySelector('.features-ecosystem'); if (ecosystem) ecosystem.style.display = 'none'; }
-    function vaiAConfronta() { nascondiExtra(); ['progress-container', 'wizard-container', 'risultati', 'hero-trust'].forEach(id => { let el = document.getElementById(id); if(el) el.style.display = 'none'; }); const sezione = document.getElementById('sezione-confronta'); if (sezione) { sezione.style.display = 'block'; window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+    
+    function vaiAConfronta() { 
+        nascondiExtra(); 
+        ['progress-container', 'wizard-container', 'risultati', 'hero-trust'].forEach(id => { let el = document.getElementById(id); if(el) el.style.display = 'none'; }); 
+        const sezione = document.getElementById('sezione-confronta'); 
+        if (sezione) { 
+            sezione.style.display = 'block'; 
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Re-inizializza il wizard al passo 1 senza rompere il motore originale
+            document.querySelectorAll('.confronta-wizard-step').forEach(el => el.style.display = 'none');
+            const step1 = document.getElementById('confronta-step-1');
+            if(step1) step1.style.display = 'block';
+        } 
+    }
+    
     function tornaAllaHome() { ['sezione-confronta', 'risultati', 'loading-screen', 'sezione-profilo'].forEach(id => { let el = document.getElementById(id); if(el) el.style.display = 'none'; }); ['hero-trust', 'progress-container', 'wizard-container'].forEach(id => { let el = document.getElementById(id); if(el) el.style.display = 'block'; }); document.querySelectorAll('.dna-section-wrapper').forEach(sec => sec.style.display = 'flex'); const ecosystem = document.querySelector('.features-ecosystem'); if (ecosystem) ecosystem.style.display = 'block'; if (typeof ricomincia === 'function') { try { ricomincia(); } catch(e) {} } window.scrollTo(0, 0); }
     function apriDashboardProfilo() { nascondiExtra(); ['progress-container', 'wizard-container', 'risultati', 'hero-trust', 'sezione-confronta'].forEach(id => { let el = document.getElementById(id); if(el) el.style.display = 'none'; }); document.getElementById('sezione-profilo').style.display = 'block'; switchProfileTab('overview'); window.scrollTo(0, 0); }
     function switchProfileTab(tabName) { document.querySelectorAll('.dash-tab-pane').forEach(el => el.classList.remove('active')); document.querySelectorAll('.dash-nav-btn').forEach(el => el.classList.remove('active')); const tabEl = document.getElementById('tab-' + tabName); const btnEl = document.getElementById('btn-tab-' + tabName); if(tabEl) tabEl.classList.add('active'); if(btnEl) btnEl.classList.add('active'); }
@@ -696,6 +749,35 @@
         } else {
             document.getElementById('modal-auth').style.display = 'flex';
         }
+    }
+
+    // Nuove Funzioni Navigazione Wizard "Confronta" Additive
+    function avantiConfronta(step) {
+        if (step === 2) {
+            let n0 = document.getElementById('nome-vino-scelto-0');
+            let n1 = document.getElementById('nome-vino-scelto-1');
+            let txt0 = n0 ? n0.innerText.trim() : '';
+            let txt1 = n1 ? n1.innerText.trim() : '';
+            if (!(txt0.length > 0 && txt1.length > 0)) {
+                alert('Per favore, seleziona e conferma almeno le prime 2 bottiglie prima di procedere.');
+                return;
+            }
+        }
+        document.querySelectorAll('.confronta-wizard-step').forEach(el => el.style.display = 'none');
+        let block = document.getElementById('confronta-step-' + step);
+        if(block) { block.style.display = 'block'; block.style.animation = 'fadeIn 0.4s ease'; }
+        window.scrollTo({ top: document.getElementById('sezione-confronta').offsetTop - 20, behavior: 'smooth' });
+    }
+
+    function indietroConfronta(step) {
+        document.querySelectorAll('.confronta-wizard-step').forEach(el => el.style.display = 'none');
+        let block = document.getElementById('confronta-step-' + step);
+        if(block) { block.style.display = 'block'; block.style.animation = 'fadeIn 0.3s ease'; }
+    }
+
+    window.impostaAtmosferaConfronto = function(atmosfera, btn) {
+        document.querySelectorAll('.atmosfera-btn').forEach(b => b.classList.remove('selezionato'));
+        if(btn) btn.classList.add('selezionato');
     }
     </script>
 
