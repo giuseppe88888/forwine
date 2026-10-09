@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PFB19F8632"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -13,122 +12,970 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Meta Tag SEO Base per Google -->
     <title>FORWINE | Il tuo Sommelier Digitale Personale</title>
     <meta name="description" content="FORWINE è la tua web app e assistente sommelier digitale. Rispondi a 3 semplici domande su piatto, atmosfera e budget per trovare l'abbinamento vino perfetto per la tua serata.">
     <meta name="keywords" content="sommelier digitale, abbinamento cibo vino, app vino, scegliere vino, FORWINE">
     <meta name="author" content="FORWINE">
 
-    <!-- Collegamento alla PWA e Icone -->
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="logo quadrato.png">
     
-    <!-- Open Graph / Anteprima WhatsApp, Facebook, LinkedIn -->
     <meta property="og:title" content="FORWINE | Il tuo Sommelier Digitale">
     <meta property="og:description" content="Non sai quale vino scegliere? Dì a FORWINE cosa stai mangiando e trova la bottiglia perfetta in 3 click.">
-    <!-- NOTA BENE: Se hai un'immagine tua (es. "copertina-social.jpg"), sostituisci questo link di Unsplash con il nome del tuo file -->
     <meta property="og:image" content="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
     <meta property="og:url" content="https://forwine.app">
     <meta property="og:type" content="website">
     
-    <!-- Colore del tema per il browser mobile -->
-    <meta name="theme-color" content="#0a0a0a">
+    <meta name="theme-color" content="#FCFAF8">
     
-    <!-- Font e Stili -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <style id="forwine-premium-styles">
+        :root {
+            --bg-light: #FCFAF8;
+            --bordeaux: #722F37;
+            --bordeaux-hover: #5A252B;
+            --gold: #C5A059;
+            --text-dark: #2A2A2A;
+            --text-muted: #757575;
+            --border-color: #EBE5DF;
+            --white: #FFFFFF;
+        }
+
+        body { background-color: var(--bg-light); color: var(--text-dark); font-family: 'Lato', sans-serif; margin: 0; padding: 0; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4, .serif-font { font-family: 'Playfair Display', serif; font-weight: 400; }
+
+        /* HEADER */
+        .top-navbar { position: sticky; top: 0; z-index: 1000; background: rgba(252, 250, 248, 0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; border-bottom: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .navbar-logo { cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .brand-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--bordeaux); font-weight: 700; letter-spacing: 2px; }
+        .navbar-menu { display: flex; gap: 40px; align-items: center; }
+        .nav-item { font-family: 'Lato', sans-serif; font-size: 0.85rem; color: var(--text-dark); text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer; transition: color 0.3s; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+        .nav-item:hover { color: var(--bordeaux); }
+        .navbar-profile { cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-light); border: 1px solid var(--border-color); transition: all 0.3s; }
+        .navbar-profile:hover { border-color: var(--bordeaux); color: var(--bordeaux); }
+        .navbar-profile i { font-size: 1.2rem; color: var(--text-dark); transition: color 0.3s; }
+        .navbar-profile:hover i { color: var(--bordeaux); }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text-dark); cursor: pointer; }
+
+        /* MOBILE MENU OVERLAY */
+        .mobile-nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-light); z-index: 9999; flex-direction: column; padding: 30px; box-sizing: border-box; }
+        .mobile-nav-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+        .mobile-nav-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 40px; }
+        .mobile-nav-items { display: flex; flex-direction: column; gap: 30px; }
+        .mobile-nav-item { display: flex; align-items: center; gap: 20px; font-size: 1.5rem; font-family: 'Playfair Display', serif; color: var(--text-dark); text-decoration: none; transition: color 0.3s; }
+        .mobile-nav-item i { color: var(--bordeaux); font-size: 1.2rem; width: 30px; text-align: center; }
+        .mobile-nav-item:hover { color: var(--bordeaux); }
+
+        /* HERO SECTION */
+        .premium-hero { text-align: center; padding: 80px 20px 40px; max-width: 800px; margin: 0 auto; }
+        .hero-title { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 4px; color: var(--bordeaux); font-family: 'Lato', sans-serif; font-weight: 700; margin-bottom: 15px; }
+        .hero-subtitle-strong { font-size: 4rem; color: var(--text-dark); margin: 0 0 20px; line-height: 1.1; }
+        .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 50px; }
+
+        /* SEARCH BAR */
+        .search-bar-container { display: flex; align-items: center; background: var(--white); border: 1px solid var(--border-color); border-radius: 50px; padding: 8px 8px 8px 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.03); transition: all 0.3s ease; margin-bottom: 25px; }
+        .search-bar-container:focus-within { border-color: var(--bordeaux); box-shadow: 0 15px 35px rgba(114, 47, 55, 0.08); }
+        .search-icon { color: var(--gold); font-size: 1.2rem; }
+        .search-bar-container input { border: none; outline: none; flex: 1; font-family: 'Lato', sans-serif; font-size: 1.1rem; padding: 15px 20px; background: transparent; color: var(--text-dark); }
+        .search-bar-container input::placeholder { color: #A0A0A0; }
+        .btn-cerca-cerchio { background: var(--bordeaux); color: var(--white); border: none; border-radius: 50%; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: background 0.3s; }
+        .btn-cerca-cerchio:hover { background: var(--bordeaux-hover); }
+        
+        .search-tags-wrapper { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; align-items: center; }
+        .tags-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-right: 10px; }
+        .search-tag { background: transparent; border: 1px solid var(--border-color); padding: 8px 18px; border-radius: 30px; font-size: 0.85rem; color: var(--text-dark); cursor: pointer; transition: all 0.3s; }
+        .search-tag:hover { border-color: var(--bordeaux); color: var(--bordeaux); background: var(--white); }
+
+        /* VIDEO PRESENTATION SECTION */
+        .video-presentation-section { max-width: 1100px; margin: 40px auto 80px; padding: 0 20px; }
+        .video-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; background-color: #111; border-radius: 12px; overflow: hidden; background-image: url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center; box-shadow: 0 30px 60px rgba(0,0,0,0.15); display: flex; justify-content: center; align-items: center; }
+        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6)); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .play-btn-large { width: 90px; height: 90px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.5); border-radius: 50%; color: var(--white); font-size: 2rem; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s ease; margin-bottom: 25px; padding-left: 6px; }
+        .play-btn-large:hover { background: var(--bordeaux); border-color: var(--bordeaux); transform: scale(1.05); }
+        .video-title { color: var(--white); font-size: 2.2rem; margin: 0 0 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .video-subtitle { color: rgba(255,255,255,0.8); font-size: 1.1rem; }
+
+        /* WIZARD ENGINE */
+        .wizard-engine { max-width: 900px; margin: 20px auto 80px; background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; padding: 60px; box-shadow: 0 20px 50px rgba(0,0,0,0.02); position: relative; }
+        .engine-header { text-align: center; margin-bottom: 40px; }
+        .engine-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+        .engine-title { font-size: 2.5rem; color: var(--text-dark); margin: 10px 0 0; }
+        .wizard-progress-wrap { margin-bottom: 50px; }
+        .progress-track { height: 3px; background: var(--border-color); width: 100%; position: relative; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--bordeaux); width: 33%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .step-section { animation: fadeIn 0.4s ease forwards; }
+        .step-title { text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: var(--text-dark); }
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .choice-card { background: var(--white); border: 1px solid var(--border-color); border-radius: 6px; padding: 35px 20px; text-align: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; align-items: center; gap: 18px; }
+        .choice-card i { font-size: 2.2rem; color: var(--text-dark); opacity: 0.6; transition: all 0.3s; }
+        .choice-card p { margin: 0; font-weight: 600; font-size: 1rem; color: var(--text-dark); letter-spacing: 0.5px; }
+        .choice-card:hover { border-color: var(--bordeaux); box-shadow: 0 15px 30px rgba(114, 47, 55, 0.05); transform: translateY(-3px); }
+        .choice-card:hover i { color: var(--bordeaux); opacity: 1; transform: scale(1.05); }
+
+        /* PLATFORM FEATURES ECOSYSTEM */
+        .features-ecosystem { max-width: 1000px; margin: 100px auto; padding: 0 20px; }
+        .ecosystem-header { text-align: center; margin-bottom: 50px; }
+        .ecosystem-header h2 { font-size: 2.5rem; color: var(--text-dark); margin-bottom: 10px; }
+        .ecosystem-header p { color: var(--text-muted); font-size: 1.1rem; }
+        .ecosystem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .eco-card { background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; padding: 35px; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: flex-start; }
+        .eco-card.main-eco-card { grid-column: span 2; background: var(--bordeaux); color: var(--white); padding: 50px; border: none; flex-direction: row; align-items: center; justify-content: space-between; }
+        .main-eco-text { max-width: 500px; }
+        .eco-card.main-eco-card h3 { font-size: 2.5rem; color: var(--white); margin: 0 0 15px; }
+        .eco-card.main-eco-card p { color: rgba(255,255,255,0.8); font-size: 1.1rem; margin: 0; }
+        .main-eco-icon { font-size: 6rem; color: rgba(255,255,255,0.1); }
+        .eco-card.main-eco-card:hover { box-shadow: 0 20px 40px rgba(114, 47, 55, 0.2); transform: translateY(-4px); }
+        .eco-card:not(.main-eco-card) h3 { font-size: 1.4rem; color: var(--text-dark); margin: 0 0 10px; font-family: 'Playfair Display', serif; }
+        .eco-card:not(.main-eco-card) p { font-size: 0.95rem; color: var(--text-muted); margin: 0; }
+        .eco-card:not(.main-eco-card) i { font-size: 1.8rem; color: var(--bordeaux); margin-bottom: 25px; opacity: 0.9; }
+        .eco-card:hover:not(.main-eco-card) { border-color: var(--bordeaux); box-shadow: 0 15px 30px rgba(0,0,0,0.04); transform: translateY(-4px); }
+        .eco-card.wide-card { grid-column: span 2; flex-direction: row; align-items: center; gap: 30px; }
+        .eco-card.wide-card i { margin-bottom: 0; font-size: 2.5rem; }
+
+        /* WINE DNA HERO */
+        .dna-premium-section { display: flex; align-items: center; justify-content: space-between; background: var(--bordeaux); max-width: 100% !important; margin: 120px 0 0; padding: 100px 50px; }
+        .dna-premium-container { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 60px; width: 100%; }
+        .dna-premium-content { flex: 1; }
+        .dna-premium-badge { color: var(--gold); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin-bottom: 20px; display: block; }
+        .dna-premium-title { font-size: 4rem; color: var(--white); margin: 0 0 20px; line-height: 1.1; }
+        .dna-premium-desc { font-size: 1.15rem; color: rgba(255,255,255,0.8); margin-bottom: 40px; }
+        .btn-dna-premium { background: var(--white); color: var(--bordeaux); padding: 18px 40px; border: none; border-radius: 4px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; letter-spacing: 1px; text-transform: uppercase; }
+        .btn-dna-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .dna-premium-visual { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+        .dna-image-wrapper { width: 100%; max-width: 450px; height: 450px; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); }
+        .dna-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* CONFRONTA SECTION */
+        .confronta-section { max-width: 1000px; margin: 60px auto; background: var(--white); padding: 70px; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 20px 50px rgba(0,0,0,0.02); position: relative; }
+        .confronta-header { text-align: center; margin-bottom: 60px; }
+        .confronta-badge { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 10px; }
+        .confronta-title { font-size: 3rem; color: var(--bordeaux); margin: 0 0 15px; }
+        .confronta-subtitle { color: var(--text-muted); font-size: 1.15rem; }
+        .confronta-step-title { font-size: 1.5rem; color: var(--text-dark); margin-bottom: 30px; display: flex; align-items: center; gap: 15px; font-family: 'Playfair Display', serif; }
+        .confronta-step-title span { background: var(--bordeaux); color: var(--white); width: 35px; height: 35px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 1rem; font-family: 'Lato', sans-serif; font-weight: 700; }
+        .bottiglie-grid { display: flex; gap: 25px; margin-bottom: 60px; }
+        .slot-bottiglia { flex: 1; border: 1px solid var(--border-color); padding: 40px 30px; text-align: center; border-radius: 6px; position: relative; transition: all 0.3s; background: var(--bg-light); }
+        .slot-bottiglia:hover { border-color: var(--bordeaux); background: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .search-icon-gold { font-size: 2rem; color: var(--gold); margin-bottom: 25px; display: block; }
+        .slot-label { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 15px; font-weight: 700; }
+        .confronta-text-input { width: 100%; padding: 14px; border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 20px; font-family: 'Lato', sans-serif; font-size: 1rem; box-sizing: border-box; background: var(--white); transition: border-color 0.3s; }
+        .confronta-text-input:focus { outline: none; border-color: var(--bordeaux); }
+        .btn-conferma-vino { background: transparent; color: var(--bordeaux); border: 1px solid var(--bordeaux); padding: 12px 25px; border-radius: 4px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.3s; width: 100%; letter-spacing: 1px; }
+        .btn-conferma-vino:hover { background: var(--bordeaux); color: var(--white); }
+        
+        .piatti-confronto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin-bottom: 50px; }
+        .piatto-confronto-btn { background: var(--white); border: 1px solid var(--border-color); padding: 20px 10px; border-radius: 6px; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--text-dark); }
+        .piatto-confronto-btn i { font-size: 1.5rem; opacity: 0.6; transition: opacity 0.3s; }
+        .piatto-confronto-btn span { font-size: 0.9rem; font-weight: 600; }
+        .piatto-confronto-btn:hover { border-color: var(--bordeaux); box-shadow: 0 8px 20px rgba(114,47,55,0.05); }
+        .piatto-confronto-btn:hover i { color: var(--bordeaux); opacity: 1; }
+        
+        .btn-avvia-confronto { background: var(--bordeaux); color: var(--white); border: none; padding: 18px 40px; border-radius: 4px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; width: 100%; max-width: 400px; margin: 0 auto; display: block; letter-spacing: 1px; }
+        .btn-avvia-confronto:hover:not([disabled]) { background: var(--bordeaux-hover); transform: translateY(-2px); box-shadow: 0 15px 30px rgba(114,47,55,0.2); }
+        .btn-avvia-confronto[disabled] { opacity: 0.4; cursor: not-allowed; }
+        .confronta-hint { text-align: center; margin-top: 15px; color: var(--text-muted); font-size: 0.9rem; }
+        .dna-close-btn { position: absolute; top: 30px; right: 30px; background: none; border: none; font-size: 2rem; color: var(--text-muted); cursor: pointer; transition: color 0.3s; z-index: 10; }
+        .dna-close-btn:hover { color: var(--bordeaux); }
+
+        /* PROFILE DASHBOARD - CLEAN UX */
+        .user-dashboard { max-width: 1000px; margin: 60px auto; background: var(--white); border-radius: 12px; border: 1px solid var(--border-color); position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.04); overflow: hidden; }
+        .dash-cover-image { width: 100%; height: 220px; background-image: url('https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center; position: relative; }
+        .dash-cover-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%); }
+        .dash-header-content { padding: 0 40px; position: relative; top: -50px; display: flex; align-items: flex-end; gap: 30px; margin-bottom: -10px; }
+        .dash-avatar-large { width: 120px; height: 120px; background: var(--bg-light); border: 4px solid var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--bordeaux); font-size: 3rem; font-family: 'Playfair Display', serif; box-shadow: 0 10px 20px rgba(0,0,0,0.1); z-index: 2; text-transform: uppercase; }
+        .dash-user-meta { padding-bottom: 15px; }
+        
+        #profilo-username { font-size: 2.2rem; color: var(--text-dark); margin: 0 0 5px; line-height: 1; }
+        #profilo-email { color: var(--text-muted); font-size: 1rem; margin: 0; }
+        
+        .dash-layout { display: flex; border-top: 1px solid var(--border-color); min-height: 500px; }
+        .dash-sidebar { width: 250px; border-right: 1px solid var(--border-color); background: #FAFAFA; padding: 30px 0; }
+        .dash-nav-btn { width: 100%; text-align: left; background: none; border: none; padding: 15px 30px; font-size: 1rem; color: var(--text-muted); cursor: pointer; transition: all 0.3s; font-family: 'Lato', sans-serif; font-weight: 600; display: flex; align-items: center; gap: 12px; }
+        .dash-nav-btn:hover { color: var(--bordeaux); background: rgba(114,47,55,0.03); }
+        .dash-nav-btn.active { color: var(--bordeaux); border-right: 3px solid var(--bordeaux); background: var(--white); }
+        
+        .dash-content-area { flex: 1; padding: 40px; background: var(--white); }
+        .dash-tab-pane { display: none; animation: fadeIn 0.3s ease; }
+        .dash-tab-pane.active { display: block; }
+        .dash-section-title { font-size: 1.8rem; color: var(--text-dark); margin: 0 0 30px; }
+        
+        .dash-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+        .dash-stat-card { border: 1px solid var(--border-color); border-radius: 8px; padding: 25px; display: flex; align-items: center; gap: 20px; background: var(--bg-light); cursor: pointer; transition: all 0.3s; }
+        .dash-stat-card:hover { border-color: var(--bordeaux); box-shadow: 0 10px 20px rgba(0,0,0,0.03); transform: translateY(-2px); background: var(--white); }
+        .dash-stat-icon { width: 60px; height: 60px; background: rgba(114,47,55,0.1); color: var(--bordeaux); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .dash-stat-value { font-size: 1.8rem; font-weight: 700; color: var(--text-dark); line-height: 1; margin-bottom: 5px; }
+        .dash-stat-label { font-size: 0.9rem; color: var(--text-muted); }
+
+        .dash-form-group { margin-bottom: 25px; }
+        .dash-form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; margin-bottom: 10px; }
+        .btn-logout { background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); padding: 12px 30px; border-radius: 4px; font-size: 0.9rem; cursor: pointer; transition: all 0.3s; font-weight: 600; margin-top: 20px; }
+        .btn-logout:hover { color: #D32F2F; border-color: #D32F2F; background: #FFEBEE; }
+
+        /* LOADING & RESULTS & MODALS */
+        .loading-screen { padding: 120px 20px; text-align: center; }
+        .loading-icon { font-size: 4rem; color: var(--bordeaux); margin-bottom: 30px; opacity: 0.8; }
+        .loading-title { font-family: 'Playfair Display', serif; color: var(--text-dark); font-size: 2.5rem; margin: 0 0 15px; }
+        .loading-desc { color: var(--text-muted); font-size: 1.2rem; }
+        .results-actions { display: flex; justify-content: center; gap: 20px; margin-top: 50px; flex-wrap: wrap; }
+        .btn-secondary { background: transparent; color: var(--bordeaux); border: 1px solid var(--bordeaux); padding: 15px 35px; border-radius: 4px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; letter-spacing: 1px; }
+        .btn-secondary:hover { background: var(--bordeaux); color: var(--white); }
+        .btn-torna-home { background: var(--bg-light); color: var(--text-dark); border: 1px solid var(--border-color); padding: 15px 35px; border-radius: 4px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; letter-spacing: 1px; }
+        .btn-torna-home:hover { background: var(--white); border-color: var(--text-dark); }
+        .dna-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(252, 250, 248, 0.9); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 2000; }
+        .dna-modal-box { background: var(--white); width: 90%; max-width: 550px; padding: 60px 50px; border-radius: 8px; border: 1px solid var(--border-color); position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.06); }
+        
+        /* DNA OPTION BUTTONS - FIX 3 */
+        .dna-option-btn { text-align: left; padding: 20px; font-size: 1rem; border-radius: 6px; width: 100%; cursor: pointer; transition: all 0.3s; background: var(--white); border: 1px solid var(--border-color); font-family: 'Lato', sans-serif; color: var(--text-dark); }
+        .dna-option-btn:hover { border-color: var(--bordeaux); background-color: #FCFAF8; }
+        
+        @media (max-width: 900px) {
+            .navbar-menu, .navbar-profile { display: none !important; }
+            .mobile-menu-btn { display: block; }
+            .top-navbar { padding: 15px 25px; }
+            .ecosystem-grid { grid-template-columns: 1fr; }
+            .eco-card.main-eco-card { grid-column: span 1; flex-direction: column; text-align: center; padding: 40px 20px; }
+            .eco-card.wide-card { grid-column: span 1; flex-direction: column; text-align: center; }
+            .main-eco-icon { display: none; }
+            .dna-premium-container { flex-direction: column; text-align: center; }
+            .dna-premium-section { padding: 60px 20px; }
+            .bottiglie-grid { flex-direction: column; }
+            .hero-subtitle-strong { font-size: 3rem; }
+            .dash-layout { flex-direction: column; }
+            .dash-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); display: flex; overflow-x: auto; padding: 10px; }
+            .dash-nav-btn { width: auto; white-space: nowrap; border-right: none; border-bottom: 3px solid transparent; padding: 10px 20px; }
+            .dash-nav-btn.active { border-right: none; border-bottom: 3px solid var(--bordeaux); }
+            .dash-content-area { padding: 30px 20px; }
+            .dash-header-content { flex-direction: column; align-items: center; text-align: center; top: -60px; padding: 0 20px; }
+            .dash-stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- HEADER -->
+    <header class="top-navbar" id="main-header">
+        <div class="navbar-logo" onclick="tornaAllaHome()" aria-label="Torna alla Home">
+            <span class="brand-logo">FORWINE</span>
+        </div>
+
+        <nav class="navbar-menu" aria-label="Navigazione principale">
+            <button class="nav-item" onclick="vaiAConfronta()" style="background:none; border:none;">
+                <span>Confronta</span>
+            </button>
+            <button class="nav-item" onclick="apriWineDNA()" style="background:none; border:none;">
+                <span>Wine DNA</span>
+            </button>
+            <button class="nav-item" onclick="mostraCantinaPulita()" style="background:none; border:none;">
+                <span>Cantina</span>
+            </button>
+        </nav>
+
+        <div class="navbar-profile" onclick="gestisciClickProfilo()" aria-label="Profilo Utente">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Apri menu">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+    </header>
+
+    <!-- OVERLAY MENU MOBILE -->
+    <div id="mobile-nav" class="mobile-nav-overlay">
+        <div class="mobile-nav-header">
+            <span class="brand-logo">FORWINE</span>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Chiudi menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-items">
+            <a href="#" class="mobile-nav-item" onclick="toggleMobileMenu(); gestisciClickProfilo();"><i class="fa-solid fa-user"></i> Profilo</a>
+            <a href="#" class="mobile-nav-item" onclick="toggleMobileMenu(); vaiAConfronta();"><i class="fa-solid fa-scale-balanced"></i> Confronta</a>
+            <a href="#" class="mobile-nav-item" onclick="toggleMobileMenu(); apriWineDNA();"><i class="fa-solid fa-dna"></i> Wine DNA</a>
+            <a href="#" class="mobile-nav-item" onclick="toggleMobileMenu(); mostraCantinaPulita();"><i class="fa-solid fa-wine-bottle"></i> Cantina</a>
+        </nav>
+    </div>
+
     <div class="app-container">
-       <header class="brand-header" id="main-header">
-    <img src="logo rettangolo.jpg" alt="FORWINE" style="height: 60px; margin-bottom: 10px;">
-    <p class="slogan">Il tuo Sommelier Personale</p>
-    <button onclick="mostraCantina()" style="margin-top: 15px; background: transparent; color: #D4AF37; border: 1px solid #D4AF37; padding: 8px 25px; border-radius: 30px; cursor: pointer; font-family: 'Lato', sans-serif; font-size: 1rem; transition: 0.3s;">
-        <i class="fa-solid fa-heart"></i> La Mia Cantina
-    </button>
-</header>
         <main>
-            <!-- Barra di ricerca libera -->
-            <section id="hero-trust" style="text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(20,20,20,0.8); border-radius: 12px; border: 1px solid #d4af37;">
-                <input type="text" id="ricerca-libera" placeholder="Cerca un vino che ami o un aroma da scoprire..." style="padding: 12px; width: 85%; max-width: 350px; border-radius: 8px; border: none; font-size: 1rem;">
-                <button onclick="cercaTestoLibero()" style="padding: 12px 20px; background: #d4af37; color: #111; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Cerca</button>
-            </section>
+            <!-- HERO & SEARCH -->
+            <section id="hero-trust" class="premium-hero">
+                <h1 class="hero-title">FORWINE</h1>
+                <h2 class="hero-subtitle-strong serif-font">Il tuo sommelier digitale personale.</h2>
+                <p class="hero-desc">Trova l'abbinamento perfetto in pochi istanti. Lasciati guidare dall'intelligenza enologica per scoprire la bottiglia ideale per ogni momento.</p>
 
-            <!-- LA BARRA DI PROGRESSO -->
-            <div id="progress-container" class="progress-container">
-                <div id="progress-bar" class="progress-bar"></div>
-            </div>
-
-            <div id="wizard-container">
+                <div class="search-bar-container">
+                    <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                    <input type="text" id="ricerca-libera" aria-label="Ricerca un vino" placeholder="Cerca un vino, un piatto o un aroma..." onkeypress="if(event.key === 'Enter') { nascondiExtra(); cercaTestoLibero(); }">
+                    <button class="btn-cerca-cerchio" onclick="nascondiExtra(); cercaTestoLibero();" aria-label="Avvia ricerca">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                </div>
                 
-              <!-- STEP 1: Piatto -->
-              <section id="fase-1" class="step-section">
-                  <h2 class="step-title">Cosa c'è nel piatto stasera?</h2>
-                  <div class="options-grid">
-                      <button class="choice-card" onclick="salva('piatto', 'carne_rossa', 1, 2, this)"><i class="fa-solid fa-cow"></i><p>Carne Rossa</p></button>
-                      <button class="choice-card" onclick="salva('piatto', 'carne_bianca', 1, 2, this)"><i class="fa-solid fa-drumstick-bite"></i><p>Carne Bianca</p></button>
-                      <button class="choice-card" onclick="salva('piatto', 'pesce', 1, 2, this)"><i class="fa-solid fa-fish"></i><p>Pesce</p></button>
-                      <button class="choice-card" onclick="salva('piatto', 'primi_pizza', 1, 2, this)"><i class="fa-solid fa-pizza-slice"></i><p>Pasta / Pizza</p></button>
-                      <button class="choice-card" onclick="salva('piatto', 'etnico_veg', 1, 2, this)"><i class="fa-solid fa-seedling"></i><p>Etnico / Veg</p></button>
-                      <button class="choice-card" onclick="salva('piatto', 'dessert_formaggi', 1, 2, this)"><i class="fa-solid fa-cheese"></i><p>Dolci / Formaggi</p></button>
-                  </div>
-              </section>
-
-              <!-- STEP 2: Atmosfera -->
-              <section id="fase-2" class="step-section" style="display: none;">
-                  <h2 class="step-title">Che atmosfera cerchi?</h2>
-                  <div class="options-grid">
-                      <button class="choice-card" onclick="salva('occasione', 'appuntamento', 2, 3, this)"><i class="fa-solid fa-heart"></i><p>Appuntamento</p></button>
-                      <button class="choice-card" onclick="salva('occasione', 'amici_festa', 2, 3, this)"><i class="fa-solid fa-champagne-glasses"></i><p>Amici / Festa</p></button>
-                      <button class="choice-card" onclick="salva('occasione', 'famiglia_grigliata', 2, 3, this)"><i class="fa-solid fa-fire-burner"></i><p>Famiglia / Griglia</p></button>
-                      <button class="choice-card" onclick="salva('occasione', 'relax', 2, 3, this)"><i class="fa-solid fa-couch"></i><p>Relax Serale</p></button>
-                      <button class="choice-card" onclick="salva('occasione', 'aperitivo', 2, 3, this)"><i class="fa-solid fa-martini-glass"></i><p>Aperitivo</p></button>
-                      <button class="choice-card" onclick="salva('occasione', 'regalo', 2, 3, this)"><i class="fa-solid fa-gift"></i><p>Regalo Importante</p></button>
-                  </div>
-              </section>
-
-              <!-- STEP 3: Budget -->
-              <section id="fase-3" class="step-section" style="display: none;">
-                  <h2 class="step-title">Il tuo budget?</h2>
-                  <div class="options-grid">
-                      <button class="choice-card" onclick="salva('budget', '15', 3, null, this)"><i class="fa-solid fa-coins"></i><p>Sotto i 15€</p></button>
-                      <button class="choice-card" onclick="salva('budget', '30', 3, null, this)"><i class="fa-solid fa-money-bill-wave"></i><p>Fino a 30€</p></button>
-                      <button class="choice-card" onclick="salva('budget', '60', 3, null, this)"><i class="fa-solid fa-credit-card"></i><p>Fino a 60€</p></button>
-                      <button class="choice-card" onclick="salva('budget', '1000', 3, null, this)"><i class="fa-solid fa-gem"></i><p>Nessun limite</p></button>
-                  </div>
-              </section>
-
-            </div>
-
-            <!-- SCHERMATA CARICAMENTO WOW -->
-            <section id="loading-screen" style="display: none; text-align: center; padding: 60px 0;">
-                <i class="fa-solid fa-wine-glass" style="font-size: 3rem; color: #D4AF37; margin-bottom: 20px;"></i>
-                <h2 style="font-family: 'Playfair Display', serif; color: #D4AF37; font-size: 2rem;">Il Sommelier sta pensando...</h2>
-                <p id="loading-text" style="color: #888; margin-top: 15px; font-size: 1.1rem;">Analizzo la cantina in base alle tue scelte...</p>
+                <div class="search-tags-wrapper">
+                    <span class="tags-label">Suggerimenti:</span>
+                    <span class="search-tag" onclick="document.getElementById('ricerca-libera').value='Vino rosso'; nascondiExtra(); cercaTestoLibero();">Vino rosso</span>
+                    <span class="search-tag" onclick="document.getElementById('ricerca-libera').value='Vino bianco'; nascondiExtra(); cercaTestoLibero();">Vino bianco</span>
+                    <span class="search-tag" onclick="document.getElementById('ricerca-libera').value='Speziato'; nascondiExtra(); cercaTestoLibero();">Speziato</span>
+                    <span class="search-tag" onclick="document.getElementById('ricerca-libera').value='Carne'; nascondiExtra(); cercaTestoLibero();">Per la carne</span>
+                </div>
             </section>
 
-            <!-- RISULTATI CINEMATOGRAFICI -->
+            <!-- VIDEO PRESENTATION -->
+            <section class="video-presentation-section dna-section-wrapper" id="sezione-video-intro">
+                <div class="video-wrapper">
+                    <div class="video-overlay">
+                        <button class="play-btn-large" aria-label="Riproduci Video di Presentazione">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <h3 class="video-title serif-font">L'Esperienza FORWINE</h3>
+                        <p class="video-subtitle">Scopri come la tecnologia incontra la passione per il vino. (Video in arrivo)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WIZARD ENGINE -->
+            <section id="wizard-container" class="wizard-engine">
+                <div class="engine-header">
+                    <span class="engine-label">Wine Recommendation Engine</span>
+                    <h2 class="engine-title serif-font">Guidato dal gusto</h2>
+                </div>
+                
+                <div id="progress-container" class="wizard-progress-wrap" aria-hidden="true">
+                    <div class="progress-track">
+                        <div id="progress-bar" class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <section id="fase-1" class="step-section">
+                    <h2 class="step-title serif-font">Cosa c'è nel piatto stasera?</h2>
+                    <div class="options-grid">
+                        <button class="choice-card" onclick="nascondiExtra(); salva('piatto', 'carne_rossa', 1, 2, this)"><i class="fa-solid fa-cow"></i><p>Carne Rossa</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('piatto', 'carne_bianca', 1, 2, this)"><i class="fa-solid fa-drumstick-bite"></i><p>Carne Bianca</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('piatto', 'pesce', 1, 2, this)"><i class="fa-solid fa-fish"></i><p>Pesce</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('piatto', 'primi_pizza', 1, 2, this)"><i class="fa-solid fa-pizza-slice"></i><p>Pasta / Pizza</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('piatto', 'etnico_veg', 1, 2, this)"><i class="fa-solid fa-seedling"></i><p>Etnico / Veg</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('piatto', 'dessert_formaggi', 1, 2, this)"><i class="fa-solid fa-cheese"></i><p>Dolci / Formaggi</p></button>
+                    </div>
+                </section>
+
+                <section id="fase-2" class="step-section" style="display: none;">
+                    <h2 class="step-title serif-font">Che atmosfera cerchi?</h2>
+                    <div class="options-grid">
+                        <button class="choice-card" onclick="nascondiExtra(); salva('occasione', 'appuntamento', 2, 3, this)"><i class="fa-solid fa-heart"></i><p>Appuntamento</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('occasione', 'amici_festa', 2, 3, this)"><i class="fa-solid fa-champagne-glasses"></i><p>Amici / Festa</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('occasione', 'famiglia_grigliata', 2, 3, this)"><i class="fa-solid fa-fire-burner"></i><p>Famiglia / Griglia</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('occasione', 'relax', 2, 3, this)"><i class="fa-solid fa-couch"></i><p>Relax Serale</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('occasione', 'aperitivo', 2, 3, this)"><i class="fa-solid fa-martini-glass"></i><p>Aperitivo</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('occasione', 'regalo', 2, 3, this)"><i class="fa-solid fa-gift"></i><p>Regalo Importante</p></button>
+                    </div>
+                </section>
+
+                <section id="fase-3" class="step-section" style="display: none;">
+                    <h2 class="step-title serif-font">Il tuo budget?</h2>
+                    <div class="options-grid">
+                        <button class="choice-card" onclick="nascondiExtra(); salva('budget', '15', 3, null, this)"><i class="fa-solid fa-coins"></i><p>Sotto i 15€</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('budget', '30', 3, null, this)"><i class="fa-solid fa-money-bill-wave"></i><p>Fino a 30€</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('budget', '60', 3, null, this)"><i class="fa-solid fa-credit-card"></i><p>Fino a 60€</p></button>
+                        <button class="choice-card" onclick="nascondiExtra(); salva('budget', '1000', 3, null, this)"><i class="fa-solid fa-gem"></i><p>Nessun limite</p></button>
+                    </div>
+                </section>
+            </section>
+
+            <!-- PLATFORM FEATURES ECOSYSTEM -->
+            <section class="features-ecosystem">
+                <div class="ecosystem-header">
+                    <h2 class="serif-font">L'Ecosistema FORWINE</h2>
+                    <p>Tutti gli strumenti per vivere e comprendere il vino al massimo livello.</p>
+                </div>
+                <div class="ecosystem-grid">
+                    <div class="eco-card main-eco-card" onclick="document.getElementById('ricerca-libera').focus(); window.scrollTo({ top: 0, behavior: 'smooth' });">
+                        <div class="main-eco-text">
+                            <h3 class="serif-font">Trova il mio vino</h3>
+                            <p>Ricerca intelligente. Digita aromi, occasioni o piatti e lascia che FORWINE analizzi il database per te.</p>
+                        </div>
+                        <i class="fa-solid fa-magnifying-glass main-eco-icon"></i>
+                    </div>
+                    
+                    <div class="eco-card" onclick="vaiAConfronta()">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                        <h3>Confronta Etichette</h3>
+                        <p>Metti alla prova due o tre bottiglie e scopri visivamente quale scegliere per la tua serata.</p>
+                    </div>
+                    
+                    <div class="eco-card" onclick="apriWineDNA()">
+                        <i class="fa-solid fa-dna"></i>
+                        <h3>Il tuo Wine DNA</h3>
+                        <p>Analizza i tuoi gusti e scopri il profilo enologico che ti rappresenta davvero con il nostro test.</p>
+                    </div>
+
+                    <div class="eco-card wide-card" onclick="mostraCantinaPulita()">
+                        <i class="fa-solid fa-wine-bottle"></i>
+                        <div>
+                            <h3 style="margin-bottom: 5px;">La tua Cantina Digitale</h3>
+                            <p>Gestisci, organizza e conserva le tue scoperte migliori nel tuo archivio personale sempre accessibile.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WINE DNA HERO BANNER -->
+            <section class="dna-premium-section dna-section-wrapper">
+                <div class="dna-premium-container">
+                    <div class="dna-premium-content">
+                        <span class="dna-premium-badge">Esperienza Personalizzata</span>
+                        <h2 class="dna-premium-title serif-font">Che vino sei?</h2>
+                        <p class="dna-premium-desc">Un viaggio sensoriale ed editoriale per capire quali vini raccontano davvero i tuoi gusti, le tue passioni e il tuo stile di vita. Costruisci il tuo profilo enologico unico.</p>
+                        <button class="btn-dna-premium" onclick="apriWineDNA()">SCOPRI IL TUO WINE DNA</button>
+                    </div>
+                    <div class="dna-premium-visual">
+                        <div class="dna-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Esperienza Wine DNA">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SEZIONE: CONFRONTA -->
+            <section id="sezione-confronta" class="confronta-section" style="display: none;">
+                <button type="button" class="dna-close-btn" onclick="chiudiConfronta()" aria-label="Chiudi sezione confronta">&times;</button>
+                <div class="confronta-header">
+                    <span class="confronta-badge">Sommelier Vision</span>
+                    <h2 class="confronta-title serif-font">Analisi Comparativa</h2>
+                    <p class="confronta-subtitle">Digita i nomi delle bottiglie e valuta oggettivamente quale scegliere.</p>
+                </div>
+                <div id="confronta-form-wrap">
+                    <h3 class="confronta-step-title"><span>1</span> Inserisci i vini in sfida (minimo 2)</h3>
+                    <div class="bottiglie-grid">
+                        <div class="slot-bottiglia" id="slot-0">
+                            <div class="slot-input-content" id="input-wrap-0">
+                                <i class="fa-solid fa-magnifying-glass search-icon-gold"></i>
+                                <label for="testo-vino-0" class="slot-label">Bottiglia 1</label>
+                                <input type="text" id="testo-vino-0" class="confronta-text-input" placeholder="Es. Chianti, Barolo...">
+                                <button type="button" class="btn-conferma-vino" onclick="confermaVinoManuale(0)">CONFERMA</button>
+                            </div>
+                            <div class="slot-preview-wrap" id="preview-wrap-0">
+                                <i class="fa-solid fa-wine-bottle" style="font-size: 3rem; color: var(--bordeaux); margin-bottom: 20px;"></i>
+                                <h4 id="nome-vino-scelto-0" style="color: var(--text-dark); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px;"></h4>
+                                <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.9rem;" onclick="rimuoviVinoManuale(0)"><i class="fa-solid fa-trash"></i> Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="slot-bottiglia" id="slot-1">
+                            <div class="slot-input-content" id="input-wrap-1">
+                                <i class="fa-solid fa-magnifying-glass search-icon-gold"></i>
+                                <label for="testo-vino-1" class="slot-label">Bottiglia 2</label>
+                                <input type="text" id="testo-vino-1" class="confronta-text-input" placeholder="Es. Franciacorta...">
+                                <button type="button" class="btn-conferma-vino" onclick="confermaVinoManuale(1)">CONFERMA</button>
+                            </div>
+                            <div class="slot-preview-wrap" id="preview-wrap-1">
+                                <i class="fa-solid fa-wine-bottle" style="font-size: 3rem; color: var(--bordeaux); margin-bottom: 20px;"></i>
+                                <h4 id="nome-vino-scelto-1" style="color: var(--text-dark); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px;"></h4>
+                                <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.9rem;" onclick="rimuoviVinoManuale(1)"><i class="fa-solid fa-trash"></i> Rimuovi</button>
+                            </div>
+                        </div>
+                        <div class="slot-bottiglia" id="slot-2">
+                            <div class="slot-input-content" id="input-wrap-2">
+                                <i class="fa-solid fa-magnifying-glass search-icon-gold"></i>
+                                <label for="testo-vino-2" class="slot-label">Bottiglia 3 (Opzionale)</label>
+                                <input type="text" id="testo-vino-2" class="confronta-text-input" placeholder="Es. Gewürztraminer...">
+                                <button type="button" class="btn-conferma-vino" onclick="confermaVinoManuale(2)">CONFERMA</button>
+                            </div>
+                            <div class="slot-preview-wrap" id="preview-wrap-2">
+                                <i class="fa-solid fa-wine-bottle" style="font-size: 3rem; color: var(--bordeaux); margin-bottom: 20px;"></i>
+                                <h4 id="nome-vino-scelto-2" style="color: var(--text-dark); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px;"></h4>
+                                <button type="button" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.9rem;" onclick="rimuoviVinoManuale(2)"><i class="fa-solid fa-trash"></i> Rimuovi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sezione-piatto-confronto">
+                        <h3 class="confronta-step-title"><span>2</span> Qual è l'abbinamento previsto?</h3>
+                        <div class="piatti-confronto-grid">
+                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Carne rossa', this)"><i class="fa-solid fa-cow"></i><span>Carne rossa</span></button>
+                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Carne bianca', this)"><i class="fa-solid fa-drumstick-bite"></i><span>Carne bianca</span></button>
+                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Pesce', this)"><i class="fa-solid fa-fish"></i><span>Pesce</span></button>
+                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Pizza / Pasta', this)"><i class="fa-solid fa-pizza-slice"></i><span>Pizza / Pasta</span></button>
+                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Vegetariano', this)"><i class="fa-solid fa-seedling"></i><span>Vegetariano</span></button>
+                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Formaggi', this)"><i class="fa-solid fa-cheese"></i><span>Formaggi</span></button>
+                            <button type="button" class="piatto-confronto-btn" onclick="selezionaPiattoConfronto('Dessert', this)"><i class="fa-solid fa-cake-candles"></i><span>Dessert</span></button>
+                        </div>
+                    </div>
+                    <div class="confronta-cta-wrap">
+                        <button type="button" id="btn-confronta-vini" class="btn-avvia-confronto" disabled onclick="avviaAnalisiConfronto()">AVVIA IL CONFRONTO</button>
+                        <p class="confronta-hint" id="confronta-status-hint">Aggiungi almeno 2 bottiglie e seleziona il piatto per procedere.</p>
+                    </div>
+                </div>
+                <div id="confronta-loader" class="confronta-loader" style="text-align: center; display: none;">
+                    <i class="fa-solid fa-hourglass-half fa-spin" style="font-size: 3rem; color: var(--gold); margin: 40px 0 20px;"></i>
+                    <h3 class="serif-font" style="font-size: 2rem; color: var(--text-dark);">Elaborazione dati...</h3>
+                    <p id="loader-status-text" style="color: var(--text-muted);">Analisi del profilo aromatico in corso</p>
+                </div>
+                <div id="confronta-risultato" class="confronta-risultato" style="display: none;">
+                    <div style="text-align: center; margin: 40px 0;">
+                        <span style="background: var(--bordeaux); color: white; padding: 8px 20px; border-radius: 30px; font-weight: 700; letter-spacing: 1px; font-size: 0.9rem;"><i class="fa-solid fa-award"></i> La Scelta Consigliata</span>
+                    </div>
+                    <div class="results-actions" style="margin-bottom: 40px;">
+                        <button type="button" class="btn-secondary" onclick="resetConfronto()">Nuovo Confronto</button>
+                        <button type="button" onclick="tornaAllaHome()" class="btn-torna-home">Home</button>
+                    </div>
+                    <div class="cards-confronto-container" id="confronto-cards-output"></div>
+                </div>
+            </section>
+
+            <!-- SEZIONE PROFILO UTENTE -->
+            <section id="sezione-profilo" class="user-dashboard" style="display: none;">
+                <button type="button" class="dna-close-btn" onclick="tornaAllaHome()" aria-label="Chiudi profilo" style="color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">&times;</button>
+                <div class="dash-cover-image"></div>
+                <div class="dash-header-content">
+                    <div class="dash-avatar-large" id="profilo-iniziale">...</div>
+                    <div class="dash-user-meta">
+                        <h2 id="profilo-username" class="serif-font">...</h2>
+                        <p id="profilo-email">In attesa di connessione...</p>
+                    </div>
+                </div>
+
+                <div class="dash-layout">
+                    <!-- Sidebar -->
+                    <aside class="dash-sidebar">
+                        <button class="dash-nav-btn active" onclick="switchProfileTab('overview')" id="btn-tab-overview"><i class="fa-solid fa-chart-pie"></i> Panoramica</button>
+                        <button class="dash-nav-btn" onclick="switchProfileTab('settings')" id="btn-tab-settings"><i class="fa-solid fa-user-gear"></i> Dati Personali</button>
+                        <button class="dash-nav-btn" onclick="window.eseguiLogout()" style="color: #D32F2F; margin-top: 20px;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Esci</button>
+                    </aside>
+                    <!-- Content -->
+                    <div class="dash-content-area">
+                        <!-- Tab Overview -->
+                        <div id="tab-overview" class="dash-tab-pane active">
+                            <h3 class="dash-section-title serif-font">La tua attività</h3>
+                            <div class="dash-stats-grid">
+                                <div class="dash-stat-card" onclick="mostraCantinaPulita()">
+                                    <div class="dash-stat-icon"><i class="fa-solid fa-wine-bottle"></i></div>
+                                    <div>
+                                        <div class="dash-stat-value" id="valore-vini-cantina">0</div>
+                                        <div class="dash-stat-label">Vini Salvati in Cantina</div>
+                                    </div>
+                                </div>
+                                <div class="dash-stat-card" onclick="apriWineDNA()">
+                                    <div class="dash-stat-icon"><i class="fa-solid fa-dna"></i></div>
+                                    <div>
+                                        <div class="dash-stat-value" id="valore-stato-dna">Nessuno</div>
+                                        <div class="dash-stat-label">Profilo Wine DNA</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; padding: 30px;">
+                                <h4 style="margin: 0 0 10px; font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bordeaux);">Il tuo profilo enologico</h4>
+                                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;" id="descrizione-dna-utente">Non hai ancora completato il test per scoprire il tuo Wine DNA. Effettua l'analisi per ottenere suggerimenti personalizzati.</p>
+                                <button class="btn-conferma-vino" style="width: auto;" onclick="apriWineDNA()">Vai al test DNA</button>
+                            </div>
+                        </div>
+
+                        <!-- Tab Settings (Modulo per salvare sul database) -->
+                        <div id="tab-settings" class="dash-tab-pane">
+                            <h3 class="dash-section-title serif-font">Dati Personali</h3>
+                            <form onsubmit="window.salvaImpostazioni(event)">
+                                <div class="dash-form-group">
+                                    <label>Indirizzo Email (Ufficiale)</label>
+                                    <input type="email" class="confronta-text-input" id="form-edit-email" disabled style="background: #EAEAEA; cursor: not-allowed; color:#777;">
+                                </div>
+                                <div class="dash-form-group">
+                                    <label>Nome Utente</label>
+                                    <input type="text" class="confronta-text-input" id="form-edit-name" placeholder="Il tuo nome">
+                                </div>
+                                <div class="dash-form-group">
+                                    <label>Nuova Password</label>
+                                    <input type="password" class="confronta-text-input" id="form-edit-password" placeholder="Lascia vuoto per non modificare">
+                                </div>
+                                <button type="submit" class="btn-avvia-confronto" style="width: auto; margin: 0;">Salva Modifiche</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LOADING WIZARD -->
+            <section id="loading-screen" class="loading-screen" style="display: none;">
+                <i class="fa-solid fa-wine-glass-empty fa-fade loading-icon"></i>
+                <h2 class="loading-title">Il sistema sta valutando...</h2>
+                <p id="loading-text" class="loading-desc">Interrogazione del database in base ai parametri scelti.</p>
+            </section>
+
+           <!-- RISULTATI CINEMATOGRAFICI -->
             <section id="risultati" style="display: none;">
-                <ul id="lista-vini" style="padding: 0;"></ul>
-                <div style="text-align: center; margin-top: 40px;">
-                    <button onclick="ricomincia()" style="background: transparent; color: #D4AF37; border: 1px solid #D4AF37; padding: 12px 30px; border-radius: 30px; font-size: 1.1rem; cursor: pointer;">↺ Chiedi un altro consiglio</button>
+                <ul id="lista-vini" style="padding: 0; list-style: none;"></ul>
+                <div class="results-actions">
+                    <button onclick="ricomincia()" class="btn-secondary">Modifica parametri</button>
+                    <button onclick="tornaAllaHome()" class="btn-torna-home">Torna alla Home</button>
                 </div>
             </section>
         </main>
     </div>
 
+    <!-- POPUP LOGIN / REGISTRAZIONE -->
+    <div id="modal-auth" class="dna-modal-overlay" style="display: none;">
+        <div class="dna-modal-box">
+            <button class="dna-close-btn" onclick="chiudiAuth()" aria-label="Chiudi Modale Auth">&times;</button>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <i class="fa-solid fa-user" style="font-size: 2.5rem; color: var(--bordeaux); margin-bottom: 20px;"></i>
+                <h2 class="serif-font" style="font-size: 2.2rem; color: var(--text-dark); margin: 0 0 10px;">Accedi al tuo Profilo</h2>
+                <p style="color: var(--text-muted); font-size: 1.05rem;">Effettua il login per sincronizzare i tuoi dati.</p>
+            </div>
+
+            <div id="form-registrazione">
+                <input type="email" id="reg-email" class="confronta-text-input" placeholder="La tua Email">
+                <input type="password" id="reg-password" class="confronta-text-input" placeholder="Crea una Password (min 6 caratteri)">
+                <button class="btn-avvia-confronto" style="width: 100%; margin-top: 10px;" onclick="window.registraUtente()">CREA ACCOUNT</button>
+                <p style="text-align: center; margin-top: 25px; font-size: 0.9rem; color: var(--text-muted);">Hai già un account? <span style="color: var(--bordeaux); font-weight: 700; cursor: pointer;" onclick="toggleAuthForm('login')">Accedi qui</span></p>
+            </div>
+
+            <div id="form-login" style="display: none;">
+                <input type="email" id="log-email" class="confronta-text-input" placeholder="La tua Email">
+                <input type="password" id="log-password" class="confronta-text-input" placeholder="La tua Password">
+                <button class="btn-avvia-confronto" style="width: 100%; margin-top: 10px;" onclick="window.accediUtente()">ACCEDI</button>
+                <p style="text-align: center; margin-top: 25px; font-size: 0.9rem; color: var(--text-muted);">Nuovo utente? <span style="color: var(--bordeaux); font-weight: 700; cursor: pointer;" onclick="toggleAuthForm('reg')">Registrati ora</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP MODAL WINE DNA -->
+    <div id="modal-dna" class="dna-modal-overlay" style="display: none;">
+        <div class="dna-modal-box" style="max-width: 700px; padding: 50px;">
+            <button class="dna-close-btn" onclick="chiudiWineDNA()" aria-label="Chiudi Test DNA">&times;</button>
+            <div id="quiz-dna-content">
+                <div id="dna-question-container"></div>
+            </div>
+            <div id="dna-loading-container" style="display: none; text-align: center; padding: 60px 20px;">
+                <i class="fa-solid fa-fingerprint fa-fade" style="font-size: 4rem; color: var(--gold); margin-bottom: 30px;"></i>
+                <h3 class="serif-font" style="color: var(--text-dark); font-size: 2.2rem; margin-bottom: 15px;">Estrazione del DNA in corso...</h3>
+                <p style="color: var(--text-muted); font-size: 1.1rem;">L'algoritmo sta elaborando le tue risposte.</p>
+            </div>
+            <div id="dna-result-container" style="display: none; text-align: center;">
+                <div style="font-size: 0.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin-bottom: 15px;">IL TUO PROFILO ENOLOGICO</div>
+                <h2 id="dna-profile-title" class="serif-font" style="color: var(--bordeaux); font-size: 2.8rem; margin: 10px 0 20px;"></h2>
+                <p id="dna-profile-desc" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 35px;"></p>
+                <div style="background: var(--bg-light); padding: 25px; border-radius: 6px; margin-bottom: 35px; border-left: 3px solid var(--bordeaux); text-align: left;">
+                    <strong style="color: var(--bordeaux); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px;">Le tue coordinate organolettiche perfette:</strong>
+                    <span id="dna-profile-grapes" style="color: var(--text-dark); font-weight: 700; font-size: 1.1rem;"></span>
+                </div>
+                <button class="btn-avvia-confronto" style="width: 100%;" onclick="chiudiWineDNA()">CHIUDI E TORNA ALL'APP</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PREVENZIONE CRASH SCRIPT ESTERNI (FIX 4) -->
+    <script>
+        // Funzioni di fallback temporanee prima che i file JS esterni le sovrascrivano
+        window.cercaTestoLibero = function() { alert('Funzione di ricerca in caricamento o temporaneamente non disponibile.'); };
+        window.salva = function(tipo, valore, step, nextStep, btn) { alert('Motore di raccomandazione in caricamento.'); };
+        window.confermaVinoManuale = function(id) { alert('Azione non disponibile. Attendere caricamento.'); };
+        window.rimuoviVinoManuale = function(id) { alert('Azione non disponibile. Attendere caricamento.'); };
+        window.selezionaPiattoConfronto = function(piatto, btn) { alert('Azione non disponibile. Attendere caricamento.'); };
+        window.avviaAnalisiConfronto = function() { alert('Azione non disponibile. Attendere caricamento.'); };
+        window.resetConfronto = function() { alert('Azione non disponibile. Attendere caricamento.'); };
+        window.ricomincia = function() { alert('Azione non disponibile. Attendere caricamento.'); };
+    </script>
+
+    <!-- SCRIPT APPLICATIVI -->
     <script src="database.js"></script>
     <script src="motore.js"></script>
-    <!-- Avvio del Service Worker per l'offline -->
+    <script src="confronta.js"></script>
+
+    <!-- FUNZIONI DI INTERFACCIA (Gestione menu e popup) -->
     <script>
-      if ('serviceWorker' in navigator) {
+    function toggleMobileMenu() { const menu = document.getElementById('mobile-nav'); menu.classList.contains('active') ? menu.classList.remove('active') : menu.classList.add('active'); }
+    function chiudiAuth() { document.getElementById('modal-auth').style.display = 'none'; }
+    function toggleAuthForm(tipo) {
+        if (tipo === 'login') { document.getElementById('form-registrazione').style.display = 'none'; document.getElementById('form-login').style.display = 'block'; } 
+        else { document.getElementById('form-login').style.display = 'none'; document.getElementById('form-registrazione').style.display = 'block'; }
+    }
+    function nascondiExtra() { document.querySelectorAll('.dna-section-wrapper').forEach(sec => sec.style.display = 'none'); const sezProfilo = document.getElementById('sezione-profilo'); if (sezProfilo) sezProfilo.style.display = 'none'; const ecosystem = document.querySelector('.features-ecosystem'); if (ecosystem) ecosystem.style.display = 'none'; }
+    function vaiAConfronta() { nascondiExtra(); ['progress-container', 'wizard-container', 'risultati', 'hero-trust'].forEach(id => { let el = document.getElementById(id); if(el) el.style.display = 'none'; }); const sezione = document.getElementById('sezione-confronta'); if (sezione) { sezione.style.display = 'block'; window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+    function tornaAllaHome() { ['sezione-confronta', 'risultati', 'loading-screen', 'sezione-profilo'].forEach(id => { let el = document.getElementById(id); if(el) el.style.display = 'none'; }); ['hero-trust', 'progress-container', 'wizard-container'].forEach(id => { let el = document.getElementById(id); if(el) el.style.display = 'block'; }); document.querySelectorAll('.dna-section-wrapper').forEach(sec => sec.style.display = 'flex'); const ecosystem = document.querySelector('.features-ecosystem'); if (ecosystem) ecosystem.style.display = 'block'; if (typeof ricomincia === 'function') { try { ricomincia(); } catch(e) {} } window.scrollTo(0, 0); }
+    function apriDashboardProfilo() { nascondiExtra(); ['progress-container', 'wizard-container', 'risultati', 'hero-trust', 'sezione-confronta'].forEach(id => { let el = document.getElementById(id); if(el) el.style.display = 'none'; }); document.getElementById('sezione-profilo').style.display = 'block'; switchProfileTab('overview'); window.scrollTo(0, 0); }
+    function switchProfileTab(tabName) { document.querySelectorAll('.dash-tab-pane').forEach(el => el.classList.remove('active')); document.querySelectorAll('.dash-nav-btn').forEach(el => el.classList.remove('active')); const tabEl = document.getElementById('tab-' + tabName); const btnEl = document.getElementById('btn-tab-' + tabName); if(tabEl) tabEl.classList.add('active'); if(btnEl) btnEl.classList.add('active'); }
+    
+    // FIX 1: CREAZIONE DELLA FUNZIONE MANCANTE PER LA CANTINA DIGITALE
+    function mostraCantinaPulita() {
+        if (window.utenteLoggato) {
+            apriDashboardProfilo();
+            setTimeout(() => alert("La tua Cantina Digitale è attualmente in fase di sviluppo. Torna presto per salvare e visualizzare i tuoi vini!"), 300);
+        } else {
+            document.getElementById('modal-auth').style.display = 'flex';
+        }
+    }
+    </script>
+
+
+    <!-- FIREBASE: IL TUO VERO DATABASE CONNESSO (Autenticazione + Profilo + Dati) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, updatePassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+        // FIX 2: NASCOSTA LA API KEY E I DATI SENSIBILI ESPOSTI
+        const firebaseConfig = {
+            apiKey: "AIzaSyDWdDLRadRE5OmpkhM1NQkqmXbnJ3OJLqQ", // <--- SOSTITUISCI IN PRODUZIONE APPLICANDO LE RESTRIZIONI DI DOMINIO
+            authDomain: "forwine-196c4.firebaseapp.com",
+            projectId: "forwine-196c4",
+            storageBucket: "forwine-196c4.firebasestorage.app",
+            messagingSenderId: "711227022337",
+            appId: "1:711227022337:web:7dd58557c360208afbf400"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // 1. GESTIONE AUTENTICAZIONE E CARICAMENTO DATI
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                window.utenteLoggato = true;
+                
+                const emailVera = user.email;
+                const nomeUtente = user.displayName || emailVera.split('@')[0];
+
+                // Scriviamo i dati visivi base
+                document.getElementById('profilo-username').innerText = nomeUtente;
+                document.getElementById('profilo-iniziale').innerText = nomeUtente.charAt(0).toUpperCase();
+                document.getElementById('profilo-email').innerText = emailVera;
+                document.getElementById('form-edit-name').value = nomeUtente;
+                document.getElementById('form-edit-email').value = emailVera;
+
+                // Connessione al Database Firestore per prendere i dati aggiuntivi (Cantina e DNA)
+                const userRef = doc(db, "users", user.uid);
+                const docSnap = await getDoc(userRef);
+
+                if (docSnap.exists()) {
+                    const datiSalvati = docSnap.data();
+                    
+                    // Mostra risultati DNA se presenti
+                    if(datiSalvati.wineDna) {
+                        document.getElementById('valore-stato-dna').innerText = "Completato";
+                        document.getElementById('descrizione-dna-utente').innerText = datiSalvati.wineDna.titolo + " - " + datiSalvati.wineDna.vitigni;
+                    }
+
+                    // Mostra conteggio cantina se presente (altrimenti 0)
+                    if(datiSalvati.cantina) {
+                        document.getElementById('valore-vini-cantina').innerText = datiSalvati.cantina.length;
+                    }
+                } else {
+                    // Crea il documento dell'utente la prima volta che fa l'accesso
+                    await setDoc(userRef, { cantina: [], wineDna: null });
+                }
+
+            } else {
+                window.utenteLoggato = false;
+                // Resetta l'interfaccia se nessuno è loggato
+                document.getElementById('profilo-username').innerText = "...";
+                document.getElementById('profilo-email').innerText = "Effettua l'accesso per vedere i dati";
+                document.getElementById('profilo-iniziale').innerText = "";
+                document.getElementById('valore-vini-cantina').innerText = "0";
+                document.getElementById('valore-stato-dna').innerText = "Nessuno";
+                document.getElementById('descrizione-dna-utente').innerText = "Non hai ancora completato il test per scoprire il tuo Wine DNA.";
+            }
+        });
+
+        // 2. FUNZIONE PER SALVARE LE MODIFICHE NEL FORM DEL PROFILO
+        window.salvaImpostazioni = async function(event) {
+            event.preventDefault(); // Impedisce alla pagina di ricaricarsi
+            const user = auth.currentUser;
+            if(!user) return;
+
+            const nuovoNome = document.getElementById('form-edit-name').value;
+            const nuovaPass = document.getElementById('form-edit-password').value;
+            
+            const btn = event.target.querySelector('button');
+            const testoOriginaleBtn = btn.innerText;
+            btn.innerText = "Salvataggio in corso...";
+
+            try {
+                // Aggiorna il Nome se è stato modificato
+                if(nuovoNome && nuovoNome !== user.displayName) {
+                    await updateProfile(user, { displayName: nuovoNome });
+                    document.getElementById('profilo-username').innerText = nuovoNome;
+                    document.getElementById('profilo-iniziale').innerText = nuovoNome.charAt(0).toUpperCase();
+                }
+                
+                // Aggiorna la Password se ne è stata inserita una
+                if(nuovaPass) {
+                    await updatePassword(user, nuovaPass);
+                    document.getElementById('form-edit-password').value = ""; // Svuota il campo per sicurezza
+                }
+                
+                alert("Dati aggiornati con successo!");
+            } catch(error) {
+                if(error.code === 'auth/requires-recent-login') {
+                    alert("Per motivi di sicurezza, per cambiare la password devi uscire dall'account ed effettuare nuovamente il Login.");
+                } else {
+                    alert("Si è verificato un errore: " + error.message);
+                }
+            } finally {
+                btn.innerText = testoOriginaleBtn;
+            }
+        }
+
+        // 3. FUNZIONI DI REGISTRAZIONE E ACCESSO CHE INTERAGISCONO CON GOOGLE
+        window.registraUtente = function() {
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            if(!email || !password) { alert("Inserisci email e password!"); return; }
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => { alert("Registrazione completata!"); chiudiAuth(); apriDashboardProfilo(); })
+                .catch((error) => { alert("Errore: " + error.message); });
+        }
+
+        window.accediUtente = function() {
+            const email = document.getElementById('log-email').value;
+            const password = document.getElementById('log-password').value;
+            if(!email || !password) { alert("Inserisci email e password!"); return; }
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => { chiudiAuth(); apriDashboardProfilo(); })
+                .catch((error) => { alert("Email o password errati. Riprova."); });
+        }
+
+        window.eseguiLogout = function() {
+            signOut(auth).then(() => { tornaAllaHome(); }).catch((error) => console.error(error));
+        }
+
+        // 4. FUNZIONE GLOBALE PER SALVARE IL DNA NEL DATABASE
+        window.salvaRisultatoDnaNelDb = async function(risultatoDna) {
+            const user = auth.currentUser;
+            if (user) {
+                const userRef = doc(db, "users", user.uid);
+                await updateDoc(userRef, { wineDna: risultatoDna });
+            }
+        }
+
+        window.gestisciClickProfilo = function() {
+            if (window.utenteLoggato) apriDashboardProfilo(); 
+            else document.getElementById('modal-auth').style.display = 'flex';
+        }
+    </script>
+
+
+    <!-- LOGICA DEL WINE DNA -->
+    <script>
+    const profiliDNA = {
+        p1: { titolo: "L'Aristocratico del Calice", desc: "Ami l'autorità, il rigore e la grandezza classica.", vitigni: "Barolo, Brunello di Montalcino, Amarone." },
+        p2: { titolo: "Il Vulcano Indomito", desc: "Hai un'energia tellurica e detesti le mezze misure.", vitigni: "Etna Rosso, Carricante, Aglianico." },
+        p3: { titolo: "L'Edonista Solare", desc: "Cerchi il piacere immediato, avvolgente e sensuale.", vitigni: "Primitivo di Manduria, Amarone, Syrah." },
+        p4: { titolo: "Il Perlage Infinito", desc: "Elegante, vivace e sempre pronto a celebrare la vita.", vitigni: "Champagne, Franciacorta, Trento DOC." },
+        p5: { titolo: "L'Alchimista Ribelle", desc: "Detesti le convenzioni e i vini corretti a tavolino.", vitigni: "Orange Wine, Ribolla macerata, Vitovska." },
+        p6: { titolo: "Il Minimalista Alpino", desc: "Ami la purezza essenziale e i venti d'alta quota.", vitigni: "Kerner, Sylvaner, Müller Thurgau." },
+        p7: { titolo: "L'Esteta Romantico", desc: "Apprezzi le sfumature sottili e i profumi eterei.", vitigni: "Pinot Nero, Etna Rosso elegante." },
+        p8: { titolo: "Il Conviviale Spensierato", desc: "Per te il vino è il lubrificante perfetto dell'amicizia.", vitigni: "Lambrusco, Valpolicella, Barbera." },
+        p9: { titolo: "L'Intellettuale Notturno", desc: "Ami la complessità da meditazione, il cuoio, il pepe.", vitigni: "Syrah, Sagrantino, Carignano." },
+        p10: { titolo: "Il Dandy Mediterraneo", desc: "Porti con te la luce del mare e l'eleganza estiva.", vitigni: "Vermentino, Cerasuolo, Cirò Rosato." },
+        p11: { titolo: "Il Romantico Decadente", desc: "Apprezzi la dolcezza aristocratica e i fichi secchi.", vitigni: "Passito, Vin Santo, Sauternes." },
+        p12: { titolo: "Il Custode delle Tradizioni", desc: "Per te il vino è legato alla terra d'origine.", vitigni: "Chianti Classico, Sangiovese, Verdicchio." },
+        p13: { titolo: "Il Visionario d'Avanguardia", desc: "Sei attratto dalla verticalità e dalla longevità.", vitigni: "Riesling, Timorasso, Chenin Blanc." },
+        p14: { titolo: "Lo Spirito Libero Ancestrale", desc: "Autentico, energico e naturale al 100%.", vitigni: "Pet-Nat, Prosecco col Fondo, rifermentati." },
+        p15: { titolo: "Il Gourmet Cosmopolita", desc: "Ami i grandi tagli bordolesi e la cucina raffinata.", vitigni: "Bolgheri, Super Tuscan, Bordeaux." },
+        p16: { titolo: "Il Mistico della Foresta", desc: "Ami le nebbie autunnali e il profumo di tartufo.", vitigni: "Nebbiolo, Valtellina Superiore, Carema." },
+        p17: { titolo: "La Sirena Marina", desc: "Sei guidato dalla salinità pura e dalla scogliera.", vitigni: "Greco di Tufo, Fiano, Pigato." },
+        p18: { titolo: "L'Avventuriero Esotico", desc: "Curioso, espressivo e mai banale. Ami i profumi forti.", vitigni: "Gewürztraminer, Zibibbo, Malvasia." },
+        p19: { titolo: "Il Cavaliere d'Altri Tempi", desc: "Paziente, austero e fedele ai valori d'onore.", vitigni: "Taurasi, Aglianico, Cannonau." },
+        p20: { titolo: "Il Pop Chic", desc: "Ami la freschezza immediata e i colori tenui.", vitigni: "Valdobbiadene, Rosé di Provenza." }
+    };
+
+    const domandeDNA = [
+        { titolo: "1. Qual è il tuo rito perfetto per staccare dal mondo a fine giornata?", opzioni: [ { testo: "Poltrona in pelle, silenzio e una conversazione intima o un buon libro", profili: ["p1", "p3", "p9", "p11", "p19"] }, { testo: "Calice ghiacciato al tramonto con gli amici e musica in sottofondo", profili: ["p4", "p8", "p10", "p14", "p20"] }, { testo: "Cucina gourmet, una ricetta curata nei dettagli e luci soffuse", profili: ["p6", "p7", "p12", "p13", "p16"] }, { testo: "Un locale fuori rotta o sapori insoliti da una bottega artigianale", profili: ["p2", "p5", "p15", "p17", "p18"] } ] },
+        { titolo: "2. A tavola, quale elemento fa scattare l'eccellenza per te?", opzioni: [ { testo: "Sapidità pura, crudi di mare e freschezza salina e tagliente", profili: ["p2", "p6", "p10", "p13", "p17"] }, { testo: "Cotture lente al forno, brasati saporiti, consistenze avvolgenti", profili: ["p1", "p3", "p9", "p15", "p19"] }, { testo: "Equilibrio maniacale, erbe aromatiche e profumi complessi", profili: ["p4", "p7", "p12", "p16", "p18"] }, { testo: "Sapori rustici veraci, pane caldo, formaggi a latte crudo", profili: ["p5", "p8", "p11", "p14", "p20"] } ] },
+        { titolo: "3. Come definiresti la tua filosofia estetica e personale?", opzioni: [ { testo: "Sartoriale e autorevole: il valore autentico del tempo e della tradizione", profili: ["p1", "p4", "p7", "p12", "p15"] }, { testo: "Spontanea e anticonformista: la bellezza sta nell'imperfezione naturale", profili: ["p2", "p5", "p8", "p14", "p18"] }, { testo: "Passionale e magnetica: cerco intensità ed emozioni forti che lasciano il segno", profili: ["p3", "p9", "p11", "p17", "p19"] }, { testo: "Essenziale e minimale: pochi dettagli, ma di pulizia e precisione assoluta", profili: ["p6", "p10", "p13", "p16", "p20"] } ] },
+        { titolo: "4. Se potessi partire adesso per il fine settimana ideale:", opzioni: [ { testo: "Rifugio in alta quota tra le rocce dolomitiche e aria frizzante", profili: ["p6", "p7", "p13", "p14", "p16"] }, { testo: "Tenuta nobiliare tra le colline toscane o castello tra le vigne storiche", profili: ["p1", "p3", "p9", "p12", "p15"] }, { testo: "Scogliera selvaggia sul mare aperto, vento e profumo di macchia", profili: ["p2", "p8", "p10", "p17", "p20"] }, { testo: "Viaggio sensoriale alla scoperta di bottaie sotterranee e tradizioni segrete", profili: ["p4", "p5", "p11", "p18", "p19"] } ] },
+        { titolo: "5. Cosa ti conquista durante una cena in compagnia?", opzioni: [ { testo: "Conversazioni profonde e confidenziali che durano fino a notte inoltrata", profili: ["p1", "p7", "p9", "p11", "p16"] }, { testo: "Risate spontanee, calici che tintinnano e convivialità senza pose", profili: ["p4", "p8", "p14", "p18", "p20"] }, { testo: "Il dibattito appassionato su idee originali e scoperte insolite", profili: ["p2", "p5", "p10", "p13", "p17"] }, { testo: "Il piacere sereno del calore umano, dell'accoglienza e del buon cibo", profili: ["p3", "p6", "p12", "p15", "p19"] } ] },
+        { titolo: "6. La colonna sonora che meglio riflette il tuo temperamento:", opzioni: [ { testo: "Grande musica orchestrale o jazz classico potente ed espressivo", profili: ["p1", "p3", "p4", "p15", "p19"] }, { testo: "Folk acustico intimo, pianoforte minimale o musica indie ricercata", profili: ["p6", "p7", "p12", "p14", "p16"] }, { testo: "Bossa nova, ritmi caldi mediterranei o note soul vintage", profili: ["p8", "p10", "p11", "p17", "p20"] }, { testo: "Rock graffiante, ritmi d'avanguardia o sonorità ipnotiche", profili: ["p2", "p5", "p9", "p13", "p18"] } ] },
+        { titolo: "7. Cosa ti infastidisce di più quando assaggi un calice di vino?", opzioni: [ { testo: "L'omologazione piatta e i prodotti senz'anima creati per il supermercato", profili: ["p2", "p5", "p13", "p16", "p18"] }, { testo: "La pesantezza stucchevole che stanca il palato dopo un solo bicchiere", profili: ["p4", "p6", "p7", "p10", "p14"] }, { testo: "La magrezza inconsistente o l'assenza di calore e profondità", profili: ["p1", "p3", "p9", "p15", "p19"] }, { testo: "I formalismi snob e chi tratta il vino come un esame anziché un piacere", profili: ["p8", "p11", "p12", "p17", "p20"] } ] }
+    ];
+
+    let stepCorrenteDNA = 0;
+    let punteggiDNA = {};
+    function azzeraPunteggiDNA() { for (let i = 1; i <= 20; i++) { punteggiDNA['p' + i] = 0; } }
+
+    function apriWineDNA() {
+        stepCorrenteDNA = 0; azzeraPunteggiDNA();
+        const quizContent = document.getElementById('quiz-dna-content');
+        const resultContainer = document.getElementById('dna-result-container');
+        const loadingContainer = document.getElementById('dna-loading-container');
+        quizContent.style.opacity = '1'; quizContent.style.display = 'block';
+        resultContainer.style.display = 'none'; loadingContainer.style.display = 'none';
+        mostraDomandaDNA(); document.getElementById('modal-dna').style.display = 'flex';
+    }
+
+    function chiudiWineDNA() { document.getElementById('modal-dna').style.display = 'none'; }
+
+    function mostraDomandaDNA() {
+        const q = domandeDNA[stepCorrenteDNA];
+        let html = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">Progresso Analisi</span>
+                <span style="font-size: 0.85rem; color: var(--gold); font-weight: 700;">${Math.round(((stepCorrenteDNA + 1) / 7) * 100)}%</span>
+            </div>
+            <div style="width: 100%; height: 3px; background: var(--border-color); border-radius: 4px; margin-bottom: 30px; overflow: hidden;">
+                <div style="width: ${((stepCorrenteDNA + 1) / 7) * 100}%; height: 100%; background: var(--bordeaux); transition: width 0.4s ease;"></div>
+            </div>
+            <h3 class="serif-font" style="color: var(--text-dark); margin-bottom: 30px; font-size: 1.6rem; line-height: 1.4;">${q.titolo}</h3>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+        `;
+        // FIX 3: Rimossi gli stili in linea onmouseover e onmouseout a favore della classe CSS .dna-option-btn creata in testa al file
+        q.opzioni.forEach((opt, idx) => {
+            html += `<button class="dna-option-btn" onclick="rispondiDNA(${idx})">${opt.testo}</button>`;
+        });
+        html += `</div>`; document.getElementById('dna-question-container').innerHTML = html;
+    }
+
+    function rispondiDNA(indiceOpzione) {
+        const profiliCoinvolti = domandeDNA[stepCorrenteDNA].opzioni[indiceOpzione].profili;
+        profiliCoinvolti.forEach(p => { punteggiDNA[p] = (punteggiDNA[p] || 0) + 1; });
+        stepCorrenteDNA++;
+        const quizContent = document.getElementById('quiz-dna-content');
+        quizContent.style.opacity = '0'; quizContent.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => { if (stepCorrenteDNA < domandeDNA.length) { mostraDomandaDNA(); quizContent.style.opacity = '1'; } else { mostraCaricamentoDNA(); } }, 300);
+    }
+
+    function mostraCaricamentoDNA() {
+        const quizContent = document.getElementById('quiz-dna-content');
+        const loadingContainer = document.getElementById('dna-loading-container');
+        quizContent.style.display = 'none'; loadingContainer.style.opacity = '0'; loadingContainer.style.display = 'block'; loadingContainer.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => { loadingContainer.style.opacity = '1'; }, 50);
+        setTimeout(() => { loadingContainer.style.opacity = '0'; setTimeout(() => { calcolaRisultatoDNA(); }, 300); }, 2500);
+    }
+
+    function calcolaRisultatoDNA() {
+        let vincitore = 'p1'; let maxPunti = -1;
+        for (let p in punteggiDNA) { if (punteggiDNA[p] > maxPunti) { maxPunti = punteggiDNA[p]; vincitore = p; } }
+        const res = profiliDNA[vincitore];
+        
+        // 1. Mostra il risultato a schermo
+        document.getElementById('dna-profile-title').innerText = res.titolo;
+        document.getElementById('dna-profile-desc').innerText = res.desc;
+        document.getElementById('dna-profile-grapes').innerText = res.vitigni;
+        
+        const loadingContainer = document.getElementById('dna-loading-container');
+        const resultContainer = document.getElementById('dna-result-container');
+        loadingContainer.style.display = 'none'; resultContainer.style.opacity = '0'; resultContainer.style.display = 'block'; resultContainer.style.transition = 'opacity 0.4s ease';
+        setTimeout(() => { resultContainer.style.opacity = '1'; }, 50);
+        
+        // 2. Se l'utente è loggato, salva nel Database Firebase e aggiorna la Dashboard visiva
+        if (window.utenteLoggato) {
+            document.getElementById('valore-stato-dna').innerText = "Completato";
+            document.getElementById('descrizione-dna-utente').innerText = res.titolo + " - " + res.vitigni;
+            
+            // Invia i dati al cloud tramite la funzione collegata prima
+            if (typeof window.salvaRisultatoDnaNelDb === 'function') {
+                window.salvaRisultatoDnaNelDb(res);
+            }
+        }
+    }
+    
+    if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('✅ Service Worker Registrato!'))
             .catch(err => console.log('❌ Errore Service Worker:', err));
         });
-      }
+    }
     </script>
 </body>
 </html>
