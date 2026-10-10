@@ -334,3 +334,18 @@ body {
 .confronta-wizard-step {
     animation: fadeIn 0.4s ease forwards;
 }
+/* AUTOCOMPLETAMENTO WIZARD CONFRONTA */
+.autocomplete-wrapper { position: relative; width: 90%; margin: 0 auto 15px auto; }
+.autocomplete-wrapper .confronta-text-input { width: 100%; margin-bottom: 0 !important; }
+.autocomplete-list { 
+    position: absolute; top: 100%; left: 0; right: 0; background: #FFFFFF; 
+    border: 1px solid var(--bordeaux); border-top: none; border-radius: 0 0 8px 8px; 
+    max-height: 160px; overflow-y: auto; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+    display: none; text-align: left; 
+}
+.autocomplete-item { 
+    padding: 12px 15px; cursor: pointer; border-bottom: 1px solid #F0EAE1; 
+    font-size: 0.95rem; color: var(--text-dark); transition: background 0.2s; font-weight: 600;
+}
+.autocomplete-item:last-child { border-bottom: none; }
+.autocomplete-item:hover { background: #FAF8F5; color: var(--bordeaux); }
