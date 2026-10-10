@@ -664,7 +664,18 @@
             <div id="form-login" style="display: none;">
                 <input type="email" id="log-email" class="confronta-text-input" placeholder="La tua Email">
                 <input type="password" id="log-password" class="confronta-text-input" placeholder="La tua Password">
-                <button class="btn-avvia-confronto" style="width: 100%; margin-top: 10px;" onclick="window.accediUtente()">ACCEDI</button>
+               <button class="btn-avvia-confronto" style="width: 100%; margin-top: 10px;" onclick="window.accediUtente()">ACCEDI</button>
+
+<!-- NUOVO PULSANTE GOOGLE -->
+<div style="display: flex; align-items: center; margin: 20px 0;">
+    <hr style="flex: 1; border: none; border-top: 1px solid var(--border-color);">
+    <span style="padding: 0 10px; color: var(--text-muted); font-size: 0.85rem;">oppure</span>
+    <hr style="flex: 1; border: none; border-top: 1px solid var(--border-color);">
+</div>
+<button onclick="window.accediConGoogle()" style="width: 100%; padding: 14px; background: white; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.95rem; font-weight: 700; color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo" style="width: 20px;">
+    Accedi con Google
+</button>
                 <p style="text-align: center; margin-top: 25px; font-size: 0.9rem; color: var(--text-muted);">Nuovo utente? <span style="color: var(--bordeaux); font-weight: 700; cursor: pointer;" onclick="toggleAuthForm('reg')">Registrati ora</span></p>
             </div>
         </div>
@@ -783,8 +794,7 @@
     <!-- FIREBASE: BACKEND -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, updatePassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, updatePassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";        import { getFirestore, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDWdDLRadRE5OmpkhM1NQkqmXbnJ3OJLqQ",
@@ -897,6 +907,25 @@
                 .then(() => { chiudiAuth(); apriDashboardProfilo(); })
                 .catch((error) => { alert("Email o password errati. Riprova."); });
         }
+        // ACCESSO CON GOOGLE
+window.accediConGoogle = function() {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            // Se l'utente entra per la prima volta, creiamo il doc in Firestore
+            const userRef = doc(db, "users", result.user.uid);
+            getDoc(userRef).then(docSnap => {
+                if (!docSnap.exists()) {
+                    setDoc(userRef, { cantina: [], wineDna: null });
+                }
+            });
+            chiudiAuth(); 
+            apriDashboardProfilo();
+        })
+        .catch((error) => {
+            alert("Errore accesso Google: " + error.message);
+        });
+}
 
         window.eseguiLogout = function() {
             signOut(auth).then(() => { tornaAllaHome(); }).catch((error) => console.error(error));
