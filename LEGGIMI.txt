@@ -1,0 +1,24 @@
+FORWINE — PATCH DI TEST CONSENSO KLARO
+
+Contenuto:
+- index.html: copia del file ricevuto con sole modifiche localizzate a Google Analytics e caricamento Klaro.
+- style.css: file ricevuto più stili isolati per il tema Klaro.
+- klaro-config.js: configurazione Klaro in italiano fornita nella conversazione.
+
+REQUISITO: nella stessa cartella del sito devono essere presenti anche i due file ufficiali di Klaro versione 0.7:
+- klaro-no-css.js
+- klaro.min.css
+
+Se non li hai già scaricati, usa i link ufficiali:
+https://cdn.kiprotect.com/klaro/v0.7/klaro-no-css.js
+https://cdn.kiprotect.com/klaro/v0.7/klaro.min.css
+
+PROVA IN SICUREZZA:
+1. Non sovrascrivere il backup FORWINE_BACKUP_ORIGINALE.
+2. Copia questi tre file nella cartella di lavoro del sito, sostituendo i file omonimi solo dopo averne conservato una copia.
+3. Assicurati che klaro-no-css.js e klaro.min.css siano nello stesso livello di index.html.
+4. Per ora non pubblicare su GitHub.
+5. Aprire index.html con doppio clic può non riprodurre correttamente Firebase o altre funzioni perché il sito è progettato per essere servito via HTTP/HTTPS. Il test locale è preliminare, non una prova completa.
+6. Verifica in DevTools > Network, con cache disabilitata, che prima della scelta NON venga richiesta la risorsa https://www.googletagmanager.com/gtag/js?id=G-PFB19F8632. Dopo aver accettato le statistiche, la richiesta può apparire; dopo aver rifiutato non deve apparire.
+
+Nota: questo patch gestisce per ora Google Analytics e aggiunge una funzione window.apriPreferenzeCookie() da collegare in seguito al footer. Non sostituisce l'audit degli altri servizi, né la creazione e verifica delle informative privacy/cookie. Prima di pubblicare serve testare banner, accettazione, rifiuto e revoca su un server di test.

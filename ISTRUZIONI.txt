@@ -1,0 +1,25 @@
+FORWINE — Footer e collaborazione (versione locale)
+
+Contenuto:
+- index.html: versione con footer integrato prima della chiusura del body
+- style.css: stili del footer aggiunti in fondo senza sostituire gli stili precedenti
+- klaro-config.js: configurazione Klaro con callback di revoca (vedi nota sotto)
+- motore.js: file motore aggiornato con dichiarazione Amazon nelle card
+
+IMPORTANTE prima di usare il footer Collaborazioni:
+Apri index.html e cerca la riga:
+const FORWINE_COLLABORATION_EMAIL = 'INSERISCI_EMAIL_FORWINE';
+Sostituisci soltanto il valore tra apici con l'indirizzo pubblico di FORWINE, senza condividerlo qui. Se resta il segnaposto, il client email si apre con oggetto e testo precompilati ma il destinatario resta vuoto.
+
+Il link Collabora con noi apre l'app email predefinita (mailto), non invia automaticamente il messaggio. L'utente può controllare e modificare il testo prima dell'invio.
+
+Non sono inclusi privacy.html e cookie.html per evitare di sovrascrivere i campi personalizzati che hai già inserito. Mantieni i tuoi file aggiornati nella cartella backend.
+
+Prima di pubblicare:
+- prova il footer su desktop e smartphone
+- prova i link verso Confronta, Wine DNA, Cantina e preferenze Klaro
+- configura l'email nel valore FORWINE_COLLABORATION_EMAIL
+- verifica le informative con tutti i campi completati
+- verifica consenso, rifiuto e revoca
+
+Questa è una build di prova locale. Non caricare online senza i controlli finali.

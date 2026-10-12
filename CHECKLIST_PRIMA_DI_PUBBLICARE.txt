@@ -1,0 +1,43 @@
+FORWINE — CHECKLIST PRIMA DI PUBBLICARE PRIVACY POLICY E COOKIE POLICY
+Bozza creata il 12 ottobre 2026. Non costituisce consulenza legale né certificazione di conformità.
+
+CAMPi DA COMPLETARE
+[ ] Sostituire [INSERIRE NOME E COGNOME DEL TITOLARE] con l'identità reale del titolare del trattamento.
+[ ] Sostituire tutti i segnaposto [EMAIL ...] con l'indirizzo ufficiale FORWINE.
+[ ] Valutare se inserire un recapito postale e verificare se si applica la nomina di un DPO.
+[ ] Definire una regola reale per la cancellazione degli account inattivi e dei relativi dati.
+
+FIREBASE / TRASFERIMENTI
+[ ] Verificare in Console Google/Firebase gli accordi di trattamento dati accettati e i ruoli di Google per ciascun servizio.
+[ ] Firebase Authentication: la documentazione Google indica trattamento in data center statunitensi; verificare la garanzia/strumento di trasferimento attualmente applicabile e citarlo correttamente.
+[ ] Firestore risulta configurato dal titolare come eur3; confermare in console e non dedurre da ciò che tutti i trattamenti Google avvengano in Europa.
+[ ] Verificare che le regole Firestore funzionino anche per tutte le operazioni di lettura/scrittura effettivamente usate e che nessun'altra raccolta sia necessaria.
+
+COOKIES / CONSENSO
+[ ] Testare in una sessione pulita i cookie e il browser storage, prima della scelta, dopo rifiuto, dopo accettazione e dopo revoca.
+[ ] Controllare se il cookie di consenso si chiama effettivamente forwine-consent e la sua durata reale.
+[ ] Controllare nomi e durata dei cookie Google Analytics dopo consenso.
+[ ] Verificare se la revoca blocca il tracciamento già nella pagina corrente, non soltanto dopo il ricaricamento; se no, correggere prima di pubblicare.
+[ ] Verificare che i pulsanti accetta, rifiuta e personalizza siano chiaramente visibili e che il rifiuto non sia più difficile dell'accettazione.
+[ ] Aggiungere al footer un link funzionante “Rivedi le tue scelte sui cookie” che riapra Klaro.
+[ ] Valutare l'hosting locale di Google Fonts, Font Awesome e immagini/asset ove possibile, per ridurre richieste a terzi prima del consenso; se restano remoti, descriverli nell'informativa.
+
+GOOGLE ANALYTICS
+[ ] Confermare che G-PFB19F8632 è la proprietà corretta.
+[ ] Verificare nelle impostazioni Analytics la conservazione di 2 mesi per utenti ed eventi.
+[ ] Il titolare ha riferito di aver disattivato Google Signals; ricontrollare lo stato effettivo.
+[ ] Verificare che non vi siano altri tag di analytics/advertising non gestiti da Klaro in index o altri file.
+
+CONTENUTI / LINK / DISCLOSURE
+[ ] Verificare tutti i servizi esterni e gli script effettivamente caricati nel sito pubblicato.
+[ ] Inserire in modo chiaro e ben visibile, sia sul sito sia vicino ai link affiliati Amazon, la dicitura richiesta dal programma: “In qualità di Affiliato Amazon io ricevo un guadagno dagli acquisti idonei.” Fonte: https://programma-affiliazione.amazon.it/help/operating/agreement
+[ ] Verificare le informative specifiche per Amazon e WhatsApp collegate ai link aperti su iniziativa dell'utente.
+[ ] Inserire link a privacy.html e cookie.html nel footer e rendere l'informativa raggiungibile al momento della registrazione, senza imporre un consenso generico non necessario.
+[ ] Testare le pagine nuove su desktop e smartphone, e tutti i collegamenti.
+[ ] Far verificare le versioni definitive da un professionista privacy/legale prima di dichiarare la conformità.
+
+PUBBLICAZIONE
+[ ] Prima del rilascio, rimuovere dalle pagine pubbliche il meta tag temporaneo robots noindex/nofollow se si desidera che le informative siano indicizzabili.
+[ ] Non pubblicare finché restano campi tra parentesi quadre o punti critici non verificati.
+[ ] Conservare il backup precedente.
+[ ] Pubblicare prima sul branch main soltanto dopo i test locali; quindi verificare HTTPS e le pagine online.
