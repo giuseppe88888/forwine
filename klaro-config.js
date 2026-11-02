@@ -26,7 +26,7 @@ window.klaroConfig = {
       },
       consentModal: {
         title: 'Preferenze sulla privacy',
-        description: 'Scegli se consentire i servizi facoltativi descritti qui sotto. Puoi modificare la scelta in qualsiasi momento dal collegamento alle preferenze che sarà aggiunto al sito.'
+        description: 'Scegli se consentire i servizi facoltativi descritti qui sotto. Puoi modificare la scelta in qualsiasi momento dal collegamento «Rivedi le tue scelte sui cookie» nel footer del sito.'
       },
       purposes: {
         analytics: {

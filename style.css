@@ -598,3 +598,23 @@ body {
     border: 1px solid #5C162E !important;
     color: #5C162E !important;
 }
+
+
+/* ==========================================================================
+   FORWINE - Aggiunte: CTA hero, FAQ, nota affiliazione, accessibilita
+   ========================================================================== */
+.btn-hero-cta { display: inline-block; margin: -25px 0 30px; padding: 14px 34px; background: #722F37; color: #FFFFFF; border-radius: 40px; font-weight: 700; letter-spacing: 1px; text-decoration: none; transition: background 0.3s; }
+.btn-hero-cta:hover { background: #5A252B; }
+.search-tag { font-family: inherit; }
+.faq-section { display: flex; justify-content: center; }
+.faq-inner { width: 100%; max-width: 800px; margin: 0 auto; padding: 0 20px; }
+.faq-inner h2 { text-align: center; font-size: 2.2rem; margin-bottom: 30px; }
+.faq-inner details { background: #FFFFFF; border: 1px solid #EBE5DF; border-radius: 8px; padding: 18px 22px; margin-bottom: 12px; }
+.faq-inner summary { cursor: pointer; font-weight: 700; color: #2A2A2A; }
+.faq-inner details[open] summary { color: #722F37; margin-bottom: 10px; }
+.faq-inner details p { color: #5E5E5E; line-height: 1.7; }
+.affiliate-note { text-align: center; color: #5E5E5E; font-size: 0.85rem; margin: 20px 0 0; }
+a:focus-visible, button:focus-visible, input:focus-visible, .choice-card:focus-visible, summary:focus-visible { outline: 2px solid #C5A059; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
